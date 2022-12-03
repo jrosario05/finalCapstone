@@ -1,5 +1,8 @@
 package com.techelevator.model;
 
+import java.security.PrivateKey;
+import java.util.List;
+
 public class Brewery {
 
     private int breweryId;
@@ -8,11 +11,33 @@ public class Brewery {
     private String city;
     private String state;
     private int zip;
+    private List<Hours> hours;
     private String phoneNumber;
     private String description;
     private boolean hasFood;
     private String imgUrl;
+    private String website;
+    private int open;
+    private int close;
+    private String day;
 
+
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public List<Hours> getHours() {
+        return hours;
+    }
+
+    public void setHours(List<Hours> hours) {
+        this.hours = hours;
+    }
 
     public int getBreweryId() {
         return breweryId;
