@@ -66,7 +66,7 @@ public class JDBCBrewery implements BreweryDao{
         brewery.setHasFood(rs.getBoolean("has_food"));
         brewery.setImgUrl(rs.getString("img_url"));
         brewery.setWebsite(rs.getString("website"));
-        brewery.setHours(hours)
+
 
 
         return brewery;
@@ -83,6 +83,14 @@ public class JDBCBrewery implements BreweryDao{
         hours.setTuesClose(rs.getString("tues_close"));
         hours.setWedOpen(rs.getString("wed_open"));
         hours.setWedClose(rs.getString("wed_close"));
+        hours.setThursOpen(rs.getString("thurs_open"));
+        hours.setThursClose(rs.getString("thurs_close"));
+        hours.setFriOpen(rs.getString("fri_open"));
+        hours.setFriClose(rs.getString("fri_close"));
+        hours.setSatOpen(rs.getString("sat_open"));
+        hours.setSatClose(rs.getString("sat_close"));
+        hours.setSunOpen(rs.getString("sun_open"));
+        hours.setSunClose(rs.getString("sun_close"));
 
 
         return hours;
