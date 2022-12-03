@@ -1,12 +1,14 @@
 package com.techelevator.controller;
 
-import com.techelevator.model.Brewery;
 import com.techelevator.dao.BreweryDao;
+import com.techelevator.model.Brewery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -14,13 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 public class BreweryController {
-
-    private BreweryDAO dao;
+@Autowired
+private BreweryDao dao;
 
 
 
     @RequestMapping(path="/breweries", method = RequestMethod.GET)
-    public List<Brewery> getBreweries(){return dao.retrieveListOfBreweries();}
-
+    public List<Brewery> getBreweries(){return dao.getAllBrewery();}
 
 }
