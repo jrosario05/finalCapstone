@@ -3,11 +3,9 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS hours;
-
 DROP TABLE IF EXISTS brewery_beer;
 DROP TABLE IF EXISTS beer;
 DROP TABLE IF EXISTS beer_style;
-
 DROP TABLE IF EXISTS brewery;
 
 
@@ -82,14 +80,20 @@ CREATE TABLE brewery_beer (
 );
 
 
+INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
+VALUES ('Edison Brewing Company', '785 Science Blvd', 'Gahanna', 'Ohio', '43230',  '(614) 762-6183', 'https://www.drinkedison.com/', 
+		'European-style Brewpub with spacious Biergarten to enjoy views of Port Columbus Airport, Downtown Skylines, Sunsets and Golf.',
+		true ,'https://www.google.com/url?sa=i&url=https%3A%2F%2Fdrinkupcolumbus.com%2F2020%2F08%2F06%2Fedison-brewing%2F&psig=AOvVaw3jHjX-G-qJwPXj4GkQ7MsW&ust=1670128866919000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNju74DR3PsCFQAAAAAdAAAAABAE');
+
+
 
 INSERT INTO brewery (brewery_name,street_address, city, state, zip_code, phone_number, description, has_food, website, img_url )
 VALUES
 ('Seventh Son','1101 N 4th St','Columbus','OH','43201', '(614)421-2337)', 'Since April of 2013 Seventh Son has brewed over 225 different beers and has been consistently voted Columbus best brewery by 614 Magazine, Columbus Alive, and Columbus Underground
-readers','False','https://www.seventhsonbrewing.com/homepage', 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1456849564007-RD6FFY9YP7Y4WKEO8FWO/image-asset.jpeg'),
+readers', false,'https://www.seventhsonbrewing.com/homepage', 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1456849564007-RD6FFY9YP7Y4WKEO8FWO/image-asset.jpeg'),
 
 ('North High Brewing', '1288 N High St', 'Columbus', 'OH', '43201', '(614) 756-0100','North High Brewing was founded in 2011 by a couple of guys who were passionate about great beer and fun times, and we opened our doors here in 2012 as just the 7th brewery in Central Ohio. Although the majority of our beer is now produced at our warehouse a half a mile from here, our Short North taproom remains to be the face of our business while we expand into more brewpubs and kitchens.
-','True', 'https://www.northhighbrewing.com/locations/short-north', 'https://i0.wp.com/ohiocraftbeer.org/wp-content/uploads/sites/18/layerslider/North-High/NorthHigh_Slider2.jpg?fit=726%2C450&ssl=1');
+', true, 'https://www.northhighbrewing.com/locations/short-north', 'https://i0.wp.com/ohiocraftbeer.org/wp-content/uploads/sites/18/layerslider/North-High/NorthHigh_Slider2.jpg?fit=726%2C450&ssl=1');
 
 INSERT INTO hours ( brewery_id, day, open, close )
 Values
@@ -101,7 +105,13 @@ Values
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '6', '11:00 AM', '2:00 AM' ),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '7', '11:00 AM', '11:00 PM' ),
 
-
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '1',  'Closed', 'Closed' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '2', '3:00 PM', '9:00 PM '),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '3', '3:00 PM', '9:00 PM' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '4', '3:00 PM', '10:00 PM' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '5', '12:00 PM', '11:00 PM' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '6', '11:00 AM', '11:00 PM' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '7', '12:00 PM', '8:00 PM' ),
 
 
 
@@ -110,7 +120,7 @@ Values
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '2', '2:00 PM', '10:00 PM '),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '3', '2:00 PM', '10:00 PM' ),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '4', '2:00 PM', '10:00 PM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '5', '12:00 AM', '12:00 AM' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '5', '12:00 PM', '12:00 AM' ),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '6', '12:00 PM', '12:00 AM' ),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '7', '12:00 PM', '10:00 PM' );
 
@@ -132,11 +142,10 @@ INSERT INTO beer_style (style_name) VALUES ('Stout');
 INSERT INTO beer_style (style_name) VALUES ('Strong Ale');
 INSERT INTO beer_style (style_name) VALUES ('Wheat');
 INSERT INTO beer_style (style_name) VALUES ('Wild/Sour');
+INSERT INTO beer_style (style_name) VALUES ('Munich Helles');
+INSERT INTO beer_style (style_name) VALUES ('Golden Ale');
 
-INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
-VALUES ('Edison Brewing Company', '785 Science Blvd', 'Gahanna', 'Ohio', '43230',  '(614) 762-6183', 'https://www.drinkedison.com/', 
-		'European-style Brewpub with spacious Biergarten to enjoy views of Port Columbus Airport, Downtown Skylines, Sunsets and Golf.',
-		true ,'https://www.google.com/url?sa=i&url=https%3A%2F%2Fdrinkupcolumbus.com%2F2020%2F08%2F06%2Fedison-brewing%2F&psig=AOvVaw3jHjX-G-qJwPXj4GkQ7MsW&ust=1670128866919000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNju74DR3PsCFQAAAAAdAAAAABAE');
+
 
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
 VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Edison Brewing Company'), 
@@ -205,7 +214,18 @@ INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url)
 		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale (IPA)'),
 		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450837610-D8D358UILU4DTC2ZJ0OE/hopes.jpg?format=500w');
 		 
-			 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Larger', 4.8,
+		'Malty, fresh bread and crackers, slight noble hop character, light body and finish',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Munich Helles'),
+		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659451363566-32BCVPHFTHIY1BTYUXDR/lager.jpg?format=500w');
+		 		 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Cover Crop', 4.5,
+		'A collaboration between the Ohio Farm Bureau and North High Brewing to commemorate the Ohio Farm Bureau’s 100 year anniversary. An easy drinking ale brewed with all Ohio malt and hops',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Golden Ale'),
+		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450886312-R0JTK36AIJZ88VA4JMA9/covercrop.jpg?format=500w');
+		 		 			 
 
 
 
