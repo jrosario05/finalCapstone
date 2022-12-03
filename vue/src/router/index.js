@@ -5,12 +5,12 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import ShowListOfBreweries from '../views/ShowListOfBreweries.vue'
-import BreweryDetails from '../views/BreweryDetails.vue'
+import BreweryDetailsPage from '../views/BreweryDetailsPage.vue'
 import store from '../store/index'
 
 Vue.use(Router)
 
-/**
+/**npm run serve
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
  *
@@ -28,7 +28,7 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
@@ -58,7 +58,7 @@ const router = new Router({
     {
       path: "/brewery",    //THIS IS INDIVIDUAL BREWERIES
       name: "brewery",
-      component: BreweryDetails,
+      component: BreweryDetailsPage,
       meta: {
         requiresAuth: false
       }
