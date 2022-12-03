@@ -18,10 +18,14 @@ if(currentToken != null) {
 
 export default new Vuex.Store({
   state: {
+    breweries: [],
     token: currentToken || '',
     user: currentUser || {}
   },
   mutations: {
+    MAKE_BREWERY_LIST(state, data){
+      state.breweries=data;
+    },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);
