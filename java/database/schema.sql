@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS brewery;
 
 
 
+
 CREATE TABLE users (
 	user_id SERIAL,
 	username varchar(50) NOT NULL UNIQUE,
@@ -66,7 +67,7 @@ CREATE TABLE beer (
 	abv DECIMAL(4,1) NOT NULL,
 	description varchar(500) NOT NULL,
 	style_id integer NOT NULL,
-	img_url varchar(250) NOT NULL,
+	img_url varchar(300) NOT NULL,
 	CONSTRAINT PK_beer PRIMARY KEY (beer_id),
 	CONSTRAINT FK_brewery FOREIGN KEY (brewery_id) REFERENCES brewery(brewery_id),
 	CONSTRAINT FK_style FOREIGN KEY (style_id) REFERENCES beer_style(style_id)
@@ -99,6 +100,11 @@ Values
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '5', '11:00 AM', '2:00 AM' ),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '6', '11:00 AM', '2:00 AM' ),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '7', '11:00 AM', '11:00 PM' ),
+
+
+
+
+
 
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '1', '2:00 PM ', '10:00 PM' ),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '2', '2:00 PM', '10:00 PM '),
@@ -169,6 +175,37 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Edison Brewing Com
 		(SELECT style_id FROM beer_style WHERE style_name = 'Dark Ale'), 
 		'https://static.wixstatic.com/media/27257e_fb6119e225a3407ea3da205e34d78149~mv2.png/v1/fill/w_443,h_526,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/scottishale.png');
 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Humlus Nimbus', 6.0,
+		'Nice flow of slightly sweet citrus into the strong hops bitterness. The aroma is a little unassuming, but there’s really nice hops complexity that lingers with the dry, bitter finish. The malt profile isn’t particularly complex, but it has enough underlying bready sweetness to balance the bitterness.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Pale Ale'),
+		'https://scontent.fcmh1-1.fna.fbcdn.net/v/t1.6435-9/76730149_2438033532988860_8131119303240974336_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=9267fe&_nc_ohc=HwMtTXhAHMMAX_58Gxs&_nc_ht=scontent.fcmh1-1.fna&oh=00_AfC7jI3FuYRdRu_X6iBbeXhscUoG3gj2Y1qo0lIEgkZZ-g&oe=63B2CAD3'); 
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Proliferous', 8.2,
+		' A gorgeous guava and apricot nose invites you to dive in, and the sip offers a soft supportive landing with more defined fruit notes braced by a medium bitterness that builds with each swallow. A thoroughly contem-porary approach applying modern hopping to the (now) classic style.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale (IPA)'),
+		 'datocms-assets.com/75079/1656561411-seventh-son-proliferous-19-05-24_cbb_reviews-137_6x10.jpg?w=900');
+		 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	 ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Honey Wheat', 5.8,
+		'Smooth and balanced with a soft malty finish. Brewed with Ohio sourced honey and malt from Marysville, OH.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'),
+		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450858008-0S4ETMAET974YSPK50Z5/honeywheat.jpg?format=500w');
+		 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		  
+	VALUES	 ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Hazy Pale', 5.8,
+		'Soft body, dry finish with aromas of grapefruit, orange, and melon, bubblegum undertones, gusts of passion fruit, slight woodiness.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Pale Ale'),
+	   'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659451207364-1MPPSJTOVHHYIK73TYLZ/hazypale.jpg?format=500w');
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Hopes', 6.8,
+		'A west coast IPA with bright tropical citrus fruit aroma followed by a pine and grapefruit taste with a pleasant bitterness to wash it down.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale (IPA)'),
+		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450837610-D8D358UILU4DTC2ZJ0OE/hopes.jpg?format=500w');
+		 
+			 
 
 
 
