@@ -20,7 +20,12 @@ public class JDBCBreweryDao implements BreweryDao{
     private Beer mapRowToBeer(SqlRowSet rs){
         Beer beer = new Beer();
         beer.setBeerId(rs.getInt("beer_id"));
-      return null;t 
+        beer.setAbv(rs.getDouble("abv"));
+        beer.setBreweryName(rs.getString("brewery_name"));
+        beer.setDescription(rs.getString("description"));
+        beer.setStyle(rs.getString("style_name"));
+
+        return beer;
     }
 }
 

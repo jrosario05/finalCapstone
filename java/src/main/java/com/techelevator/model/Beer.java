@@ -4,7 +4,7 @@ public class Beer {
 
     private int beerId;
     private String breweryName;
-    private float abv;
+    private double abv;
     private String description;
     private String style;
     private String imgUrl;
@@ -25,11 +25,11 @@ public class Beer {
         this.breweryName = breweryName;
     }
 
-    public float getAbv() {
+    public double getAbv() {
         return abv;
     }
 
-    public void setAbv(float abv) {
+    public void setAbv(double abv) {
         this.abv = abv;
     }
 
