@@ -22,38 +22,37 @@ public class JDBCBrewery implements BreweryDao{
 
 
     @Override
-    public List<Brewery> getAllBrewery(int breweryId) {
+    public List<Brewery> getAllBrewery() {
 
-        List<Brewery> brewery = new ArrayList<>();
+        List<Brewery> breweryList = new ArrayList<>();
 
-        String hoursSql = "Select * from hours " +
-                "where brewery_id = ?";
-        SqlRowSet days = jdbcTemplate.queryForhoursSql, breweryId);
-        while (days.next()) {
-            brewery.add(days)
-
-
+        String sql = "Select * from brewery ";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+        while (result.next()) {
+            Brewery brewery=mapToRowSetBrewery(result);
+            breweryList.add(brewery);
         }
-
-
-            String sql = "SELECT brewery.brewery_id, brewery_name, day, open, close, street_address, city, " +
-                    "state, zip_code, phone_number, description, has_food, website, img_url FROM brewery " +
-                    "JOIN hours ON hours.brewery_id = brewery.brewery_id " +
-                    "WHERE brewery.brewery_id = ?";
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, breweryId);
-            if (results.next()){
-                Brewery breweries = mapToRowSetBrewery(results);
-                brewery.add(breweries);
-
-                return brewery;
-            }
-
+        return breweryList;
     }
+//
+//        }
+//
+//
+//            String sql = "SELECT brewery.brewery_id, brewery_name, day, open, close, street_address, city, " +
+//                    "state, zip_code, phone_number, description, has_food, website, img_url FROM brewery " +
+//                    "JOIN hours ON hours.brewery_id = brewery.brewery_id " +
+//                    "WHERE brewery.brewery_id = ?";
+//            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, breweryId);
+//            if (results.next()){
+//                Brewery breweries = mapToRowSetBrewery(results);
+//                brewery.add(breweries);
+//
+//                return brewery;
+//            }
+//
+//    }
 
     private Brewery mapToRowSetBrewery(SqlRowSet rs){
-
-        Hours hours = new Hours();
-
         Brewery brewery = new Brewery();
 
         brewery.setBreweryId(rs.getInt("brewery_id"));
@@ -61,26 +60,14 @@ public class JDBCBrewery implements BreweryDao{
         brewery.setStreetAddress(rs.getString("street_address"));
         brewery.setCity(rs.getString("city"));
         brewery.setState(rs.getString("state"));
+        brewery.setPhoneNumber(rs.getString("phone_number"));
+        brewery.setDescription(rs.getString("description"));
         brewery.setZip(rs.getInt("zip_code"));
         brewery.setHasFood(rs.getBoolean("has_food"));
         brewery.setImgUrl(rs.getString("img_url"));
         brewery.setWebsite(rs.getString("website"));
         brewery.setHours(hours)
 
-        hours.setMonOpen(rs.getString("mon_open"));
-        hours.setMonClose(rs.getString("mon_close"));
-        hours.setTuesOpen(rs.getString("tues_open"));
-        hours.setTuesClose(rs.getString("tues_close"));
-        hours.setWedOpen(rs.getString("wed_open"));
-        hours.setWedClose(rs.getString("wed_close"));
-        hours.setThursOpen(rs.getString("thurs_open"));
-        hours.setThursClose(rs.getString("thurs_close"));
-        hours.setFriOpen(rs.getString("fri_open"));
-        hours.setFriClose(rs.getString("fri_close"));
-        hours.setSatOpen(rs.getString("sat_open"));
-        hours.setSatClose(rs.getString("sat_close"));
-        hours.setSunOpen(rs.getString("sun_open"));
-        hours.setSunClose(rs.getString("sun_close"));
 
         return brewery;
 
@@ -90,9 +77,15 @@ public class JDBCBrewery implements BreweryDao{
 
     private Hours mapToRowSetHours(SqlRowSet rs){
         Hours hours = new Hours();
+        hours.setMonOpen(rs.getString("mon_open"));
+        hours.setMonClose(rs.getString("mon_close"));
+        hours.setTuesOpen(rs.getString("tues_open"));
+        hours.setTuesClose(rs.getString("tues_close"));
+        hours.setWedOpen(rs.getString("wed_open"));
+        hours.setWedClose(rs.getString("wed_close"));
 
 
-
+        return hours;
     }
 
 
