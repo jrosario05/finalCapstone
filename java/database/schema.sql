@@ -105,7 +105,7 @@ Values
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '6', '1100', '0200' ),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '7', '1100', '2300' ),
 
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '1', , ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '1', -1 , -1 ),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '2', '1500', '2100'),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '3', '1500', '2100' ),
 ((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '4', '1500', '2200' ),
