@@ -7,7 +7,7 @@
 <script>
 import BreweryDetails from '../components/BreweryDetails.vue'
 export default {
-    name: 'brewery-details',
+    name: 'brewery-details-page',
   components: { BreweryDetails },
 
 }

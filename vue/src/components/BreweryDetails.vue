@@ -1,16 +1,16 @@
 <template>
   <div>
       <p>SHOW BREWERY DETAILS</p>
-      <beer-cards/>
+      <beer-card/>
   </div>
 </template>
 
 <script>
-import BeerCards from './BeerCards.vue'
+import BeerCard from './BeerCard.vue'
 export default {
-name: 'breweries-details',
+name: 'brewery-details',
 
-components: { BeerCards },
+components: { BeerCard },
 
 }
 </script>
