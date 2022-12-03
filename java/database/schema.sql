@@ -47,8 +47,8 @@ CREATE TABLE brewery (
 CREATE TABLE hours (
 	brewery_id integer NOT NULL,
 	day varchar(10) NOT NULL,
-	open varchar,
-	close varchar,
+	open integer,
+	close integer,
 	CONSTRAINT FK_brewery FOREIGN KEY (brewery_id) REFERENCES brewery(brewery_id)
 );
 CREATE TABLE beer_style (
@@ -81,7 +81,7 @@ CREATE TABLE brewery_beer (
 
 
 INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
-VALUES ('Edison Brewing Company', '785 Science Blvd', 'Gahanna', 'Ohio', '43230',  '(614) 762-6183', 'https://www.drinkedison.com/', 
+VALUES ('Edison Brewing Company', '785 Science Blvd', 'Gahanna', 'OH', '43230',  '(614) 762-6183', 'https://www.drinkedison.com/', 
 		'European-style Brewpub with spacious Biergarten to enjoy views of Port Columbus Airport, Downtown Skylines, Sunsets and Golf.',
 		true ,'https://www.google.com/url?sa=i&url=https%3A%2F%2Fdrinkupcolumbus.com%2F2020%2F08%2F06%2Fedison-brewing%2F&psig=AOvVaw3jHjX-G-qJwPXj4GkQ7MsW&ust=1670128866919000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNju74DR3PsCFQAAAAAdAAAAABAE');
 
@@ -89,7 +89,7 @@ VALUES ('Edison Brewing Company', '785 Science Blvd', 'Gahanna', 'Ohio', '43230'
 
 INSERT INTO brewery (brewery_name,street_address, city, state, zip_code, phone_number, description, has_food, website, img_url )
 VALUES
-('Seventh Son','1101 N 4th St','Columbus','OH','43201', '(614)421-2337)', 'Since April of 2013 Seventh Son has brewed over 225 different beers and has been consistently voted Columbus best brewery by 614 Magazine, Columbus Alive, and Columbus Underground
+('Seventh Son','1101 N 4th St','Columbus','OH','43201', '(614)421-2337', 'Since April of 2013 Seventh Son has brewed over 225 different beers and has been consistently voted Columbus best brewery by 614 Magazine, Columbus Alive, and Columbus Underground
 readers', false,'https://www.seventhsonbrewing.com/homepage', 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1456849564007-RD6FFY9YP7Y4WKEO8FWO/image-asset.jpeg'),
 
 ('North High Brewing', '1288 N High St', 'Columbus', 'OH', '43201', '(614) 756-0100','North High Brewing was founded in 2011 by a couple of guys who were passionate about great beer and fun times, and we opened our doors here in 2012 as just the 7th brewery in Central Ohio. Although the majority of our beer is now produced at our warehouse a half a mile from here, our Short North taproom remains to be the face of our business while we expand into more brewpubs and kitchens.
@@ -97,32 +97,32 @@ readers', false,'https://www.seventhsonbrewing.com/homepage', 'https://images.sq
 
 INSERT INTO hours ( brewery_id, day, open, close )
 Values
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '1', '3:30 PM ', '11:00 PM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '2', '3:30 PM', '11:00 PM '),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '3',  '3:30 PM', '11:00 PM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '4', '3:30 PM', '12:00 AM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '5', '11:00 AM', '2:00 AM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '6', '11:00 AM', '2:00 AM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '7', '11:00 AM', '11:00 PM' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '1', '1530', '2300' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '2', '1530', '2300'),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '3',  '1530', '2300' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '4', '1530', '0000' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '5', '1100', '0200' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '6', '1100', '0200' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Seventh Son'), '7', '1100', '2300' ),
 
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '1',  'Closed', 'Closed' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '2', '3:00 PM', '9:00 PM '),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '3', '3:00 PM', '9:00 PM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '4', '3:00 PM', '10:00 PM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '5', '12:00 PM', '11:00 PM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '6', '11:00 AM', '11:00 PM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '7', '12:00 PM', '8:00 PM' ),
-
-
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '1', -1 , -1 ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '2', '1500', '2100'),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '3', '1500', '2100' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '4', '1500', '2200' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '5', '1200', '2300' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '6', '1100', '2300' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='Edison Brewing Company'), '7', '1200', '2000' ),
 
 
-((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '1', '2:00 PM ', '10:00 PM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '2', '2:00 PM', '10:00 PM '),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '3', '2:00 PM', '10:00 PM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '4', '2:00 PM', '10:00 PM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '5', '12:00 PM', '12:00 AM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '6', '12:00 PM', '12:00 AM' ),
-((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '7', '12:00 PM', '10:00 PM' );
+
+
+((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '1', '1400 ', '2200'),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '2', '1400', '2200'),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '3', '1400', '2200' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '4', '1400', '2200' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '5', '1200', '2200' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '6', '1200', '2200' ),
+((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'), '7', '1200', '2200' );
 
 
 

@@ -1,12 +1,12 @@
 <template>
   <div>
-      <p>THIS IS A DETAILS FOR BEER from cards (child class)</p>
+      <p>Beer Card Child Class</p>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'beer-cards',
+    name: 'beer-cards'
 
 }
 </script>
