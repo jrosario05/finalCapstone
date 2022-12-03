@@ -2,68 +2,131 @@ package com.techelevator.model;
 
 public class Hours {
 
-    private int[] sunHours = new int[2];
-    private int[] monHours = new int[2];
-    private int[] tuesHours = new int[2];
-    private int[] wedHours = new int[2];
-    private int[] thuHours = new int[2];
-    private int[] friHours = new int[2];
-    private int[] satHours = new int[2];
+    private String monOpen;
+    private String monClose;
+    private String tuesOpen;
+    private String tuesClose;
+    private String wedOpen;
+    private String wedClose;
+    private String thursOpen;
+    private String thursClose;
+    private String friOpen;
+    private String friClose;
+    private String satOpen;
+    private String satClose;
+    private String sunOpen;
+    private String sunClose;
 
 
-    public int[] getSunHours() {
-        return sunHours;
+    public String getMonOpen() {
+        return monOpen;
     }
 
-    public void setSunHours(int[] sunHours) {
-        this.sunHours = sunHours;
+    public void setMonOpen(String monOpen) {
+        this.monOpen = monOpen;
     }
 
-    public int[] getMonHours() {
-        return monHours;
+    public String getMonClose() {
+        return monClose;
     }
 
-    public void setMonHours(int[] monHours) {
-        this.monHours = monHours;
+    public void setMonClose(String monClose) {
+        this.monClose = monClose;
     }
 
-    public int[] getTuesHours() {
-        return tuesHours;
+    public String getTuesOpen() {
+        return tuesOpen;
     }
 
-    public void setTuesHours(int[] tuesHours) {
-        this.tuesHours = tuesHours;
+    public void setTuesOpen(String tuesOpen) {
+        this.tuesOpen = tuesOpen;
     }
 
-    public int[] getWedHours() {
-        return wedHours;
+    public String getTuesClose() {
+        return tuesClose;
     }
 
-    public void setWedHours(int[] wedHours) {
-        this.wedHours = wedHours;
+    public void setTuesClose(String tuesClose) {
+        this.tuesClose = tuesClose;
     }
 
-    public int[] getThuHours() {
-        return thuHours;
+    public String getWedOpen() {
+        return wedOpen;
     }
 
-    public void setThuHours(int[] thuHours) {
-        this.thuHours = thuHours;
+    public void setWedOpen(String wedOpen) {
+        this.wedOpen = wedOpen;
     }
 
-    public int[] getFriHours() {
-        return friHours;
+    public String getWedClose() {
+        return wedClose;
     }
 
-    public void setFriHours(int[] friHours) {
-        this.friHours = friHours;
+    public void setWedClose(String wedClose) {
+        this.wedClose = wedClose;
     }
 
-    public int[] getSatHours() {
-        return satHours;
+    public String getThursOpen() {
+        return thursOpen;
     }
 
-    public void setSatHours(int[] satHours) {
-        this.satHours = satHours;
+    public void setThursOpen(String thursOpen) {
+        this.thursOpen = thursOpen;
+    }
+
+    public String getThursClose() {
+        return thursClose;
+    }
+
+    public void setThursClose(String thursClose) {
+        this.thursClose = thursClose;
+    }
+
+    public String getFriOpen() {
+        return friOpen;
+    }
+
+    public void setFriOpen(String friOpen) {
+        this.friOpen = friOpen;
+    }
+
+    public String getFriClose() {
+        return friClose;
+    }
+
+    public void setFriClose(String friClose) {
+        this.friClose = friClose;
+    }
+
+    public String getSatOpen() {
+        return satOpen;
+    }
+
+    public void setSatOpen(String satOpen) {
+        this.satOpen = satOpen;
+    }
+
+    public String getSatClose() {
+        return satClose;
+    }
+
+    public void setSatClose(String satClose) {
+        this.satClose = satClose;
+    }
+
+    public String getSunOpen() {
+        return sunOpen;
+    }
+
+    public void setSunOpen(String sunOpen) {
+        this.sunOpen = sunOpen;
+    }
+
+    public String getSunClose() {
+        return sunClose;
+    }
+
+    public void setSunClose(String sunClose) {
+        this.sunClose = sunClose;
     }
 }
