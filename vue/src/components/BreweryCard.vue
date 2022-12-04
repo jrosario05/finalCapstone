@@ -6,6 +6,9 @@
     <div>
       {{ brewery.description }}
     </div>
+    <div>
+      {{brewery.hours.monOpen}}
+    </div>
     <router-link v-bind:to="{name: 'brewery'}">Click for brewery Details</router-link>
   </div>
 </template>
