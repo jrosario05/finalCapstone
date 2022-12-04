@@ -1,16 +1,17 @@
 <template>
-  <div>
-    <div>
-      {{ brewery.breweryName }}
-    </div>
-    <div>
+  <router-link class="card" v-bind:to="{ name: 'brewery' }">
+    <div class="card">
+      <div id="brewery-image">
+        <img v-bind:src="brewery.imgUrl" />
+      </div>
+      <div id="brewery-name">
+        <h1>{{ brewery.breweryName }}</h1>
+      </div>
+      <!-- <div id="description">
       {{ brewery.description }}
+    </div> -->
     </div>
-    <div>
-      {{brewery.hours.monOpen}}
-    </div>
-    <router-link v-bind:to="{name: 'brewery'}">Click for brewery Details</router-link>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -21,7 +22,48 @@ export default {
 </script>
 
 <style scoped>
-div {
+.card {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  background-color: black;
+  border: none;
+  margin: 25px auto;
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+}
+
+#brewery-name {
+  position: absolute;
+}
+
+#brewery-name h1 {
+  padding: 0px 10px;
+  font-size: 2em;
   color: white;
+  text-shadow: 6px 6px 6px #272727;
+}
+
+
+
+#description {
+  color: black;
+}
+
+#brewery-image img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  opacity: 0.65;
+}
+
+#brewery-image img:hover {
+
+  opacity: 1;
 }
 </style>

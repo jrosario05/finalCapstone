@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-
+    
     <beer-card />
   </div>
 </template>
@@ -127,8 +127,8 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 0px;
-  margin-bottom: -20px;
+  margin-top: 10px;
+  margin-bottom: -30px;
 }
 
 .hours {
@@ -146,6 +146,7 @@ export default {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas: ". phone website .";
   margin: 0px 20px;
+  margin-bottom: 10px;
 }
 
 #phone {

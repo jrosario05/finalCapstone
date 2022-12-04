@@ -1,13 +1,10 @@
 <template>
-  <div>
+  <div class="brewery-container">
       <brewery-card 
       v-for="brewery in breweriesArray"
       v-bind:key="brewery.id"
       v-bind:brewery="brewery"
     />
-    
-     
-   
   </div>
 </template>
 
@@ -41,6 +38,11 @@ created(){
 }
 </script>
 
-<style>
+<style scoped>
+.brewery-container {
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
 
 </style>
