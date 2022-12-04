@@ -2,10 +2,8 @@
   <div id="background">
     <div class="brewery_detail">
       <div class="brewery_photo">
+        <img src="https://drinkupcolumbus.com/wp-content/uploads/2020/08/edison-brewing.jpg"/>
         <div id="overlay"></div>
-        <img
-          src="https://drinkupcolumbus.com/wp-content/uploads/2020/08/edison-brewing.jpg"
-        />
       </div>
       <div id="title-info">
         <h1 id="brewery_name">Edison Brewing Company</h1>
@@ -60,9 +58,7 @@ export default {
 } */
 
 .brewery_detail {
-  /* background-image: url();
-  background-repeat: no-repeat;
-  background-color: #f3f3f4; */
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "photo title-info";
@@ -80,19 +76,23 @@ export default {
   opacity: 0.6;
 }
 
-/* #overlay {
+
+
+
+
+.overlay {
   background-color: black;
-  width: 100%;
-  height: auto;
-} */
+  grid-area: photo;
+
+}
 
 .brewery_photo {
   grid-area: photo;
-  background-color: black;
 }
 
 #brewery_name {
   margin: 0;
+  color: white;
 }
 
 #description {
