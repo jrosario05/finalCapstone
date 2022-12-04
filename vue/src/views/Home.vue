@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+   <p>You must be authenticated to see this</p>
   </div>
 </template>
 
@@ -10,3 +10,10 @@ export default {
   name: "home"
 };
 </script>
+
+<style>
+div{
+  color: white;
+}
+
+</style>
