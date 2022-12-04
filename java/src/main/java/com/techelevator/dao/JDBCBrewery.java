@@ -26,33 +26,35 @@ public class JDBCBrewery implements BreweryDao{
 
         List<Brewery> breweryList = new ArrayList<>();
 
-        String sql = "Select * from brewery ";
+        String sql = "Select * from brewery " +
+                "join hours on brewery.brewery_id = hours.brewery_id;";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
         while (result.next()) {
-            Brewery brewery=mapToRowSetBrewery(result);
+            Hours hours=mapToRowSetHours(result);
+            Brewery brewery=mapToRowSetBrewery(result, hours);
             breweryList.add(brewery);
         }
         return breweryList;
     }
-//
-//        }
-//
-//
-//            String sql = "SELECT brewery.brewery_id, brewery_name, day, open, close, street_address, city, " +
-//                    "state, zip_code, phone_number, description, has_food, website, img_url FROM brewery " +
-//                    "JOIN hours ON hours.brewery_id = brewery.brewery_id " +
-//                    "WHERE brewery.brewery_id = ?";
-//            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, breweryId);
-//            if (results.next()){
-//                Brewery breweries = mapToRowSetBrewery(results);
-//                brewery.add(breweries);
-//
-//                return brewery;
-//            }
-//
-//    }
 
-    private Brewery mapToRowSetBrewery(SqlRowSet rs){
+    public Brewery getBreweryById(int id){
+        Brewery brewery=null;
+        String sql = "Select * from brewery " +
+                "join hours on brewery.brewery_id = hours.brewery_id "+
+                "Where brewery.brewery_id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
+        if (result.next()) {
+            Hours hours = mapToRowSetHours(result);
+            brewery = mapToRowSetBrewery(result, hours);
+        }
+        return brewery;
+    }
+
+
+
+
+
+    private Brewery mapToRowSetBrewery(SqlRowSet rs, Hours hours){
         Brewery brewery = new Brewery();
 
         brewery.setBreweryId(rs.getInt("brewery_id"));
@@ -66,6 +68,7 @@ public class JDBCBrewery implements BreweryDao{
         brewery.setHasFood(rs.getBoolean("has_food"));
         brewery.setImgUrl(rs.getString("img_url"));
         brewery.setWebsite(rs.getString("website"));
+        brewery.setHours(hours);
 
 
 
@@ -83,8 +86,8 @@ public class JDBCBrewery implements BreweryDao{
         hours.setTuesClose(rs.getString("tues_close"));
         hours.setWedOpen(rs.getString("wed_open"));
         hours.setWedClose(rs.getString("wed_close"));
-        hours.setThursOpen(rs.getString("thurs_open"));
-        hours.setThursClose(rs.getString("thurs_close"));
+        hours.setThursOpen(rs.getString("thur_open"));
+        hours.setThursClose(rs.getString("thur_close"));
         hours.setFriOpen(rs.getString("fri_open"));
         hours.setFriClose(rs.getString("fri_close"));
         hours.setSatOpen(rs.getString("sat_open"));

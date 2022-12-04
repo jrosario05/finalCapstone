@@ -158,4 +158,3 @@ INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url)
 
 COMMIT TRANSACTION;
 
-rollback;

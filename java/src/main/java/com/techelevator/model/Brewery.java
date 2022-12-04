@@ -11,7 +11,7 @@ public class Brewery {
     private String city;
     private String state;
     private int zip;
-    private List<Hours> hours;
+    private Hours hours;
     private String phoneNumber;
     private String description;
     private boolean hasFood;
@@ -31,11 +31,11 @@ public class Brewery {
         this.website = website;
     }
 
-    public List<Hours> getHours() {
+    public Hours getHours() {
         return hours;
     }
 
-    public void setHours(List<Hours> hours) {
+    public void setHours(Hours hours) {
         this.hours = hours;
     }
 
