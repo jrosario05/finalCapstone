@@ -2,8 +2,10 @@
   <div id="background">
     <div class="brewery_detail">
       <div class="brewery_photo">
-        <img src="https://drinkupcolumbus.com/wp-content/uploads/2020/08/edison-brewing.jpg"/>
-        <div id="overlay"></div>
+        <img
+          src="https://drinkupcolumbus.com/wp-content/uploads/2020/08/edison-brewing.jpg"
+        />
+        <div id="color-box"></div>
       </div>
       <div id="title-info">
         <h1 id="brewery_name">Edison Brewing Company</h1>
@@ -29,8 +31,10 @@
       </div>
 
       <div class="contact">
-        <p id="phone">(614) 762-6183</p>
-        <a id="website" href="https://www.drinkedison.com/">drinkedison.com</a>
+        <div id="phone"><a href="tel:614-762-6183">(614) 762-6183</a></div>
+        <div id="website">
+          <a href="https://www.drinkedison.com/">drinkedison.com</a>
+        </div>
       </div>
     </div>
 
@@ -58,11 +62,12 @@ export default {
 } */
 
 .brewery_detail {
-
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "photo title-info";
-  width: 100%;
+  -webkit-box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.75);
 }
 
 #title-info {
@@ -71,23 +76,26 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: black;
+  background: rgba(0, 0, 0, 0.6);
   color: white;
-  opacity: 0.6;
 }
 
-
-
-
-
-.overlay {
-  background-color: black;
-  grid-area: photo;
-
+#title-info h1 {
+  text-shadow: 6px 6px 6px #272727;
 }
 
 .brewery_photo {
   grid-area: photo;
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+}
+
+.brewery_photo img {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 #brewery_name {
@@ -100,38 +108,121 @@ export default {
   margin-top: 10px;
 }
 
-.brewery_photo img {
+.information {
+  text-shadow: 1px 1px 1px #000000;
+  padding: 0px 0px 10px 0px;
+  background-color: rgb(167, 167, 167, 0.6);
   width: 100%;
-  height: auto;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    "address"
+    "hours"
+    "contact";
 }
 
-.information {
-  background-color: rgb(230, 230, 230);
-  width: 100%;
-  opacity: 0.7;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    "address address"
-    "hours hours"
-    "phone website";
+.address {
+  grid-area: address;
+  font-size: 1.45em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 0px;
+  margin-bottom: -20px;
 }
 
 .hours {
   display: flex;
   flex-direction: columns;
   justify-content: space-around;
+  align-items: center;
   grid-area: hours;
+  margin: 0;
+  font-size: 0.75em;
 }
 
-.address {
-  grid-area: address;
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas: ". phone website .";
+  margin: 0px 20px;
 }
 
 #phone {
   grid-area: phone;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-right: 25px;
+  margin-left: 50px;
+}
+
+#phone a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 200px;
+  height: 50px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  background: rgb(238, 238, 238);
+  border-radius: 15px;
+  -webkit-box-shadow: 6px 3px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 6px 3px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 6px 3px 10px 0px rgba(0, 0, 0, 0.75);
+    background-image: linear-gradient(160deg, #ffffff 0%, #979797 100%);
+
+}
+
+#phone a:hover {
+  background-image: linear-gradient(160deg, #d8e7e2  0%, #95a19d 100%);
 }
 #website {
   grid-area: website;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-right: 50px;
+  margin-left: 25px;
+}
+
+#website a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 200px;
+  height: 50px;
+  background-image: linear-gradient(160deg, #ffffff 0%, #979797 100%);
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 15px;
+  -webkit-box-shadow: 6px 3px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 6px 3px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 6px 3px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+#website a:hover {
+  background-image: linear-gradient(160deg, #d8e7e2  0%, #95a19d 100%);
 }
 </style>
+
+
+         
+         .btn-grad {
+
+            transition: 0.5s;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+          }
+
+          .btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+         
