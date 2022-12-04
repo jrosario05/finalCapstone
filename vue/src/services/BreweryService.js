@@ -10,7 +10,7 @@ listBeer() {
     return axios.get('/beer')  //SHOULD THIS BY BREWERY??
  },
 
-brewery(id) {
+breweryById(id) {
     return axios.get(`/breweries/${id}`)
 },
 

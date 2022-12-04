@@ -36,23 +36,23 @@ public class JDBCBrewery implements BreweryDao{
         }
         return breweryList;
     }
-//
-//        }
-//
-//
-//            String sql = "SELECT brewery.brewery_id, brewery_name, day, open, close, street_address, city, " +
-//                    "state, zip_code, phone_number, description, has_food, website, img_url FROM brewery " +
-//                    "JOIN hours ON hours.brewery_id = brewery.brewery_id " +
-//                    "WHERE brewery.brewery_id = ?";
-//            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, breweryId);
-//            if (results.next()){
-//                Brewery breweries = mapToRowSetBrewery(results);
-//                brewery.add(breweries);
-//
-//                return brewery;
-//            }
-//
-//    }
+
+    public Brewery getBreweryById(int id){
+        Brewery brewery=null;
+        String sql = "Select * from brewery " +
+                "join hours on brewery.brewery_id = hours.brewery_id "+
+                "Where brewery.brewery_id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
+        if (result.next()) {
+            Hours hours = mapToRowSetHours(result);
+            brewery = mapToRowSetBrewery(result, hours);
+        }
+        return brewery;
+    }
+
+
+
+
 
     private Brewery mapToRowSetBrewery(SqlRowSet rs, Hours hours){
         Brewery brewery = new Brewery();
