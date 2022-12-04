@@ -22,9 +22,6 @@ private BreweryDao dao;
     public List<Brewery> getBreweries(){return dao.getAllBrewery();}
 
 
-
-
-
     @RequestMapping(path = "/breweries/{breweryId}", method = RequestMethod.GET)
     public Brewery getBreweryById(@PathVariable int breweryId){
         return dao.getBreweryById(breweryId);
