@@ -66,7 +66,7 @@ CREATE TABLE beer (
 	brewery_id integer NOT NULL,
 	beer_name varchar NOT NULL,
 	abv DECIMAL(4,1) NOT NULL,
-	description varchar(500) NOT NULL,
+	description varchar(2000) NOT NULL,
 	style_id integer NOT NULL,
 	img_url varchar(300) NOT NULL,
 	CONSTRAINT PK_beer PRIMARY KEY (beer_id),
