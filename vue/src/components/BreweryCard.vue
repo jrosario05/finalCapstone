@@ -1,6 +1,6 @@
 <template>
-  <router-link class="card" v-bind:to="{ name: 'brewery' }">
-    <div class="card">
+  <!-- <router-link class="card" v-bind:to="{ name: 'brewery' }"> -->
+    <div class="card" v-on:click="viewBreweryDetails(brewery.breweryId)">
       <div id="brewery-image">
         <img v-bind:src="brewery.imgUrl" />
       </div>
@@ -11,13 +11,19 @@
       {{ brewery.description }}
     </div> -->
     </div>
-  </router-link>
+  <!-- </router-link> -->
 </template>
 
 <script>
 export default {
   name: "brewery-card",
   props: ["brewery"],
+
+  methods:{
+        viewBreweryDetails(id) {
+      this.$router.push(`breweries/${id}`);
+  },
+  }
 };
 </script>
 
@@ -66,4 +72,5 @@ export default {
 
   opacity: 1;
 }
+
 </style>

@@ -57,8 +57,8 @@ const router = new Router({
       }
     },
     {
-      path: "/brewery",    //THIS IS INDIVIDUAL BREWERIES
-      name: "brewery",
+      path: "/breweries/:id",    //THIS IS INDIVIDUAL BREWERIES
+      name: "breweryDetails",
       component: BreweryDetailsPage,
       meta: {
         requiresAuth: false
@@ -74,8 +74,8 @@ const router = new Router({
       }
     },
   {
-    path:"/breweries/beers",  //THIS IS A LIST OF ALL BEERS
-    name: "beers",
+    path:"/beers",  //THIS IS A LIST OF ALL BEERS
+    name: "all-beers",
     component: ShowListOfBeers,
     meta: {
       requiresAuth: false

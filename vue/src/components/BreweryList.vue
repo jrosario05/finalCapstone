@@ -22,8 +22,11 @@ methods: {
         breweryService.listBreweries().then(response =>{
             this.$store.commit("MAKE_BREWERY_LIST", response.data)
         });
-    }
+    },
+
+
 },
+
 
 computed:{
   breweriesArray(){
