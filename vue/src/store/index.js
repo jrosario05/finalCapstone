@@ -45,6 +45,7 @@ export default new Vuex.Store({
     },
     MAKE_BEER_LIST(state, data) {
       state.beers=data;
-    }
+    },
+    
   }
 })

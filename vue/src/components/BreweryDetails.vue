@@ -2,52 +2,71 @@
   <div id="background">
     <div class="brewery_detail">
       <div class="brewery_photo">
-        <img
-          src="https://drinkupcolumbus.com/wp-content/uploads/2020/08/edison-brewing.jpg"
-        />
+        <img v-bind:src="brewery.imgUrl" />
         <div id="color-box"></div>
       </div>
       <div id="title-info">
-        <h1 id="brewery_name">Edison Brewing Company</h1>
+        <h1 id="brewery_name">{{ brewery.breweryName}}</h1>
         <p id="description">
-          European-style Brewpub with spacious Biergarten to enjoy views of Port
-          Columbus Airport, Downtown Skylines, Sunsets and Golf.
+          {{ brewery.description}}
         </p>
       </div>
     </div>
 
     <div class="information">
       <div class="address">
-        <p>785 Science Blvd Gahanna, OH 43230</p>
+        <p>{{brewery.streetAddress}}  {{brewery.city}},  {{brewery.state}}  {{brewery.zip}}</p>
       </div>
       <div class="hours">
-        <p>Monday - Closed</p>
-        <p>Tuesday - 3:00pm to 9:00pm</p>
-        <p>Wednesday - 3:00pm to 9:00pm</p>
-        <p>Thursday - 3:00pm to 10:00pm</p>
-        <p>Friday - 12:00pm to 11:00pm</p>
-        <p>Saturday - 11:00am to 11:00pm</p>
-        <p>Sunday - 12:00pm to 8:00pm</p>
+        <p>Monday - {{brewery.hours.monOpen}} - {{brewery.hours.monClose}}</p>
+        <p>Tuesday - {{brewery.hours.tuesOpen}} - {{brewery.hours.tuesClose}}</p>
+        <p>Wednesday - {{brewery.hours.wedOpen}} - {{brewery.hours.wedClose}}</p>
+        <p>Thursday - {{brewery.hours.thursOpen}} - {{brewery.hours.thursClose}}</p>
+        <p>Friday - {{brewery.hours.friOpen}} - {{brewery.hours.friClose}}</p>
+        <p>Saturday - {{brewery.hours.satOpen}} - {{brewery.hours.satClose}}</p>
+        <p>Sunday - {{brewery.hours.sunOpen}} - {{brewery.hours.Close}}</p>
       </div>
 
       <div class="contact">
-        <div id="phone"><a href="tel:614-762-6183">(614) 762-6183</a></div>
+        <div id="phone"><a href="tel:614-762-6183">{{brewery.phoneNumber}}</a></div>
         <div id="website">
-          <a href="https://www.drinkedison.com/">drinkedison.com</a>
+          <a href="https://www.drinkedison.com/">{{brewery.website}}</a>
         </div>
       </div>
     </div>
-    
+
     <beer-card />
   </div>
 </template>
 
 <script>
+import BeerService from '../services/BeerService';
+import BreweryService from "../services/BreweryService";
 import BeerCard from "./BeerCard.vue";
+
 export default {
   name: "brewery-details",
-
   components: { BeerCard },
+
+  data() {
+    return {
+      brewery: {},
+    };
+  },
+  created(){
+      BreweryService.breweryById(this.$route.params.id).then((response)=>{
+        this.brewery=response.data;
+      });
+
+    },
+    methods:{
+     getBreweries(){
+        BeerService.beerByBrewery().then(response =>{
+            this.$store.commit("MAKE_BEER_LIST", response.data)
+        });
+    },
+    }
+
 };
 </script>
 
@@ -173,12 +192,11 @@ export default {
   -webkit-box-shadow: 6px 3px 10px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 6px 3px 10px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 6px 3px 10px 0px rgba(0, 0, 0, 0.75);
-    background-image: linear-gradient(160deg, #ffffff 0%, #979797 100%);
-
+  background-image: linear-gradient(160deg, #ffffff 0%, #979797 100%);
 }
 
 #phone a:hover {
-  background-image: linear-gradient(160deg, #d8e7e2  0%, #95a19d 100%);
+  background-image: linear-gradient(160deg, #d8e7e2 0%, #95a19d 100%);
 }
 #website {
   grid-area: website;
@@ -207,7 +225,7 @@ export default {
 }
 
 #website a:hover {
-  background-image: linear-gradient(160deg, #d8e7e2  0%, #95a19d 100%);
+  background-image: linear-gradient(160deg, #d8e7e2 0%, #95a19d 100%);
 }
 </style>
 
