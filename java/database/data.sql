@@ -13,6 +13,17 @@ VALUES ('Edison Brewing Company', '785 Science Blvd', 'Gahanna', 'OH', '43230', 
 		true ,'https://drinkupcolumbus.com/wp-content/uploads/2020/08/edison-brewing.jpg');
 
 
+INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
+VALUES ('Columbus Brewing Company', '200 Kelton Avenue', 'Columbus', 'OH', '43205',  '(614) 224-3626', 'https://columbusbrewing.com/', 
+		'Founded in 1988, Columbus Brewing Company is one of the longest-running breweries in Ohio and the oldest brewery in Central Ohio.',
+		true ,'https://media.bizj.us/view/img/12039158/20210616172927*1200xx9248-5202-0-867.jpg');
+
+INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
+VALUES ('Endeavor Brewing', '909 W 5th Ave', 'Columbus', 'OH', '43212',  '(614) 732-0086', 'https://endeavorbrewing.com/', 
+		'Endeavor is proud to be Columbus, Ohio’s first brewstillery. We locally craft a wide selection of internationally inspired beer styles, and select clear and wood aged spirits.',
+		false ,'https://endeavorbrewing.com/wp-content/uploads/2022/01/Endeavor-Taproom.jpg');
+
+
 
 INSERT INTO brewery (brewery_name,street_address, city, state, zip_code, phone_number, description, has_food, website, img_url )
 VALUES
@@ -58,6 +69,28 @@ Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'
 					'12:00pm', '12:00am', 
 					'12:00pm', '10:00pm');
 
+INSERT INTO hours ( brewery_id, mon_open, mon_close, tues_open, tues_close, wed_open, wed_close, 
+					thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close )
+Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Columbus Brewing Company'),
+					'Closed', 'Closed', 
+					'3:00pm', '11:00pm', 
+					'3:00pm', '11:00pm', 
+					'3:00pm', '11:00pm', 
+					'11:30am', '12:00am', 
+					'11:30am', '12:00am', 
+					'11:30am', '10:00pm');
+
+INSERT INTO hours ( brewery_id, mon_open, mon_close, tues_open, tues_close, wed_open, wed_close, 
+					thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close )
+Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Endeavor Brewing'), 
+					'Closed', 'Closed', 
+					'3:00pm', '10:00pm', 
+					'3:00pm', '10:00pm', 
+					'3:00pm', '10:00pm', 
+					'3:00pm', '12:00am', 
+					'12:00pm', '12:00am', 
+					'11:00am', '7:00pm');
+
 
 /* Insertion of Beer Styles */
 
@@ -87,6 +120,27 @@ INSERT INTO beer_style (style_name) VALUES ('Stout');
 INSERT INTO beer_style (style_name) VALUES ('Strong Ale');
 INSERT INTO beer_style (style_name) VALUES ('Wheat');
 INSERT INTO beer_style (style_name) VALUES ('Wild/Sour');
+INSERT INTO beer_style (style_name) VALUES ('Double IPA');
+INSERT INTO beer_style (style_name) VALUES ('Hazy IPA');
+INSERT INTO beer_style (style_name) VALUES ('Imperial IPA');
+INSERT INTO beer_style (style_name) VALUES ('Citrus IPA');
+INSERT INTO beer_style (style_name) VALUES ('Spiced Holiday Ale');
+INSERT INTO beer_style (style_name) VALUES ('Hoppy Holiday Ale');
+INSERT INTO beer_style (style_name) VALUES ('German-Style Pilsner');
+INSERT INTO beer_style (style_name) VALUES ('German-Style Lager');
+INSERT INTO beer_style (style_name) VALUES ('Oktoberfest-Style Lager');
+INSERT INTO beer_style (style_name) VALUES ('American IPA');
+INSERT INTO beer_style (style_name) VALUES ('Latin Lager');
+INSERT INTO beer_style (style_name) VALUES ('Hefeweizen');
+INSERT INTO beer_style (style_name) VALUES ('Cream Ale');
+INSERT INTO beer_style (style_name) VALUES ('Nitro Stout');
+INSERT INTO beer_style (style_name) VALUES ('Export Stout');
+INSERT INTO beer_style (style_name) VALUES ('Gose');
+INSERT INTO beer_style (style_name) VALUES ('Unfiltered IPA');
+INSERT INTO beer_style (style_name) VALUES ('Icelandic Style Ale');
+
+
+
 
 	/* Edison Brewing Beers Starts here */ 
 
@@ -347,6 +401,160 @@ INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url)
 		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'),
 		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659451095246-0HWKG7DW9694ZJXEUBSP/falutin.jpg');		 
 
+
+/* Columbus Brewing Company Beers Start Here*/
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'IPA', 6.3,
+		'Dank with notes of grapefruit, orange and stone fruit.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/03/ipa.webp');	
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Bodhi', 8.3,
+		'Notes of pineapple, grapefruit, and mango. 2014 Bronze Medal Winner - GABF.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Double IPA'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/03/bodhi.webp');		 	 
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Columbus Lager', 4.6,
+		'Crisp, clean, and perfectly crafted, its a legacy in the making. 2022 Bronze Award Winner – World Beer Cup®.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'lager'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/03/lager.webp');	
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Endless Haze', 6.1,
+		'Notes of freshly-cut pineapple, citrus, banana and stone fruit.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Hazy IPA'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/03/endlesshaze.webp');
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Creeper', 10,
+		'Dank notes with freshly-cut pineapple and orange peel. Deceptively smooth finish. 2014 Gold Medal Winner - GABF.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Imperial IPA'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/03/creeper.webp');		 
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Technicolor Hat', 6.9,
+		'Notes of tangerine, Meyer lemon and passionfruit.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Citrus IPA'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/03/technicolorhat.webp');	
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Technicolor Hat', 6.9,
+		'Notes of tangerine, Meyer lemon and passionfruit.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Citrus IPA'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/03/technicolorhat.webp');	
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Festbier', 5.3,
+		'A slightly hoppy version of a traditional Festbier. Malty with a smooth finish.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Oktoberfest-Style Lager'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/03/festbier.webp');	
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Summer Teeth', 5.3,
+		'Clean and crisp. Spicy, floral notes from Noble hops. 2010 Bronze Medal Winner - GABF.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'German-Style Lager'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/03/summerteeth.webp');	
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Pils', 5.2,
+		'Crisp, German-style pilsner with subtle hop character that adds spicy, floral notes.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'German-Style Pilsner'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/03/summerteeth.webp');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Citra® Noel', 7.3,
+		'A subtle yet hoppy red ale with rich maltiness and notes of tropical fruit.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Hoppy Holiday Ale'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/03/citranoel.webp');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Tracksuit Santa', 7.8,
+		'A lightly-spiced holiday ale brewed with Indonesian cinnamon, ginger and orange peel.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Spiced Holiday Ale'),
+		 'https://columbusbrewing.com/wp-content/uploads/2022/04/Tracksuit_Santa_web_render.webp');
+
+
+
+
+
+
+
+/* Endeavor Brewing Beers Start Here*/
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Endeavor Brewing'), 'Altura', 5,
+		'Inspired by mountaineering in Chile, unfiltered German pilsner, and tacos al pastor. An aroma of lime zest with flavors of sweet corn tortilla.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Latin Lager'),
+		 'https://endeavorbrewing.com/wp-content/uploads/2022/03/003-Altura-scaled.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Endeavor Brewing'), 'Landhaus', 5.5,
+		'Inspired by Cameron’s tours of the hop fields of Bavaria and vineyards of the Rhineland. This Bavarian style wheat beer has rich banana, clove, and vanilla flavors and a subtle banana bread base.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Hefeweizen'),
+		 'https://endeavorbrewing.com/wp-content/uploads/2022/01/Landhaus-Portfolio-Image-scaled.jpg');
+
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Endeavor Brewing'), 'Gaul', 10,
+		'Inspired by fond farewells dancing tango on a rooftop. A symphony of flavors – apricot, honey, and lime.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Imperial IPA'),
+		 'https://endeavorbrewing.com/wp-content/uploads/2019/11/Gaul-Portfolio-Image-1-scaled.jpg');
+
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Endeavor Brewing'), 'Nordecke', 5,
+		'Brewed in collaboration with the Nordecke supporters group, this ultra smooth ale tastes like corn pops and berries. Gonna take a lot to drag us away from this brew.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Cream Ale'),
+		 'https://endeavorbrewing.com/wp-content/uploads/2022/04/008-Nordecke-Porfolio-Image-scaled.jpg');
+
+
+
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Endeavor Brewing'), 'Icelandic Saga', 4.7,
+		'Inspired by Scott van camping around Iceland and watching the Northern Lights. Flavored with star anise and sage, and brewed with wheat and aromatic malts for an exclusive taste of Iceland.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Icelandic Style Ale'),
+		 'https://endeavorbrewing.com/wp-content/uploads/2019/11/Saga-Portfolio-Image-1-scaled.jpg');
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Endeavor Brewing'), 'Shaka', 6.5,
+		'Inspired by Tyler swimming naked with Sharks in Hawaii. Brewed with hops from three continents for tropical flavors of citrus, passion fruit, guava, strawberry, and melon.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Unfiltered IPA'),
+		 'https://endeavorbrewing.com/wp-content/uploads/2022/03/004-Shaka-scaled.jpg');
+
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Endeavor Brewing'), 'Garten Gose', 5.5,
+		'Inspired by road tripping around Germany to drink regional beers in their native habitats. Refreshingly tart with coriander and sea salt.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Gose'),
+		 'https://endeavorbrewing.com/wp-content/uploads/2022/03/011-Gose-scaled.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Endeavor Brewing'), 'Holy Ground', 6,
+		'Inspired by Pat’s family pilgrimages to the old world – warming up after a wet and windy seaside hike. Coffee and dark chocolate flavors give way to earthy hops and a velvety nitro finish.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Export Stout'),
+		 'https://endeavorbrewing.com/wp-content/uploads/2022/01/Holy-Ground-Portfolio-Image-scaled.jpg');
+
+		 
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Endeavor Brewing'), 'Campfire S’mores', 4.7,
+		'Inspired by summer camp and family weekend getaways. Real chocolate and vanilla bean on top of a graham crackery and lightly smoky base beer.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Nitro Stout'),
+		 'https://endeavorbrewing.com/wp-content/uploads/2022/03/012-Smores-scaled.jpg');
 
 COMMIT TRANSACTION;
 
