@@ -61,6 +61,7 @@ Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='North High Brewing'
 
 /* Insertion of Beer Styles */
 
+INSERT INTO beer_style (style_name) VALUES ('American Pale Ale');
 INSERT INTO beer_style (style_name) VALUES ('Bock');
 INSERT INTO beer_style (style_name) VALUES ('Brown Ale');
 INSERT INTO beer_style (style_name) VALUES ('Dark Ale');
@@ -68,10 +69,12 @@ INSERT INTO beer_style (style_name) VALUES ('Dark Lager');
 INSERT INTO beer_style (style_name) VALUES ('Doppelbock');
 INSERT INTO beer_style (style_name) VALUES ('Goes');
 INSERT INTO beer_style (style_name) VALUES ('Golden Ale');
+INSERT INTO beer_style (style_name) VALUES ('Hard Seltzer');
+INSERT INTO beer_style (style_name) VALUES ('Hazy Light IPA');
 INSERT INTO beer_style (style_name) VALUES ('Hefeweizen');
 INSERT INTO beer_style (style_name) VALUES ('Helles');
 INSERT INTO beer_style (style_name) VALUES ('Hybrid');
-INSERT INTO beer_style (style_name) VALUES ('Indian Pale Ale (IPA)');
+INSERT INTO beer_style (style_name) VALUES ('Indian Pale Ale');
 INSERT INTO beer_style (style_name) VALUES ('Lager');
 INSERT INTO beer_style (style_name) VALUES ('Märzen/Oktoberfest');
 INSERT INTO beer_style (style_name) VALUES ('Munich Helles');
@@ -233,16 +236,70 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Edison Brewing Com
 /* Seventh Son Beers Start Here*/
 
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Scientist', 7.0,
+			 'Berry-piney hops and light malts; toes the line between IPA and pale ale.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale (IPA)'),
+		 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557791548-VT0JK1ASOG9XZEFK5GOA/CO5A1529.jpg');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
 VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Humlus Nimbus', 6.0,
 		'Nice flow of slightly sweet citrus into the strong hops bitterness. The aroma is a little unassuming, but there’s really nice hops complexity that lingers with the dry, bitter finish. The malt profile isn’t particularly complex, but it has enough underlying bready sweetness to balance the bitterness.',
 		(SELECT style_id FROM beer_style WHERE style_name = 'Pale Ale'),
-		'https://scontent.fcmh1-1.fna.fbcdn.net/v/t1.6435-9/76730149_2438033532988860_8131119303240974336_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=9267fe&_nc_ohc=HwMtTXhAHMMAX_58Gxs&_nc_ht=scontent.fcmh1-1.fna&oh=00_AfC7jI3FuYRdRu_X6iBbeXhscUoG3gj2Y1qo0lIEgkZZ-g&oe=63B2CAD3'); 
-
+		'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557789358-DPRMTU775B8RGK43SA63/CO5A1527.jpg'); 
+		 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Stone Fort', 5.0,
+			 'A toasty brown ale with a round, full mouthfeel and a pleasant aroma. Light roasted notes, leather, biscuit.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Brown Ale'),
+		 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557785501-O4KP52NAO7E2OBR2JAVR/CO5A1523.jpg');	
+		 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Seventh Son', 7.7,
+	'A ruddy American strong. Grapefruit and stone fruit hop aroma and character are balanced by a rich red malt backbone.',
+	(SELECT style_id FROM beer_style WHERE style_name = 'Strong Ale'),
+	 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557784112-RZFJBF3BW8IQ5VGBDFWQ/CO5A1526.jpg');
+		 
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
 	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Proliferous', 8.2,
-		' A gorgeous guava and apricot nose invites you to dive in, and the sip offers a soft supportive landing with more defined fruit notes braced by a medium bitterness that builds with each swallow. A thoroughly contem-porary approach applying modern hopping to the (now) classic style.',
+		'Mosaic and a cast of supporting hops give this DIPA layers of tropical fruit and citrus with a bracing pine bit-terness in the finish.',
 		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale (IPA)'),
-		 'datocms-assets.com/75079/1656561411-seventh-son-proliferous-19-05-24_cbb_reviews-137_6x10.jpg?w=900');
+		 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557912757-9UTR5R0G3I39Q5KTT1XY/CO5A1541.jpg');	
+		 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Assistant Manager Beer', 4.5,
+		'Heavily hopped with Denali, Sorachi Ace, and Simcoe. Lemony fruit flavors roll into a dry crisp finish.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Golden Ale'),
+		 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557794461-VYUVLS3PY1L3Y3ESYNSW/CO5A1530.jpg');	
+		 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Miracle', 4.0,
+		'Delicate hops and golden malts give way to firm bitterness and a clean finish.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Hazy Light IPA'),
+		 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557794674-2GOS38ZMKKDW0PCTTRHN/CO5A1531.jpg');
+		 	 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Kitty Paw Key Lime Guava', 4.2,
+		'110 calories. Made with real ingredients, no artificial colors or flavors.  ',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Hard Seltzer'),
+		 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557910325-ZGHB57YUP2C12DIZ4WMH/CO5A1537.jpg');
+		 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Kitty Paw Pineapple Tangerine', 4.2,
+		'Hard Seltzer with Pineapple and Tangerines',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Hard Seltzer'),
+		 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557909993-5SV3EGONV40TVKWUDJP8/CO5A1536.jpg');
+		 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Kitty Paw Cherry Passionfruit', 4.2,
+		'Hard Seltzer with Cherry and Passionfruit',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Hard Seltzer'),
+		 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557910325-ZGHB57YUP2C12DIZ4WMH/CO5A1537.jpg');
+		 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Kitty Paw Rasberry', 4.2,
+		'Hard Seltzer with Rasberry',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Hard Seltzer'),
+		 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557906863-ISKMUH15C3Q11VFHBV7Q/CO5A1532.jpg');	
 
 
 	/* North High Brewing Beers Starts here */ 
@@ -252,31 +309,43 @@ INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url)
 	VALUES	 ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Honey Wheat', 5.8,
 		'Smooth and balanced with a soft malty finish. Brewed with Ohio sourced honey and malt from Marysville, OH.',
 		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'),
-		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450858008-0S4ETMAET974YSPK50Z5/honeywheat.jpg?format=500w');
+		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450858008-0S4ETMAET974YSPK50Z5/honeywheat.jpg');
 		 
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		  
 	VALUES	 ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Hazy Pale', 5.8,
 		'Soft body, dry finish with aromas of grapefruit, orange, and melon, bubblegum undertones, gusts of passion fruit, slight woodiness.',
 		(SELECT style_id FROM beer_style WHERE style_name = 'Pale Ale'),
-	   'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659451207364-1MPPSJTOVHHYIK73TYLZ/hazypale.jpg?format=500w');
+	   'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659451207364-1MPPSJTOVHHYIK73TYLZ/hazypale.jpg');
 
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
 	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Hopes', 6.8,
 		'A west coast IPA with bright tropical citrus fruit aroma followed by a pine and grapefruit taste with a pleasant bitterness to wash it down.',
 		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale (IPA)'),
-		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450837610-D8D358UILU4DTC2ZJ0OE/hopes.jpg?format=500w');
+		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450837610-D8D358UILU4DTC2ZJ0OE/hopes.jpg');
 		 
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
 	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Larger', 4.8,
 		'Malty, fresh bread and crackers, slight noble hop character, light body and finish',
 		(SELECT style_id FROM beer_style WHERE style_name = 'Munich Helles'),
-		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659451363566-32BCVPHFTHIY1BTYUXDR/lager.jpg?format=500w');
+		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659451363566-32BCVPHFTHIY1BTYUXDR/lager.jpg');
 		 		 
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
 	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Cover Crop', 4.5,
 		'A collaboration between the Ohio Farm Bureau and North High Brewing to commemorate the Ohio Farm Bureau’s 100 year anniversary. An easy drinking ale brewed with all Ohio malt and hops',
 		(SELECT style_id FROM beer_style WHERE style_name = 'Golden Ale'),
-		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450886312-R0JTK36AIJZ88VA4JMA9/covercrop.jpg?format=500w');
+		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450886312-R0JTK36AIJZ88VA4JMA9/covercrop.jpg');
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Five', 5.8,
+		'Easy drinking dry-hopped pale ale, showcasing aromas of tropical fruit, citrus and herbs. Drinks like a session IPA, but with the body to balance the hops.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'American Pale Ale'),
+		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450819321-9215Z7LP164D9CW6B57C/five.jpg');	
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
+	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Falutin', 6.0,
+		'Hazy IPA with huge aromas of pineapple, ripe peaches and orange zest with restrained bitterness.',
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'),
+		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659451095246-0HWKG7DW9694ZJXEUBSP/falutin.jpg');		 
 
 
 COMMIT TRANSACTION;
