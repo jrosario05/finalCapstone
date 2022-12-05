@@ -3,6 +3,7 @@
       <div id="beer-image">
         <img v-bind:src="beer.imgUrl" />
       </div>
+      <div class="beer-details">
       <div id="beer-name">
         <h1>{{ beer.beerName }}</h1>
       </div>
@@ -11,6 +12,7 @@
     </div>
       <div id="beer-style">
       {{beer.style}}
+    </div>
     </div>
     </div>
 </template>
@@ -32,19 +34,23 @@ export default {
   border-radius: 10px;
   background-color: black;
   border: none;
-  margin: 25px auto;
+  margin: 25px 25px;
   -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
 
 #beer-name {
-  position: absolute;
+  text-align: center;
 }
 #ABV {
-  position: absolute;
+  text-align: center;
 }
 #beer-style {
+  text-align: center;
+}
+
+.beer-details{
   position: absolute;
 }
 
@@ -64,7 +70,7 @@ export default {
 #beer-image img {
   width: 300px;
   height: 300px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 10px;
   opacity: 0.65;
 }

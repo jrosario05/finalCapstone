@@ -80,20 +80,20 @@ export default {
 </script>
 
 <style scoped>
-/* #background {
+#background {
     background-image: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg");
-    height: 100%;
+    height: 100vh;
     position: sticky;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-} */
+}
 
 .beer-container {
     display:flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-}
+background-color: transparent !important;}
 
 .brewery_detail {
   display: grid;
