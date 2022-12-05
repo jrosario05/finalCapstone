@@ -1,5 +1,4 @@
 <template>
-  <!-- <router-link class="card" v-bind:to="{ name: 'brewery' }"> -->
     <div class="card" v-on:click="viewBreweryDetails(brewery.breweryId)">
       <div id="brewery-image">
         <img v-bind:src="brewery.imgUrl" />
@@ -11,7 +10,6 @@
       {{ brewery.description }}
     </div> -->
     </div>
-  <!-- </router-link> -->
 </template>
 
 <script>

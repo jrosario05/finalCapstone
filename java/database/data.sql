@@ -238,7 +238,7 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Edison Brewing Com
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
 	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Scientist', 7.0,
 			 'Berry-piney hops and light malts; toes the line between IPA and pale ale.',
-		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale (IPA)'),
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'),
 		 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557791548-VT0JK1ASOG9XZEFK5GOA/CO5A1529.jpg');
 		
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
@@ -262,7 +262,7 @@ VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Se
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
 	VALUES	((SELECT brewery_id FROM brewery WHERE brewery_name = 'Seventh Son'), 'Proliferous', 8.2,
 		'Mosaic and a cast of supporting hops give this DIPA layers of tropical fruit and citrus with a bracing pine bit-terness in the finish.',
-		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale (IPA)'),
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'),
 		 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1605557912757-9UTR5R0G3I39Q5KTT1XY/CO5A1541.jpg');	
 		 
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
@@ -320,7 +320,7 @@ INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url)
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
 	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'North High Brewing'), 'Hopes', 6.8,
 		'A west coast IPA with bright tropical citrus fruit aroma followed by a pine and grapefruit taste with a pleasant bitterness to wash it down.',
-		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale (IPA)'),
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'),
 		 'https://images.squarespace-cdn.com/content/v1/5f2d61243d1dbf4e15a42fb7/1659450837610-D8D358UILU4DTC2ZJ0OE/hopes.jpg');
 		 
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 

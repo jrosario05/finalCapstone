@@ -1,16 +1,18 @@
 <template>
-    <div class="card">
-      <div id="beer-image">
-        <img v-bind:src="beer.imgUrl" />
-      </div>
-      <div id="beer-name">
-        <h1>{{ beer.beerName }}</h1>
-      </div>
-      <!-- <div id="description">
-      {{ beer.description }}
-    </div> -->
+  <div class="card">
+    <div id="beer-image">
+      <img v-bind:src="beer.imgUrl" />
     </div>
-  <!-- </router-link> -->
+    <div id="beer-name">
+      <h1>{{ beer.beerName }}</h1>
+    </div>
+    <div id="ABV">
+      {{ beer.abv }}
+    </div>
+    <div id="beer-style">
+      {{ beer.style }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -39,6 +41,12 @@ export default {
 #beer-name {
   position: absolute;
 }
+#ABV {
+  position: absolute;
+}
+#beer-style {
+  position: absolute;
+}
 
 #beer-name h1 {
   padding: 0px 10px;
@@ -46,8 +54,6 @@ export default {
   color: white;
   text-shadow: 6px 6px 6px #272727;
 }
-
-
 
 #description {
   color: black;
@@ -62,8 +68,6 @@ export default {
 }
 
 #beer-image img:hover {
-
   opacity: 1;
 }
-
 </style>

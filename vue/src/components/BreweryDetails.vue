@@ -24,7 +24,7 @@
         <p>Thursday - {{brewery.hours.thursOpen}} - {{brewery.hours.thursClose}}</p>
         <p>Friday - {{brewery.hours.friOpen}} - {{brewery.hours.friClose}}</p>
         <p>Saturday - {{brewery.hours.satOpen}} - {{brewery.hours.satClose}}</p>
-        <p>Sunday - {{brewery.hours.sunOpen}} - {{brewery.hours.Close}}</p>
+        <p>Sunday - {{brewery.hours.sunOpen}} - {{brewery.hours.sunClose}}</p>
       </div>
 
       <div class="contact">
@@ -35,11 +35,12 @@
       </div>
     </div>
 
-    <beer-card 
-          v-for="beer in beers"
-      v-bind:key="beer.id"
+  <div class="beer-container">
+      <beer-card v-for="beer in beers" 
+      v-bind:key="beer.id"  
       v-bind:beer="beer"
-    />
+      />
+  </div>
   </div>
 </template>
 
@@ -87,6 +88,12 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
 } */
+
+.beer-container {
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
 
 .brewery_detail {
   display: grid;

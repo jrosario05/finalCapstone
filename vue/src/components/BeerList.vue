@@ -38,5 +38,10 @@ export default {
 </script>
 
 <style>
+.beer-container {
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
 
 </style>

@@ -92,4 +92,4 @@ CREATE TABLE brewery_beer (
 
 COMMIT TRANSACTION;
 
-ROLLBACK;
+
