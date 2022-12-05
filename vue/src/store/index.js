@@ -20,7 +20,8 @@ export default new Vuex.Store({
   state: {
     breweries: [],
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    beers: []
   },
   mutations: {
     MAKE_BREWERY_LIST(state, data){
@@ -41,6 +42,9 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    MAKE_BEER_LIST(state, data) {
+      state.beers=data;
     }
   }
 })

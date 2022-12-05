@@ -11,6 +11,7 @@
 <script>
 import breweryService from '../services/BreweryService.js'
 import BreweryCard from './BreweryCard.vue'
+
 export default {
 name: 'brewery-list',
 

@@ -10,8 +10,6 @@ import java.util.List;
 @RestController
 @CrossOrigin
 
-
-
 public class BreweryController {
 @Autowired
 private BreweryDao dao;
