@@ -3,7 +3,7 @@ package com.techelevator.model;
 public class Beer {
 
     private int beerId;
-    private String breweryName;
+    private String beerName;
     private double abv;
     private String description;
     private String style;
@@ -17,12 +17,12 @@ public class Beer {
         this.beerId = beerId;
     }
 
-    public String getBreweryName() {
-        return breweryName;
+    public String getBeerName() {
+        return beerName;
     }
 
-    public void setBreweryName(String breweryName) {
-        this.breweryName = breweryName;
+    public void setBeerName(String beerName) {
+        this.beerName = beerName;
     }
 
     public double getAbv() {

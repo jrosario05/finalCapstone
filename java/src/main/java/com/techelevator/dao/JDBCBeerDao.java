@@ -6,6 +6,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class JDBCBeerDao implements BeerDao {
 
@@ -20,29 +23,45 @@ public class JDBCBeerDao implements BeerDao {
 
 
     @Override
-    public Beer getAllBeersByBrewery(int breweryId) {
-        String sql = "Select beer_id, brewery_id, beer_name, abv, description, style_name, img_url from beer_style " +
-                "join beer on beer.style_id = beer_style.style_id " +
-                "where brewery_id = ?";
+    public List<Beer> getAllBeersByBrewery(int breweryId) {
+        List<Beer> beers = new ArrayList<>();
+
+        String sql = "Select beer_id, beer_name, abv, beer.description, style_name, beer.img_url from beer_style" +
+                " join beer on beer.style_id = beer_style.style_id" +
+                " where brewery_id = ?";
 
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, breweryId);
-        if(results.next()){
-            return mapRowToBeer(results);
-        }else{
-            return null;
+        while (results.next()) {
+            Beer beer = mapRowToBeer(results);
+            beers.add(beer);
+
         }
+        return beers;
+
     }
 
+    @Override
+    public List<Beer> getAllBeers() {
+        List<Beer> beers = new ArrayList<>();
+        String sql = "Select * from beer_style" +
+                " join beer on beer.style_id = beer_style.style_id";
 
 
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            Beer beer = mapRowToBeer(results);
+            beers.add(beer);
 
+        }
+        return beers;
+    }
 
     private Beer mapRowToBeer(SqlRowSet rs){
         Beer beer = new Beer();
         beer.setBeerId(rs.getInt("beer_id"));
         beer.setAbv(rs.getDouble("abv"));
-        beer.setBreweryName(rs.getString("brewery_name"));
+        beer.setBeerName(rs.getString("beer_name"));
         beer.setDescription(rs.getString("description"));
         beer.setStyle(rs.getString("style_name"));
         beer.setImgUrl(rs.getString("img_url"));
