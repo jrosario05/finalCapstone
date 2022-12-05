@@ -70,12 +70,7 @@ public class JDBCBrewery implements BreweryDao{
         brewery.setWebsite(rs.getString("website"));
         brewery.setHours(hours);
 
-
-
         return brewery;
-
-
-
     }
 
     private Hours mapToRowSetHours(SqlRowSet rs){
