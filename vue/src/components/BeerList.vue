@@ -1,8 +1,8 @@
 <template>
   <div class="beer-container">
-      <beer-card v-for="beers in beersArray" 
-      v-bind:key="beers.id"  
-      v-bind:beers="beers"
+      <beer-card v-for="beer in beers" 
+      v-bind:key="beer.id"  
+      v-bind:beer="beer"
       />
   </div>
 </template>
@@ -14,13 +14,16 @@ import BeerCard from './BeerCard.vue';
 export default {
     name:'beer-list',
   components: { BeerCard },
-
-  methods: {
-      getBeers(){
-          beerService.listBeer().then(response =>{
-              this.$store.commit("MAKE_BEER_LIST", response.data)
-          });
+  data(){
+      return{
+          beers: []
       }
+  },
+
+  created() {
+          beerService.listBeer().then(response =>{
+              this.beers=response.data;
+          });
   },
 
 
@@ -30,10 +33,6 @@ export default {
           return beersArray;
       }
   },
-
-  created(){
-      this.getBeers();
-  }
     
 }
 </script>

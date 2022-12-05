@@ -35,7 +35,11 @@
       </div>
     </div>
 
-    <beer-card />
+    <beer-card 
+          v-for="beer in beers"
+      v-bind:key="beer.id"
+      v-bind:beer="beer"
+    />
   </div>
 </template>
 
@@ -51,21 +55,25 @@ export default {
   data() {
     return {
       brewery: {},
+      beers: [],
     };
   },
   created(){
       BreweryService.breweryById(this.$route.params.id).then((response)=>{
         this.brewery=response.data;
       });
+      BeerService.beerByBrewery(this.$route.params.id).then(response =>{
+            this.beers=response.data;
+        });
 
     },
-    methods:{
-     getBreweries(){
-        BeerService.beerByBrewery().then(response =>{
-            this.$store.commit("MAKE_BEER_LIST", response.data)
-        });
-    },
-    }
+    // methods:{
+    //  getBreweries(){
+    //     BeerService.beerByBrewery().then(response =>{
+    //         this.$store.commit("MAKE_BEER_LIST", response.data)
+    //     });
+    // },
+    // }
 
 };
 </script>

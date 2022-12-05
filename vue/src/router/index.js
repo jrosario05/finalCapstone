@@ -75,7 +75,7 @@ const router = new Router({
     },
   {
     path:"/beers",  //THIS IS A LIST OF ALL BEERS
-    name: "all-beers",
+    name: "beers",
     component: ShowListOfBeers,
     meta: {
       requiresAuth: false
