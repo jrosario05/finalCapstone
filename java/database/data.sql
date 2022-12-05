@@ -131,7 +131,6 @@ INSERT INTO beer_style (style_name) VALUES ('German-Style Lager');
 INSERT INTO beer_style (style_name) VALUES ('Oktoberfest-Style Lager');
 INSERT INTO beer_style (style_name) VALUES ('American IPA');
 INSERT INTO beer_style (style_name) VALUES ('Latin Lager');
-INSERT INTO beer_style (style_name) VALUES ('Hefeweizen');
 INSERT INTO beer_style (style_name) VALUES ('Cream Ale');
 INSERT INTO beer_style (style_name) VALUES ('Nitro Stout');
 INSERT INTO beer_style (style_name) VALUES ('Export Stout');
@@ -420,7 +419,7 @@ INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url)
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
 	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Columbus Lager', 4.6,
 		'Crisp, clean, and perfectly crafted, its a legacy in the making. 2022 Bronze Award Winner – World Beer Cup®.',
-		(SELECT style_id FROM beer_style WHERE style_name = 'lager'),
+		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'),
 		 'https://columbusbrewing.com/wp-content/uploads/2022/03/lager.webp');	
 
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
