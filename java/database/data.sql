@@ -33,6 +33,12 @@ readers', false,'https://www.seventhsonbrewing.com/homepage', 'https://images.sq
 ('North High Brewing', '1288 N High St', 'Columbus', 'OH', '43201', '(614) 756-0100','North High Brewing was founded in 2011 by a couple of guys who were passionate about great beer and fun times, and we opened our doors here in 2012 as just the 7th brewery in Central Ohio. Although the majority of our beer is now produced at our warehouse a half a mile from here, our Short North taproom remains to be the face of our business while we expand into more brewpubs and kitchens.
 ', true, 'https://www.northhighbrewing.com/locations/short-north', 'https://i0.wp.com/ohiocraftbeer.org/wp-content/uploads/sites/18/layerslider/North-High/NorthHigh_Slider2.jpg?fit=726%2C450&ssl=1');
 
+		 		 			 
+INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
+VALUES ('Saucy Brew Works', '443 W 3rd Ave', 'Columbus', 'OH', '43201',  '(614) 696-5100', 'https://www.saucybrewworks.com/', 
+		'At Saucy Brew Works, we don’t just brew beer. Since opening our doors in 2017, we’ve been dedicated to putting our minds and hearts into the process, using the finest ingredients and employing state of the art techniques.',
+		true ,'https://s3-prod.crainscleveland.com/s3fs-public/DSC_3974_i.jpg');
+
 
 /* Insertion of Brewery Hours */
 
@@ -92,6 +98,18 @@ Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Endeavor Brewing'),
 					'11:00am', '7:00pm');
 
 
+INSERT INTO hours ( brewery_id, mon_open, mon_close, tues_open, tues_close, wed_open, wed_close, 
+					thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close )
+Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Saucy Brew Works'),
+					'11:00am', '10:00pm', 
+					'11:00am', '10:00pm', 
+					'11:00am', '10:00pm', 
+					'11:00am', '10:00am', 
+					'11:00am', '12:00am', 
+					'11:00am', '12:00am', 
+					'11:00am', '10:00pm');					
+
+
 /* Insertion of Beer Styles */
 
 INSERT INTO beer_style (style_name) VALUES ('American Pale Ale');
@@ -137,6 +155,12 @@ INSERT INTO beer_style (style_name) VALUES ('Export Stout');
 INSERT INTO beer_style (style_name) VALUES ('Gose');
 INSERT INTO beer_style (style_name) VALUES ('Unfiltered IPA');
 INSERT INTO beer_style (style_name) VALUES ('Icelandic Style Ale');
+INSERT INTO beer_style (style_name) VALUES ('Pumpkin Ale');
+INSERT INTO beer_style (style_name) VALUES ('Christmas Ale');
+INSERT INTO beer_style (style_name) VALUES ('Fruit IPA');
+INSERT INTO beer_style (style_name) VALUES ('Ale');
+
+
 
 
 
@@ -554,6 +578,79 @@ INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url)
 		'Inspired by summer camp and family weekend getaways. Real chocolate and vanilla bean on top of a graham crackery and lightly smoky base beer.',
 		(SELECT style_id FROM beer_style WHERE style_name = 'Nitro Stout'),
 		 'https://endeavorbrewing.com/wp-content/uploads/2022/03/012-Smores-scaled.jpg');
+
+
+
+
+
+	/* Saucy Brew Works beer are here */
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'Juicy Asap', 6.5, 'Our #1 IPA. Tropical, citrusy, and most certainly juicy.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'American IPA'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/Juicy-Asap.png'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'Love You, Bye', 8.0, 'Hazy Imperial IPA, Super juicy and permanently hazy.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Hazy Light IPA'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/Love-you-bye.png'),	
+		
+			((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'El Lager', 4.3, 'Light, clean, crisp with a touch of Mexican maize.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Latin Lager'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/el-lager.png'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'White Light', 3.2, 'Low-Calorie Belgian White brewed with lemon and peach. 100 calories per 12oz serving.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Ale'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/White-Light.png'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'Juicy Asap Hazy', 6.7, 'Super hazy and dripping with tropical fruit. Notes of stone fruit, peach, white grape, and kiwi.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Hazy Light IPA'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/Juicy-Hazy.png'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'Numb Nuts', 7.5, 'Massively creamy stout with medium-roast Honduran coffee, rich peanut butter, and sweet vanilla.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Stout'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/11/numb-nuts-502x1024.png'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'Pushing Hazies', 8.0, 'Massively creamy stout with medium-roast Honduran coffee, rich peanut butter, and sweet vanilla.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Hazy Light IPA'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/11/pushing-hazies-502x1024.png'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'Boo Thang', 8.5, 'Massively creamy stout with medium-roast Honduran coffee, rich peanut butter, and sweet vanilla.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Pumpkin Ale'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/Boo-Thang.png'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'Three Hos', 7.5, 'Red ale brewed with ginger, nutmeg, cinnamon. Enjoy a medium-bodied ale with a soft malt backbone.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Christmas Ale'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/Boo-Thang.png'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'What Is His Nuts?', 7.5, 'Vanilla Stout brewed with Madagascar Vanilla, Peanut Butter and Honduran Coffee.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Stout'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/Whats-his-nuts.png'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'Stealing Signs', 6.0, 'Dank, citrusy and perfect for a day spent outside, featuring pils malt, and Citra hops throughout.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'American IPA'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/Stealing-Signs-1.png'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'Electric Lettuce', 7.5, 'Flavors of melon, grapefruit, and sweet candy poise the assertive bitterness of this West Coast IPA.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'American IPA'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/electric-lettuce.png'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works'), 
+		'I Can Teach Blue', 7.5, 'Brewed with wheat, two types of oats, and milk sugar for a thick, milkshake like body.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'American IPA'), 
+		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/I-can-teach-blue.png');
 
 COMMIT TRANSACTION;
 
