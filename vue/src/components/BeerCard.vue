@@ -1,25 +1,35 @@
 <template>
+
+  <div class="container">
     <div class="card">
       <div id="beer-image">
         <img v-bind:src="beer.imgUrl" />
       </div>
-      <div class="beer-details">
-      <div id="beer-name">
-        <h1>{{ beer.beerName }}</h1>
+      <div class="beer-info">
+        <div id="beer-name">
+          <h1>{{ beer.beerName }}</h1>
+        </div>
+        <div id="ABV">
+          {{ beer.abv }}
+        </div>
+        <div id="beer-style">
+          {{ beer.style }}
+        </div>
       </div>
-      <div id="ABV">
-      {{ beer.abv }}
     </div>
-      <div id="beer-style">
-      {{beer.style}}
-    </div>
-    </div>
-    </div>
+        <beer-detail v-show="false"/>
+
+
+  </div>
 </template>
 
+
 <script>
+import BeerDetail from "./BeerDetail.vue"
+
 export default {
   name: "beer-card",
+  components: { BeerDetail },
   props: ["beer"],
 };
 </script>
@@ -50,7 +60,7 @@ export default {
   text-align: center;
 }
 
-.beer-details{
+.beer-info {
   position: absolute;
 }
 
@@ -60,8 +70,6 @@ export default {
   color: white;
   text-shadow: 6px 6px 6px #272727;
 }
-
-
 
 #description {
   color: black;
@@ -76,8 +84,6 @@ export default {
 }
 
 #beer-image img:hover {
-
   opacity: 1;
 }
-
 </style>
