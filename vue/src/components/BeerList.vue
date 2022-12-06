@@ -6,9 +6,8 @@
       v-bind:beer="beer"
       />
   </div>
-    <b-modal ref="beer-card" >
         <beer-detail></beer-detail>
-    </b-modal>
+    
 
 </div>
 
@@ -17,14 +16,17 @@
 <script>
 import beerService from '../services/BeerService.js';
 import BeerCard from './BeerCard.vue';
+import BeerDetail from './BeerDetail.vue';
 
 
 export default {
     name:'beer-list',
-  components: { BeerCard },
+  components: { BeerCard, 
+  BeerDetail 
+  },
   data(){
       return{
-          beers: []
+          beers: [],
       }
   },
 

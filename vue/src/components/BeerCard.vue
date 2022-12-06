@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="card" v-show="true" v-on:click.prevent="someFunction(beer.beerId)">
-      <div id="beer-image">
+    <div class="card" v-show="true" >
+      <div id="beer-image" v-on:click="someFunctions()">
         <img v-bind:src="beer.imgUrl" />
       </div>
       <div class="banner-details">
@@ -10,35 +10,23 @@
         </div>
       </div>
     </div>
-    <!-- <div class="pop-up" v-show="true">
-      <div class="beer-details">
-        <img v-bind:src="beer.imgUrl" />
-        <h1>
-          {{ beer.beerName }}
-        </h1>
-        <div id="ABV">
-          <p>{{ beer.abv }}%</p>
-        </div>
-        <div id="beer-style">
-          <p>{{ beer.style }}</p>
-        </div>
-        <div id="description">
-          <p>{{ beer.description }}</p>
-        </div>
-      </div>
-    </div> -->
+
   </div>
 </template>
 <script>
 export default {
   name: "beer-card",
   props: ["beer"],
+  data(){
+    return{
+      beerForDetails:{}
+    }
+  },
 
-
-
-  methods: {
-    someFunction(id){
-      this.$store.commit('BEER_ID_FOR_DETAILS', id)
+  methods:{
+    someFunctions(){
+      this.$store.commit('BEER_FOR_DETAILS', this.beer);
+      console.log(this.$store.state.currentBeer)
     }
   }
 };
