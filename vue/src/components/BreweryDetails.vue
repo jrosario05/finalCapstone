@@ -68,13 +68,7 @@ export default {
         });
 
     },
-    // methods:{
-    //  getBreweries(){
-    //     BeerService.beerByBrewery().then(response =>{
-    //         this.$store.commit("MAKE_BEER_LIST", response.data)
-    //     });
-    // },
-    // }
+
 
 };
 </script>
