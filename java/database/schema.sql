@@ -1,6 +1,10 @@
 BEGIN TRANSACTION;
 
 
+
+DROP TABLE IF EXISTS passport_beer;
+DROP TABLE IF EXISTS passport_brewery;
+DROP TABLE IF EXISTS passport;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS hours;
 DROP TABLE IF EXISTS brewery_beer;
@@ -8,12 +12,32 @@ DROP TABLE IF EXISTS beer;
 DROP TABLE IF EXISTS beer_style;
 DROP TABLE IF EXISTS brewery;
 
+
 CREATE TABLE users (
 	user_id SERIAL,
 	username varchar(50) NOT NULL UNIQUE,
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
-	CONSTRAINT PK_user PRIMARY KEY (user_id)
+	user_first varchar(50) NOT NULL,
+	user_last varchar(50) NOT NULL,
+	address varchar(100) NOT NULL,
+	city varchar(25) NOT NULL,
+	state varchar(15) NOT NULL,
+	
+	zip_code integer NOT NULL,
+	img_url varchar(300),
+	
+ CONSTRAINT PK_user PRIMARY KEY (user_id)
+);
+
+CREATE TABLE passport(
+    passport_id SERIAL NOT NULL UNIQUE,
+	user_id integer NOT NULL,
+	
+	CONSTRAINT PK_passport PRIMARY KEY (passport_id),
+	
+	CONSTRAINT FK_users FOREIGN KEY (user_id) REFERENCES users(user_id)
+	
 );
 
 
@@ -34,6 +58,22 @@ CREATE TABLE brewery (
 	CONSTRAINT PK_brewery PRIMARY KEY (brewery_id)
 
 );
+
+CREATE TABLE passport_brewery(
+
+	passport_id integer NOT NULL,
+	brewery_id integer NOT NULL,
+	visted boolean NOT NULL,
+	
+	CONSTRAINT FK_passport FOREIGN KEY (passport_id) REFERENCES passport(passport_id),
+	CONSTRAINT FK_brewery FOREIGN KEY (brewery_id) REFERENCES brewery(brewery_id)
+	
+);
+
+
+
+
+
 
 CREATE TABLE hours (
 	brewery_id integer NOT NULL,
@@ -74,6 +114,18 @@ CREATE TABLE beer (
 	CONSTRAINT FK_style FOREIGN KEY (style_id) REFERENCES beer_style(style_id)
 );
 
+CREATE TABLE passport_beer(
+
+	passport_id integer NOT NULL,
+	beer_id integer NOT NULL,
+	drank boolean not null,
+	
+	CONSTRAINT FK_passport FOREIGN KEY (passport_id) REFERENCES passport(passport_id),
+	CONSTRAINT FK_beer FOREIGN KEY (beer_id) REFERENCES beer(beer_id)
+	
+);
+
+
 
 CREATE TABLE brewery_beer (
 	brewery_id integer NOT NULL UNIQUE,
@@ -81,11 +133,6 @@ CREATE TABLE brewery_beer (
 	CONSTRAINT FK_brewery FOREIGN KEY (brewery_id) REFERENCES brewery(brewery_id),
 	CONSTRAINT FK_beer FOREIGN KEY (beer_id) REFERENCES beer(beer_id)
 );
-
-		 		 			 
-
-
-
 
 
 

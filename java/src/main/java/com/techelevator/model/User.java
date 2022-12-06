@@ -8,6 +8,15 @@ import java.util.Set;
 
 public class User {
 
+
+   private String userFirstName;
+   private String getUserLastName;
+   private String address;
+   private String city;
+   private String state;
+   private  int zipCode;
+   private String role;
+
    private int id;
    private String username;
    @JsonIgnore
@@ -24,6 +33,62 @@ public class User {
       this.password = password;
       if(authorities != null) this.setAuthorities(authorities);
       this.activated = true;
+   }
+
+   public String getUserFirstName() {
+      return userFirstName;
+   }
+
+   public void setUserFirstName(String userFirstName) {
+      this.userFirstName = userFirstName;
+   }
+
+   public String getGetUserLastName() {
+      return getUserLastName;
+   }
+
+   public void setGetUserLastName(String getUserLastName) {
+      this.getUserLastName = getUserLastName;
+   }
+
+   public String getAddress() {
+      return address;
+   }
+
+   public void setAddress(String address) {
+      this.address = address;
+   }
+
+   public String getCity() {
+      return city;
+   }
+
+   public void setCity(String city) {
+      this.city = city;
+   }
+
+   public String getState() {
+      return state;
+   }
+
+   public void setState(String state) {
+      this.state = state;
+   }
+
+   public int getZipCode() {
+      return zipCode;
+   }
+
+   public void setZipCode(int zipCode) {
+      this.zipCode = zipCode;
+   }
+
+   public String getRole() {
+      return role;
+   }
+
+   public void setRole(String role) {
+      this.role = role;
    }
 
    public int getId() {
@@ -100,4 +165,5 @@ public class User {
               ", authorities=" + authorities +
               '}';
    }
+
 }
