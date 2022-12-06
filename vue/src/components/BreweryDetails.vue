@@ -28,9 +28,9 @@
       </div>
 
       <div class="contact">
-        <div id="phone"><a href="tel:614-762-6183">{{brewery.phoneNumber}}</a></div>
+        <div id="phone"><a v-bind:href="`tel:brewery.phoneNumber`">Call</a></div>
         <div id="website">
-          <a href="https://www.drinkedison.com/">{{brewery.website}}</a>
+          <a v-bind:href="brewery.website">Visit</a>
         </div>
       </div>
     </div>
