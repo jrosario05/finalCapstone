@@ -56,6 +56,15 @@ VALUES ('Zaftig Brewing Company and Taproom','7020-A Huntley Rd','Worthington','
 
 
 
+INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
+VALUES ('Ohio Brewing Company', '421 E 2nd Ave', 'Columbus', 'OH', '43201',  '(614) 682-2337', 'https://ohiobrewingcolumbus.com/', 
+		'Ohio Brewing Columbus produces a wide array of styles such as Mexican Lager, Pilsner, IPA, DIPA, Session IPA, Fruit Sour, 
+		Altbier, Witbier and a Nitro Irish Stout. Brewmaster Joe has professionally brewed beers for over 20+ years and 
+		perfected his brewing skills in Ireland during his 8-year stay. Needless to say that you can expect high quality craft beers at OBC.',
+		true ,'https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/gkhlufvm/d8fbb293-6bf5-4d50-893f-02123e850797.jpg');
+
+
+
 
 /* Insertion of Brewery Hours */
 
@@ -150,7 +159,16 @@ Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Zaftig Brewing Comp
 					'11:00am', '10:00pm', 
 					'1:00pm', '7:00pm');
 
-
+INSERT INTO hours ( brewery_id, mon_open, mon_close, tues_open, tues_close, wed_open, wed_close, 
+					thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close )
+Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Ohio Brewing Company'), 
+					'4:00pm', '11:00pm', 
+					'4:00pm', '11:00pm', 
+					'4:00pm', '11:00pm', 
+					'4:00pm', '11:00pm', 
+					'4:00pm', '11:00am', 
+					'10:00am', '11:00pm', 
+					'10:00am', '11:00pm');
 					
 
 
@@ -219,6 +237,11 @@ INSERT INTO beer_style (style_name) VALUES ('Peanut Butter Stout');
 INSERT INTO beer_style (style_name) VALUES ('Pecan Brown Ale');
 INSERT INTO beer_style (style_name) VALUES ('Session IPA');
 INSERT INTO beer_style (style_name) VALUES ('Chocolate Rasberry Stout');
+INSERT INTO beer_style (style_name) VALUES ('Mexican Lager');
+INSERT INTO beer_style (style_name) VALUES ('Nitro Irish Stout');
+INSERT INTO beer_style (style_name) VALUES ('Altbier');
+INSERT INTO beer_style (style_name) VALUES ('Fruit Sour');
+
 
 
 
@@ -986,6 +1009,79 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Com
 		together a silky smooth and complex chocolate taste with a nice tart raspberry nose and finish.', 
 		(SELECT style_id FROM beer_style WHERE style_name = 'Chocolate Rasberry Stout'),
 		'https://static.wixstatic.com/media/637195_33f5a3713a594374907b54f7b0cd8ad9~mv2.png');
+
+
+/* Beers for Ohio Brewing Company */
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Jing8le Bell Ale', 8.0, 'A beautiful deep-mahogany hue, sweet vanilla nose, 
+		complimented by a balanced blend of cinnamon, ginger, and honey, make this classic
+		Ohio-style holiday ale a perfect match for those cold winter nights.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Christmas Ale'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/11/OBC-Jingle-Bell-Christmas-Ale-2022.jpg');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Pumpkin Ale', 6.2, 'A beautifully balanced autumn brew with flavors and aromas reminiscent of grandma’s pumpkin pie.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Spiced Holiday Ale'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/09/DSC02755.jpg');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Lil Vata', 4.6, 'A crisp and refreshing Mexican-style lager. Goes great with sunburns and sandy toes.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Mexican Lager'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Lil-Vata.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'President Pils', 5.2, 'Rich, characterful, pale Czech-style lager. Complex yet well-balanced and refreshing. 
+		The bitterness is clean and without harshness, which gives a rounded drinkability.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Pilsner'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Presidents-Pils.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Kulbit', 7.2, 'Fruity aromas of passion fruit, grapefruit and orange; with a soft mouthfeel and a balanced finish.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Kulbit.png');		
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Pitchback', 4.2, 'An easy-going Session IPA with a focus on late and dry-hop additions for big hop flavor and aroma without a big alcohol bang.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Session IPA'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Pitchback.png');		
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Flori', 8.2, 'A big, bold DIPA. Packed with tropical fruit flavor and aroma with a smooth finish that leans towards bitter.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Double IPA'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/FLori.png');	
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Bowsie', 4.2, 'An Irish Classic, creamy with hints of chocolate and coffee and a smooth dry finish.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Nitro Irish Stout'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Bowsie.png');		
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Scarlet', 5.0, 'Caramel and sweet toffee aromas compliment the rich malt character and smooth bitterness.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Altbier'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Scarlet.png');	
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Lulet', 5.0, 'A Belgian-style Witbier brewed with orange peel, coriander and lavender.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Wheat'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Lulet.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Lemonita', 4.0, 'A mixed-fermentation fruit sour, brewed with fresh lemons and dry-hopped with Citra.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Fruit Sour'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Lemonita.png');
 				
 		
 

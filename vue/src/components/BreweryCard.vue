@@ -35,13 +35,14 @@ export default {
   border-radius: 10px;
   background-color: black;
   border: none;
-  margin: 25px auto;
+  margin: 25px;
   -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
 
 #brewery-name {
+  text-align: center;
   position: absolute;
 }
 
