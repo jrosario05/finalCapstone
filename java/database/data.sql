@@ -139,6 +139,18 @@ Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Wolf''s Ridge Brewi
 					'10:00am', '2:00pm');
 
 
+INSERT INTO hours ( brewery_id, mon_open, mon_close, tues_open, tues_close, wed_open, wed_close, 
+					thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close )
+Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Zaftig Brewing Company and Taproom'),
+					'3:00pm', '9:00pm', 
+					'3:00pm', '9:00pm',  
+					'3:00pm', '9:00pm',  
+					'3:00pm', '10:00pm',  
+					'3:00pm', '10:00pm', 
+					'11:00am', '10:00pm', 
+					'1:00pm', '7:00pm');
+
+
 					
 
 
