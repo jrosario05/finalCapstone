@@ -23,6 +23,11 @@ VALUES ('Endeavor Brewing', '909 W 5th Ave', 'Columbus', 'OH', '43212',  '(614) 
 		'Endeavor is proud to be Columbus, Ohio’s first brewstillery. We locally craft a wide selection of internationally inspired beer styles, and select clear and wood aged spirits.',
 		false ,'https://endeavorbrewing.com/wp-content/uploads/2022/01/Endeavor-Taproom.jpg');
 
+INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
+VALUES ('Parsons North Brewing Company', '685 Parsons Avenue', 'Columbus', 'OH', '43206',  '(614) 824-4208', 'https://parsonsnorth.com/', 
+		'We offer authentic styles of beer as well as providing a few unique beer experiences which turn expectations upside-down. Patience, good brewing practices, and consistent aquifer water from the southeast side of Columbus allow us to make genuine beers true to our unique part of town.  We do not use filters or yeast finings made from chemicals or animal byproducts.',
+		false ,'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570810684445-GKHJTDCA1DJGDQBCU6MD/IMG_4372.JPG');
+
 
 
 INSERT INTO brewery (brewery_name,street_address, city, state, zip_code, phone_number, description, has_food, website, img_url )
@@ -128,6 +133,17 @@ Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Wolf''s Ridge Brewi
 					
 
 
+INSERT INTO hours ( brewery_id, mon_open, mon_close, tues_open, tues_close, wed_open, wed_close, 
+					thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close )
+Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Parsons North Brewing Company'),
+					'4:00pm', '10:00pm', 
+					'4:00pm', '10:00pm', 
+					'4:00pm', '10:00pm', 
+					'4:00pm', '10:00am', 
+					'4:00pm', '12:00am', 
+					'12:00pm', '2:00am', 
+					'12:00pm', '7:00pm');
+
 				
 
 
@@ -184,6 +200,10 @@ INSERT INTO beer_style (style_name) VALUES ('Smoked Lager');
 INSERT INTO beer_style (style_name) VALUES ('Dunkel');
 INSERT INTO beer_style (style_name) VALUES ('Barleywine');
 INSERT INTO beer_style (style_name) VALUES ('Imperial Stout');
+INSERT INTO beer_style (style_name) VALUES ('Kölsch');
+INSERT INTO beer_style (style_name) VALUES ('Festbier');
+INSERT INTO beer_style (style_name) VALUES ('Belgian Dubbel');
+INSERT INTO beer_style (style_name) VALUES ('Cider');
 
 
 
@@ -756,6 +776,99 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brew
 		(SELECT style_id FROM beer_style WHERE style_name = 'Fruit IPA'), 
 		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/12oz__Hop_Pink_01_1024x1024@2x.png?v=1589810923');
 		
+/* Parsons North Beers Start Here*/
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'East Coast IPA', 7.2, 'Tropical, Juicy, Smooth.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'PN Light', 3.2, 'Smooth, Dry, Light.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Ale'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Grapefruit Wheat', 6.2, 'Zesty, Mellow, Clean.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Wheat'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Pecan Holiday Ale', 6, 'Rich, Smooth, Nutty.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Brown Ale'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Kolsch', 6.9, 'Crisp, Dry, Light.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Kölsch'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Coffee Kölsch', 5, 'Tropical, Juicy, Smooth.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Kölsch'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Dry Cider', 6.9, 'Smooth, Crisp, Tart.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Cider'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+
+ INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Fest Bier', 6.3, 'Smooth, Malty, Nutty.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Festbier'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'American Stout', 6.5, 'Rich, Balanced, Chocolatey.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Stout'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Doppelbock', 7.8, 'Full, Fruity, Malty.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Bock'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Belgian Dubbel', 6.8, 'Smooth, Malty, Fruity.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Belgian Dubbel'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Cranberry Wheat', 6.2, 'Wintry, Tart, Clean.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Wheat'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Mexican DARK Lager', 5, 'Dark, Smooth, Full.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
 
 
 COMMIT TRANSACTION;
