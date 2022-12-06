@@ -1,7 +1,12 @@
 BEGIN TRANSACTION;
 
-INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
-INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
+
+INSERT INTO users ( username, password_hash, role, user_first, user_last, address, city, state, zip_code) VALUES 
+('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER', 'Michael', 'Doom', '1775 Kinner Rd', 'Columbus', 'OH', 43215);
+INSERT INTO users (username, password_hash, role, user_first, user_last, address,city,  state, zip_code) 
+VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN', 'Andrew', 'Brantley', 'Somewhere', 'Gahanna', 'OH', 43215);
+
+
 
 
 
@@ -1196,6 +1201,32 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brew
 		'Mexican DARK Lager', 5, 'Dark, Smooth, Full.', 
 		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
 		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+
+
+
+
+INSERT INTO passport (user_id)
+VALUES ((SELECT user_id from users where user_first = 'Michael')),
+		((SELECT user_id from users where user_first = 'Andrew'));
+		
+Insert into passport_beer (passport_id, beer_id, drank)
+		
+	VALUES ((SELECT passport_id from passport where passport_id = 1), (select beer_id from beer where beer_id = 1), true),
+		   ((SELECT passport_id from passport where passport_id = 1), (select beer_id from beer where beer_id = 16), false),
+		   ((SELECT passport_id from passport where passport_id = 2), (select beer_id from beer where beer_id = 3), true),
+		   ((SELECT passport_id from passport where passport_id = 2), (select beer_id from beer where beer_id = 11), false);
+
+		
+
+Insert into passport_brewery (passport_id, brewery_id, visted)
+		
+	VALUES ((SELECT passport_id from passport where passport_id = 1), (select brewery_id from beer where beer_id = 1), true),
+		   ((SELECT passport_id from passport where passport_id = 1), (select brewery_id from beer where beer_id = 2), false),
+		   ((SELECT passport_id from passport where passport_id = 2), (select brewery_id from beer where beer_id = 18), false),
+		   ((SELECT passport_id from passport where passport_id = 2), (select brewery_id from beer where beer_id = 29), true);
+
 
 
 COMMIT TRANSACTION;

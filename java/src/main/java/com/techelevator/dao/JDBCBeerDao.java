@@ -57,6 +57,18 @@ public class JDBCBeerDao implements BeerDao {
         return beers;
     }
 
+    @Override
+    public Beer getBeer(int beerId) {
+        Beer beer = new Beer();
+        String sql = "Select * from beer where beer_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, beerId);
+        beer = mapRowToBeer(results);
+        return beer;
+
+
+
+    }
+
     private Beer mapRowToBeer(SqlRowSet rs){
         Beer beer = new Beer();
         beer.setBeerId(rs.getInt("beer_id"));

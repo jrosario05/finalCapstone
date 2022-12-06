@@ -9,6 +9,8 @@ public interface BeerDao {
     List<Beer> getAllBeersByBrewery(int breweryId);
 
     List<Beer> getAllBeers();
+
+    Beer getBeer(int beerId);
 }
 
 
