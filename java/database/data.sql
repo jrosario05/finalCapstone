@@ -39,6 +39,11 @@ VALUES ('Saucy Brew Works', '443 W 3rd Ave', 'Columbus', 'OH', '43201',  '(614) 
 		'At Saucy Brew Works, we don’t just brew beer. Since opening our doors in 2017, we’ve been dedicated to putting our minds and hearts into the process, using the finest ingredients and employing state of the art techniques.',
 		true ,'https://s3-prod.crainscleveland.com/s3fs-public/DSC_3974_i.jpg');
 
+INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
+VALUES ('Wolf''s Ridge Brewing', '215 N. 4th St', 'Columbus', 'OH', '43215',  '614-429-3936', 'https://www.wolfsridgebrewing.com/', 
+		'An independent, family-owned craft brewery and restaurant.',
+		true ,'https://drinkupcolumbus.com/wp-content/uploads/2016/08/Wolfs-Ridge-Anniversary.jpg');
+
 
 /* Insertion of Brewery Hours */
 
@@ -104,10 +109,26 @@ Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Saucy Brew Works'),
 					'11:00am', '10:00pm', 
 					'11:00am', '10:00pm', 
 					'11:00am', '10:00pm', 
-					'11:00am', '10:00am', 
+					'11:00am', '10:00pm', 
 					'11:00am', '12:00am', 
 					'11:00am', '12:00am', 
-					'11:00am', '10:00pm');					
+					'11:00am', '10:00pm');	
+
+		
+INSERT INTO hours ( brewery_id, mon_open, mon_close, tues_open, tues_close, wed_open, wed_close, 
+					thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close )
+Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Wolf''s Ridge Brewing'),
+					'Closed', 'Closed', 
+					'5:00pm', '10:00pm', 
+					'5:00pm', '10:00pm', 
+					'5:00pm', '10:00pm', 
+					'5:00pm', '11:00pm', 
+					'10:00am', '11:00pm', 
+					'10:00am', '2:00pm');
+					
+
+
+				
 
 
 /* Insertion of Beer Styles */
@@ -159,6 +180,11 @@ INSERT INTO beer_style (style_name) VALUES ('Pumpkin Ale');
 INSERT INTO beer_style (style_name) VALUES ('Christmas Ale');
 INSERT INTO beer_style (style_name) VALUES ('Fruit IPA');
 INSERT INTO beer_style (style_name) VALUES ('Ale');
+INSERT INTO beer_style (style_name) VALUES ('Smoked Lager');
+INSERT INTO beer_style (style_name) VALUES ('Dunkel');
+INSERT INTO beer_style (style_name) VALUES ('Barleywine');
+INSERT INTO beer_style (style_name) VALUES ('Imperial Stout');
+
 
 
 
@@ -651,6 +677,86 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Saucy Brew Works')
 		'I Can Teach Blue', 7.5, 'Brewed with wheat, two types of oats, and milk sugar for a thick, milkshake like body.', 
 		(SELECT style_id FROM beer_style WHERE style_name = 'American IPA'), 
 		'https://www.saucybrewworks.com/wp-content/uploads/2021/10/I-can-teach-blue.png');
+
+
+
+	
+	/* Wolf''s Ridge Brewing's Beers are here */
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'(614) Lager', 4.2,
+		'Midwest Light Lager, only 110 calories. Brewed to be clean and crisp but with more flavor and allure than a macro lager. very lightly dry hopped with Huell Melon hops to add a subtle melon/citrus note to the aroma.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
+		'https://imgur.com/MVOw3IJ'),
+		
+		 ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Bourbon Barrel Pi', 9.0,
+		'Our Imperial Pumpkin Ale begins with local Ohio pumpkins from Jacquemin Farms which are smoked in our kitchen before being added to the mash alongside heritage English barley. We then add cinnamon, ginger root, nutmeg, and ancho chili peppers to the brew. After later aging on vanilla bean and pecan wood, we finish off this Imperial Pumpkin Ale with a year of aging in Watershed bourbon barrels.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Pumpkin Ale'), 
+		'https://assets.untappd.com/photos/2022_10_28/7623fd7ded2c4c30be34026606dd830f_640x640.jpg'),
+		
+		 ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Buchenrauch', 5.7, 'This traditional smoked lager style hails from Bamberg Germany. The name literally means "beech smoke," which pays homage to the time honored tradition of smoking the malt over beech wood to create the signature smooth smokiness. Mahogany in color and rich in flavors of campfire smoke and crusty bread. Buchenrauch is crisp and savory.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Smoked Lager'), 
+		'https://www.datocms-assets.com/75079/1656605430-wolf-s-ridge-buchenrauch-6317.jpg'),
+		
+		 ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Daybreak', 5.0, 'Wolf Ridge crew brewed a pre-prohibition style Cream Ale with barley and corn for a smooth, crisp, clean sipper. Then they infused it with local, light roast coffee beans and brightened it with swirls of vanilla.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Ale'), 
+		'https://res.cloudinary.com/tavour/image/upload/c_fill,f_auto,g_auto,h_430,q_auto,w_430/zb0lqvqpjbnnbffebkvj'),
+		
+		 ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Dire Wolf', 10.8, 'Our #1 IPA. Tropical, citrusy, and most certainly juicy.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Stout'), 
+		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/WRB_12oz_Direwolf_background_1024x1024@2x.png?v=1648054069'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Pack IPA', 6.8, 'From our pack to yours - we invite you to share and enjoy this IPA wherever your path leads you. Brimming with Citra, Mosaic and Amarillo hoppy goodness, Pack is the perfect companion for any and all awaiting adventures.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'American IPA'), 
+		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/12oz__Pack_IPA_01_1024x1024@2x.png?v=1589044310'),
+		
+		 ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Hammer Toss', 5.2, 'Dunkel is a staple style at many breweries for good reason. The beer is dark and malty enough to satisfy fans of more flavorful beers while the low abv and clean lager profile allow it to be easily drinkable for anyone. So what are you waiting for? It''s time to throw the hammer down and dunk on your thirst!', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Dunkel'), 
+		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/WRB_12oz_HammerToss_1024x1024@2x.png?v=1668268223'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Oktoberfest', 5.4, 'Steeped in tradition and consumed in celebration, Oktoberfest is the perfect lager to herald the onset of autumn. Toasted bread on the nose leads to a slightly sweet, malty flavor with just a hint of noble hops. Crisp and highly quaffable. Brewed to be drunk by the stein; enjoy this brewer’s favorite seasonal beer!', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
+		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/WRB_12oz_Oktoberfest_1024x1024@2x.png?v=1659024205'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Onsetter', 6.5, 'Dry and bitter with notes of French roast coffee, baker''s chocolate, and classic American hops.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Stout'), 
+		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/onsetter_1024x1024@2x.png?v=1648227138'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Josh''s Brown', 5.3, ' As a toasty treat to greet the cold weather, our Brown Ale will please even the staunchest advocates for this classic style. The beer is dry and drinkable with notes of warm biscuits, caramel, and baker''s chocolate. Who says brown ales aren''t cool? We beg to differ!', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Brown Ale'), 
+		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/WRB_12oz_Josh_sBrownAle_1024x1024@2x.png?v=1667492525'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Chocolate Cherry Blanton''s Barrel Dire Wolf', 10.8, 'We brewed Dire Wolf and fermented it with tart Montmorency cherries, then aged it in Blanton''s barrels for 19 months. The beer is further finished with single-origin cacao nibs and Ugandan vanilla.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Imperial Stout'), 
+		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/8oz_choccherry_1024x1024@2x.png?v=1663693800'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Blanton''s Barrel Lord Maris', 12.0, ' Today we tip our hat to the boldest and most elusive of all otters! The venerated Lord Maris is layered with the finest imported malts, boiled for 8 hours, carefully fermented, then aged for over 18 months in Blanton’s Bourbon Barrels.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Barleywine'), 
+		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/8oz_Blanton_sLordMarisjpg_1024x1024@2x.jpg?v=1652722235'),
+		
+		((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Bourbon Barrel Coffee Cherry Vanilla Dire Wolf', 12.5, 'For years we''ve used beautiful, tart Montmorency cherries from Michigan for special projects. Coffee Cherry Vanilla Dire Wolf has been a favorite draft infusion of ours for a long time, featuring bold pie cherry overtones that marry well with the deep chocolate and caramel character of our Dire Wolf Imperial Stout. The One Line Coffee ties it all together. We hope your day is a fruitful as this beer when you enjoy it.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Imperial Stout'), 
+		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/22oz_CherryDireWolf_BG_1024x1024@2x.png?v=1652722264'),
+		
+		 ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
+		'Hop Pink', 7.2, ' Hop pink is our new take on IPA. We Ferment it hot with Norwegian Kveik yeast, then cool things down with a barrage of cryo hops. The fermentation adds bright aromatic notes of orange, while the cryo hops showcase amplified tropical and floral flavors.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Fruit IPA'), 
+		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/12oz__Hop_Pink_01_1024x1024@2x.png?v=1589810923');
+		
+
 
 COMMIT TRANSACTION;
 
