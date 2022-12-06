@@ -29,7 +29,6 @@
     </div> -->
   </div>
 </template>
-
 <script>
 export default {
   name: "beer-card",
@@ -44,7 +43,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .card {
   flex-direction: row;
@@ -60,7 +58,6 @@ export default {
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75); */
 }
-
 #beer-name {
   text-align: center;
   font-size: 0.75em;
@@ -76,7 +73,6 @@ export default {
 #beer-style {
   text-align: center;
 } */
-
 .banner-details {
   position: absolute;
   padding: 15px 0px;
@@ -86,7 +82,6 @@ export default {
   /* border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px; */
 }
-
 #beer-name h1 {
   padding: 0px 10px;
   margin: 0;
@@ -94,11 +89,9 @@ export default {
   color: white;
   text-shadow: 6px 6px 6px #272727;
 }
-
 #description {
   color: black;
 }
-
 #beer-image img {
   filter: grayscale(75%);
   width: 300px;
@@ -111,11 +104,9 @@ export default {
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75); */
   /* filter: drop-shadow(12px 0px 24px rgba(0, 0, 0, 0.75)); */
 }
-
 #beer-image:hover img {
   filter: grayscale(0);
 }
-
 .pop-up {
   width: 300px;
   height: 300px;
@@ -125,8 +116,14 @@ export default {
   position: absolute;
   z-index: 50;
 }
-
 .beer-details img {
   width: 25%;
 }
 </style>
+
+
+
+
+
+
+
