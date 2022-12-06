@@ -243,14 +243,11 @@ INSERT INTO beer_style (style_name) VALUES ('Ale');
 INSERT INTO beer_style (style_name) VALUES ('Smoked Lager');
 INSERT INTO beer_style (style_name) VALUES ('Dunkel');
 INSERT INTO beer_style (style_name) VALUES ('Imperial Stout');
-<<<<<<< HEAD
 INSERT INTO beer_style (style_name) VALUES ('Kölsch');
 INSERT INTO beer_style (style_name) VALUES ('Festbier');
 INSERT INTO beer_style (style_name) VALUES ('Belgian Dubbel');
 INSERT INTO beer_style (style_name) VALUES ('Cider');
-=======
 INSERT INTO beer_style (style_name) VALUES ('Blonde Ale');
-INSERT INTO beer_style (style_name) VALUES ('Kolsch');
 INSERT INTO beer_style (style_name) VALUES ('Barleywine');
 INSERT INTO beer_style (style_name) VALUES ('Coffee Brown Ale');
 INSERT INTO beer_style (style_name) VALUES ('Holiday Porter');
@@ -265,7 +262,6 @@ INSERT INTO beer_style (style_name) VALUES ('Altbier');
 INSERT INTO beer_style (style_name) VALUES ('Fruit Sour');
 
 
->>>>>>> 5402a31d8dff7c91f757ab6d0cfd80bfa7213abb
 
 
 
@@ -851,10 +847,10 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Com
 		
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
 VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'), 
-		'Cart Path Kolsch', 4.5, 'Expertly hopped with Cascaxde and Amarillo, this ''inspired ale''
+		'Cart Path Kölsch', 4.5, 'Expertly hopped with Cascaxde and Amarillo, this ''inspired ale''
 		pays homage to its German roots while being uniquely American. The flavor is bright, crisp, 
 		and citrusy with notes of lemon and grapefruit. With a small amount of malty sweetness, the finish is clean and refreshing.', 
-		(SELECT style_id FROM beer_style WHERE style_name = 'Kolsch'), 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Kölsch'), 
 		'https://static.wixstatic.com/media/637195_61c163e0335c482b9d5439f675930aaa~mv2.png');
 		
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
@@ -878,7 +874,7 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Com
 		'Peach Please', 4.5, 'Infused with peach puree and expertly hopped with Cascade and Amarillo, the flavor is 
 		fruity, bright, with subtle notes of lemon. The aroma is floral and lightly citrusy. Just the right amount 
 		of malty sweetness on the finish provides balance that is both clean and refreshing.', 
-		(SELECT style_id FROM beer_style WHERE style_name = 'Kolsch'), 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Kölsch'), 
 		'https://static.wixstatic.com/media/637195_1970dee30fe94bb2ba5562dc338d3566~mv2.png');
 		
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
@@ -1141,7 +1137,7 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brew
 
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
 VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
-		'Kolsch', 6.9, 'Crisp, Dry, Light.', 
+		'Kölsch', 6.9, 'Crisp, Dry, Light.', 
 		(SELECT style_id FROM beer_style WHERE style_name = 'Kölsch'), 
 		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
 
