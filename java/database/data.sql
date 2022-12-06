@@ -5,7 +5,7 @@ INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpUL
 
 
 
-/* Insertino of Brewery INformation */
+/* Insertion of Brewery Information */
 
 INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
 VALUES ('Edison Brewing Company', '785 Science Blvd', 'Gahanna', 'OH', '43230',  '(614) 762-6183', 'https://www.drinkedison.com/', 
@@ -23,15 +23,22 @@ VALUES ('Endeavor Brewing', '909 W 5th Ave', 'Columbus', 'OH', '43212',  '(614) 
 		'Endeavor is proud to be Columbus, Ohio’s first brewstillery. We locally craft a wide selection of internationally inspired beer styles, and select clear and wood aged spirits.',
 		false ,'https://endeavorbrewing.com/wp-content/uploads/2022/01/Endeavor-Taproom.jpg');
 
+INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
+VALUES ('Parsons North Brewing Company', '685 Parsons Avenue', 'Columbus', 'OH', '43206',  '(614) 824-4208', 'https://parsonsnorth.com/', 
+		'We offer authentic styles of beer as well as providing a few unique beer experiences which turn expectations upside-down. Patience, good brewing practices, and consistent aquifer water from the southeast side of Columbus allow us to make genuine beers true to our unique part of town.  We do not use filters or yeast finings made from chemicals or animal byproducts.',
+		false ,'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570810684445-GKHJTDCA1DJGDQBCU6MD/IMG_4372.JPG');
+
 
 
 INSERT INTO brewery (brewery_name,street_address, city, state, zip_code, phone_number, description, has_food, website, img_url )
-VALUES
-('Seventh Son','1101 N 4th St','Columbus','OH','43201', '(614)421-2337', 'Since April of 2013 Seventh Son has brewed over 225 different beers and has been consistently voted Columbus best brewery by 614 Magazine, Columbus Alive, and Columbus Underground
-readers', false,'https://www.seventhsonbrewing.com/homepage', 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1456849564007-RD6FFY9YP7Y4WKEO8FWO/image-asset.jpeg'),
+VALUES ('Seventh Son','1101 N 4th St','Columbus','OH','43201', '(614)421-2337', 'Since April of 2013 Seventh Son has brewed over 225 different beers and has been consistently voted Columbus best bcrewery by 614 Magazine, Columbus Alive, and Columbus Underground
+		readers', false,'https://www.seventhsonbrewing.com/homepage', 'https://images.squarespace-cdn.com/content/v1/51abeb0be4b08f6a770c06bf/1456849564007-RD6FFY9YP7Y4WKEO8FWO/image-asset.jpeg');
 
-('North High Brewing', '1288 N High St', 'Columbus', 'OH', '43201', '(614) 756-0100','North High Brewing was founded in 2011 by a couple of guys who were passionate about great beer and fun times, and we opened our doors here in 2012 as just the 7th brewery in Central Ohio. Although the majority of our beer is now produced at our warehouse a half a mile from here, our Short North taproom remains to be the face of our business while we expand into more brewpubs and kitchens.
-', true, 'https://www.northhighbrewing.com/locations/short-north', 'https://i0.wp.com/ohiocraftbeer.org/wp-content/uploads/sites/18/layerslider/North-High/NorthHigh_Slider2.jpg?fit=726%2C450&ssl=1');
+
+INSERT INTO brewery (brewery_name,street_address, city, state, zip_code, phone_number, description, has_food, website, img_url )
+VALUES ('North High Brewing', '1288 N High St', 'Columbus', 'OH', '43201', '(614) 756-0100','North High Brewing was founded in 2011 by a couple of guys who were passionate about great beer and fun times, 
+	and we opened our doors here in 2012 as just the 7th brewery in Central Ohio. Although the majority of our beer is now produced at our warehouse a half a mile from here, our Short North taproom remains to be the face of our business while we expand into more brewpubs and kitchens.'
+	, true, 'https://www.northhighbrewing.com/locations/short-north', 'https://i0.wp.com/ohiocraftbeer.org/wp-content/uploads/sites/18/layerslider/North-High/NorthHigh_Slider2.jpg');
 
 		 		 			 
 INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
@@ -43,6 +50,25 @@ INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone
 VALUES ('Wolf''s Ridge Brewing', '215 N. 4th St', 'Columbus', 'OH', '43215',  '614-429-3936', 'https://www.wolfsridgebrewing.com/', 
 		'An independent, family-owned craft brewery and restaurant.',
 		true ,'https://drinkupcolumbus.com/wp-content/uploads/2016/08/Wolfs-Ridge-Anniversary.jpg');
+
+
+
+INSERT INTO brewery (brewery_name,street_address, city, state, zip_code, phone_number, description, has_food, website, img_url )
+VALUES ('Zaftig Brewing Company and Taproom','7020-A Huntley Rd','Worthington','OH','43229', '(614) 636-2537', 
+		'Established in 2013, Zaftig Brewing Company is Worthington''s only craft brewery, offering an extensive array of selections.', 
+		true,'https://www.drinkzaftig.com/', 'https://static.wixstatic.com/media/637195_10dfacefbd4845728045442994e7c0dc~mv2.jpg');
+
+
+
+
+INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
+VALUES ('Ohio Brewing Company', '421 E 2nd Ave', 'Columbus', 'OH', '43201',  '(614) 682-2337', 'https://ohiobrewingcolumbus.com/', 
+		'Ohio Brewing Columbus produces a wide array of styles such as Mexican Lager, Pilsner, IPA, DIPA, Session IPA, Fruit Sour, 
+		Altbier, Witbier and a Nitro Irish Stout. Brewmaster Joe has professionally brewed beers for over 20+ years and 
+		perfected his brewing skills in Ireland during his 8-year stay. Needless to say that you can expect high quality craft beers at OBC.',
+		true ,'https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/gkhlufvm/d8fbb293-6bf5-4d50-893f-02123e850797.jpg');
+
+
 
 
 /* Insertion of Brewery Hours */
@@ -125,8 +151,42 @@ Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Wolf''s Ridge Brewi
 					'5:00pm', '11:00pm', 
 					'10:00am', '11:00pm', 
 					'10:00am', '2:00pm');
+
+
+INSERT INTO hours ( brewery_id, mon_open, mon_close, tues_open, tues_close, wed_open, wed_close, 
+					thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close )
+Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Zaftig Brewing Company and Taproom'),
+					'3:00pm', '9:00pm', 
+					'3:00pm', '9:00pm',  
+					'3:00pm', '9:00pm',  
+					'3:00pm', '10:00pm',  
+					'3:00pm', '10:00pm', 
+					'11:00am', '10:00pm', 
+					'1:00pm', '7:00pm');
+
+INSERT INTO hours ( brewery_id, mon_open, mon_close, tues_open, tues_close, wed_open, wed_close, 
+					thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close )
+Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Ohio Brewing Company'), 
+					'4:00pm', '11:00pm', 
+					'4:00pm', '11:00pm', 
+					'4:00pm', '11:00pm', 
+					'4:00pm', '11:00pm', 
+					'4:00pm', '11:00am', 
+					'10:00am', '11:00pm', 
+					'10:00am', '11:00pm');
 					
 
+
+INSERT INTO hours ( brewery_id, mon_open, mon_close, tues_open, tues_close, wed_open, wed_close, 
+					thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close )
+Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Parsons North Brewing Company'),
+					'4:00pm', '10:00pm', 
+					'4:00pm', '10:00pm', 
+					'4:00pm', '10:00pm', 
+					'4:00pm', '10:00am', 
+					'4:00pm', '12:00am', 
+					'12:00pm', '2:00am', 
+					'12:00pm', '7:00pm');
 
 				
 
@@ -182,8 +242,26 @@ INSERT INTO beer_style (style_name) VALUES ('Fruit IPA');
 INSERT INTO beer_style (style_name) VALUES ('Ale');
 INSERT INTO beer_style (style_name) VALUES ('Smoked Lager');
 INSERT INTO beer_style (style_name) VALUES ('Dunkel');
-INSERT INTO beer_style (style_name) VALUES ('Barleywine');
 INSERT INTO beer_style (style_name) VALUES ('Imperial Stout');
+INSERT INTO beer_style (style_name) VALUES ('Kölsch');
+INSERT INTO beer_style (style_name) VALUES ('Festbier');
+INSERT INTO beer_style (style_name) VALUES ('Belgian Dubbel');
+INSERT INTO beer_style (style_name) VALUES ('Cider');
+INSERT INTO beer_style (style_name) VALUES ('Blonde Ale');
+INSERT INTO beer_style (style_name) VALUES ('Barleywine');
+INSERT INTO beer_style (style_name) VALUES ('Coffee Brown Ale');
+INSERT INTO beer_style (style_name) VALUES ('Holiday Porter');
+INSERT INTO beer_style (style_name) VALUES ('Imperial Milk Stout');
+INSERT INTO beer_style (style_name) VALUES ('Peanut Butter Stout');
+INSERT INTO beer_style (style_name) VALUES ('Pecan Brown Ale');
+INSERT INTO beer_style (style_name) VALUES ('Session IPA');
+INSERT INTO beer_style (style_name) VALUES ('Chocolate Rasberry Stout');
+INSERT INTO beer_style (style_name) VALUES ('Mexican Lager');
+INSERT INTO beer_style (style_name) VALUES ('Nitro Irish Stout');
+INSERT INTO beer_style (style_name) VALUES ('Altbier');
+INSERT INTO beer_style (style_name) VALUES ('Fruit Sour');
+
+
 
 
 
@@ -688,7 +766,7 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brew
 		'(614) Lager', 4.2,
 		'Midwest Light Lager, only 110 calories. Brewed to be clean and crisp but with more flavor and allure than a macro lager. very lightly dry hopped with Huell Melon hops to add a subtle melon/citrus note to the aroma.', 
 		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
-		'https://imgur.com/MVOw3IJ'),
+		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/614render_1024x1024@2x.jpg'),
 		
 		 ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brewing'), 
 		'Bourbon Barrel Pi', 9.0,
@@ -755,7 +833,369 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Wolf''s Ridge Brew
 		'Hop Pink', 7.2, ' Hop pink is our new take on IPA. We Ferment it hot with Norwegian Kveik yeast, then cool things down with a barrage of cryo hops. The fermentation adds bright aromatic notes of orange, while the cryo hops showcase amplified tropical and floral flavors.', 
 		(SELECT style_id FROM beer_style WHERE style_name = 'Fruit IPA'), 
 		'https://cdn.shopify.com/s/files/1/0265/6976/9007/products/12oz__Hop_Pink_01_1024x1024@2x.png?v=1589810923');
+
+
+/* Zaftig Brewery Beer LIst */
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'), 
+		'Mini Bomb Blonde', 5.0, 'Crisp, refreshing, and smooth with cereal malts; Mini Bomb is light and approachable,
+		while not being overly hoppy, Subtle floral notes and unassuming citrus are present, but no one flavor dominates.
+		The finish is soft, pleasant, and round. clean. ', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Blonde Ale'), 
+		'https://static.wixstatic.com/media/637195_0125a8d994e74f28ad44d9334933f08d~mv2.png');
 		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'), 
+		'Cart Path Kölsch', 4.5, 'Expertly hopped with Cascaxde and Amarillo, this ''inspired ale''
+		pays homage to its German roots while being uniquely American. The flavor is bright, crisp, 
+		and citrusy with notes of lemon and grapefruit. With a small amount of malty sweetness, the finish is clean and refreshing.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Kölsch'), 
+		'https://static.wixstatic.com/media/637195_61c163e0335c482b9d5439f675930aaa~mv2.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'), 
+		'Hazy Miss Daisy', 7.0, 'Our traditional New England IPA boasts a tart juiciness derived from Amarillo and Mosaic hops. 
+		Featuring an inviting floral nose, Miss Daisy has noted of lemon and stone fruit with slight maltiness. Unfiltered, the 
+		light haze you see comes from the East Coast yeast and dry-hopping process.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'), 
+		'https://static.wixstatic.com/media/637195_420c499df1c34033a9738c8790ac5bc8~mv2.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'), 
+		'Juicy Lucy', 7.0, 'Our flagship West Coast style IPA is malty and complex with tons of fruit flavor 
+		and a giant mouthfeel. Double dry-hopped with Citra and Rakau, she delivers a citrusy punch on the 
+		nose and upon tasting contains notes of papaya, apricot, and guava.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'American IPA'), 
+		'https://static.wixstatic.com/media/637195_420c499df1c34033a9738c8790ac5bc8~mv2.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'), 
+		'Peach Please', 4.5, 'Infused with peach puree and expertly hopped with Cascade and Amarillo, the flavor is 
+		fruity, bright, with subtle notes of lemon. The aroma is floral and lightly citrusy. Just the right amount 
+		of malty sweetness on the finish provides balance that is both clean and refreshing.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Kölsch'), 
+		'https://static.wixstatic.com/media/637195_1970dee30fe94bb2ba5562dc338d3566~mv2.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'), 
+		'Cats in Space', 10.0, 'Crazy amounts of pineapple and mango haze with subtle pine and fruity 
+		esters send this double dry-hopped NEIPA into orbit. Brewed with over four pounds of Galaxy hops per barrel, 
+		your palate may also pick up on citrus, peach, and a pungent passionfruit aroma. ', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Double IPA'), 
+		'https://static.wixstatic.com/media/637195_0a5ae7f2505140a3baf7fccac7db3e75~mv2.jpg');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'), 
+		'Too Cans', 10.0, 'Crazy amounts of pineapple and mango haze with subtle pine and fruity 
+		esters send this double dry-hopped NEIPA into orbit. Brewed with over four pounds of Galaxy hops per barrel, 
+		your palate may also pick up on citrus, peach, and a pungent passionfruit aroma. ', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Imperial IPA'), 
+		'https://static.wixstatic.com/media/637195_0a5ae7f2505140a3baf7fccac7db3e75~mv2.jpg');
+			
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Oktoberfest', 6.0, 'A traditional German Marzen lager with a deep orange
+		  color and solid white head. Vienna malt creates the backbone of the flavor, complemented by Munich 
+		 and Crystal malts. Hallertau hops is added to create a balanced bitterness that finishes smooth, clean, and enjoyable. Prost! ', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Märzen/Oktoberfest'), 
+		'https://static.wixstatic.com/media/637195_3c770100128d4f06b449049dcac0ffb1~mv2.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Frosty Tips', 5.5, 'An expert blend of Simcoe, Enigma, and Nelson Sauvin hops create a truly unique and crushable IPA. 
+		Hoppy on the nose, Frosty has bright tropical and citrus notes. The finish is clean and refreshing with body--just 
+		a hint of pine and a pleasant maltiness that excites the palate and olfactory senses.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'), 
+		'https://static.wixstatic.com/media/637195_38a4a712828f43a0af8f4cc8359e106e~mv2.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Wee Heavy', 10.0, 'Our award-winning Wee Heavy is a beauty to behold, featuring toffee, caramel, 
+		and dark fruit notes balanced with grassy, floral British hops. This brew is also quite well-suited 
+		for gathering age in a cellar and pairs well with smoked meats and cheeses, sticky toffee pudding, and even haggis!', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Dark Ale'), 
+		'https://static.wixstatic.com/media/637195_1b3c05a24dd84876b941f32242200cc8~mv2.png');		
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Heavy Hearted Amber', 8.0, 'A classic, but unique full-bodied amber that is rich and toasty, 
+		with caramel and toffee flavors without being overly sweet. Big, yet delicate, with a sophisticated
+		malt finish that lingers on the palate; containing subtle notes of wood and earth on the exhale from the battering hops. ', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Dark Ale'), 
+		'https://static.wixstatic.com/media/637195_703c32fe062f489bac650ab336b6c1c9~mv2.png');		
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Cashmere Indulgence', 7.5, 'Brewed with over 300lbs of strawberry puree, this IPA boasts incredible fruit flavor. 
+		Cashmere and Mosaic hops add complexity and provide a smooth bitterness and subtle herbal bouquet. 
+		Balanced with lactose for a luxurious mouthfeel and dry spiced with Madagascar vanilla beans for depth.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Fruit IPA'), 
+		'https://static.wixstatic.com/media/637195_d1dfb7b450644961a7e1f206ab53dba4~mv2.png');	
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Hop Swapper', 10.0, 'In each batch of this Double New England IPA, our brewers get creative and swap the hops. 
+		Each release brings you a new blend of exotic hops to ensure.a juicy treat. The current batch uses Motueka and 
+		El Dorado hops for bright tropical fruit flavors and floral aromas.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Double IPA'), 
+		'https://static.wixstatic.com/media/637195_e520277911d14b96bd05cb97d7581761~mv2.png');	
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Big Barleywine', 14.0, 'An American-style barleywine with a deep ruby color. An intense malt aroma on the nose; 
+		the flavors are dark and complex, including notes of apple, pear, and caramel. BBW starts clean and finishes round, 
+		warm, and dry. Plenty of body and warmth to make one happy. ', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Barleywine'), 
+		'https://static.wixstatic.com/media/637195_ff368e3ea8424a82980cc6f7ecdff444~mv2.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Modest', 4.9, 'Our first Session, Modest is brewed with Centennial, Nelson Sauvin, and Simcoe hops with an unmistakable IPA aroma. 
+		You''ll experience notes of white wine, citrus, and light tropical fruit. The finish is slightly 
+		piney and resinous for an unassuming yet full-bodied encounter.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Session IPA'), 
+		'https://static.wixstatic.com/media/637195_47aac216c0e44b7586e853c645e08c7f~mv2.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Hourglass', 6.0, 'A classic New England IPA with a different personality. 
+		By uniting Citra and Amarillo hops, we have built a crossover between a NEIPA and the also 
+		popular West Coast style. Well-balanced, with generous citrus notes and delicate maltiness, you get the best of both worlds. ', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'), 
+		'https://static.wixstatic.com/media/637195_4f94e85efdae4f618de5d6cf5d9fb829~mv2.png');	
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Super Juicy Lucy', 7.0, 'Our flagship West Coast style IPA infused with Valencia orange puree. 
+		Double dry-hopped with Citra and Rakau, Super Juicy delivers a citrusy punch on the nose and a 
+		huge rush of orange flavor upon tasting with subtle notes of papaya, apricot, and guava and an incredible malty finish.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Fruit IPA'), 
+		'https://static.wixstatic.com/media/637195_d69704c0c85c4670a11ddc61b2a8a68b~mv2.png');	
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Tropical Hazy', 6.0, 'Our traditional New England IPA infused with passion fruit, orange, 
+		and guava puree. Brewed with Amarillo and Mosaic hops, Tropical Hazy is smooth, slightly 
+		malty, and packed with exotic fruit flavors that harmoniously play off of each other, but remain balanced through its finish.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Fruit IPA'), 
+		'https://static.wixstatic.com/media/637195_3604920d7fb84d2395197d47198931bd~mv2.png');	
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Bear Action', 9.5, 'The base of this big brown ale has a full body with deep, nutty flavors. 
+		Backroom Roasters Sumatra Takengon coffee is cold-brewed and added to give the beer deep, 
+		rich notes of artisan coffee. The result is a bold but smooth brown ale that packs a huge coffee punch.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Coffee Brown Ale'), 
+		'https://static.wixstatic.com/media/637195_83f709b4616b48308cb34002a0717c88~mv2.png');	
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'I Believe in Santa', 10.0, 'With an expert blend of cinnamon, vanilla bean, and orange peel, 
+		this porter is sophisticated and balanced; not overly spiced and incredibly smooth with just the right amount of bitterness.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Holiday Porter'),
+		'https://static.wixstatic.com/media/637195_d1ac681d2f5f4c7383f51499aa11d42a~mv2.png');	
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Closet Troll', 11.0, 'Rich, dark, and mysterious--Closet Troll is not only robust, 
+		but rages with notes of roasted barley and chocolate, with an earthy bitterness that 
+		seeks to overwhelm the drinker, but is cleverly balanced by the milk sugars for a perfect finish.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Imperial Milk Stout'),
+		'https://static.wixstatic.com/media/637195_7556af7517a04c4f97214cab84b04449~mv2.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Nuts for You', 11.0, 'One of our signature stouts--it is rich, dark, heavy on 
+		the roasted peanuts and accented with the world''s finest cocoa nibs. Unlike many duplicators 
+		on the market today, Nuts for You is not cloyingly sweet nor is it bitter, but remarkably 
+		balanced with a smooth dark chocolate finish.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Peanut Butter Stout'),
+		'https://static.wixstatic.com/media/637195_c4da7b81118540f48ef1560be6516f69~mv2.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Nuttn'' 2 It', 10.0, 'Asked how hard would it be to make a tasty, nutty Brown Ale, the head brewer growled, “Nuttn’ 2 it.” That may be, 
+		but the skilfull blending of pecans and East Kent Goldings and Wilamete hops in this smooth drinking, 
+		malty brown ale will leave you shaking your head wondering “How did they do it?"', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Pecan Brown Ale'),
+		'https://static.wixstatic.com/media/637195_add34d877d174b07965ac3dcb384d83a~mv2.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Zaftig Brewing Company and Taproom'),
+		'Razzy Galore', 9.0, 'We put together a stout heavy on the chocolate malt, added 
+		about 11 pounds of cocoa nibs and finished with a natural raspberry puree to bring 
+		together a silky smooth and complex chocolate taste with a nice tart raspberry nose and finish.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Chocolate Rasberry Stout'),
+		'https://static.wixstatic.com/media/637195_33f5a3713a594374907b54f7b0cd8ad9~mv2.png');
+
+
+/* Beers for Ohio Brewing Company */
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Jing8le Bell Ale', 8.0, 'A beautiful deep-mahogany hue, sweet vanilla nose, 
+		complimented by a balanced blend of cinnamon, ginger, and honey, make this classic
+		Ohio-style holiday ale a perfect match for those cold winter nights.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Christmas Ale'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/11/OBC-Jingle-Bell-Christmas-Ale-2022.jpg');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Pumpkin Ale', 6.2, 'A beautifully balanced autumn brew with flavors and aromas reminiscent of grandma’s pumpkin pie.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Spiced Holiday Ale'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/09/DSC02755.jpg');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Lil Vata', 4.6, 'A crisp and refreshing Mexican-style lager. Goes great with sunburns and sandy toes.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Mexican Lager'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Lil-Vata.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'President Pils', 5.2, 'Rich, characterful, pale Czech-style lager. Complex yet well-balanced and refreshing. 
+		The bitterness is clean and without harshness, which gives a rounded drinkability.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Pilsner'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Presidents-Pils.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Kulbit', 7.2, 'Fruity aromas of passion fruit, grapefruit and orange; with a soft mouthfeel and a balanced finish.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Kulbit.png');		
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Pitchback', 4.2, 'An easy-going Session IPA with a focus on late and dry-hop additions for big hop flavor and aroma without a big alcohol bang.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Session IPA'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Pitchback.png');		
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Flori', 8.2, 'A big, bold DIPA. Packed with tropical fruit flavor and aroma with a smooth finish that leans towards bitter.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Double IPA'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/FLori.png');	
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Bowsie', 4.2, 'An Irish Classic, creamy with hints of chocolate and coffee and a smooth dry finish.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Nitro Irish Stout'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Bowsie.png');		
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Scarlet', 5.0, 'Caramel and sweet toffee aromas compliment the rich malt character and smooth bitterness.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Altbier'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Scarlet.png');	
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Lulet', 5.0, 'A Belgian-style Witbier brewed with orange peel, coriander and lavender.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Wheat'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Lulet.png');
+		
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Ohio Brewing Company'), 
+		'Lemonita', 4.0, 'A mixed-fermentation fruit sour, brewed with fresh lemons and dry-hopped with Citra.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Fruit Sour'), 
+		'https://v6id9d.p3cdn1.secureserver.net/wp-content/uploads/2022/08/Lemonita.png');
+				
+		
+/* Parsons North Beers Start Here*/
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'East Coast IPA', 7.2, 'Tropical, Juicy, Smooth.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Indian Pale Ale'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'PN Light', 3.2, 'Smooth, Dry, Light.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Ale'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Grapefruit Wheat', 6.2, 'Zesty, Mellow, Clean.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Wheat'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Pecan Holiday Ale', 6, 'Rich, Smooth, Nutty.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Brown Ale'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Kölsch', 6.9, 'Crisp, Dry, Light.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Kölsch'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Coffee Kölsch', 5, 'Tropical, Juicy, Smooth.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Kölsch'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Dry Cider', 6.9, 'Smooth, Crisp, Tart.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Cider'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+
+ INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Fest Bier', 6.3, 'Smooth, Malty, Nutty.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Festbier'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'American Stout', 6.5, 'Rich, Balanced, Chocolatey.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Stout'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Doppelbock', 7.8, 'Full, Fruity, Malty.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Bock'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Belgian Dubbel', 6.8, 'Smooth, Malty, Fruity.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Belgian Dubbel'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Cranberry Wheat', 6.2, 'Wintry, Tart, Clean.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Wheat'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brewing Company'), 
+		'Mexican DARK Lager', 5, 'Dark, Smooth, Full.', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
+		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
 
 
 COMMIT TRANSACTION;
