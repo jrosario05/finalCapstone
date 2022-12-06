@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card" v-show="true">
+    <div class="card" v-show="true" v-on:click.prevent="someFunction(beer.beerId)">
       <div id="beer-image">
         <img v-bind:src="beer.imgUrl" />
       </div>
@@ -34,6 +34,14 @@
 export default {
   name: "beer-card",
   props: ["beer"],
+
+
+
+  methods: {
+    someFunction(id){
+      this.$store.commit('BEER_ID_FOR_DETAILS', id)
+    }
+  }
 };
 </script>
 

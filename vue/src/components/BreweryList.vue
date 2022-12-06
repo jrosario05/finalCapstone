@@ -9,18 +9,6 @@
   </select>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
       <div id="search">
         <label for="breweryName">name filter:</label>
         <input type="text" name="breweryName" v-model="nameFilter"/>
@@ -67,7 +55,7 @@ computed:{
     let filteredBreweriesArray=this.$store.state.breweries;
     if (this.nameFilter !=""){
       filteredBreweriesArray = filteredBreweriesArray.filter((brewery)=>{
-         return brewery.breweryName.includes(this.nameFilter)
+         return brewery.breweryName.toLowerCase().includes(this.nameFilter.toLowerCase())
       });
     }
     if (this.cityFilter != ''){
