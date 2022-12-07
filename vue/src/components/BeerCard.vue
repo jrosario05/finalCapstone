@@ -1,6 +1,9 @@
 <template>
   <div>
-      <div class="card" v-on:click="toggleShow">
+          
+
+    <div class="card" v-on:click="toggleShow">
+      <transition name="fade">
         <div class="front" v-show="show">
           <div id="beer-image" v-on:click="someFunctions()">
             <img v-bind:src="beer.imgUrl" />
@@ -11,6 +14,8 @@
             </div>
           </div>
         </div>
+      </transition>
+      <transition name="fade">
         <div class="back" v-show="!show">
           <div class="details">
             <h1>{{ beer.beerName }}</h1>
@@ -21,7 +26,10 @@
 
           <img v-bind:src="beer.imgUrl" />
         </div>
-      </div>
+    </transition>
+
+    </div>
+
   </div>
 </template>
 <script>
@@ -35,7 +43,6 @@ export default {
     };
   },
 
-<<<<<<< HEAD
   methods: {
     someFunctions() {
       this.$store.commit("BEER_FOR_DETAILS", this.beer);
@@ -49,13 +56,6 @@ export default {
         this.show = false;
       }
     },
-=======
-  methods:{
-    someFunctions(){
-      this.$store.commit('BEER_FOR_DETAILS', this.beer);
-      console.log(this.$store.state.currentBeer)
-    }
->>>>>>> 3e626e709eb6ceeb88e140b151dcfd543f9bc74c
   },
 };
 </script>
@@ -70,9 +70,9 @@ export default {
   border-radius: 10px;
   border: none;
   margin: 25px 100px;
-  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  background-color: transparent;
+
+  animation: fadeinout 4s linear forwards;
 }
 
 .front {
@@ -80,6 +80,26 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  border: none;
+  position: absolute;
+    -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -webkit-animation: fadeinout 4s linear forwards;
+}
+
+#beer-image img {
+  filter: grayscale(75%);
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+#beer-image:hover img {
+  filter: grayscale(0);
 }
 
 .back {
@@ -87,11 +107,18 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* position: absolute; */
-  width: 300px;
-  height: 300px;
-  color: black;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: white;
   border-radius: 20px;
+  background-color: rgb(48, 31, 0);
+  border-radius: 10px;
+  border: none;
+    -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -webkit-animation: fadeinout 4s linear forwards;
 }
 
 .details h1 {
@@ -149,21 +176,44 @@ export default {
   opacity: 20%;
 }
 
-#beer-image img {
-  filter: grayscale(75%);
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 10px;
+/* Animation Properties */
+
+.fade-enter-active {
+  animation: fade-in .5s;
+}
+.fade-leave-active {
+  animation: fade-out .5s;
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform:rotateY(0deg);
+
+  }
+  
+  100% {
+    opacity: 0;
+    transform:rotateY(180deg);
+
+  }
 }
 
-/* #beer-image:hover img {
-  filter: grayscale(0);
-} */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+        transform:rotateY(180deg);
 
-.beer-details img {
-  width: 25%;
+  }
+  
+  100% {
+    opacity: 1;
+            transform:rotateY(0deg);
+
+  }
 }
+
+
+
 
 </style>
 
