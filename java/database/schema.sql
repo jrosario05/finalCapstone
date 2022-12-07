@@ -4,7 +4,7 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS passport_beer;
 DROP TABLE IF EXISTS passport_brewery;
-DROP TABLE IF EXISTS passport;
+DROP TABLE IF EXISTS user_info;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS hours;
 DROP TABLE IF EXISTS brewery_beer;
@@ -18,21 +18,21 @@ CREATE TABLE users (
 	username varchar(50) NOT NULL UNIQUE,
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
+	
+	
+ CONSTRAINT PK_user PRIMARY KEY (user_id)
+);
+
+CREATE TABLE user_info(
+    passport_id SERIAL NOT NULL UNIQUE,
+	user_id integer NOT NULL,
 	user_first varchar(50) NOT NULL,
 	user_last varchar(50) NOT NULL,
 	address varchar(100) NOT NULL,
 	city varchar(25) NOT NULL,
 	state varchar(15) NOT NULL,
-	
 	zip_code integer NOT NULL,
 	img_url varchar(300),
-	
- CONSTRAINT PK_user PRIMARY KEY (user_id)
-);
-
-CREATE TABLE passport(
-    passport_id SERIAL NOT NULL UNIQUE,
-	user_id integer NOT NULL,
 	
 	CONSTRAINT PK_passport PRIMARY KEY (passport_id),
 	
@@ -65,7 +65,7 @@ CREATE TABLE passport_brewery(
 	brewery_id integer NOT NULL,
 	visited boolean NOT NULL,
 	
-	CONSTRAINT FK_passport FOREIGN KEY (passport_id) REFERENCES passport(passport_id),
+	CONSTRAINT FK_user_info FOREIGN KEY (passport_id) REFERENCES user_info(passport_id),
 	CONSTRAINT FK_brewery FOREIGN KEY (brewery_id) REFERENCES brewery(brewery_id)
 	
 );
@@ -120,7 +120,7 @@ CREATE TABLE passport_beer(
 	beer_id integer NOT NULL,
 	drank boolean not null,
 	
-	CONSTRAINT FK_passport FOREIGN KEY (passport_id) REFERENCES passport(passport_id),
+	CONSTRAINT FK_user_info FOREIGN KEY (passport_id) REFERENCES user_info(passport_id),
 	CONSTRAINT FK_beer FOREIGN KEY (beer_id) REFERENCES beer(beer_id)
 	
 );
