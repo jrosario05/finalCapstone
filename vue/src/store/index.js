@@ -22,11 +22,15 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     beers: [],
-    beerId:'',
+    currentBeer:{
+      beerName: 'test',
+      imgURL: 'test',
+      abv: 5,
+    },
   },
   mutations: {
-    BEER_ID_FOR_DETAILS(state, data){
-      state.beerId=data;
+    BEER_FOR_DETAILS(state, data){
+      state.currentBeer=data;
     },
     MAKE_BREWERY_LIST(state, data){
       state.breweries=data;
