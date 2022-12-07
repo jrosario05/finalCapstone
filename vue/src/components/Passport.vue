@@ -105,6 +105,7 @@ h1 {
 }
 
 .passport {
+  background-color: white;
   margin: 0 auto;
   width: 80vw;
   border-top-left-radius: 15px;
@@ -148,9 +149,17 @@ h1 {
 .accordion {
   margin-top: 10px;
   display: flex;
-  width: 100%;
-  flex-direction: row;
+  width: 33%;
+  flex-direction: column;
 }
+/* Adjust beer list positioning */
+#beer-list {
+  margin: 0 auto;
+  position: absolute;
+  transform: translate(525px, 0px);
+  width: 50%;
+}
+
 
 div.card-body {
   display: flex;
@@ -159,12 +168,7 @@ div.card-body {
   align-items: center;
 }
 
-#beer-list {
-  margin: 0 auto;
-  position: absolute;
-  transform: translate(10px, 75px);
-  width: 78%;
-}
+
 
 
 .beer-name {
