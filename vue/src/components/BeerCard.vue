@@ -1,34 +1,40 @@
 <template>
   <div>
-    <div class="card" v-show="true" >
-      <div id="beer-image" v-on:click="someFunctions()">
-        <img v-bind:src="beer.imgUrl" />
-      </div>
-      <div class="banner-details">
-        <div id="beer-name">
-          <h1>{{ beer.beerName }}</h1>
+    <div class="card">
+      <div class="front">
+        <div id="beer-image" v-on:click="someFunctions()">
+          <img v-bind:src="beer.imgUrl" />
+        </div>
+        <div class="banner-details">
+          <div id="beer-name">
+            <h1>{{ beer.beerName }}</h1>
+          </div>
         </div>
       </div>
+      <div class="back">
+        <h3>{{ beer.style }}</h3>
+        <h3>{{ beer.abv }}</h3>
+        <p class="description">{{ beer.description }}</p>
+      </div>
     </div>
-
   </div>
 </template>
 <script>
 export default {
   name: "beer-card",
   props: ["beer"],
-  data(){
-    return{
-      beerForDetails:{}
-    }
+  data() {
+    return {
+      beerForDetails: {},
+    };
   },
 
-  methods:{
-    someFunctions(){
-      this.$store.commit('BEER_FOR_DETAILS', this.beer);
-      console.log(this.$store.state.currentBeer)
-    }
-  }
+  methods: {
+    someFunctions() {
+      this.$store.commit("BEER_FOR_DETAILS", this.beer);
+      console.log(this.$store.state.currentBeer);
+    },
+  },
 };
 </script>
 <style scoped>
@@ -45,6 +51,28 @@ export default {
   /* -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75); */
+}
+
+.front {
+  position: absolute;
+  width: 275px;
+  height: 400px;
+  background: linear-gradient(135deg, #f1f1f1, #e7e7e7 20%);
+  border: 0.5px solid;
+  color: black;
+  border-radius: 20px;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.back {
+  position: absolute;
+  width: 275px;
+  height: 400px;
+  background: linear-gradient(135deg, #f1f1f1, #e7e7e7 20%);
+  box-shadow: 3px 3px 18px 1px;
+  color: black;
+  border-radius: 20px;
 }
 #beer-name {
   text-align: center;
