@@ -43,6 +43,7 @@ public class AuthenticationController {
         String jwt = tokenProvider.createToken(authentication, false);
         
         User user = userDao.findByUsername(loginDto.getUsername());
+//        user=userDao.getUserById(user.getId());
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
