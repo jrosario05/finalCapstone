@@ -23,6 +23,8 @@ export default new Vuex.Store({
     user: currentUser || {},
     userInfo: {},
     beers: [],
+    passportBreweries: [],
+    passportBeers: [],
     currentBeer:{
       beerName: 'test',
       imgURL: 'test',
@@ -30,6 +32,12 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    PASSPORT_BEERS(state,data){
+      state.passportBeers=data;
+    },
+    PASSPORT_BREWERIES(state,data){
+      state.passportBreweries=data;
+    },
     SET_USER_INFO(state, data){
       state.userInfo=data;
     },

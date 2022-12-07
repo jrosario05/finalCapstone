@@ -49,15 +49,15 @@ export default {
 
   computed: {
     filterArray() {
-      let filteredArray = this.$store.state.breweries;
+      let filteredArray = this.$store.state.passportBreweries;
       return filteredArray;
     },
   },
 
   methods: {
     getBreweries() {
-      BreweryService.listBreweries().then((response) => {
-        this.$store.commit("MAKE_BREWERY_LIST", response.data);
+      BreweryService.breweryPassport(this.$store.state.user.id).then((response) => {
+        this.$store.commit("PASSPORT_BREWERIES", response.data);
       });
     },
     getBeer(id) {
@@ -107,6 +107,7 @@ h1 {
   margin: 10px;
   
   display: flex;
+  flex-grow: 1;
   flex-direction: row;
   justify-content:space-around;
   align-items: center;
