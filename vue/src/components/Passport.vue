@@ -24,10 +24,15 @@
             <div class="beer-style">
               {{ beer.style }}
             </div>
-            <div class="beer-abv">
-              {{ beer.abv }}% ABV
+            <div class="beer-abv">{{ beer.abv }}% ABV</div>
+            <div class="drank">
+              <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
+              <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
             </div>
-
+            <div class="favorited">
+              <i class="bi bi-heart" v-show="!true"></i>
+              <i class="bi bi-heart-fill" v-show="true"></i>
+            </div>
           </b-card>
         </b-collapse>
       </div>
@@ -60,9 +65,11 @@ export default {
 
   methods: {
     getBreweries() {
-      BreweryService.breweryPassport(this.$store.state.user.id).then((response) => {
-        this.$store.commit("PASSPORT_BREWERIES", response.data);
-      });
+      BreweryService.breweryPassport(this.$store.state.user.id).then(
+        (response) => {
+          this.$store.commit("PASSPORT_BREWERIES", response.data);
+        }
+      );
     },
     getBeer(breweryId) {
       BeerService.beerPassport(this.$store.state.user.id, breweryId).then(response => {
@@ -80,7 +87,6 @@ export default {
 };
 </script>
 <style scoped>
-
 h1 {
   color: white;
 }
@@ -99,7 +105,7 @@ h1 {
   width: 80vw;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-     /* -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  /* -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75); */
 }
@@ -109,17 +115,21 @@ h1 {
   width: auto;
   border: none;
   margin: 10px;
-  
+  padding: 25px 0px;
+
   display: flex;
   flex-grow: 1;
   flex-direction: row;
-  justify-content:space-around;
+  justify-content: space-around;
   align-items: center;
   color: black;
-     -webkit-box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.75);
-  
+}
+
+#brewery:click {
+  background-color: rgb(184, 169, 37);
 }
 
 .passport h3 {
@@ -138,34 +148,61 @@ h1 {
   flex-direction: row;
 }
 
-
 #beer-list {
   margin: 0 auto;
   position: absolute;
   transform: translate(0px, 75px);
-  width: 80vw;
-  
-  
-
+  width: 81%;
 }
 
 .beer-name {
-  /* margin: 0px 25px; */
+  display: inline-block;
+
+  margin: 0 auto;
   width: 25%;
- font-size: 1em;
-  font-weight:bold;
+  font-size: 1em;
+  font-weight: bold;
 }
 
 .beer-style {
+  display: inline-block;
+
+  margin: 0 auto;
+
   width: 25%;
   font-size: 1em;
-  font-style:italic;
+  font-style: italic;
 }
 .beer-abv {
+  display: inline-block;
   width: 25%;
-    font-style:italic;
-    font-size: 1em;
+  font-style: italic;
+  font-size: 1em;
+}
 
+.drank {
+  display: inline;
+}
+
+.drank img {
+  width: 40px;
+  height: auto;
+}
+
+.favorited {
+  display: inline;
+  background-color: grey;
+  padding-top: 10px;
+  margin: 25px;
+  width: 25%;
+  height: auto;
+}
+
+.favorited i {
+  font-size: 30px;
+  margin-top: 10px;
+  
+  color: red;
 }
 
 </style>
