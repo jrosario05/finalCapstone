@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 v-show="$store.state.token != ''">Welcome {{$store.state.user.username}}</h1>
+    <h1 v-show="$store.state.token != ''">Welcome {{$store.state.userInfo.userFirstName}}</h1>
 
 <div class="accordion" role="tablist">
   <b-button v-for="brewery in filterArray" :key="brewery.id" v-b-toggle.collapse-1 variant="primary" v-on:click="getBeer(brewery.breweryId)">{{brewery.breweryName}}</b-button>

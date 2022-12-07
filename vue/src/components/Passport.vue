@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 id="welcome" v-show="$store.state.token != ''">
-      Welcome {{ $store.state.user.username }}
+      Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
 
     <div class="passport">
