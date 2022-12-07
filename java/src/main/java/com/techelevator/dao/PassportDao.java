@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface PassportDao {
 
-    List<Passport> getPassport();
+    List<Passport> getPassport(int UseID);
 }

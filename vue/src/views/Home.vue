@@ -25,6 +25,8 @@
 </div>
 
 
+<button v-on:click="functionTest()">TEST</button>
+
 
   </div>
 </template>
@@ -57,6 +59,9 @@ export default {
     getBeer(id){
             BeerService.beerByBrewery(id).then(response =>{
             this.beers=response.data});
+    },
+    functionTest(){
+      console.log(this.$store.state.user)
     }
     
 
