@@ -8,4 +8,7 @@ export default{
     beerByBrewery(id){
         return axios.get(`/breweries/${id}/beers`)
     },
+    beerPassport(userId, BreweryId){
+        return axios.get(`/passport/brewery/${userId}/${BreweryId}`)
+    }
 }

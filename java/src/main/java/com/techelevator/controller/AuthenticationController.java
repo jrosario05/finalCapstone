@@ -61,5 +61,10 @@ public class AuthenticationController {
         }
     }
 
+    @RequestMapping(path="/users/{id}", method = RequestMethod.GET)
+    public UserInfo getUser(@PathVariable int id){
+        return userDao.getUserById(id);
+    }
+
 }
 
