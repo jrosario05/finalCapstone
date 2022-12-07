@@ -17,7 +17,7 @@
           >{{ brewery.breweryName }}</b-button
         >
         <b-collapse id="beer-list" class="mt-2">
-          <b-card id="individual-beer" v-for="beer in beers" :key="beer.id">
+          <b-card id="individual-beer" v-for="beer in beerArray" :key="beer.id">
             <div class="beer-name">
               {{ beer.beerName }}
             </div>
@@ -57,6 +57,10 @@ export default {
       let filteredArray = this.$store.state.passportBreweries;
       return filteredArray;
     },
+    beerArray(){
+      let beerArray=this.beers;
+      return beerArray;
+    }
   },
 
   methods: {
@@ -67,9 +71,9 @@ export default {
         }
       );
     },
-    getBeer(id) {
-      BeerService.beerByBrewery(id).then((response) => {
-        this.beers = response.data;
+    getBeer(breweryId) {
+      BeerService.beerPassport(this.$store.state.user.id, breweryId).then(response => {
+        this.beers=response.data;
       });
     },
     functionTest() {
