@@ -1218,7 +1218,7 @@ Insert into passport_beer (passport_id, beer_id, drank)
 		   ((SELECT passport_id from user_info where passport_id = 2), (select beer_id from beer where beer_id = 3), true),
 		   ((SELECT passport_id from user_info where passport_id = 2), (select beer_id from beer where beer_id = 11), false),
 		   ((SELECT passport_id from user_info where passport_id = 1), (select beer_id from beer where beer_id = 30), true),
-		   ((SELECT passport_id from user_info where passport_id = 1), (select beer_id from beer where beer_id = 16), false),
+		   ((SELECT passport_id from user_info where passport_id = 1), (select beer_id from beer where beer_id = 17), false),
 		   ((SELECT passport_id from user_info where passport_id = 2), (select beer_id from beer where beer_id = 50), true),
 		   ((SELECT passport_id from user_info where passport_id = 2), (select beer_id from beer where beer_id = 11), false);
 
@@ -1233,7 +1233,7 @@ Insert into passport_brewery (passport_id, brewery_id, visited)
 		   ((SELECT passport_id from user_info where passport_id = 2), (select brewery_id from beer where beer_id = 3), false),
 		   ((SELECT passport_id from user_info where passport_id = 2), (select brewery_id from beer where beer_id = 11), true),
 			((SELECT passport_id from user_info where passport_id = 1), (select brewery_id from beer where beer_id = 30), true),
-		   ((SELECT passport_id from user_info where passport_id = 1), (select brewery_id from beer where beer_id = 16), false),
+		   ((SELECT passport_id from user_info where passport_id = 1), (select brewery_id from beer where beer_id = 17), false),
 		   ((SELECT passport_id from user_info where passport_id = 2), (select brewery_id from beer where beer_id = 50), false),
 		   ((SELECT passport_id from user_info where passport_id = 2), (select brewery_id from beer where beer_id = 11), true);
 

@@ -61,7 +61,7 @@ export default {
             this.beers=response.data});
     },
     functionTest(){
-      console.log(this.$store.state.user)
+      console.log(this.$store.state.userInfo.userFirstName)
     }
     
 

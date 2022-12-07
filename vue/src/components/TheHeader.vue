@@ -2,7 +2,7 @@
   <div>
     
       <router-link class="link" v-bind:to="{name: 'breweries'}"> Breweries</router-link>
-      <router-link class="link" v-bind:to="{ name: 'home' }">Home</router-link>
+      <router-link class="link" v-bind:to="{ name: 'passport' }" v-show="$store.state.token != ''" >MyPassport</router-link>
       <img src="https://www.pngkey.com/png/full/15-151006_picture-stock-beer-tap-clipart-beer-on-tap.png">
       <router-link class="link" v-bind:to="{ name: 'beers'}"> All Beers</router-link>
       <router-link class="link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>

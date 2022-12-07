@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.techelevator.model.UserInfo;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -37,11 +38,14 @@ public class JdbcUserDao implements UserDao {
     }
 
 	@Override
-	public User getUserById(int userId) {
-		String sql = "SELECT * FROM users WHERE user_id = ?";
+	public UserInfo getUserById(int userId) {
+		String sql = "SELECT passport_id, user_info.user_id, user_first, user_last, address, city, state, zip_code, img_url, role FROM user_info " +
+                "join users on user_info.user_id = users.user_id " +
+                "WHERE user_info.user_id =?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
 		if (results.next()) {
-			return mapRowToUser(results);
+			UserInfo userInfo=mapRowToUserInfo(results);
+            return userInfo;
 		} else {
 			return null;
 		}
@@ -91,4 +95,20 @@ public class JdbcUserDao implements UserDao {
         user.setActivated(true);
         return user;
     }
+
+    private UserInfo mapRowToUserInfo(SqlRowSet rs) {
+        UserInfo user = new UserInfo();
+        user.setRole(rs.getString("role"));
+        user.setUserId(rs.getInt("user_id"));
+        user.setPassportId(rs.getInt("passport_id"));
+        user.setUserFirstName(rs.getString("user_first"));
+        user.setUserLastName(rs.getString("user_last"));
+        user.setAddress(rs.getString("address"));
+        user.setCity(rs.getString("city"));
+        user.setState(rs.getString("state"));
+        user.setZipCode(rs.getInt("zip_code"));
+        user.setImgURL(rs.getString("img_url"));
+        return user;
+    }
 }
+

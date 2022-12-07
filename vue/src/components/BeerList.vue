@@ -37,12 +37,12 @@ export default {
   },
 
 
-  computed:{
-      beersArray(){
-          const beersArray=this.$store.state.beers;
-          return beersArray;
-      }
-  },
+//   computed:{
+//       beersArray(){
+//           const beersArray=this.$store.state.beers;
+//           return beersArray;
+//       }
+//   },
     
 }
 </script>

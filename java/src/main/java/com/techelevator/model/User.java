@@ -11,6 +11,8 @@ public class User {
 
 
    private String role;
+   private int passportId;
+   private String imgURL;
 
 
    private int id;
@@ -78,6 +80,22 @@ public class User {
 
    public void setAuthorities(Set<Authority> authorities) {
       this.authorities = authorities;
+   }
+
+   public int getPassportId() {
+      return passportId;
+   }
+
+   public void setPassportId(int passportId) {
+      this.passportId = passportId;
+   }
+
+   public String getImgURL() {
+      return imgURL;
+   }
+
+   public void setImgURL(String imgURL) {
+      this.imgURL = imgURL;
    }
 
    public void setAuthorities(String authorities) {

@@ -9,5 +9,9 @@ listBreweries() {
 breweryById(id) {
     return axios.get(`/breweries/${id}`)
 },
+breweryPassport(userId){
+    return axios.get(`/passport/brewery/${userId}`)
+},
+
 
 }
