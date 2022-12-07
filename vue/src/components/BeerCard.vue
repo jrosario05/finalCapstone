@@ -35,7 +35,6 @@ export default {
     };
   },
 
-<<<<<<< HEAD
   methods: {
     someFunctions() {
       this.$store.commit("BEER_FOR_DETAILS", this.beer);
@@ -49,13 +48,6 @@ export default {
         this.show = false;
       }
     },
-=======
-  methods:{
-    someFunctions(){
-      this.$store.commit('BEER_FOR_DETAILS', this.beer);
-      console.log(this.$store.state.currentBeer)
-    }
->>>>>>> 3e626e709eb6ceeb88e140b151dcfd543f9bc74c
   },
 };
 </script>
