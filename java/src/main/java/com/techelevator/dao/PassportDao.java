@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface PassportDao {
 
-    List<Passport> getPassport(int UseID);
+    List<Passport> getPassport(int userID);
+    List<Passport> getPassportBeer(int userID);
+    List<Passport> getPassportBrewery(int userID);
 }
