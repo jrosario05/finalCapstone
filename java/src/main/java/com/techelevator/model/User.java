@@ -10,12 +10,13 @@ public class User {
 
 
    private String userFirstName;
-   private String getUserLastName;
+   private String userLastName;
    private String address;
    private String city;
    private String state;
    private  int zipCode;
    private String role;
+
 
    private int id;
    private String username;
@@ -43,12 +44,12 @@ public class User {
       this.userFirstName = userFirstName;
    }
 
-   public String getGetUserLastName() {
-      return getUserLastName;
+   public String getUserLastName() {
+      return userLastName;
    }
 
-   public void setGetUserLastName(String getUserLastName) {
-      this.getUserLastName = getUserLastName;
+   public void setUserLastName(String userLastName) {
+      this.userLastName = userLastName;
    }
 
    public String getAddress() {

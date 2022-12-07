@@ -1220,7 +1220,7 @@ Insert into passport_beer (passport_id, beer_id, drank)
 
 		
 
-Insert into passport_brewery (passport_id, brewery_id, visted)
+Insert into passport_brewery (passport_id, brewery_id, visited)
 		
 	VALUES ((SELECT passport_id from passport where passport_id = 1), (select brewery_id from beer where beer_id = 1), true),
 		   ((SELECT passport_id from passport where passport_id = 1), (select brewery_id from beer where beer_id = 2), false),
