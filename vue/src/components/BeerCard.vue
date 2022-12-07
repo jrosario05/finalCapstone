@@ -28,7 +28,7 @@ export default {
       this.$store.commit('BEER_FOR_DETAILS', this.beer);
       console.log(this.$store.state.currentBeer)
     }
-  }
+  },
 };
 </script>
 <style scoped>
