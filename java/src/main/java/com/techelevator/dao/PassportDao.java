@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Beer;
 import com.techelevator.model.Passport;
 import com.techelevator.model.PassportBeerInfo;
 import com.techelevator.model.PassportBreweryInfo;
@@ -13,4 +14,5 @@ public interface PassportDao {
     List<Passport> getPassportBrewery(int userID);
     List<PassportBeerInfo> getPassportBeerInfo(int userId, int breweryId);
     List<PassportBreweryInfo> getPassportBreweryInfo(int userId);
+    void addBeerToPassport(int userId, Beer beer);
 }
