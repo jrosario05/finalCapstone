@@ -1,8 +1,18 @@
 <template>
   <div>
+
+
+
     <h1 id="welcome" v-show="$store.state.token != ''">
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
+
+    <div class="secondPass">
+      <div id="breweryCard" v-for="brewery in filterArray"
+        :key="brewery.id" v-on:click="getBeer(brewery.breweryId)">{{brewery.breweryName}}
+              <div v-show="beer.breweryId == brewery.breweryId" v-for="beer in beerArray" :key="beer.id" id="beerCard" >{{ beer.beerName }}</div>
+        </div>
+    </div>
 
     <div class="passport">
       <!-- <h3>Passport</h3> -->
@@ -37,6 +47,10 @@
         </b-collapse>
       </div>
     </div>
+
+
+
+
   </div>
 </template>
 
@@ -94,6 +108,16 @@ export default {
 h1 {
   color: white;
 }
+#breweryCard {
+  width: 500px;
+  background-color: white;
+  height: auto;
+  font-weight: bold;
+}
+#beerCard {
+  font-weight: light;
+  background-color: red;
+}
 
 #welcome {
   margin: 20px 0px;
@@ -105,6 +129,7 @@ h1 {
 }
 
 .passport {
+  display: none;
   background-color: white;
   margin: 0 auto;
   width: 80vw;
