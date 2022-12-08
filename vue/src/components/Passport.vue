@@ -3,25 +3,19 @@
     <h1 id="welcome" v-show="$store.state.token != ''">
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
-
-    
       <div
         class="passport"
         v-for="brewery in this.passport"
         :key="brewery.id"
         
-        v-on:click="cardOpen(brewery)"
       >
-        <div id="breweryCard">
-          <div id="beerName">
-            
-          {{ brewery.breweryName }}
-          </div>
+        <div id="breweryCard" v-on:click="cardOpen(brewery)">
+          <div id="breweryName">{{ brewery.breweryName }}</div>
           <div class="open" >
             <img v-show="brewery.cardOpen" src="https://i.imgur.com/3OjzTy2.png" />
             <img v-show="!brewery.cardOpen" src="https://i.imgur.com/YjdeFuu.png" />
           </div>
-        </div>  
+        </div>
         <div
           v-show="brewery.cardOpen"
           v-for="beer in brewery.passportBeers"
@@ -39,12 +33,10 @@
             <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
             <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
           </div>
-        
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import BreweryService from "../services/BreweryService";
 export default {
@@ -56,32 +48,33 @@ export default {
       }
       }
       },
-
   computed: {
     filterArray() {
       let filteredArray = this.breweries;
       return filteredArray;
     },
   },
-
   methods: {
     getBreweries() {
       BreweryService.breweryPassport(this.$store.state.user.id).then(
         (response) => {
           this.passport=response.data;
+<<<<<<< HEAD
           
           })        
     },
     
+=======
+          })
+    },
+>>>>>>> 67803d9b15baf776a2777251e3ed7a65d24a763d
     toggleDrank(beer) {
       beer.drank = !beer.drank;
     },
     cardOpen(brewery){
       brewery.cardOpen=!brewery.cardOpen
-
     }
   },
-
   created() {
     this.getBreweries();
   },
@@ -98,93 +91,67 @@ export default {
   text-shadow: 6px 6px 6px #272727;
 }
 
+/* Sets size of the passport */
 .passport {
   margin: 0 auto;
   width: 60vw;
-  /* height: 50px; */
-  border-radius: 5px;
+  
+}
 
-}
-#breweryCard{
-background-color: white;
-}
+/* Styles individual brewery tiles */
 #breweryCard {
   display: flex;
   height: 50px;
-    border-radius: 5px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
+  height: 50px;
+    border-radius: 5px;
   margin: 10px;
-  flex-direction: column;
-  justify-content: center;
+
   background-color: white;
-    -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+
+      -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+
 }
-#beerName{
-  margin-left: 20px;
+
+#breweryName{
+  margin-left: 50px;
+    font-weight: bold;   
+
 }
+
+.open {
+  margin-right: 50px;
+}
+
+.open img {
+  /* display: inline-block; */
+  width: 25px;
+  height: auto;
+}
+
 
 #beerCard {
-  font-weight: light;
-  margin-left: 10px;
-  border-radius: 5px;
-
-  background-color: rgb(202, 78, 78);
-  margin-top: 10px;
-}
-
-#brewery {
-  background-color: rgb(221, 204, 50);
-  width: auto;
-  border: none;
-  margin: 10px;
-  padding: 25px 0px;
-
-  display: flex;
-  flex-grow: 1;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  color: black;
-  -webkit-box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.75);
-}
-
-#brewery:click {
-  background-color: rgb(184, 169, 37);
-}
-
-.passport h3 {
-  padding: 10px;
-  margin-bottom: -10px;
-  background-color: rgb(169, 169, 170);
-  width: 100%;
-  text-align: center;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-}
-.accordion {
-  margin-top: 10px;
-  display: flex;
-  width: 33%;
-  flex-direction: column;
-}
-/* Adjust beer list positioning */
-#beer-list {
-  margin: 0 auto;
-  position: absolute;
-  transform: translate(525px, 0px);
-  width: 50%;
-}
-
-div.card-body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border-radius: 5px;
+  margin: 0px 20px 10px 20px;  
+  height: 50px;
+  background-color: rgba(56, 56, 56, 0.801);
+  color: white;
+      -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
+
+
+/*  Beer tile styling and positioning */
 
 .beer-name {
   display: inline-block;
@@ -192,12 +159,9 @@ div.card-body {
   font-size: 1em;
   font-weight: bold;
 }
-
 .beer-style {
   display: inline-block;
-
   /* margin: 0 auto; */
-
   font-size: 1em;
   font-style: italic;
 }
@@ -206,14 +170,14 @@ div.card-body {
   font-style: italic;
   font-size: 1em;
 }
-
 .drank {
   margin-right: 30px;
   display: inline;
 }
-
 .drank img {
   width: 40px;
   height: auto;
 }
+
+
 </style>
