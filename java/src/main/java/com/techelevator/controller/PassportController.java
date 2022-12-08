@@ -28,7 +28,7 @@ private PassportDao dao;
     }
 
 
-    @RequestMapping(path = "/passport/brewery/{userId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/passport/{userId}", method = RequestMethod.GET)
     public List<PassportBreweryInfo> getBreweryInfo(@PathVariable int userId){
         return dao.getPassportBreweryInfo(userId);
     }

@@ -1,102 +1,99 @@
 <template>
   <div>
-
-
-
     <h1 id="welcome" v-show="$store.state.token != ''">
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
 
-    <div class="secondPass">
-      <div id="breweryCard" v-for="brewery in filterArray"
-        :key="brewery.id" v-on:click="getBeer(brewery.breweryId)">{{brewery.breweryName}}
-              <div v-show="beer.breweryId == brewery.breweryId" v-for="beer in beerArray" :key="beer.id" id="beerCard" >{{ beer.beerName }}</div>
-        </div>
-    </div>
-
-    <div class="passport">
-      <!-- <h3>Passport</h3> -->
-      <div class="accordion" role="tablist">
-        <b-button
-          id="brewery"
-          v-for="brewery in filterArray"
-          :key="brewery.id"
-          v-b-toggle.beer-list
-          variant="primary"
-          v-on:click="getBeer(brewery.breweryId)"
-          >{{ brewery.breweryName }}</b-button
+    
+      <div
+        class="passport"
+        v-for="brewery in this.passport"
+        :key="brewery.id"
+        
+        v-on:click="cardOpen(brewery)"
+      >
+        <div id="breweryCard">
+          <div id="beerName">
+            
+          {{ brewery.breweryName }}
+          </div>
+          <div class="open" >
+            <img v-show="brewery.cardOpen" src="https://i.imgur.com/3OjzTy2.png" />
+            <img v-show="!brewery.cardOpen" src="https://i.imgur.com/YjdeFuu.png" />
+          </div>
+        </div>  
+        <div
+          v-show="brewery.cardOpen"
+          v-for="beer in brewery.passportBeers"
+          :key="beer.id"
+          id="beerCard"
         >
-        <b-collapse id="beer-list" class="mt-2">
-          <b-card id="individual-beer" v-for="beer in beerArray" :key="beer.id">
-            <div class="beer-name">
-              {{ beer.beerName }}
-            </div>
-            <div class="beer-style">
-              {{ beer.styleName }}
-            </div>
-            <div class="beer-abv">{{ beer.abv }}% ABV</div>
-            <div class="drank" v-on:click="toggleDrank(beer)">
-              <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
-              <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
-            </div>
-            <!-- <div class="favorited">
-              <i class="bi bi-heart" v-show="!true"></i>
-              <i class="bi bi-heart-fill" v-show="true"></i>
-            </div> -->
-          </b-card>
-        </b-collapse>
+          <div class="beer-name">
+            {{ beer.beerName }}
+          </div>
+          <div class="beer-style">
+            {{ beer.styleName }}
+          </div>
+          <div class="beer-abv">{{ beer.abv }}% ABV</div>
+          <div class="drank" v-on:click="toggleDrank(beer)">
+            <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
+            <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
+          </div>
+        
       </div>
     </div>
-
-
-
-
   </div>
 </template>
 
 <script>
-import BeerService from "../services/BeerService";
 import BreweryService from "../services/BreweryService";
 export default {
   name: "my-passport",
   data() {
     return {
-      brewery: {},
-      beers: [],
-    };
-  },
+      passport:{
+        brewery:{}
+      }
+      }
+      },
 
   computed: {
     filterArray() {
-      let filteredArray = this.$store.state.passportBreweries;
+      let filteredArray = this.breweries;
       return filteredArray;
     },
-    beerArray(){
-      let beerArray=this.beers;
+    beerArray() {
+      let beerArray = this.beers;
       return beerArray;
-    }
+    },
+    
+ 
+    
   },
 
   methods: {
     getBreweries() {
       BreweryService.breweryPassport(this.$store.state.user.id).then(
         (response) => {
-          this.$store.commit("PASSPORT_BREWERIES", response.data);
-        }
-      );
+          this.passport=response.data;
+          
+          })        
     },
-    getBeer(breweryId) {
-      BeerService.beerPassport(this.$store.state.user.id, breweryId).then(response => {
-        this.beers=response.data;
-      });
+    
+    getBeer(brewery) {
+      console.log(brewery.passportBeers)
+
     },
     functionTest() {
       console.log(this.$store.state.user);
     },
     toggleDrank(beer) {
       beer.drank = !beer.drank;
-    }
+    },
+    cardOpen(brewery){
+      brewery.cardOpen=!brewery.cardOpen
 
+    }
   },
 
   created() {
@@ -105,22 +102,9 @@ export default {
 };
 </script>
 <style scoped>
-h1 {
-  color: white;
-}
-#breweryCard {
-  width: 500px;
-  background-color: white;
-  height: auto;
-  font-weight: bold;
-}
-#beerCard {
-  font-weight: light;
-  background-color: red;
-}
-
 #welcome {
   margin: 20px 0px;
+  color: white;
   padding: 15px 0px;
   text-align: center;
   font-size: 3em;
@@ -129,15 +113,39 @@ h1 {
 }
 
 .passport {
-  display: none;
-  background-color: white;
   margin: 0 auto;
-  width: 80vw;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  /* -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  width: 60vw;
+  /* height: 50px; */
+  border-radius: 5px;
+
+}
+#breweryCard{
+background-color: white;
+}
+#breweryCard {
+  display: flex;
+  height: 50px;
+    border-radius: 5px;
+
+  margin: 10px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+    -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75); */
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+}
+#beerName{
+  margin-left: 20px;
+}
+
+#beerCard {
+  font-weight: light;
+  margin-left: 10px;
+  border-radius: 5px;
+
+  background-color: rgb(202, 78, 78);
+  margin-top: 10px;
 }
 
 #brewery {
@@ -185,16 +193,12 @@ h1 {
   width: 50%;
 }
 
-
 div.card-body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-
-
-
 
 .beer-name {
   display: inline-block;
@@ -226,21 +230,4 @@ div.card-body {
   width: 40px;
   height: auto;
 }
-
-.favorited {
-  display: inline;
-  background-color: grey;
-  padding-top: 10px;
-  margin: 25px;
-  width: 25%;
-  height: auto;
-}
-
-.favorited i {
-  font-size: 30px;
-  margin-top: 10px;
-  padding-top: 10px;
-  color: red;
-}
-
 </style>

@@ -1,9 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Passport;
-import com.techelevator.model.PassportBeerInfo;
-import com.techelevator.model.PassportBreweryInfo;
-import com.techelevator.model.User;
+import com.techelevator.model.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.core.parameters.P;
@@ -106,7 +103,7 @@ public class JdbcPassportDAO implements PassportDao{
 
     @Override
     public List<PassportBreweryInfo> getPassportBreweryInfo(int userId) {
-        List<PassportBreweryInfo> breweryInfo = new ArrayList<>();
+        List<PassportBreweryInfo> myBreweries = new ArrayList<>();
         String sql =
                 "SELECT brewery_name, brewery.brewery_id " +
                 "from user_info " +
@@ -118,10 +115,28 @@ public class JdbcPassportDAO implements PassportDao{
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         while (results.next()){
             PassportBreweryInfo brewery = mapRowPassportBreweryInfo(results);
-            breweryInfo.add(brewery);
+
+            int id = brewery.getBreweryId();
+
+            String sql2 = "Select  passport_beer.beer_id, beer_name, abv, drank, style_name, brewery_id  from user_info " +
+                    "                join passport_beer on user_info.passport_id = passport_beer.passport_id " +
+                    "join beer on passport_beer.beer_id = beer.beer_id " +
+                    "join beer_style on  beer.style_id = beer_style.style_id " +
+                    "                where user_info.user_id = ? and brewery_id = ? ";
+            SqlRowSet beerResults = jdbcTemplate.queryForRowSet(sql2, userId, id);
+            List<PassportBeerInfo> myBeers=new ArrayList<>();
+            while(beerResults.next()){
+
+                PassportBeerInfo beer = mapRowPassportBeerInfo(beerResults);
+                myBeers.add(beer);
+
+            }
+            brewery.setPassportBeers(myBeers);
+            myBreweries.add(brewery);
 
         }
-        return breweryInfo;
+
+        return myBreweries;
     }
 
 
@@ -139,6 +154,7 @@ public class JdbcPassportDAO implements PassportDao{
         Passport passport = new Passport();
         passport.setBreweryId(rs.getInt("brewery_id"));
         passport.setVisited(rs.getBoolean("visited"));
+
 
 
 
@@ -164,6 +180,7 @@ public class JdbcPassportDAO implements PassportDao{
         PassportBreweryInfo breweryInfo = new PassportBreweryInfo();
         breweryInfo.setBreweryId(rs.getInt("brewery_id"));
         breweryInfo.setBreweryName(rs.getString("brewery_name"));
+        breweryInfo.setCardOpen(false);
 
         return breweryInfo;
     }
