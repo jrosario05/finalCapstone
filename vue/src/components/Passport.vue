@@ -79,7 +79,7 @@ export default {
       console.log("clicked")
       PassportService.deleteFromPassport(this.$store.state.user.id, beerId).then( response => {
         if(response.status === 200) {
-          console.log("level")
+          console.log("in the if")
           // this.getBreweries();
         }
       }).catch( error => {
