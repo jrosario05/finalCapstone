@@ -1,14 +1,26 @@
 package com.techelevator.model;
 
+import java.util.List;
+
 public class Passport {
 
     private int passportId;
-    private int breweryId;
+
+    List<PassportBreweryInfo> myBreweries;
+
+
     private int beerId;
     private boolean visited;
     private boolean drank;
     private String  beerName;
     private String styleName;
+
+
+    private double abv;
+    private int breweryId;
+
+
+    private boolean cardOpen;
 
 
 

@@ -86,6 +86,12 @@ public class JdbcUserDao implements UserDao {
         return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole) == 1;
     }
 
+//    public void updateUserInfo(){
+//        String sql="INSERT INTO user_info (user_id, user_first, user_last, address, city, state, zip_code) "+
+//                "VALUES ((SELECT user_id from users where username= ?), ?, ?, ?, ?, ?, ?)";
+//        return jdbcTemplate.update(sql );
+//    }
+
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
         user.setId(rs.getInt("user_id"));
