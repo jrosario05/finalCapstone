@@ -3,36 +3,40 @@
     <h1 id="welcome" v-show="$store.state.token != ''">
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
-      <div
-        class="passport"
-        v-for="brewery in this.passport"
-        :key="brewery.id"
-        
-      >
-        <div id="breweryCard" v-on:click="cardOpen(brewery)">
-          <div id="breweryName">{{ brewery.breweryName }}</div>
-          <div class="open" >
-            <img v-show="brewery.cardOpen" src="https://i.imgur.com/3OjzTy2.png" />
-            <img v-show="!brewery.cardOpen" src="https://i.imgur.com/YjdeFuu.png" />
-          </div>
+    <div class="passport" v-for="brewery in this.passport" :key="brewery.id">
+      <div id="breweryCard" v-on:click="cardOpen(brewery)">
+        <div id="breweryName">{{ brewery.breweryName }}</div>
+        <div class="open">
+          <img
+            v-show="brewery.cardOpen"
+            src="https://i.imgur.com/3OjzTy2.png"
+          />
+          <img
+            v-show="!brewery.cardOpen"
+            src="https://i.imgur.com/YjdeFuu.png"
+          />
         </div>
-        <div
-          v-show="brewery.cardOpen"
-          v-for="beer in brewery.passportBeers"
-          :key="beer.id"
-          id="beerCard"
-        >
-          <div class="beer-name">
-            {{ beer.beerName }}
-          </div>
-          <div class="beer-style">
-            {{ beer.styleName }}
-          </div>
-          <div class="beer-abv">{{ beer.abv }}% ABV</div>
-          <div class="drank" v-on:click="toggleDrank(beer)">
-            <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
-            <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
-          </div>
+      </div>
+      <div
+        v-show="brewery.cardOpen"
+        v-for="beer in brewery.passportBeers"
+        :key="beer.id"
+        id="beerCard"
+      >
+        <div class="beer-name">
+          {{ beer.beerName }}
+        </div>
+        <div class="beer-style">
+          {{ beer.styleName }}
+        </div>
+        <div class="beer-abv">{{ beer.abv }}% ABV</div>
+        <div class="drank" v-on:click="toggleDrank(beer)">
+          <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
+          <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
+        </div>
+        <div class="remove">
+          <img src="https://i.imgur.com/vdqV5fW.png" />
+        </div>
       </div>
     </div>
   </div>
@@ -43,11 +47,11 @@ export default {
   name: "my-passport",
   data() {
     return {
-      passport:{
-        brewery:{}
-      }
-      }
+      passport: {
+        brewery: {},
       },
+    };
+  },
   computed: {
     filterArray() {
       let filteredArray = this.breweries;
@@ -58,16 +62,24 @@ export default {
     getBreweries() {
       BreweryService.breweryPassport(this.$store.state.user.id).then(
         (response) => {
+<<<<<<< HEAD
           this.passport=response.data;
           })        
     },
     
+=======
+          this.passport = response.data;
+        }
+      );
+          
+    },
+>>>>>>> 175eb2cb0fe7ed5d331bf45627df1d061200c252
     toggleDrank(beer) {
       beer.drank = !beer.drank;
     },
-    cardOpen(brewery){
-      brewery.cardOpen=!brewery.cardOpen
-    }
+    cardOpen(brewery) {
+      brewery.cardOpen = !brewery.cardOpen;
+    },
   },
   created() {
     this.getBreweries();
@@ -89,7 +101,6 @@ export default {
 .passport {
   margin: 0 auto;
   width: 60vw;
-  
 }
 
 /* Styles individual brewery tiles */
@@ -101,21 +112,19 @@ export default {
   align-items: center;
 
   height: 50px;
-    border-radius: 5px;
+  border-radius: 5px;
   margin: 10px;
 
   background-color: white;
 
-      -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
-
 }
 
-#breweryName{
+#breweryName {
   margin-left: 50px;
-    font-weight: bold;   
-
+  font-weight: bold;
 }
 
 .open {
@@ -128,22 +137,20 @@ export default {
   height: auto;
 }
 
-
 #beerCard {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
-  margin: 0px 20px 10px 20px;  
+  margin: 0px 20px 10px 20px;
   height: 50px;
   background-color: rgba(56, 56, 56, 0.801);
   color: white;
-      -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
-
 
 /*  Beer tile styling and positioning */
 
@@ -165,13 +172,18 @@ export default {
   font-size: 1em;
 }
 .drank {
-  margin-right: 30px;
   display: inline;
 }
 .drank img {
   width: 40px;
   height: auto;
 }
-
-
+.remove {
+  margin-right: 30px;
+  display: inline;
+}
+.remove img {
+  width: 40px;
+  height: auto;
+}
 </style>
