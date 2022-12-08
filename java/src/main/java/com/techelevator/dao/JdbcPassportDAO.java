@@ -147,15 +147,20 @@ public class JdbcPassportDAO implements PassportDao{
     }
 
     @Override
-    public void deleteBeerFromPassport(int userId, PassportBeerInfo beer) {
-            String sql = "DELETE FROM passport_beer WHERE beer_id = ? AND passport_id = (SELECT passport_id FROM user_info where user_id = ?)";
-        jdbcTemplate.update(sql, beer.getBeerId(), userId);
+    public void deleteBeerFromPassport(int userId, int beerId) {
 
-        List<PassportBeerInfo> beers = getPassportBeerInfo(userId, beer.getBreweryId());
+        String sqlFOrBreweryId="SELECT brewery_id FROM beer where beer_id = ?";
+        Integer breweryId=jdbcTemplate.queryForObject(sqlFOrBreweryId, Integer.class, beerId);
+        int brewInt = (int)breweryId;
+
+        String sql = "DELETE FROM passport_beer WHERE beer_id = ? AND passport_id = (SELECT passport_id FROM user_info where user_id = ?)";
+        jdbcTemplate.update(sql, beerId, userId);
+
+        List<PassportBeerInfo> beers = getPassportBeerInfo(userId, beerId);
 
         if(beers.size() == 0) {
             String sqlBrewery = "DELETE FROM passport_brewery WHERE brewery_id = ?";
-            jdbcTemplate.update(sqlBrewery,beer.getBreweryId());
+            jdbcTemplate.update(sqlBrewery, brewInt);
         }
     }
 

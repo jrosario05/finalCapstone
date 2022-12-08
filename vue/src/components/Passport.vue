@@ -3,7 +3,7 @@
     <h1 id="welcome" v-show="$store.state.token != ''">
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
-    <div class="passport" v-for="brewery in this.passport" :key="brewery.id">
+    <div class="passport" v-for="brewery in this.filterArray" :key="brewery.id">
       <div id="breweryCard" v-on:click="cardOpen(brewery)">
         <div id="breweryName">{{ brewery.breweryName }}</div>
         <div class="open">
@@ -34,8 +34,8 @@
           <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
           <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
         </div>
-        <div class="remove" >
-          <img v-on:click="removeFromPassport(beer)" src="https://i.imgur.com/vdqV5fW.png" />
+        <div class="remove" v-on:click="removeFromPassport(beer.beerId)">
+          <img  src="https://i.imgur.com/vdqV5fW.png" />
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     filterArray() {
-      let filteredArray = this.breweries;
+      let filteredArray = this.passport;
       return filteredArray;
     },
   },
@@ -76,8 +76,10 @@ export default {
 
 
     removeFromPassport(beerId) {
+      console.log("it clicked")
       PassportService.deleteFromPassport(this.$store.state.user.id, beerId).then( response => {
         if(response.status === 200) {
+          console.log("in the if")
           this.getBreweries();
         }
       }).catch( error => {
