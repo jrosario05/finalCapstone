@@ -63,11 +63,10 @@ export default {
     getBreweries() {
       BreweryService.breweryPassport(this.$store.state.user.id).then(
         (response) => {
-          this.passport = response.data;
-        }
-      );
-          
+          this.passport=response.data;
+          })        
     },
+    
     toggleDrank(beer) {
       beer.drank = !beer.drank;
     },
