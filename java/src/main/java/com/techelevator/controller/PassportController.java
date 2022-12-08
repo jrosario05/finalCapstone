@@ -40,8 +40,8 @@ private PassportDao dao;
     }
 
     @RequestMapping(path= "/passport/{userId}", method = RequestMethod.DELETE)
-    public void DeleteBeerFromPassport (@PathVariable int userId, @RequestBody PassportBeerInfo beer){
-        dao.deleteBeerFromPassport(userId, beer);
+    public void DeleteBeerFromPassport (@PathVariable int userId, @RequestBody int beerId){
+        dao.deleteBeerFromPassport(userId, beerId);
     }
 //
 //    @RequestMapping(path= "/passport/{userId}", method = RequestMethod.DELETE)
