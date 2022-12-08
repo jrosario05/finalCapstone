@@ -32,6 +32,60 @@
         v-model="user.confirmPassword"
         required
       />
+        <!-- <label for="firstName" class="sr-only">Password</label>
+      <input
+        type="name"
+        id="fname"
+        class="form-control"
+        placeholder="First Name"
+        v-model="userInfo.firstName"
+        required
+      />
+            <label for="lastName" class="sr-only">Password</label>
+      <input
+        type="name"
+        id="lname"
+        class="form-control"
+        placeholder="Last Name"
+        v-model="userInfo.lastName"
+        required
+      />
+      <label for="address" class="sr-only">Password</label>
+      <input
+        type="address"
+        id="address"
+        class="form-control"
+        placeholder="Street Address"
+        v-model="userInfo.streetAddress"
+        required
+      />
+      <label for="city" class="sr-only">Password</label>
+      <input
+        type="city"
+        id="city"
+        class="form-control"
+        placeholder="city"
+        v-model="userInfo.city"
+        required
+      />
+      <label for="state" class="sr-only">Password</label>
+      <input
+        type="state"
+        id="state"
+        class="form-control"
+        placeholder="state"
+        v-model="userInfo.state"
+        required
+      />
+      <label for="zip" class="sr-only">Password</label>
+      <input
+        type="zip"
+        id="zip"
+        class="form-control"
+        placeholder="Zip Code"
+        v-model="userInfo.zip"
+        required
+      /> -->
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
@@ -53,6 +107,9 @@ export default {
         confirmPassword: '',
         role: 'user',
       },
+      userInfo: {
+        userName:''
+      },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.',
     };
@@ -67,6 +124,8 @@ export default {
           .register(this.user)
           .then((response) => {
             if (response.status == 201) {
+              // this.updateUserName();
+              // this.sendUserInfo();
               this.$router.push({
                 path: '/login',
                 query: { registration: 'success' },
@@ -86,7 +145,17 @@ export default {
       this.registrationErrors = false;
       this.registrationErrorMsg = 'There were problems registering this user.';
     },
-  },
+    // sendUserInfo(){
+    //   authService.sendInfo(this.userInfo, this.user.username).then((response =>{
+    //     if(response.status==201){
+    //       this.userInfo={}
+    //     }
+    //   }))
+    // },
+    // updateUserName(){
+    //   this.userInfo.userName=this.user.username;
+    // },
+  }
 };
 </script>
 

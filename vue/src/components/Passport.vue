@@ -5,7 +5,7 @@
     </h1>
 
     <div class="passport">
-      <h3>Passport</h3>
+      <!-- <h3>Passport</h3> -->
       <div class="accordion" role="tablist">
         <b-button
           id="brewery"
@@ -22,17 +22,17 @@
               {{ beer.beerName }}
             </div>
             <div class="beer-style">
-              {{ beer.style }}
+              {{ beer.styleName }}
             </div>
             <div class="beer-abv">{{ beer.abv }}% ABV</div>
-            <div class="drank">
+            <div class="drank" v-on:click="toggleDrank(beer)">
               <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
               <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
             </div>
-            <div class="favorited">
+            <!-- <div class="favorited">
               <i class="bi bi-heart" v-show="!true"></i>
               <i class="bi bi-heart-fill" v-show="true"></i>
-            </div>
+            </div> -->
           </b-card>
         </b-collapse>
       </div>
@@ -79,6 +79,10 @@ export default {
     functionTest() {
       console.log(this.$store.state.user);
     },
+    toggleDrank(beer) {
+      beer.drank = !beer.drank;
+    }
+
   },
 
   created() {
@@ -101,6 +105,7 @@ h1 {
 }
 
 .passport {
+  background-color: white;
   margin: 0 auto;
   width: 80vw;
   border-top-left-radius: 15px;
@@ -144,22 +149,31 @@ h1 {
 .accordion {
   margin-top: 10px;
   display: flex;
-  width: 100%;
-  flex-direction: row;
+  width: 33%;
+  flex-direction: column;
 }
-
+/* Adjust beer list positioning */
 #beer-list {
   margin: 0 auto;
   position: absolute;
-  transform: translate(0px, 75px);
-  width: 81%;
+  transform: translate(525px, 0px);
+  width: 50%;
 }
+
+
+div.card-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
 
 .beer-name {
   display: inline-block;
-
-  margin: 0 auto;
-  width: 25%;
+  margin-left: 30px;
   font-size: 1em;
   font-weight: bold;
 }
@@ -167,20 +181,19 @@ h1 {
 .beer-style {
   display: inline-block;
 
-  margin: 0 auto;
+  /* margin: 0 auto; */
 
-  width: 25%;
   font-size: 1em;
   font-style: italic;
 }
 .beer-abv {
   display: inline-block;
-  width: 25%;
   font-style: italic;
   font-size: 1em;
 }
 
 .drank {
+  margin-right: 30px;
   display: inline;
 }
 
@@ -201,7 +214,7 @@ h1 {
 .favorited i {
   font-size: 30px;
   margin-top: 10px;
-  
+  padding-top: 10px;
   color: red;
 }
 
