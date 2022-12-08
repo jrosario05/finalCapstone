@@ -18,11 +18,7 @@ public class JdbcPassportDAO implements PassportDao{
 
     public JdbcPassportDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-
-
-
     }
-
 
     @Override
     public List<Passport> getPassport(int userID) {
@@ -40,8 +36,6 @@ public class JdbcPassportDAO implements PassportDao{
 //                    Passport passport = mapRowToUser(results);
 //                    passports.add(passport);
 //                }
-
-
         return passports;
 
 
@@ -151,6 +145,20 @@ public class JdbcPassportDAO implements PassportDao{
         jdbcTemplate.update(sql2, userId, beer.getBeerId());
 
     }
+
+    @Override
+    public void deleteBeerFromPassport(int userId, PassportBeerInfo beer) {
+            String sql = "DELETE FROM passport_beer WHERE beer_id = ? AND passport_id = (SELECT passport_id FROM user_info where user_id = ?)";
+        jdbcTemplate.update(sql, beer.getBeerId(), userId);
+
+        List<PassportBeerInfo> beers = getPassportBeerInfo(userId,beer.getBreweryId());
+
+        if(beers.size() == 0) {
+            String sqlBrewery = "DELETE FROM passport_brewery WHERE brewery_id = ?";
+            jdbcTemplate.update(sqlBrewery,beer.getBreweryId());
+        }
+    }
+
 
     private  Passport mapRowBeerPassport(SqlRowSet rs){
         Passport passport = new Passport();
