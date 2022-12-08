@@ -62,13 +62,6 @@ export default {
       let filteredArray = this.breweries;
       return filteredArray;
     },
-    beerArray() {
-      let beerArray = this.beers;
-      return beerArray;
-    },
-    
- 
-    
   },
 
   methods: {
@@ -80,13 +73,6 @@ export default {
           })        
     },
     
-    getBeer(brewery) {
-      console.log(brewery.passportBeers)
-
-    },
-    functionTest() {
-      console.log(this.$store.state.user);
-    },
     toggleDrank(beer) {
       beer.drank = !beer.drank;
     },

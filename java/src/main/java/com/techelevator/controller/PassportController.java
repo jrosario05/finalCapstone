@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.PassportDao;
+import com.techelevator.model.Beer;
 import com.techelevator.model.Passport;
 import com.techelevator.model.PassportBeerInfo;
 import com.techelevator.model.PassportBreweryInfo;
@@ -31,6 +32,11 @@ private PassportDao dao;
     @RequestMapping(path = "/passport/{userId}", method = RequestMethod.GET)
     public List<PassportBreweryInfo> getBreweryInfo(@PathVariable int userId){
         return dao.getPassportBreweryInfo(userId);
+    }
+
+    @RequestMapping(path= "/passport/{userId}", method = RequestMethod.POST)
+    public void PassportBeerInfo (@PathVariable int userId, @RequestBody Beer beer){
+        dao.addBeerToPassport(userId, beer);
     }
 
 
