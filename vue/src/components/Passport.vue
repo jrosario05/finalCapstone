@@ -4,6 +4,13 @@
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
 
+    <div class="secondPass">
+      <div id="breweryCard" v-for="brewery in filterArray"
+        :key="brewery.id" v-on:click="getBeer(brewery.breweryId)">{{brewery.breweryName}} 
+              <div v-show="1 == brewery.breweryId" v-for="beer in beerArray" :key="beer.id" id="beerCard" >{{ beer.beerName }}</div>
+        </div>
+    </div>
+
     <div class="passport">
       <!-- <h3>Passport</h3> -->
       <div class="accordion" role="tablist">
@@ -37,6 +44,8 @@
         </b-collapse>
       </div>
     </div>
+
+    
   </div>
 </template>
 
@@ -57,10 +66,10 @@ export default {
       let filteredArray = this.$store.state.passportBreweries;
       return filteredArray;
     },
-    beerArray(){
-      let beerArray=this.beers;
+    beerArray() {
+      let beerArray = this.beers;
       return beerArray;
-    }
+    },
   },
 
   methods: {
@@ -72,17 +81,18 @@ export default {
       );
     },
     getBeer(breweryId) {
-      BeerService.beerPassport(this.$store.state.user.id, breweryId).then(response => {
-        this.beers=response.data;
-      });
+      BeerService.beerPassport(this.$store.state.user.id, breweryId).then(
+        (response) => {
+          this.beers = response.data;
+        }
+      );
     },
     functionTest() {
       console.log(this.$store.state.user);
     },
     toggleDrank(beer) {
       beer.drank = !beer.drank;
-    }
-
+    },
   },
 
   created() {
@@ -91,8 +101,16 @@ export default {
 };
 </script>
 <style scoped>
+.passport {
+  display: none;
+}
+
 h1 {
   color: white;
+}
+
+.secondPass {
+  width: 500px;
 }
 
 #welcome {
@@ -160,16 +178,12 @@ h1 {
   width: 50%;
 }
 
-
 div.card-body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-
-
-
 
 .beer-name {
   display: inline-block;
@@ -218,4 +232,15 @@ div.card-body {
   color: red;
 }
 
+#breweryCard {
+  width: 500px;
+  background-color: white;
+  height: auto;
+  font-weight: bold;
+}
+#beerCard {
+  font-weight: light;
+  background-color: red;
+
+}
 </style>
