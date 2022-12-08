@@ -34,7 +34,7 @@
           <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
           <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
         </div>
-        <div class="remove" v-on:click="removeFromPassport(beer.beerId)">
+        <div id="remove" class="remove" v-on:click="removeFromPassport(beer.beerId)" >
           <img  src="https://i.imgur.com/vdqV5fW.png" />
         </div>
       </div>
@@ -76,11 +76,11 @@ export default {
 
 
     removeFromPassport(beerId) {
-      console.log("it clicked")
+      console.log("clicked")
       PassportService.deleteFromPassport(this.$store.state.user.id, beerId).then( response => {
         if(response.status === 200) {
           console.log("in the if")
-          this.getBreweries();
+          // this.getBreweries();
         }
       }).catch( error => {
         console.log(error)});

@@ -160,12 +160,13 @@ public class JdbcPassportDAO implements PassportDao{
 
         if(beers.size() == 0) {
             String sqlBrewery = "DELETE FROM passport_brewery WHERE brewery_id = ?";
+
             jdbcTemplate.update(sqlBrewery, brewInt);
         }
     }
 
 
-    private  Passport mapRowBeerPassport(SqlRowSet rs){
+    private  Passport mapRowBeerPassport(SqlRowSet rs){git 
         Passport passport = new Passport();
 
 
