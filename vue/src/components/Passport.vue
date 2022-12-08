@@ -34,14 +34,15 @@
           <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
           <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
         </div>
-        <div class="remove">
-          <img src="https://i.imgur.com/vdqV5fW.png" />
+        <div class="remove" >
+          <img v-on:click="removeFromPassport(beer)" src="https://i.imgur.com/vdqV5fW.png" />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import PassportService from "../services/PassportService";
 import BreweryService from "../services/BreweryService";
 export default {
   name: "my-passport",
@@ -73,7 +74,18 @@ export default {
     cardOpen(brewery) {
       brewery.cardOpen = !brewery.cardOpen;
     },
-  },
+
+
+    removeFromPassport(beerId) {
+      PassportService.deleteFromPassport(this.$store.state.user.id, beerId).then( response => {
+        if(response.status === 200) {
+          this.getBreweries();
+        }
+      }).catch( error => {
+        console.log(error)});
+        
+      }
+    },
   created() {
     this.getBreweries();
   },
