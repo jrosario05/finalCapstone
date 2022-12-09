@@ -31,7 +31,7 @@
         v-model="user.password"
         required
       />
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+      <router-link id="register-button" :to="{ name: 'register' }">CREATE A PASSPORT</router-link>
       <button type="submit">Sign in</button>
     </form>
   </div>
@@ -81,3 +81,36 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+body {
+   background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  background-color: black;
+}
+input{
+  width: 50vw;
+  margin: 5px;
+}
+h1{
+  color: white;
+  font-weight: bold;
+  font-size: xx-large;
+}
+#login{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#register-button{
+  color: white;
+  font-size: x-large;
+}
+
+
+</style>

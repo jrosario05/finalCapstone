@@ -9,7 +9,7 @@
 
 <script>
 export default {
-    props:['visibleSlide', 'index', 'direction',"messasge", "i"],
+    props:['visibleSlide', 'index', 'direction',"messages", "i"],
     date(){
         return{
 
