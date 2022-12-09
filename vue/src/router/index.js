@@ -9,6 +9,7 @@ import BreweryDetailsPage from '../views/BreweryDetailsPage.vue'
 import ShowListOfBeers from '../views/ShowListOfBeers.vue'
 import Test from '../views/Test.vue'
 import store from '../store/index'
+import Home from '../views/Home.vue'
 
 Vue.use(Router)
 
@@ -90,6 +91,16 @@ const router = new Router({
       requiresAuth: false
     }
   },
+
+  {
+    path:"/",
+    name: "home",
+    component: Home,
+    meta:{
+      requiresAuth: false
+    }
+
+  }
 
     
   ]

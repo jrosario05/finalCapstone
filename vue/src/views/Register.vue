@@ -32,13 +32,13 @@
         v-model="user.confirmPassword"
         required
       />
-        <!-- <label for="firstName" class="sr-only">Password</label>
+        <label for="firstName" class="sr-only">Password</label>
       <input
         type="name"
         id="fname"
         class="form-control"
         placeholder="First Name"
-        v-model="userInfo.firstName"
+        v-model="userInfo.userFirstName"
         required
       />
             <label for="lastName" class="sr-only">Password</label>
@@ -47,7 +47,7 @@
         id="lname"
         class="form-control"
         placeholder="Last Name"
-        v-model="userInfo.lastName"
+        v-model="userInfo.userLastName"
         required
       />
       <label for="address" class="sr-only">Password</label>
@@ -56,7 +56,7 @@
         id="address"
         class="form-control"
         placeholder="Street Address"
-        v-model="userInfo.streetAddress"
+        v-model="userInfo.address"
         required
       />
       <label for="city" class="sr-only">Password</label>
@@ -83,9 +83,9 @@
         id="zip"
         class="form-control"
         placeholder="Zip Code"
-        v-model="userInfo.zip"
+        v-model="userInfo.zipCode"
         required
-      /> -->
+      />
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
@@ -124,8 +124,8 @@ export default {
           .register(this.user)
           .then((response) => {
             if (response.status == 201) {
-              // this.updateUserName();
-              // this.sendUserInfo();
+              this.updateUserName();
+              this.sendUserInfo();
               this.$router.push({
                 path: '/login',
                 query: { registration: 'success' },
@@ -145,16 +145,12 @@ export default {
       this.registrationErrors = false;
       this.registrationErrorMsg = 'There were problems registering this user.';
     },
-    // sendUserInfo(){
-    //   authService.sendInfo(this.userInfo, this.user.username).then((response =>{
-    //     if(response.status==201){
-    //       this.userInfo={}
-    //     }
-    //   }))
-    // },
-    // updateUserName(){
-    //   this.userInfo.userName=this.user.username;
-    // },
+    sendUserInfo(){
+      authService.sendInfo(this.userInfo)
+    },
+    updateUserName(){
+      this.userInfo.userName=this.user.username;
+    },
   }
 };
 </script>

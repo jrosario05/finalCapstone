@@ -138,12 +138,11 @@ public class JdbcPassportDAO implements PassportDao{
     @Override
     public void addBeerToPassport(int userId, Beer beer){
         String sql= "Insert into passport_beer (passport_id, beer_id, drank) "+
-        "VALUES ((SELECT passport_id from user_info where user_id = ?), (select beer_id from beer where beer_id = ?), false)";
+        "VALUES ((SELECT passport_id from user_info where user_id = ?), ?, false)";
         jdbcTemplate.update(sql, userId, beer.getBeerId());
         String sql2= "Insert into passport_brewery (passport_id, brewery_id, visited) " +
         "VALUES ((SELECT passport_id from user_info where user_id = ?), (select brewery_id from beer where beer_id = ?), false)";
         jdbcTemplate.update(sql2, userId, beer.getBeerId());
-
     }
 
     @Override
@@ -165,8 +164,18 @@ public class JdbcPassportDAO implements PassportDao{
         }
     }
 
+    public void updateDrank(int userId, int beerId){
+        String sql="update passport_beer " +
+                "set drank= NOT drank " +
+                "where beer_id= ? and passport_id =(select passport_id from user_info where user_id= ?)";
+        jdbcTemplate.update(sql, beerId, userId);
+    }
 
-    private  Passport mapRowBeerPassport(SqlRowSet rs){git
+
+
+
+    private  Passport mapRowBeerPassport(SqlRowSet rs){
+
         Passport passport = new Passport();
 
 

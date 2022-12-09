@@ -3,6 +3,7 @@ package com.techelevator.model;
 public class UserInfo {
 
     private int userId;
+    private String userName;
     private String userFirstName;
     private String userLastName;
     private String address;
@@ -13,6 +14,13 @@ public class UserInfo {
     private int passportId;
     private String imgURL;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public int getUserId() {
         return userId;

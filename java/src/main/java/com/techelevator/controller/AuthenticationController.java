@@ -66,7 +66,10 @@ public class AuthenticationController {
         return userDao.getUserById(id);
     }
 
-
+    @RequestMapping(path ="/info", method = RequestMethod.POST)
+    public void createUserInfo(@RequestBody UserInfo user){
+        userDao.createUserInfo(user);
+    }
 
 }
 
