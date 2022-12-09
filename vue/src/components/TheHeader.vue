@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="https://images.squarespace-cdn.com/content/v1/576fd738f5e231ddf3c84701/1657991335226-D0J2ET5PKNZ4S3SDXVUC/BH+Logo.png">
+    <img src="https://i.imgur.com/d67GqPG.png">
       <router-link class="link" v-bind:to="{name: 'breweries'}"> Breweries</router-link>
       <router-link class="link" v-bind:to="{ name: 'passport' }" v-show="$store.state.token != ''" >MyPassport</router-link>
       
@@ -28,21 +28,27 @@ div{
   justify-content: space-around;
 }
 img{
-  width: 3%;
-  margin: 10px;
+  width: 15%;
+  margin: 5px;
+}
+.link{
+font-size: larger; 
+font-weight: bolder;
+color: #bfcf5f
 }
 
 
 
 .link:hover {
-  box-shadow: rgba(0, 1, 0, .2) 0 2px 8px;
   opacity: .85;
+color: #515a20
 }
 
 
 
 .link:focus {
-  box-shadow: rgba(0, 0, 0, .5) 0 0 0 3px;
+  color: #292e0e
+
 }
 </style>
 

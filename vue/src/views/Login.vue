@@ -31,7 +31,7 @@
         v-model="user.password"
         required
       />
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+      <router-link id="register-button" :to="{ name: 'register' }">CREATE A PASSPORT</router-link>
       <button type="submit">Sign in</button>
     </form>
   </div>
@@ -84,6 +84,25 @@ export default {
 
 <style scoped>
 
+input{
+  width: 50vw;
+  margin: 5px;
+}
+h1{
+  color: white;
+  font-weight: bold;
+  font-size: xx-large;
+}
+#login{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#register-button{
+  color: white;
+  font-size: x-large;
+}
 
 
 </style>
