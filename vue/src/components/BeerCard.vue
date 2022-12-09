@@ -1,22 +1,30 @@
-/* v-show="$store.state.token != ''" */
 
 <template>
   <div>
-    <div class="successMsg" v-show="this.msg !=''">
-      <h1>{{this.msg}}</h1>
-      <button v-on:click="closeMsg" >CLOSE MESSAGE</button>
-
+    <div class="visible" v-show="$store.state.token != ''">
+    <div class="card" id="addToPassport" v-on:click="addBeerToPassport(beer)">
+      <p id="addText">Add to Passport</p>
+      <img src="https://i.imgur.com/o3yJ5PP.png" />
     </div>
-          
+
+
+      <div class="overlay" v-show="this.msg != ''" v-on:click="closeMsg">
+        <div id="successMsg">
+          <h1 class="msg">{{ this.msg }}</h1>
+          <p>Click to close</p>
+          <!-- <img  id="closeMsg" src="https://i.imgur.com/vdqV5fW.png" /> -->
+        </div>
+      </div>
+    </div>
 
     <div class="card" v-on:click="toggleShow">
       <transition name="fade">
         <div class="front" v-show="show">
-          <div id="beer-image" v-on:click="someFunctions()">
+          <div id="beer-image">
             <img v-bind:src="beer.imgUrl" />
           </div>
           <div class="banner-details">
-            <div id="beer-name" v-on:click="addBeerToPassport(beer)">
+            <div id="beer-name">
               <h1>{{ beer.beerName }}</h1>
             </div>
           </div>
@@ -33,14 +41,12 @@
 
           <img v-bind:src="beer.imgUrl" />
         </div>
-    </transition>
-
+      </transition>
     </div>
-
   </div>
 </template>
 <script>
-import PassportService from '../services/PassportService';
+import PassportService from "../services/PassportService";
 export default {
   name: "beer-card",
   props: ["beer"],
@@ -48,29 +54,27 @@ export default {
     return {
       beerForDetails: {},
       show: true,
-      msg:''
+      msg: "",
+      hideMsg: false,
     };
   },
 
   methods: {
-    someFunctions() {
-      this.$store.commit("BEER_FOR_DETAILS", this.beer);
-      console.log(this.$store.state.currentBeer);
+    addBeerToPassport(beer) {
+      console.log("it clicked");
+      PassportService.addBeerToPassport(this.$store.state.user.id, beer)
+        .then((response) => {
+          if (response.status == 200) {
+            console.log("in the if statement");
+            this.msg = beer.beerName + " has been added to your passport";
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-
-    addBeerToPassport(beer){
-      console.log("it clicked")
-      PassportService.addBeerToPassport(this.$store.state.user.id, beer).then(response =>{
-        if(response.status==200){
-          console.log('in the if statement')
-          this.msg= beer.beerName + ' added to your passport';
-        }
-      }).catch(error =>{
-        console.log(error);
-      })
-    },
-    closeMsg(){
-      this.msg='';
+    closeMsg() {
+      this.msg = "";
     },
 
     toggleShow() {
@@ -84,13 +88,85 @@ export default {
 };
 </script>
 <style scoped>
-.successMsg{
-  z-index: 100;
-  display: flex;
-  background-color: black;
+.overlay {
+  text-align: center;
+  width: 300px;
+  height: auto;
+
+  padding: 15px 0px;
+  z-index: 10;
+  margin: 0 auto;
+  border-radius: 3px;
+
+  background-color: rgba(93, 216, 104, 0.85);
   color: white;
+  transform: translate(100px, 200px);
   position: absolute;
 }
+
+.msg {
+  margin: 0 auto;
+
+  font-size: 1em;
+  display: inline-block;
+}
+
+#successMsg p {
+  margin: 0 auto;
+
+  font-size: 0.5em;
+}
+
+#closeMsg {
+  display: inline-block;
+  position: absolute;
+  width: 25px;
+  height: auto;
+  filter: brightness(50%) grayscale(100%);
+  transform: translate(0, -25px);
+}
+
+#addToPassport {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgb(240, 230, 174);
+  border: 3px outset rgba(230, 230, 230), 0.75;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  z-index: 10;
+  transform: translate(265px, 60px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* 
+  -webkit-box-shadow: px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75); */
+  box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
+}
+
+#addText {
+  text-align: center;
+  font-size: 0.65em;
+  position: absolute;
+  z-index: 4;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  margin: 0 auto;
+  text-shadow: 0.5px 0.5px 0.25px #8d8d8d;
+}
+
+#addToPassport img {
+  width: 40px;
+  height: auto;
+  opacity: 0.6;
+  filter: invert(59%) brightness(100%) grayscale(100%) hue-rotate(46deg);
+}
+
 .card {
   z-index: 1;
   flex-direction: row;
@@ -116,7 +192,7 @@ export default {
   border-radius: 10px;
   border: none;
   position: absolute;
-    -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -webkit-animation: fadeinout 4s linear forwards;
@@ -147,7 +223,7 @@ export default {
   background-color: rgb(48, 31, 0);
   border-radius: 10px;
   border: none;
-    -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -webkit-animation: fadeinout 4s linear forwards;
@@ -211,42 +287,34 @@ export default {
 /* Animation Properties */
 
 .fade-enter-active {
-  animation: fade-in .5s;
+  animation: fade-in 0.5s;
 }
 .fade-leave-active {
-  animation: fade-out .5s;
+  animation: fade-out 0.5s;
 }
 @keyframes fade-out {
   0% {
     opacity: 1;
-    transform:rotateY(0deg);
-
+    transform: rotateY(0deg);
   }
-  
+
   100% {
     opacity: 0;
-    transform:rotateY(180deg);
-
+    transform: rotateY(180deg);
   }
 }
 
 @keyframes fade-in {
   0% {
     opacity: 0;
-        transform:rotateY(180deg);
-
+    transform: rotateY(180deg);
   }
-  
+
   100% {
     opacity: 1;
-            transform:rotateY(0deg);
-
+    transform: rotateY(0deg);
   }
 }
-
-
-
-
 </style>
 
 

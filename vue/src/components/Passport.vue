@@ -83,10 +83,8 @@ export default {
     
    
     removeFromPassport(beerId, brewery) {
-      console.log("clicked")
       PassportService.deleteFromPassport(this.$store.state.user.id, beerId).then( response => {
         if(response.status === 200) {
-          console.log("in the if")
           this.breweryToOpen=brewery.breweryId
           this.getBreweries();
         }
@@ -172,35 +170,40 @@ export default {
 /*  Beer tile styling and positioning */
 
 .beer-name {
-  display: inline-block;
+  width: 20%;
   margin-left: 30px;
   font-size: 1em;
   font-weight: bold;
 }
 .beer-style {
-  display: inline-block;
-  /* margin: 0 auto; */
+  width: 20%;
   font-size: 1em;
   font-style: italic;
+
 }
 .beer-abv {
+  width: 20%;
   display: inline-block;
   font-style: italic;
   font-size: 1em;
 }
 .drank {
-  display: inline;
+  width: 20%;
 }
 .drank img {
+  display: flex;
+  margin: 0 auto;
   width: 40px;
   height: auto;
 }
 .remove {
+  width: 20%;
   margin-right: 30px;
-  display: inline;
 }
 .remove img {
+  float: right;
   width: 40px;
+  margin: 0 auto;
   height: auto;
 }
 </style>
