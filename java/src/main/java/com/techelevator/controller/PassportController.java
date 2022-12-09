@@ -45,5 +45,11 @@ private PassportDao dao;
         dao.deleteBeerFromPassport(userId, beerId);
     }
 
+    @RequestMapping(path= "/passport/{userId}/{beerId}", method = RequestMethod.PUT)
+    public void UpdateBeerDrankFromPassport (@PathVariable int userId, @PathVariable int beerId){
+        dao.updateDrank(userId, beerId);
+    }
 
-}
+
+
+    }

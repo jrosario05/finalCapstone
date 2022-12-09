@@ -165,6 +165,14 @@ public class JdbcPassportDAO implements PassportDao{
         }
     }
 
+    public void updateDrank(int userId, int beerId){
+        String sql="update passport_beer " +
+                "set drank= NOT drank " +
+                "where beer_id= ? and passport_id =(select passport_id from user_info where user_id= ?)";
+        jdbcTemplate.update(sql, beerId, userId);
+    }
+
+
 
     private  Passport mapRowBeerPassport(SqlRowSet rs){
         Passport passport = new Passport();

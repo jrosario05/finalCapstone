@@ -14,6 +14,9 @@ deleteFromPassport(userId, beerId) {
 
 addBeerToPassport(userId, beer){
     return axios.post(`passport/${userId}`, beer)
+},
+updateDrank(userId, beerId){
+    return axios.put(`/passport/${userId}/${beerId}`)
 }
 
 

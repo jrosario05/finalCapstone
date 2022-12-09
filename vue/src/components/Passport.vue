@@ -70,6 +70,7 @@ export default {
     
     toggleDrank(beer) {
       beer.drank = !beer.drank;
+      PassportService.updateDrank(this.$store.state.user.id, beer.beerId);
     },
     cardOpen(brewery) {
       brewery.cardOpen = !brewery.cardOpen;

@@ -16,5 +16,6 @@ public interface PassportDao {
     List<PassportBreweryInfo> getPassportBreweryInfo(int userId);
     void addBeerToPassport(int userId, Beer beer);
     void deleteBeerFromPassport(int userId, int beerId);
+    void updateDrank(int userId, int beerId);
 //    void deleteBreweryFromPassport(int userId, PassportBeerInfo beer);
 }
