@@ -1,12 +1,11 @@
-
+<!-- v-show="this.checkBeer(beer)==false"  I feel like this should hide the add to passport but its not working...-->
 <template>
   <div>
     <div class="visible" v-show="$store.state.token != ''">
-    <div class="card" id="addToPassport" v-on:click="addBeerToPassport(beer)">
-      <p id="addText">Add to Passport</p>
-      <img src="https://i.imgur.com/o3yJ5PP.png" />
-    </div>
-
+      <div  class="card" id="addToPassport"  v-on:click="addBeerToPassport(beer)">
+        <p id="addText">Add to Passport</p>
+        <img src="https://i.imgur.com/o3yJ5PP.png" />
+      </div>
 
       <div class="overlay" v-show="this.msg != ''" v-on:click="closeMsg">
         <div id="successMsg">
@@ -53,6 +52,7 @@ export default {
   data() {
     return {
       beerForDetails: {},
+      beerFilter: [],
       show: true,
       msg: "",
       hideMsg: false,
@@ -84,7 +84,22 @@ export default {
         this.show = false;
       }
     },
+    checkBeer(beer) {
+      this.beerFilter.forEach(b => {
+        if (b.beerId == beer.beerId){ 
+          console.log("through the if")
+          return false;
+        }else{
+          return true
+        }
+      });
+    },
   },
+  created(){
+              PassportService.getBeerFilter(this.$store.state.user.id).then(response =>{
+              this.beerFilter=response.data;
+          });
+  }
 };
 </script>
 <style scoped>

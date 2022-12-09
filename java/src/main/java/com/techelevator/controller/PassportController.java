@@ -39,6 +39,10 @@ private PassportDao dao;
         dao.addBeerToPassport(userId, beer);
     }
 
+    @RequestMapping(path="/passport/beer/{userId}", method = RequestMethod.GET)
+    public List<PassportBeerInfo> getBeerFilter (@PathVariable int userId) {
+        return dao.getPassportBeerFilter(userId);
+    }
 
     @RequestMapping(path= "/passport/{userId}/{beerId}", method = RequestMethod.DELETE)
     public void DeleteBeerFromPassport (@PathVariable int userId, @PathVariable int beerId){
