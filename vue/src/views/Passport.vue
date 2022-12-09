@@ -1,5 +1,6 @@
-<template>
-  <my-passport/>
+<template><div class="passportContainer">  
+  <my-passport/> 
+  </div>
 </template>
 
 <script>
@@ -12,7 +13,7 @@ export default {
 }
 </script>
 <style scoped>
-body {
+.passportContainer {
    background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;

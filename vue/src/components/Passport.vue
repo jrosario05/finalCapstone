@@ -101,6 +101,9 @@ export default {
 };
 </script>
 <style scoped>
+
+
+
 #welcome {
   margin: 20px 0px;
   color: white;
