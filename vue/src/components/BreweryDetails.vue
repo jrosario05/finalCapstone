@@ -6,7 +6,7 @@
         <div id="color-box"></div>
       </div>
       <div id="title-info">
-        <h1 id="brewery_name">{{ brewery.breweryName}}</h1>
+        <h1 id="brewery_name" >{{ brewery.breweryName}}</h1>
         <p id="description">
           {{ brewery.description}}
         </p>
@@ -68,7 +68,6 @@ export default {
         });
 
     },
-
 
 };
 </script>

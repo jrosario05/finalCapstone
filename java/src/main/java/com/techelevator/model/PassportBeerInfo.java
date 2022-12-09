@@ -6,7 +6,16 @@ public class PassportBeerInfo {
     private String  beerName;
     private String styleName;
     private double abv;
+    private int breweryId;
 
+
+    public int getBreweryId() {
+        return breweryId;
+    }
+
+    public void setBreweryId(int breweryId) {
+        this.breweryId = breweryId;
+    }
 
     public int getBeerId() {
         return beerId;

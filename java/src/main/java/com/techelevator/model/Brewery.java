@@ -21,7 +21,15 @@ public class Brewery {
     private int close;
     private String day;
 
+    private List<Beer> beers;
 
+    public List<Beer> getBeers() {
+        return beers;
+    }
+
+    public void setBeers(List<Beer> beers) {
+        this.beers = beers;
+    }
 
     public String getWebsite() {
         return website;

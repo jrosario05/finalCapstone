@@ -2,6 +2,11 @@
 
 <template>
   <div>
+    <div class="successMsg" v-show="this.msg !=''">
+      <h1>{{this.msg}}</h1>
+      <button v-on:click="closeMsg" >CLOSE MESSAGE</button>
+
+    </div>
           
 
     <div class="card" v-on:click="toggleShow">
@@ -11,7 +16,7 @@
             <img v-bind:src="beer.imgUrl" />
           </div>
           <div class="banner-details">
-            <div id="beer-name">
+            <div id="beer-name" v-on:click="addBeerToPassport(beer)">
               <h1>{{ beer.beerName }}</h1>
             </div>
           </div>
@@ -35,6 +40,7 @@
   </div>
 </template>
 <script>
+import PassportService from '../services/PassportService';
 export default {
   name: "beer-card",
   props: ["beer"],
@@ -42,6 +48,7 @@ export default {
     return {
       beerForDetails: {},
       show: true,
+      msg:''
     };
   },
 
@@ -49,6 +56,21 @@ export default {
     someFunctions() {
       this.$store.commit("BEER_FOR_DETAILS", this.beer);
       console.log(this.$store.state.currentBeer);
+    },
+
+    addBeerToPassport(beer){
+      console.log("it clicked")
+      PassportService.addBeerToPassport(this.$store.state.user.id, beer).then(response =>{
+        if(response.status==200){
+          console.log('in the if statement')
+          this.msg= beer.beerName + ' added to your passport';
+        }
+      }).catch(error =>{
+        console.log(error);
+      })
+    },
+    closeMsg(){
+      this.msg='';
     },
 
     toggleShow() {
@@ -62,7 +84,15 @@ export default {
 };
 </script>
 <style scoped>
+.successMsg{
+  z-index: 100;
+  display: flex;
+  background-color: black;
+  color: white;
+  position: absolute;
+}
 .card {
+  z-index: 1;
   flex-direction: row;
   justify-content: center;
   align-items: center;

@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.PassportDao;
+import com.techelevator.model.Beer;
 import com.techelevator.model.Passport;
 import com.techelevator.model.PassportBeerInfo;
 import com.techelevator.model.PassportBreweryInfo;
@@ -28,10 +29,27 @@ private PassportDao dao;
     }
 
 
-    @RequestMapping(path = "/passport/brewery/{userId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/passport/{userId}", method = RequestMethod.GET)
     public List<PassportBreweryInfo> getBreweryInfo(@PathVariable int userId){
         return dao.getPassportBreweryInfo(userId);
     }
 
+    @RequestMapping(path= "/passport/{userId}", method = RequestMethod.POST)
+    public void PassportBeerInfo (@PathVariable int userId, @RequestBody Beer beer){
+        dao.addBeerToPassport(userId, beer);
+    }
 
-}
+
+    @RequestMapping(path= "/passport/{userId}/{beerId}", method = RequestMethod.DELETE)
+    public void DeleteBeerFromPassport (@PathVariable int userId, @PathVariable int beerId){
+        dao.deleteBeerFromPassport(userId, beerId);
+    }
+
+    @RequestMapping(path= "/passport/{userId}/{beerId}", method = RequestMethod.PUT)
+    public void UpdateBeerDrankFromPassport (@PathVariable int userId, @PathVariable int beerId){
+        dao.updateDrank(userId, beerId);
+    }
+
+
+
+    }

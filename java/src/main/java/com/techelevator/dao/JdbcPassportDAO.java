@@ -1,15 +1,13 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Passport;
-import com.techelevator.model.PassportBeerInfo;
-import com.techelevator.model.PassportBreweryInfo;
-import com.techelevator.model.User;
+import com.techelevator.model.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import java.awt.*;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 @Component
@@ -20,11 +18,7 @@ public class JdbcPassportDAO implements PassportDao{
 
     public JdbcPassportDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-
-
-
     }
-
 
     @Override
     public List<Passport> getPassport(int userID) {
@@ -42,8 +36,6 @@ public class JdbcPassportDAO implements PassportDao{
 //                    Passport passport = mapRowToUser(results);
 //                    passports.add(passport);
 //                }
-
-
         return passports;
 
 
@@ -87,7 +79,7 @@ public class JdbcPassportDAO implements PassportDao{
     @Override
     public List<PassportBeerInfo> getPassportBeerInfo(int userId, int breweryId) {
         List<PassportBeerInfo> beerInfo = new ArrayList<>();
-        String sql = "Select  passport_beer.beer_id, beer_name, abv, drank, style_name  from user_info " +
+        String sql = "Select  passport_beer.beer_id, beer_name, abv, drank, style_name, brewery_id  from user_info " +
                 "                join passport_beer on user_info.passport_id = passport_beer.passport_id " +
                 "join beer on passport_beer.beer_id = beer.beer_id " +
                 "join beer_style on  beer.style_id = beer_style.style_id " +
@@ -106,7 +98,7 @@ public class JdbcPassportDAO implements PassportDao{
 
     @Override
     public List<PassportBreweryInfo> getPassportBreweryInfo(int userId) {
-        List<PassportBreweryInfo> breweryInfo = new ArrayList<>();
+        List<PassportBreweryInfo> myBreweries = new ArrayList<>();
         String sql =
                 "SELECT brewery_name, brewery.brewery_id " +
                 "from user_info " +
@@ -118,11 +110,68 @@ public class JdbcPassportDAO implements PassportDao{
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         while (results.next()){
             PassportBreweryInfo brewery = mapRowPassportBreweryInfo(results);
-            breweryInfo.add(brewery);
+
+            int id = brewery.getBreweryId();
+
+            String sql2 = "Select  passport_beer.beer_id, beer_name, abv, drank, style_name, brewery_id  from user_info " +
+                    "                join passport_beer on user_info.passport_id = passport_beer.passport_id " +
+                    "join beer on passport_beer.beer_id = beer.beer_id " +
+                    "join beer_style on  beer.style_id = beer_style.style_id " +
+                    "                where user_info.user_id = ? and brewery_id = ? ";
+            SqlRowSet beerResults = jdbcTemplate.queryForRowSet(sql2, userId, id);
+            List<PassportBeerInfo> myBeers=new ArrayList<>();
+            while(beerResults.next()){
+
+                PassportBeerInfo beer = mapRowPassportBeerInfo(beerResults);
+                myBeers.add(beer);
+
+            }
+            brewery.setPassportBeers(myBeers);
+            myBreweries.add(brewery);
 
         }
-        return breweryInfo;
+
+        return myBreweries;
     }
+
+
+    @Override
+    public void addBeerToPassport(int userId, Beer beer){
+        String sql= "Insert into passport_beer (passport_id, beer_id, drank) "+
+        "VALUES ((SELECT passport_id from user_info where user_id = ?), ?, false)";
+        jdbcTemplate.update(sql, userId, beer.getBeerId());
+        String sql2= "Insert into passport_brewery (passport_id, brewery_id, visited) " +
+        "VALUES ((SELECT passport_id from user_info where user_id = ?), (select brewery_id from beer where beer_id = ?), false)";
+        jdbcTemplate.update(sql2, userId, beer.getBeerId());
+
+    }
+
+    @Override
+    public void deleteBeerFromPassport(int userId, int beerId) {
+
+        String sqlFOrBreweryId="SELECT brewery_id FROM beer where beer_id = ?";
+        Integer breweryId=jdbcTemplate.queryForObject(sqlFOrBreweryId, Integer.class, beerId);
+        int brewInt = (int)breweryId;
+
+        String sql = "DELETE FROM passport_beer WHERE beer_id = ? AND passport_id = (SELECT passport_id FROM user_info where user_id = ?)";
+        jdbcTemplate.update(sql, beerId, userId);
+
+        List<PassportBeerInfo> beers = getPassportBeerInfo(userId, brewInt);
+
+        if(beers.size() == 0) {
+            String sqlBrewery = "DELETE FROM passport_brewery WHERE brewery_id = ?";
+
+            jdbcTemplate.update(sqlBrewery, brewInt);
+        }
+    }
+
+    public void updateDrank(int userId, int beerId){
+        String sql="update passport_beer " +
+                "set drank= NOT drank " +
+                "where beer_id= ? and passport_id =(select passport_id from user_info where user_id= ?)";
+        jdbcTemplate.update(sql, beerId, userId);
+    }
+
 
 
     private  Passport mapRowBeerPassport(SqlRowSet rs){
@@ -142,6 +191,7 @@ public class JdbcPassportDAO implements PassportDao{
 
 
 
+
         return passport;
 
     }
@@ -154,6 +204,7 @@ public class JdbcPassportDAO implements PassportDao{
         beerInfo.setAbv(rs.getDouble("abv"));
         beerInfo.setStyleName(rs.getString("style_name"));
         beerInfo.setDrank(rs.getBoolean("drank"));
+        beerInfo.setBreweryId(rs.getInt("brewery_id"));
 
         return beerInfo;
     }
@@ -163,6 +214,7 @@ public class JdbcPassportDAO implements PassportDao{
         PassportBreweryInfo breweryInfo = new PassportBreweryInfo();
         breweryInfo.setBreweryId(rs.getInt("brewery_id"));
         breweryInfo.setBreweryName(rs.getString("brewery_name"));
+        breweryInfo.setCardOpen(false);
 
         return breweryInfo;
     }
