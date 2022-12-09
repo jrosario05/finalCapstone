@@ -14,7 +14,7 @@
   
     >
     <div id="textContainer">
-    <p class="slideText" v-for="(msg, i) in messasge" 
+    <p class="slideText" v-for="(msg, i) in messages" 
     :key="msg"
     :index="i"
     :visibleSlide = 'visibleSlide'
@@ -41,10 +41,10 @@ export default {
         "https://media.istockphoto.com/id/532132774/photo/wooden-cask-and-bricks.jpg?s=612x612&w=0&k=20&c=-_Du5tUGq9_YeC4UqkNRiDoFTLjUZrqyiWsDsop1gio=",
         "https://cadomzalski.files.wordpress.com/2018/08/brewerypassport2-e1535425383945.jpeg",
         "https://images.unsplash.com/photo-1615332579037-3c44b3660b53?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGJlZXJ8ZW58MHx8MHx8&w=1000&q=80",
-        "https://picsum.photos/id/231/600/350",
+        
       
       ],
-      messasge:["Discover All The Amazing Brewery That Columbus Has To Offer", "Come And Explore All The Beers and Get Your Stamp Here", "Helping Local Brewery Show Off All Their Craft Beers", "joel", "javaGreen"],
+      messages:["Discover All The Amazing Brewery That Columbus Has To Offer", "Come And Explore All The Beers and Get Your Stamp Here", "Helping Local Brewery Show Off All Their Craft Beers"],
 
 
       visibleSlide: 0,
@@ -80,6 +80,10 @@ export default {
 </script>
 
 <style scoped>
+
+#app{
+  display: none;
+}
 #textContainer{
 width: 100%;
   height: 100%;
@@ -114,7 +118,9 @@ img{
  
   
 }
-.display{
- }
+body{
+background-color:  white;
+}
+ 
 
 </style>
