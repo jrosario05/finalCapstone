@@ -2,6 +2,7 @@
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
       <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      <p>Sign in to view and update your passport</p>
       <div
         class="alert alert-danger"
         role="alert"
@@ -12,6 +13,7 @@
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
+      <div id="inputBoxes">
       <label for="username" class="sr-only">Username</label>
       <input
         type="text"
@@ -31,8 +33,11 @@
         v-model="user.password"
         required
       />
+      </div>
+      <div class="sign-in-button">
+      <button  type="submit" >Sign in</button>
+      </div>
       <router-link id="register-button" :to="{ name: 'register' }">CREATE A PASSPORT</router-link>
-      <button type="submit">Sign in</button>
     </form>
   </div>
 </template>
@@ -92,14 +97,34 @@ body {
   height: 100vh;
   background-color: black;
 }
-input{
-  width: 50vw;
+.form-signin{
+  margin-top:25px;
+  height:400px;
+  width: 400px;
+  border-radius: 5px;
+  border-width: 5px;
+  border-color: 2px;
+  border: black;
+  background-color: white;
+  display: grid;
+  grid-template-rows: .5fr 1fr 2fr 1fr 1fr;
+  grid-template-areas: "header" "mini-text" "forms" "button" "register";
+}
+#inputBoxes{
+  grid-area: forms;
+  width: 80%;
   margin: 5px;
+  justify-content: center;
+  align-content: center;
 }
 h1{
-  color: white;
+  grid-area: header;
+  color: black;
   font-weight: bold;
   font-size: xx-large;
+}
+p{
+  grid-area: mini-text;
 }
 #login{
   width: 100%;
@@ -108,9 +133,17 @@ h1{
   justify-content: center;
 }
 #register-button{
-  color: white;
+  grid-area: register;
+  color: black;
   font-size: x-large;
 }
+.sign-in-button{
+  grid-area: button;
+  position: relative;
+  background: none;
+  color: black;
+}
+
 
 
 </style>
