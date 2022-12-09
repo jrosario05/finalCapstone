@@ -3,7 +3,7 @@
     <h1 id="welcome" v-show="$store.state.token != ''">
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
-    <div class="passport" v-for="brewery in this.filterArray" :key="brewery.id">
+    <div class="passport" v-for="brewery in fullObject" :key="brewery.id" :isRendered="checkBrewery(brewery)">
       <div id="breweryCard" v-on:click="cardOpen(brewery)">
         <div id="breweryName">{{ brewery.breweryName }}</div>
         <div class="open">
@@ -34,7 +34,7 @@
           <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
           <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
         </div>
-        <div id="remove" class="remove" v-on:click="removeFromPassport(beer.beerId)" >
+        <div id="remove" class="remove" v-on:click="removeFromPassport(beer.beerId, brewery)">
           <img  src="https://i.imgur.com/vdqV5fW.png" />
         </div>
       </div>
@@ -43,25 +43,26 @@
 </template>
 <script>
 import PassportService from "../services/PassportService";
-import BreweryService from "../services/BreweryService";
 export default {
   name: "my-passport",
   data() {
     return {
       passport: {
         brewery: {},
-      },
-    };
+        },
+      breweryToOpen:''
+      };
   },
   computed: {
-    filterArray() {
-      let filteredArray = this.passport;
-      return filteredArray;
+    fullObject() {
+      let PassportObject = this.passport;
+      return PassportObject;
     },
+ 
   },
   methods: {
     getBreweries() {
-      BreweryService.breweryPassport(this.$store.state.user.id).then(
+      PassportService.breweryPassport(this.$store.state.user.id).then(
         (response) => {
           this.passport=response.data;
           })        
@@ -73,14 +74,20 @@ export default {
     cardOpen(brewery) {
       brewery.cardOpen = !brewery.cardOpen;
     },
-
-
-    removeFromPassport(beerId) {
+    checkBrewery(brewery){
+      if(brewery.breweryId==this.breweryToOpen){
+        brewery.cardOpen=true;
+      }
+    },
+    
+   
+    removeFromPassport(beerId, brewery) {
       console.log("clicked")
       PassportService.deleteFromPassport(this.$store.state.user.id, beerId).then( response => {
         if(response.status === 200) {
           console.log("in the if")
-          // this.getBreweries();
+          this.breweryToOpen=brewery.breweryId
+          this.getBreweries();
         }
       }).catch( error => {
         console.log(error)});
