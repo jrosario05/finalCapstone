@@ -112,10 +112,12 @@ export default {
         pub.splice(index, 1);
       }
     },
+
     getBreweryAddress(brewery){
       this.allBreweries.forEach(b=>{
         if(brewery.breweryId==b.breweryId){
-        this.address=b.streetAddress +" " + b.city +', '+ b.state+' '+ b.zip;
+          this.address=b.streetAddress + " " + b.city +', ' + b.state + ' ' + b.zip;
+          brewery.address = this.address;
         }
       })
     },
@@ -182,10 +184,11 @@ export default {
      let contents = this.beerCrawlBreweries;
      let dialog = window.open('', '', 'height=500, width=500');
             dialog.document.write('<html>');
-            dialog.document.write('<body > <h1>Bar Crawl Itinerary</h1>');
+            dialog.document.write('<body > <center><h1>Bar Crawl Itinerary</h1></center>');
 
             contents.forEach(pub => {
-              dialog.document.write(`<p>${contents.indexOf(pub)+1}) ${pub.breweryName}</p>`);
+              this.getBreweryAddress(pub);
+              dialog.document.write(`<p><strong>${contents.indexOf(pub)+1}) ${pub.breweryName}</strong> <br>${pub.address}</p>`);
             });
 
             dialog.document.write('</body></html>');
