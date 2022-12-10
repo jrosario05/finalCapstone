@@ -1,11 +1,13 @@
-<!-- v-show="this.checkBeer(beer)==false"  I feel like this should hide the add to passport but its not working...-->
+
 <template>
-  <div>
-    <div class="visible" v-show="$store.state.token != ''">
-      <div  class="card" id="addToPassport"  v-on:click="addBeerToPassport(beer)">
-        <p id="addText">Add to Passport</p>
-        <img src="https://i.imgur.com/o3yJ5PP.png" />
-      </div>
+  <div :rendered="populateFilter()">
+    <div :rendered="checkPassport(beer)" class="visible" v-show="$store.state.token != ''">
+    <div class="card" id="addToPassport" >
+      <p v-show="!beer.inPassport" id="addText" v-on:click="addBeerToPassport(beer)">Add to Passport</p>
+      <p v-show="beer.inPassport" id="addText">IN YOUR PASSPORT</p>
+      <img src="https://i.imgur.com/o3yJ5PP.png" />
+    </div>
+
 
       <div class="overlay" v-show="this.msg != ''" v-on:click="closeMsg">
         <div id="successMsg">
@@ -52,12 +54,21 @@ export default {
   data() {
     return {
       beerForDetails: {},
-      beerFilter: [],
+      filterArray: [],
       show: true,
       msg: "",
       hideMsg: false,
+      check: ''
     };
   },
+  
+  // computed: {
+  //   computedArray(){
+  //    let computerFilterArray=this.filterArray;
+  //    return computerFilterArray;
+  //   }
+  // },
+
 
   methods: {
     addBeerToPassport(beer) {
@@ -65,7 +76,7 @@ export default {
       PassportService.addBeerToPassport(this.$store.state.user.id, beer)
         .then((response) => {
           if (response.status == 200) {
-            console.log("in the if statement");
+           beer.inPassport=true;
             this.msg = beer.beerName + " has been added to your passport";
           }
         })
@@ -84,23 +95,26 @@ export default {
         this.show = false;
       }
     },
-    checkBeer(beer) {
-      this.beerFilter.forEach(b => {
-        if (b.beerId == beer.beerId){ 
-          console.log("through the if")
-          return false;
-        }else{
-          return true
-        }
-      });
+    checkPassport(beer){
+      this.filterArray.forEach(b =>{
+       if( b.beerId==beer.beerId){
+         beer.inPassport = true;
+         console.log(beer.beerName + " flipped")
+       }else{
+         console.log(beer.beerName + " didnt flip")
+
+       }
+      })
+
     },
+      populateFilter(){
+    PassportService.getBeerFilter(this.$store.state.user.id).then(response =>{
+      this.filterArray=response.data;
+    });
   },
-  created(){
-              PassportService.getBeerFilter(this.$store.state.user.id).then(response =>{
-              this.beerFilter=response.data;
-          });
-  }
-};
+
+}
+}
 </script>
 <style scoped>
 .overlay {
