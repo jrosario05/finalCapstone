@@ -1,19 +1,24 @@
 
 <template>
   <div :rendered="populateFilter()">
-    <div :rendered="checkPassport(beer)" class="visible" v-show="$store.state.token != ''">
-    <div class="card" id="addToPassport" >
-      <p v-show="!beer.inPassport" id="addText" v-on:click="addBeerToPassport(beer)">Add to Passport</p>
-      <p v-show="beer.inPassport" id="addText">IN YOUR PASSPORT</p>
-      <img src="https://i.imgur.com/o3yJ5PP.png" />
-    </div>
-
+    <div
+      :rendered="checkPassport(beer)"
+      class="visible"
+      v-show="$store.state.token != ''"
+    >
+      <div @mouseenter="hover = true" @mouseleave="hover = false" class="card" id="addToPassport" v-show="!beer.inPassport" v-on:click="addBeerToPassport(beer)">
+        <p v-show="hover"  id="addText" >Add to Passport</p>
+        <img src="https://i.imgur.com/o3yJ5PP.png" />
+      </div>
+      <div class="card" id="currentlyInPassport" v-show="beer.inPassport">
+        <!-- <p id="addedText">Added to Passport</p> -->
+        <img src="https://i.imgur.com/kZz7FLZ.png" />
+      </div>
 
       <div class="overlay" v-show="this.msg != ''" v-on:click="closeMsg">
         <div id="successMsg">
           <h1 class="msg">{{ this.msg }}</h1>
           <p>Click to close</p>
-          <!-- <img  id="closeMsg" src="https://i.imgur.com/vdqV5fW.png" /> -->
         </div>
       </div>
     </div>
@@ -58,17 +63,10 @@ export default {
       show: true,
       msg: "",
       hideMsg: false,
-      check: ''
+      check: "",
+      hover: false
     };
   },
-  
-  // computed: {
-  //   computedArray(){
-  //    let computerFilterArray=this.filterArray;
-  //    return computerFilterArray;
-  //   }
-  // },
-
 
   methods: {
     addBeerToPassport(beer) {
@@ -76,7 +74,7 @@ export default {
       PassportService.addBeerToPassport(this.$store.state.user.id, beer)
         .then((response) => {
           if (response.status == 200) {
-           beer.inPassport=true;
+            beer.inPassport = true;
             this.msg = beer.beerName + " has been added to your passport";
           }
         })
@@ -95,26 +93,25 @@ export default {
         this.show = false;
       }
     },
-    checkPassport(beer){
-      this.filterArray.forEach(b =>{
-       if( b.beerId==beer.beerId){
-         beer.inPassport = true;
-         console.log(beer.beerName + " flipped")
-       }else{
-         console.log(beer.beerName + " didnt flip")
-
-       }
-      })
-
+    checkPassport(beer) {
+      this.filterArray.forEach((b) => {
+        if (b.beerId == beer.beerId) {
+          beer.inPassport = true;
+          console.log(beer.beerName + " flipped");
+        } else {
+          console.log(beer.beerName + " didnt flip");
+        }
+      });
     },
-      populateFilter(){
-    PassportService.getBeerFilter(this.$store.state.user.id).then(response =>{
-      this.filterArray=response.data;
-    });
+    populateFilter() {
+      PassportService.getBeerFilter(this.$store.state.user.id).then(
+        (response) => {
+          this.filterArray = response.data;
+        }
+      );
+    },
   },
-
-}
-}
+};
 </script>
 <style scoped>
 .overlay {
@@ -163,24 +160,39 @@ export default {
 
   background-color: rgb(240, 230, 174);
   border: 3px outset rgba(230, 230, 230), 0.75;
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   border-radius: 100%;
   z-index: 10;
   transform: translate(265px, 60px);
+
+  -webkit-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
+}
+
+
+#currentlyInPassport {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* 
-  -webkit-box-shadow: px 0px 24px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75); */
+  background-color: rgb(0, 139, 12);
+  border: 3px outset rgba(230, 230, 230), 0.75;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  z-index: 10;
+  transform: translate(265px, 60px);
+
+  -webkit-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
 }
 
-#addText {
+#addText  {
   text-align: center;
-  font-size: 0.65em;
+  font-size: 0.5em;
   position: absolute;
   z-index: 4;
   font-weight: bold;
@@ -189,11 +201,34 @@ export default {
   text-shadow: 0.5px 0.5px 0.25px #8d8d8d;
 }
 
+#addedText {
+  text-align: center;
+  font-size: 0.25em;
+  position: absolute;
+  z-index: 4;
+  font-weight: bold;
+  color: white;
+  margin: 0 auto;
+  text-shadow: 0.5px 0.5px 0.25px #8d8d8d;
+}
+
 #addToPassport img {
-  width: 40px;
+  width: 35px;
   height: auto;
-  opacity: 0.6;
-  filter: invert(59%) brightness(100%) grayscale(100%) hue-rotate(46deg);
+  filter:  brightness(100%) grayscale(100%) hue-rotate(46deg);
+}
+
+#addToPassport:hover img {
+
+  opacity: 0.2;
+}
+
+#currentlyInPassport img {
+  width: 30px;
+  height: auto;
+  opacity: 1;
+  transform:translate(1px,-1px);
+  filter: invert(100%) brightness(100%);
 }
 
 .card {
@@ -272,8 +307,16 @@ export default {
 }
 
 .description {
-  padding: 0px 20px;
-  margin-top: 10px;
+  z-index: 15;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  max-width: 300px;
+  max-height: 145px;
+  text-overflow: ellipsis;
+  margin: 10px 20px 0px;
   font-size: 0.75em;
 }
 
