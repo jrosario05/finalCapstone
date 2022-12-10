@@ -59,6 +59,9 @@
     <!-- BAR CRAWL LIST STARTS HERE  -->
     <div class="barCrawlList" v-show="beerCrawlBreweries.length > 0">
       <h1>Beer Crawl Itinerary</h1>
+      <div id="print-button" v-on:click="printItinerary">
+        <p>Print</p>
+        </div>
       <div
         class="brewery-info"
         v-for="brewery in beerCrawlBreweries"
@@ -98,9 +101,6 @@ export default {
   },
 
   methods: {
-
-
-
     addToBeerCrawl(brewery) {
 
 
@@ -162,6 +162,22 @@ export default {
         })
 
     },
+
+    printItinerary() {
+      
+     let contents = this.beerCrawlBreweries;
+     let dialog = window.open('', '', 'height=500, width=500');
+            dialog.document.write('<html>');
+            dialog.document.write('<body > <h1>Bar Crawl Itinerary</h1>');
+
+            contents.forEach(pub => {
+              dialog.document.write(`<p>${contents.indexOf(pub)+1}) ${pub.breweryName}</p>`);
+            });
+
+            dialog.document.write('</body></html>');
+            dialog.document.close();
+            dialog.print();
+    }
   },
   created() {
     this.getBreweries();
@@ -307,6 +323,12 @@ export default {
   justify-self: center;
   align-self: center;
   padding: 10px 0px;
+}
+
+#print-button {
+  background-color: red;
+  width: 50px;
+  height: auto;
 }
 
 .brewery-info {
