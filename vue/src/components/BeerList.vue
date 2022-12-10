@@ -6,7 +6,7 @@
       v-bind:beer="beer"
       />
   </div>
-        <beer-detail></beer-detail>
+    <beer-detail></beer-detail>
     
 
 </div>

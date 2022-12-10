@@ -8,6 +8,16 @@ public class Beer {
     private String description;
     private String style;
     private String imgUrl;
+    private boolean inPassport;
+
+
+    public boolean isInPassport() {
+        return inPassport;
+    }
+
+    public void setInPassport(boolean inPassport) {
+        this.inPassport = inPassport;
+    }
 
     public int getBeerId() {
         return beerId;

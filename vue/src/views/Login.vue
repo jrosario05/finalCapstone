@@ -1,4 +1,5 @@
 <template>
+<div class="loginContainer"> 
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
       <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
@@ -40,6 +41,7 @@
       <router-link id="register-button" :to="{ name: 'register' }">CREATE A PASSPORT</router-link>
     </form>
   </div>
+   </div>
 </template>
 
 <script>
@@ -88,7 +90,7 @@ export default {
 </script>
 
 <style scoped>
-body {
+.loginContainer {
    background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -142,6 +144,7 @@ p{
   position: relative;
   background: none;
   color: black;
+  width: 40%;
 }
 
 
