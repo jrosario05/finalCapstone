@@ -112,18 +112,6 @@ export default {
         pub.splice(index, 1);
       }
     },
-
-
-
-
-
-
-
-
-
-
-
-
     toggleCheckBox(brewery) {
       if (this.beerCrawlBreweries.includes(brewery)) {
         return true;
