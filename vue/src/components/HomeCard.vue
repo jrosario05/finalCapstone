@@ -267,7 +267,7 @@ img{
   border:0;
 }
 
-row . *{
+r{
   padding-right: none;
 }
       

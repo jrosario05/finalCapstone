@@ -119,6 +119,7 @@ CREATE TABLE passport_beer(
 	passport_id integer NOT NULL,
 	beer_id integer NOT NULL,
 	drank boolean not null,
+	beer_rating int not null,
 	
 	CONSTRAINT FK_user_info FOREIGN KEY (passport_id) REFERENCES user_info(passport_id),
 	CONSTRAINT FK_beer FOREIGN KEY (beer_id) REFERENCES beer(beer_id)

@@ -113,7 +113,7 @@ public class JdbcPassportDAO implements PassportDao{
 
             int id = brewery.getBreweryId();
 
-            String sql2 = "Select  passport_beer.beer_id, beer_name, abv, drank, style_name, brewery_id  from user_info " +
+            String sql2 = "Select  passport_beer.beer_id, beer_name, abv, drank, style_name, brewery_id, beer_rating from user_info " +
                     "                join passport_beer on user_info.passport_id = passport_beer.passport_id " +
                     "join beer on passport_beer.beer_id = beer.beer_id " +
                     "join beer_style on  beer.style_id = beer_style.style_id " +
@@ -151,8 +151,8 @@ public class JdbcPassportDAO implements PassportDao{
 
     @Override
     public void addBeerToPassport(int userId, Beer beer){
-        String sql= "Insert into passport_beer (passport_id, beer_id, drank) "+
-        "VALUES ((SELECT passport_id from user_info where user_id = ?), ?, false)";
+        String sql= "Insert into passport_beer (passport_id, beer_id, drank, beer_rating) "+
+        "VALUES ((SELECT passport_id from user_info where user_id = ?), ?, false, 0)";
         jdbcTemplate.update(sql, userId, beer.getBeerId());
         String sql2= "Insert into passport_brewery (passport_id, brewery_id, visited) " +
         "VALUES ((SELECT passport_id from user_info where user_id = ?), (select brewery_id from beer where beer_id = ?), false)";
@@ -185,6 +185,14 @@ public class JdbcPassportDAO implements PassportDao{
         jdbcTemplate.update(sql, beerId, userId);
     }
 
+    public void updateRating(int userId, int beerId, int rating){
+         String sql =  "update passport_beer " +
+                "set beer_rating= ? " +
+                "where beer_id= ? and passport_id =(select passport_id from user_info where user_id= ?)";
+         jdbcTemplate.update(sql, rating, beerId, userId );
+
+    }
+
 
 
 
@@ -195,6 +203,7 @@ public class JdbcPassportDAO implements PassportDao{
 
         passport.setBeerId(rs.getInt("beer_id"));
         passport.setDrank(rs.getBoolean("drank"));
+
 
         return passport;
     }
@@ -220,6 +229,8 @@ public class JdbcPassportDAO implements PassportDao{
         beerInfo.setStyleName(rs.getString("style_name"));
         beerInfo.setDrank(rs.getBoolean("drank"));
         beerInfo.setBreweryId(rs.getInt("brewery_id"));
+        beerInfo.setBeerRating(rs.getInt("beer_rating"));
+
 
         return beerInfo;
     }

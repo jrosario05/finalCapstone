@@ -20,6 +20,10 @@ updateDrank(userId, beerId){
 },
 getBeerFilter(userId){
     return axios.get(`passport/beer/${userId}`)
+},
+
+updateRating(userId, beerId, rating){
+    return axios.put(`rating/${userId}${beerId}${rating}`)
 }
 
 

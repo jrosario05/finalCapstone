@@ -53,6 +53,12 @@ private PassportDao dao;
     public void UpdateBeerDrankFromPassport (@PathVariable int userId, @PathVariable int beerId){
         dao.updateDrank(userId, beerId);
     }
+    @RequestMapping(path = "/rating/{userId}/{beerId}/{rating}", method = RequestMethod.PUT)
+    public void UpdateBeerRating(@PathVariable int userId, @PathVariable int beerId, @PathVariable int rating){
+        dao.updateRating(userId, beerId, rating);
+    }
+
+
 
 
 
