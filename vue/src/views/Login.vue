@@ -101,7 +101,7 @@ export default {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 100vh;
+  height:100%;
   background-color: black;
 }
 .form-signin{

@@ -68,7 +68,7 @@
         :key="brewery.id"
       >
         <div class="brewery-name">{{beerCrawlBreweries.indexOf(brewery) + 1}}) {{ brewery.breweryName }}</div>
-        <div class="brewery-address">Brewery Address Goes Here</div>
+        <div :rendered="getBreweryAddress(brewery)" class="brewery-address">{{address}}</div>
       </div>
     </div>
   </div>
@@ -80,15 +80,17 @@
 
 <script>
 import PassportService from "../services/PassportService";
+import BreweryService from "../services/BreweryService.js"
 export default {
   name: "my-passport",
   data() {
     return {
+      allBreweries:[],
       passport: {
         brewery: {},
       },
       beerCrawlBreweries: [],
-
+      address:'',
       breweryToOpen: "",
     };
   },
@@ -102,8 +104,6 @@ export default {
 
   methods: {
     addToBeerCrawl(brewery) {
-
-
       let pub = this.beerCrawlBreweries;
       if (!this.beerCrawlBreweries.includes(brewery)) {
         pub.push(brewery);
@@ -112,6 +112,16 @@ export default {
         pub.splice(index, 1);
       }
     },
+    getBreweryAddress(brewery){
+      this.allBreweries.forEach(b=>{
+        if(brewery.breweryId==b.breweryId){
+        this.address=b.streetAddress +" " + b.city +', '+ b.state+' '+ b.zip;
+        }
+      })
+    },
+
+
+
     toggleCheckBox(brewery) {
       if (this.beerCrawlBreweries.includes(brewery)) {
         return true;
@@ -126,6 +136,10 @@ export default {
           this.passport = response.data;
         }
       );
+      BreweryService.listBreweries().then(response=>{
+        this.allBreweries=response.data;
+        console.log(this.allBreweries);
+      })
     },
 
     toggleDrank(beer) {

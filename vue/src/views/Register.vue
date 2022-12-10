@@ -1,5 +1,6 @@
 <template>
-  <div id="register" class="text-center">
+<div class="registerContainer">
+  <div  class="text-center">
     <form class="form-register" @submit.prevent="register">
       <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
@@ -32,7 +33,7 @@
         v-model="user.confirmPassword"
         required
       />
-        <label for="firstName" class="sr-only">Password</label>
+        <label for="firstName" class="sr-only">First Name</label>
       <input
         type="name"
         id="fname"
@@ -41,7 +42,7 @@
         v-model="userInfo.userFirstName"
         required
       />
-            <label for="lastName" class="sr-only">Password</label>
+            <label for="lastName" class="sr-only">Last Name</label>
       <input
         type="name"
         id="lname"
@@ -50,7 +51,7 @@
         v-model="userInfo.userLastName"
         required
       />
-      <label for="address" class="sr-only">Password</label>
+      <label for="address" class="sr-only">Street Address</label>
       <input
         type="address"
         id="address"
@@ -59,7 +60,7 @@
         v-model="userInfo.address"
         required
       />
-      <label for="city" class="sr-only">Password</label>
+      <label for="city" class="sr-only">City</label>
       <input
         type="city"
         id="city"
@@ -68,7 +69,7 @@
         v-model="userInfo.city"
         required
       />
-      <label for="state" class="sr-only">Password</label>
+      <label for="state" class="sr-only">State</label>
       <input
         type="state"
         id="state"
@@ -77,7 +78,7 @@
         v-model="userInfo.state"
         required
       />
-      <label for="zip" class="sr-only">Password</label>
+      <label for="zip" class="sr-only">ZipCode</label>
       <input
         type="zip"
         id="zip"
@@ -87,10 +88,11 @@
         required
       />
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+      <div class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
-      </button>
+      </div>
     </form>
+  </div>
   </div>
 </template>
 
@@ -157,15 +159,124 @@ export default {
 
 <style scoped> 
 
- #register{
+ .registerContainer{
    background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 100vh;
+  height: 100%;
   background-color: black;
+  display: flex;
+  justify-content: center;
 
+
+}
+
+.text-center{
+  height:1000px;
+  width: 400px;
+  border-radius: 5px;
+  border-width: 5px;
+  border-color: 2px;
+  border: black;
+  background-color: white;
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+}
+#inputBoxes{
+  grid-area: forms;
+  width: 100%;
+  margin: 10px;
+  display: grid;
+  grid-template-rows: .5fr 1fr .5fr 1fr;
+  grid-template-areas: "userLabel" "userInput" "passwordLabel" "passwordInput";
+;
+}
+input{
+  width:90%
+}
+
+#usernameLabel{
+  grid-area: userLabel;
+}
+#username{
+  grid-area: userInput;
+}
+#passwordLabel{
+  grid-area: passwordLabel;
+}
+#password{
+  grid-area: passwordInput;
+}
+
+
+
+
+#signOnHeader{
+  grid-area: header;
+  color: black;
+  font-weight: bold;
+  font-size: xx-large;
+  display: flex;
+  justify-content: center;
+}
+p{
+  grid-area: mini-text;
+}
+#login{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#register-button{
+  grid-area: register;
+  color: black;
+  font-size: x-large;
+}
+#button-full-div{
+  grid-area: button;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+#sign-in-button-div{
+  grid-area: button;
+  border-radius: 4px;
+  border: black;
+  border-width: 5px;
+  border: solid;
+  background: none;
+  color: black;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+#sign-in-button-div:hover{
+  background-color: rgb(190, 190, 190);
+}
+
+
+
+#sign-in-button-div p{
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+#register-button:hover{
+  color: blue;
 }
 
 </style>
