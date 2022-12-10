@@ -3,7 +3,19 @@
     <h1 id="welcome" v-show="$store.state.token != ''">
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
-    <div class="passport" v-for="brewery in fullObject" :key="brewery.id" :isRendered="checkBrewery(brewery)">
+    <div
+      class="passport"
+      v-for="brewery in fullObject"
+      :key="brewery.id"
+      :isRendered="checkBrewery(brewery)"
+    >
+      <input
+        :checked="toggleCheckBox(brewery)"
+        type="checkbox"
+        id="addToBeerCrawl"
+        name="beerCrawlToggle"
+        v-on:change="addToBeerCrawl(brewery)"
+      />
       <div id="breweryCard" v-on:click="cardOpen(brewery)">
         <div id="breweryName">{{ brewery.breweryName }}</div>
         <div class="open">
@@ -34,13 +46,35 @@
           <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
           <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
         </div>
-        <div id="remove" class="remove" v-on:click="removeFromPassport(beer.beerId, brewery)">
-          <img  src="https://i.imgur.com/vdqV5fW.png" />
+        <div
+          id="remove"
+          class="remove"
+          v-on:click="removeFromPassport(beer.beerId, brewery)"
+        >
+          <img src="https://i.imgur.com/vdqV5fW.png" />
         </div>
+      </div>
+    </div>
+
+    <!-- BAR CRAWL LIST STARTS HERE  -->
+    <div class="barCrawlList" v-show="beerCrawlBreweries.length > 0">
+      <h1>Beer Crawl Itinerary</h1>
+      <div
+        class="brewery-info"
+        v-for="brewery in beerCrawlBreweries"
+        :key="brewery.id"
+      >
+        <div class="brewery-name">{{beerCrawlBreweries.indexOf(brewery) + 1}}) {{ brewery.breweryName }}</div>
+        <div class="brewery-address">Brewery Address Goes Here</div>
       </div>
     </div>
   </div>
 </template>
+
+
+
+// SCRIPT STARTS HERE
+
 <script>
 import PassportService from "../services/PassportService";
 export default {
@@ -49,25 +83,63 @@ export default {
     return {
       passport: {
         brewery: {},
-        },
-      breweryToOpen:''
-      };
+      },
+      beerCrawlBreweries: [],
+
+      breweryToOpen: "",
+    };
   },
+
   computed: {
     fullObject() {
       let PassportObject = this.passport;
       return PassportObject;
     },
- 
   },
+
   methods: {
+
+
+
+    addToBeerCrawl(brewery) {
+
+
+      let pub = this.beerCrawlBreweries;
+      if (!this.beerCrawlBreweries.includes(brewery)) {
+        pub.push(brewery);
+      } else {
+        let index = pub.indexOf(brewery);
+        pub.splice(index, 1);
+      }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+    toggleCheckBox(brewery) {
+      if (this.beerCrawlBreweries.includes(brewery)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
     getBreweries() {
       PassportService.breweryPassport(this.$store.state.user.id).then(
         (response) => {
-          this.passport=response.data;
-          })        
+          this.passport = response.data;
+        }
+      );
     },
-    
+
     toggleDrank(beer) {
       beer.drank = !beer.drank;
       PassportService.updateDrank(this.$store.state.user.id, beer.beerId);
@@ -75,24 +147,34 @@ export default {
     cardOpen(brewery) {
       brewery.cardOpen = !brewery.cardOpen;
     },
-    checkBrewery(brewery){
-      if(brewery.breweryId==this.breweryToOpen){
-        brewery.cardOpen=true;
+    checkBrewery(brewery) {
+      if (brewery.breweryId == this.breweryToOpen) {
+        brewery.cardOpen = true;
       }
     },
-    
-   
+
     removeFromPassport(beerId, brewery) {
-      PassportService.deleteFromPassport(this.$store.state.user.id, beerId).then( response => {
-        if(response.status === 200) {
-          this.breweryToOpen=brewery.breweryId
-          this.getBreweries();
-        }
-      }).catch( error => {
-        console.log(error)});
-        
-      }
+      PassportService.deleteFromPassport(this.$store.state.user.id, beerId)
+        .then((response) => {
+          if (response.status === 200) {
+            this.breweryToOpen = brewery.breweryId;
+            this.getBreweries();
+          }
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+        this.beerCrawlBreweries.forEach( brewery => {
+          if(brewery.breweryId == brewery.breweryId) {
+            let index = this.beerCrawlBreweries.indexOf(brewery);
+            this.beerCrawlBreweries.splice(index,1);
+          }
+        })
+
     },
+  },
   created() {
     this.getBreweries();
   },
@@ -121,12 +203,12 @@ export default {
 /* Styles individual brewery tiles */
 #breweryCard {
   display: flex;
-  height: 50px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
   height: 50px;
+
   border-radius: 5px;
   margin: 10px;
 
@@ -179,7 +261,6 @@ export default {
   width: 20%;
   font-size: 1em;
   font-style: italic;
-
 }
 .beer-abv {
   width: 20%;
@@ -205,5 +286,70 @@ export default {
   width: 40px;
   margin: 0 auto;
   height: auto;
+}
+
+#button {
+  width: 25px;
+  height: 25px;
+  background-color: red;
+}
+
+/* STYLING FOR THE BAR CRAWL LIST */
+
+.barCrawlList {
+  width: 58vw;
+
+  margin: 36px 10px 10px 20px;
+
+  height: auto;
+  margin: 0 auto;
+
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+}
+
+.barCrawlList h1 {
+  font-size: 2em;
+  background-color: rgba(99, 98, 98, 0.718);
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-self: center;
+  padding: 10px 0px;
+}
+
+.brewery-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  margin: 3px 0px;
+
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.brewery-name {
+  float: left;
+  margin-left: 50px;
+  font-weight: bold;
+}
+
+.brewery-address {
+  margin-right: 50px;
+  font-style: italic;
+}
+
+/* positions checkbox */
+#addToBeerCrawl {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transform: translate(25px, 15px);
 }
 </style>
