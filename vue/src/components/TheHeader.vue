@@ -21,15 +21,15 @@ export default {
 
 div{
   background-color: rgba(255, 255, 255, 0.938);
-  padding: 5px;
+  padding: 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
 }
 img{
-  width: 15%;
-  margin: 5px;
+  width: 100px;
+  margin: 2px;
 }
 .link{
 font-size: larger; 

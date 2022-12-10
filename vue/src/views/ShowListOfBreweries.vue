@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="breweryListContainer">
       <brewery-list></brewery-list>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
 
 <style scoped>
 
-body {
+.breweryListContainer {
    background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;

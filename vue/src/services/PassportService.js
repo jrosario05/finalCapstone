@@ -17,6 +17,9 @@ addBeerToPassport(userId, beer){
 },
 updateDrank(userId, beerId){
     return axios.put(`/passport/${userId}/${beerId}`)
+},
+getBeerFilter(userId){
+    return axios.get(`passport/beer/${userId}`)
 }
 
 

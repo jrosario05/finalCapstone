@@ -136,6 +136,20 @@ public class JdbcPassportDAO implements PassportDao{
 
 
     @Override
+    public List<PassportBeerInfo> getPassportBeerFilter(int userId){
+        List<PassportBeerInfo> beerFilter=new ArrayList<>();
+        String sql= "select beer_id from passport_beer where passport_id = (select passport_id from user_info where user_id=?) " +
+                "group by beer_id";
+        SqlRowSet beerResults = jdbcTemplate.queryForRowSet(sql, userId);
+        while(beerResults.next()){
+            PassportBeerInfo beer =beerFilterMap(beerResults);
+            beerFilter.add(beer);
+        }
+        return beerFilter;
+    }
+
+
+    @Override
     public void addBeerToPassport(int userId, Beer beer){
         String sql= "Insert into passport_beer (passport_id, beer_id, drank) "+
         "VALUES ((SELECT passport_id from user_info where user_id = ?), ?, false)";
@@ -207,6 +221,11 @@ public class JdbcPassportDAO implements PassportDao{
         beerInfo.setDrank(rs.getBoolean("drank"));
         beerInfo.setBreweryId(rs.getInt("brewery_id"));
 
+        return beerInfo;
+    }
+    private PassportBeerInfo beerFilterMap(SqlRowSet rs){
+        PassportBeerInfo beerInfo = new PassportBeerInfo();
+        beerInfo.setBeerId(rs.getInt("beer_id"));
         return beerInfo;
     }
 
