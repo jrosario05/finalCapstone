@@ -82,6 +82,7 @@ public class JDBCBeerDao implements BeerDao {
         beer.setDescription(rs.getString("description"));
         beer.setStyle(rs.getString("style_name"));
         beer.setImgUrl(rs.getString("img_url"));
+        beer.setInPassport(false);
 
         return beer;
     }

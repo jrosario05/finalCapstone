@@ -27,13 +27,6 @@ export default {
   data(){
       return{
           beers: [],
-          beerFilter:[]
-      }
-  },
-  computed:{
-      filterArray(){
-          let filter=this.beerFilter
-          return filter;
       }
   },
 
@@ -41,12 +34,8 @@ export default {
           beerService.listBeer().then(response =>{
               this.beers=response.data;
           });
-
   },
-    methods:{
 
-   
-    }
 
 //   computed:{
 //       beersArray(){

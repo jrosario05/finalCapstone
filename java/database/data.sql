@@ -573,13 +573,6 @@ INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url)
 		(SELECT style_id FROM beer_style WHERE style_name = 'Citrus IPA'),
 		 'https://columbusbrewing.com/wp-content/uploads/2022/03/technicolorhat.webp');	
 
-
-INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
-	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Technicolor Hat', 6.9,
-		'Notes of tangerine, Meyer lemon and passionfruit.',
-		(SELECT style_id FROM beer_style WHERE style_name = 'Citrus IPA'),
-		 'https://columbusbrewing.com/wp-content/uploads/2022/03/technicolorhat.webp');	
-
 INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 		 
 	VALUES	  ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Columbus Brewing Company'), 'Festbier', 5.3,
 		'A slightly hoppy version of a traditional Festbier. Malty with a smooth finish.',
