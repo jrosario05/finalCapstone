@@ -31,7 +31,7 @@ const router = new Router({
       name: 'passport',
       component: Passport,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
