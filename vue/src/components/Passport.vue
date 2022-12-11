@@ -41,10 +41,10 @@
         <div class="beer-style">
           {{ beer.styleName }}
         </div>
-        <div class="review">
+        <div class="beer-abv">{{ beer.abv }}% ABV</div>
+         <div class="review">
           <review :beer="beer"/>
         </div>
-        <div class="beer-abv">{{ beer.abv }}% ABV</div>
         <div class="drank" v-on:click="toggleDrank(beer)">
           <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
           <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
@@ -101,6 +101,7 @@ export default {
   computed: {
     fullObject() {
       let PassportObject = this.passport;
+      console.log("changing");
       return PassportObject;
     },
   },
@@ -277,7 +278,7 @@ export default {
   font-size: 1em;
 }
 .review{
-  width: 10%;
+  width: 12%;
 }
 .drank {
   width: 9%;
@@ -289,7 +290,7 @@ export default {
   height: auto;
 }
 .remove {
-  width: 11%;
+  width: 9%;
   margin-right: 30px;
 }
 .remove img {
