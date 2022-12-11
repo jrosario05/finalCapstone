@@ -92,6 +92,10 @@ export default {
       beerCrawlBreweries: [],
       address:'',
       breweryToOpen: "",
+      darkColor:["dark","dark","dark","dark","dark"],
+      lightColor:["light","light","light","light","light"],
+      showColor:[]
+
     };
   },
 
@@ -99,6 +103,7 @@ export default {
     fullObject() {
       let PassportObject = this.passport;
       return PassportObject;
+      
     },
   },
 
@@ -119,7 +124,26 @@ export default {
           this.address=b.streetAddress + " " + b.city +', ' + b.state + ' ' + b.zip;
           brewery.address = this.address;
         }
+        console.log(this.getRating)
       })
+    },
+
+    getRating(){
+     let rating = 2
+  
+
+   
+
+   for (let i = 0; i < rating; i++) {
+  this.showColor[i] = this.lightColor[i]
+ 
+}
+for(let j = rating ; j <= this.darkColor.length; j++){
+  this.showColor[j] = this.darkColor[j]
+  console.log(this.showColor);
+}
+  return this.showColor
+  
     },
 
 
@@ -198,6 +222,7 @@ export default {
   },
   created() {
     this.getBreweries();
+    this.getRating();
   },
 };
 </script>
