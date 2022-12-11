@@ -41,6 +41,9 @@
         <div class="beer-style">
           {{ beer.styleName }}
         </div>
+        <div class="review">
+          <review :beer="beer"/>
+        </div>
         <div class="beer-abv">{{ beer.abv }}% ABV</div>
         <div class="drank" v-on:click="toggleDrank(beer)">
           <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
@@ -59,9 +62,6 @@
     <!-- BAR CRAWL LIST STARTS HERE  -->
     <div class="barCrawlList" v-show="beerCrawlBreweries.length > 0">
       <h1>Beer Crawl Itinerary</h1>
-      <div id="print-button" v-on:click="printItinerary">
-        <p>Print</p>
-        </div>
       <div
         class="brewery-info"
         v-for="brewery in beerCrawlBreweries"
@@ -79,9 +79,12 @@
 // SCRIPT STARTS HERE
 
 <script>
+
 import PassportService from "../services/PassportService";
 import BreweryService from "../services/BreweryService.js"
+import Review from './Review.vue';
 export default {
+  components: { Review },
   name: "my-passport",
   data() {
     return {
@@ -103,6 +106,9 @@ export default {
   },
 
   methods: {
+
+
+
     addToBeerCrawl(brewery) {
       let pub = this.beerCrawlBreweries;
       if (!this.beerCrawlBreweries.includes(brewery)) {
@@ -112,12 +118,10 @@ export default {
         pub.splice(index, 1);
       }
     },
-
     getBreweryAddress(brewery){
       this.allBreweries.forEach(b=>{
         if(brewery.breweryId==b.breweryId){
-          this.address=b.streetAddress + " " + b.city +', ' + b.state + ' ' + b.zip;
-          brewery.address = this.address;
+        this.address=b.streetAddress +" " + b.city +', '+ b.state+' '+ b.zip;
         }
       })
     },
@@ -178,23 +182,6 @@ export default {
         })
 
     },
-
-    printItinerary() {
-      
-     let contents = this.beerCrawlBreweries;
-     let dialog = window.open('', '', 'height=500, width=500');
-            dialog.document.write('<html>');
-            dialog.document.write('<body > <center><h1>Bar Crawl Itinerary</h1></center>');
-
-            contents.forEach(pub => {
-              this.getBreweryAddress(pub);
-              dialog.document.write(`<p><strong>${contents.indexOf(pub)+1}) ${pub.breweryName}</strong> <br>${pub.address}</p>`);
-            });
-
-            dialog.document.write('</body></html>');
-            dialog.document.close();
-            dialog.print();
-    }
   },
   created() {
     this.getBreweries();
@@ -289,8 +276,11 @@ export default {
   font-style: italic;
   font-size: 1em;
 }
+.review{
+  width: 10%;
+}
 .drank {
-  width: 20%;
+  width: 9%;
 }
 .drank img {
   display: flex;
@@ -299,7 +289,7 @@ export default {
   height: auto;
 }
 .remove {
-  width: 20%;
+  width: 11%;
   margin-right: 30px;
 }
 .remove img {
@@ -340,12 +330,6 @@ export default {
   justify-self: center;
   align-self: center;
   padding: 10px 0px;
-}
-
-#print-button {
-  background-color: red;
-  width: 50px;
-  height: auto;
 }
 
 .brewery-info {
