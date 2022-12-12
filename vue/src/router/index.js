@@ -8,6 +8,7 @@ import ShowListOfBreweries from '../views/ShowListOfBreweries.vue'
 import BreweryDetailsPage from '../views/BreweryDetailsPage.vue'
 import ShowListOfBeers from '../views/ShowListOfBeers.vue'
 import Test from '../views/Test.vue'
+
 import store from '../store/index'
 import Home from '../views/Home.vue'
 
@@ -29,9 +30,9 @@ const router = new Router({
     {
       path: '/passport',
       name: 'passport',
-      component: Passport,
+      component: Passport, 
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -91,6 +92,7 @@ const router = new Router({
       requiresAuth: false
     }
   },
+
 
   {
     path:"/",
