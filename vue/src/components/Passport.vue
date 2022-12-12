@@ -25,12 +25,20 @@
                 v-show="brewery.cardOpen"
                 src="https://i.imgur.com/3OjzTy2.png"
               />
-              <img
+                            <img
                 v-show="!brewery.cardOpen"
                 src="https://i.imgur.com/YjdeFuu.png"
               />
             </div>
           </div>
+                    <div class=legend >
+            <p class="legend-name">Name</p>
+            <p class="legend-style">Style</p>
+            <p class="legend-abv">ABV</p>
+            <p class="legend-review">RATING</p>
+            <p class="legend-drank">DRANK</p>
+            <p class="legend-remove">DELETE</p>
+             </div>
           <div
             v-show="brewery.cardOpen"
             v-for="beer in brewery.passportBeers"
@@ -43,7 +51,7 @@
             <div class="beer-style">
               {{ beer.styleName }}
             </div>
-            <div class="beer-abv">{{ beer.abv }}% ABV</div>
+            <div class="beer-abv">{{ beer.abv }}%</div>
             <div class="review">
               <review :beer="beer" />
             </div>
@@ -91,12 +99,17 @@
               />
             </div>
           </div>
+
           <div
             v-show="brewery.cardOpen"
             v-for="beer in brewery.passportBeers"
             :key="beer.id"
             id="beerCard"
           >
+          
+
+
+         
             <div class="beer-name">
               {{ beer.beerName }}
             </div>
@@ -347,6 +360,68 @@ export default {
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
+
+.legend {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: center;
+  border-radius: 5px;
+  margin: 0px 20px 0px 20px;
+  height: 25px;
+  background-color: rgba(15, 15, 15, 0.801);
+  color: white;
+  font-size: .65em;
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+}
+
+
+.legend p {
+  margin: 0px 30px;
+}
+
+
+.legend p {
+  /* text-align: center; */
+  font-size: 1em;
+  margin-top: 8px;
+  margin-bottom: 3px;
+}
+
+.legend-name {
+  margin-left: 30px;
+  width: 20%;
+    display: inline-block;
+
+}
+
+.legend-style {
+  width: 20%;
+    display: inline-block;
+
+}
+.legend-abv {
+  width: 20%;
+    display: inline-block;
+
+}
+.legend-review {
+  text-align: center;
+  width: 12%;
+}
+.remove-drank {
+  text-align: center;
+  width: 9%;
+}
+
+.legend-remove {
+  width: 9%;
+  margin-right: 30px;
+  text-align: center;
+}
+
 
 /*  Beer tile styling and positioning */
 
