@@ -631,9 +631,5 @@ export default {
   /* margin: 0px auto; */
 }
 
-.placeholder {
-  width: 100%;
-  background-color: white;
-  height: 100px;
-}
+
 </style>
