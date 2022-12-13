@@ -12,9 +12,10 @@ export default MapElementFactory({
   mappedProps: {},
 
   props: {
-    origin: { type: String },
-    destination: { type: String },
-    travelMode: { type: String }
+    origin: { type: Object },
+    destination: { type: Object },
+    travelMode: { type: String },
+    waypoints: { type: Array }
     
   },
 
@@ -22,16 +23,17 @@ export default MapElementFactory({
     let directionsService = new window.google.maps.DirectionsService();
 
     this.$watch(
-      () => [this.origin, this.destination, this.travelMode],
+      () => [this.origin, this.destination, this.travelMode, this.waypoints],
       () => {
-        let { origin, destination, travelMode } = this;
-        if (!origin || !destination || !travelMode) return;
+        let { origin, destination, travelMode, waypoints } = this;
+        if (!origin || !destination || !travelMode || !waypoints) return;
 
         directionsService.route(
           {
             origin,
             destination,
             travelMode,
+            waypoints
           },
           (response, status) => {
             if (status !== "OK") return;

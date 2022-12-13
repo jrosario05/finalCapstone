@@ -22,6 +22,7 @@
 // SCRIPT STARTS HERE
 
 <script>
+import GoogleService from '../services/GoogleService.js'
 import PassportService from "../services/PassportService.js"
 export default {
   name: "g-map",
@@ -94,7 +95,30 @@ computed:{
       } 
       // stops += this.crawlList[this.crawlList.length-1].breweryName;
       this.waypoints = waypoints;
-    }
+    },
+
+
+    getLocations(array){
+        array.forEach(bar => {
+            GoogleService.get(bar.address).then((response)=>{
+                if (response.data.error_message){
+                    console.log(response.data.error_message);
+                }else{
+                    let marker={
+                        lat:"",
+                        lng:""
+                    };
+                    marker.lat=response.data.results[0].geometry.location.lat;
+                    marker.lng=response.data.results[0].geometry.location.lng;
+                  this.markers.push({ position: marker });
+                }
+            }).catch((error)=>{
+                console.log(error.message)
+            })
+            
+        });
+
+    },
 
   },
 

@@ -1,16 +1,17 @@
 <template>
   <div>
 
-           <div v-on:click="origin(), destionation()" class="button">CLICK HERE</div>
+<div v-on:click.prevent="origin() + destionation(), addWayPoints()" class="button">CLICK HERE</div>
 
 
-    <GmapMap :zoom="7" :center="{ lat: 41.85, lng: -87.65 }">
-      <DirectionsRenderer travelMode="DRIVING" :origin="origin2" :destination="destionation2"/>
+    <GmapMap :zoom="10" :center="{ lat: 39.9612, lng: -82.9988 }">
+      <DirectionsRenderer travelMode="DRIVING" :origin="origin2" :destination="destionation2" :waypoints="waypoints1" />
     </GmapMap>
   </div>
 </template>
 
 <script>
+import GoogleService from '../services/GoogleService.js'
 import DirectionsRenderer from "@/components/DirectionsRenderer";
 
 export default {
@@ -23,18 +24,11 @@ export default {
     return{
     start: '',
     end: '',
-    waypts:[]
+    waypts:[],
+    otherArray:[]
       }
     },
 
-  watch:{
-    array(barCrawl){
-      if(barCrawl.length>0){
-        this.start=this.barCrawl[0].address;
-        this.end=this.barCrawl[1].address;
-      }
-    }
-  },
   
 
   computed: {
@@ -47,25 +41,64 @@ export default {
       if (!this.end) return null;
       return { query: this.end };
     },
+    waypoints1(){
+      let otherArray=[];
+      this.waypts.forEach((brewery)=>{
+      let object= {};
+      object.location=brewery.address;
+      object.stopover=false;
+      otherArray.push(object)
+      })
+      return otherArray
       },
+
+  },
 
     
 
     methods:{
     origin() {
       console.log("hit origin")
-      this.start=this.barCrawl[0].address;
-
+      this.start=this.$store.state.userInfo.address;
       if (!this.start) return null;
       return { query: this.start };
     },
     destionation() {
-      console.log('hit destination')
-    this.end=this.barCrawl[1].address;
-
+    console.log('hit destination')
+    this.end=this.barCrawl[this.barCrawl.length-1].address;
       if (!this.end) return null;
       return { query: this.end };
     },
+    addWayPoints(){
+      if (this.barCrawl.length>1){
+        for(let i=0; i<this.barCrawl.length-1; i++){
+          this.waypts.push(this.barCrawl[i])
+        }
+      }
+    },
+
+
+
+    getLocations(address){
+            GoogleService.get(address).then((response)=>{
+                if (response.data.error_message){
+                    console.log(response.data.error_message);
+                }else{
+                  let location={};
+                    location.lat=response.data.results[0].geometry.location.lat;
+                    location.lng=response.data.results[0].geometry.location.lng;
+                    return location;
+                }
+            }).catch((error)=>{
+                console.log(error.message)
+            })
+            
+        
+
+    },
+
+
+    
   }
 };
 </script>

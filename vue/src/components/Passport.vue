@@ -5,7 +5,7 @@
     </div>
 
     <div>
-      <directions/>
+      <directions :barCrawl="beerCrawlBreweries"/>
     </div>
 
  <div class="main">
@@ -249,8 +249,7 @@ export default {
     getBreweryAddress(brewery) {
       this.allBreweries.forEach((b) => {
         if (brewery.breweryId == b.breweryId) {
-          return (this.address =
-            b.streetAddress + " " + b.city + ", " + b.state + " " + b.zip);
+            brewery.address=(b.streetAddress + " " + b.city + ", " + b.state + " " + b.zip);
         }
       });
     },
