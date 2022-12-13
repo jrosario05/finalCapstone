@@ -1201,8 +1201,8 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brew
 
 
 INSERT INTO user_info (user_id, user_first, user_last, address, city, state, zip_code)
-VALUES ((SELECT user_id from users where username= 'user'), 'Michael', 'Doom', '1775 Kinner Rd', 'Columbus', 'OH', 43215),
-		((SELECT user_id from users where username = 'admin'), 'Andrew', 'Brantley', '123 Main St', 'Gahanna', 'OH', 43215);
+VALUES ((SELECT user_id from users where username= 'user'), 'Michael', 'Doom', '1275 Kinnear Rd', 'Columbus', 'OH', 43215),
+		((SELECT user_id from users where username = 'admin'), 'Andrew', 'Brantley', '123 Main St', 'Columbus', 'OH', 43215);
 		
 Insert into passport_beer (passport_id, beer_id, drank, beer_rating)
 		

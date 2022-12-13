@@ -194,6 +194,23 @@ public class JdbcPassportDAO implements PassportDao{
     }
 
 
+//    @Override
+//    public UserInfo getUserAddess(int userId) {
+//        new UserInfo address = new UserInfo();
+//        String sql = "Select  address, city, state, zipCode from user_info where user_id=?"
+//
+//        SqlRowSet addressInfo = jdbcTemplate.queryForRowSet(sql,userId);
+//        if (addressInfo.next()){
+//            PassportBeerInfo beer =mapRowPassportBeerInfo(beerResults);
+//            beerInfo.add(beer);
+//        }
+//
+//
+//
+//        return beerInfo;
+//    }
+
+
 
 
     private  Passport mapRowBeerPassport(SqlRowSet rs){

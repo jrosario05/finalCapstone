@@ -3,8 +3,10 @@
     <h1 id="welcome" v-show="$store.state.token != ''">
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
-
-        <div 
+      <div>
+        <google-map :barCrawl="beerCrawlBreweries"/>
+        </div>
+        <!-- <div 
           class="main-passport"
           v-for="brewery in fullObject"
           :key="brewery.id"
@@ -31,7 +33,7 @@
               />
             </div>
           </div>
-                    <div class=legend >
+            <div class=legend v-show="brewery.cardOpen">
             <p class="legend-name">Name</p>
             <p class="legend-style">Style</p>
             <p class="legend-abv">ABV</p>
@@ -67,10 +69,10 @@
               <img src="https://i.imgur.com/vdqV5fW.png" />
             </div>
           </div>
-          </div>
+          </div> -->
 
 
-    <div class="main" v-show="beerCrawlBreweries.length > 0"
+    <div class="main" 
 >
       <div class="leftPanel">
         <div
@@ -79,15 +81,15 @@
           :key="brewery.id"
           :isRendered="checkBrewery(brewery)"
         >
-          <input
+          <!-- <input
             :checked="toggleCheckBox(brewery)"
             type="checkbox"
             id="addToBeerCrawl"
             name="beerCrawlToggle"
             v-on:change="addToBeerCrawl(brewery)"
-          />
+          /> -->
           <div id="breweryCard" v-on:click="cardOpen(brewery)">
-            <div id="breweryName">{{ brewery.breweryName }}</div>
+            <div id="breweryName" draggable @dragstart="onDrag($event, brewery)">{{ brewery.breweryName }}</div>
             <div class="open">
               <img
                 v-show="brewery.cardOpen"
@@ -136,8 +138,8 @@
       </div>
 
       <!-- BAR CRAWL LIST STARTS HERE  -->
-      <div class="rightPanel">
-        <div class="barCrawlList" v-show="beerCrawlBreweries.length > 0">
+      <div class="rightPanel" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent>
+        <div class="barCrawlList" >
             <h1>Beer Crawl Itinerary</h1>
       <div id="print-button" v-on:click="printItinerary">
         <p>Print</p>
@@ -153,7 +155,7 @@
               {{ brewery.breweryName }}
             </div>
             <div :rendered="getBreweryAddress(brewery)" class="brewery-address">
-              {{ address }}
+              {{ brewery.address }}
             </div>
           </div>
         </div>
@@ -170,9 +172,13 @@
 import PassportService from "../services/PassportService";
 import BreweryService from "../services/BreweryService.js";
 import Review from "./Review.vue";
+import GoogleMap from './GoogleMap.vue';
 export default {
-  components: { Review },
-  name: "my-passport",
+  components: {Review, 
+   GoogleMap
+  },
+  name:
+    "my-passport",
   data() {
     return {
       allBreweries: [],
@@ -188,12 +194,32 @@ export default {
   computed: {
     fullObject() {
       let PassportObject = this.passport;
-      console.log("changing");
       return PassportObject;
     },
   },
 
   methods: {
+
+
+    onDrag(evt, brewery){
+      console.log("inside start drag " + brewery.breweryId + " " + brewery.breweryName);
+      evt.dataTransfer.dropEffect = "move";
+      evt.dataTransfer.effectAllowed = "move";
+      evt.dataTransfer.setData("draggedBreweryId", brewery.breweryId);
+      evt.dataTransfer.setData("draggedBreweryName", brewery.breweryName);
+    },
+
+  onDrop(evt) {
+      console.log('on drop started')
+      const draggedBreweryId = evt.dataTransfer.getData('draggedBreweryId');
+      const draggedBreweryName = evt.dataTransfer.getData('draggedBreweryName');
+      console.log(draggedBreweryId + " " + draggedBreweryName);
+      const breweryToAdd = {
+        breweryId: draggedBreweryId,
+        breweryName: draggedBreweryName
+      }
+      this.beerCrawlBreweries.push(breweryToAdd);
+    },
 
 
     printItinerary() {
@@ -205,7 +231,7 @@ export default {
 
             contents.forEach(pub => {
               this.getBreweryAddress(pub);
-              dialog.document.write(`<p><strong>${contents.indexOf(pub)+1}) ${pub.breweryName}</strong> <br> ${this.address}</p>`);
+              dialog.document.write(`<p><strong>${contents.indexOf(pub)+1}) ${pub.breweryName}</strong> <br> ${pub.address}</p>`);
             });
 
             dialog.document.write('</body></html>');
@@ -226,7 +252,7 @@ export default {
     getBreweryAddress(brewery) {
       this.allBreweries.forEach((b) => {
         if (brewery.breweryId == b.breweryId) {
-          return this.address =
+          brewery.address=
             b.streetAddress + " " + b.city + ", " + b.state + " " + b.zip;
         }
       });
