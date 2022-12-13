@@ -11,7 +11,7 @@
         <img src="https://i.imgur.com/o3yJ5PP.png" />
       </div>
       <div class="card" id="currentlyInPassport" v-show="beer.inPassport">
-        <!-- <p id="addedText">Added to Passport</p> -->
+        <p id="addedText">Added to Passport</p>
         <img src="https://i.imgur.com/kZz7FLZ.png" />
       </div>
 
@@ -116,10 +116,10 @@ export default {
 <style scoped>
 .overlay {
   text-align: center;
-  width: 300px;
+  width: 250px;
   height: auto;
 
-  padding: 15px 0px;
+  /* padding: 15px 0px; */
   z-index: 10;
   margin: 0 auto;
   border-radius: 3px;
@@ -164,7 +164,7 @@ export default {
   height: 45px;
   border-radius: 100%;
   z-index: 10;
-  transform: translate(265px, 60px);
+  transform: translate(225px, 40px);
 
   -webkit-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
@@ -183,7 +183,7 @@ export default {
   height: 45px;
   border-radius: 100%;
   z-index: 10;
-  transform: translate(265px, 60px);
+  transform: translate(225px, 40px);
 
   -webkit-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
@@ -237,11 +237,11 @@ export default {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border-radius: 10px;
   border: none;
-  margin: 25px 100px;
+  margin: 15px 50px;
   background-color: transparent;
 
   animation: fadeinout 4s linear forwards;
@@ -264,8 +264,8 @@ export default {
 
 #beer-image img {
   filter: grayscale(75%);
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -295,7 +295,7 @@ export default {
 
 .details h1 {
   text-align: center;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .details h3 {
@@ -303,7 +303,7 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 1.25em;
+  font-size: 1em;
 }
 
 .description {
@@ -313,8 +313,8 @@ export default {
   align-items: flex-start;
   justify-content: center;
   overflow: hidden;
-  max-width: 300px;
-  max-height: 145px;
+  max-width: 200px;
+  max-height: 110px;
   text-overflow: ellipsis;
   margin: 10px 20px 0px;
   font-size: 0.75em;
@@ -349,8 +349,8 @@ export default {
 .back img {
   position: absolute;
   filter: grayscale(75%);
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   object-fit: cover;
   border-radius: 10px;
   opacity: 20%;

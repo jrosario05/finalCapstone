@@ -52,6 +52,8 @@ export default {
     display:flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    width: 70vw;
+    margin: 0 auto;
     
 }
 

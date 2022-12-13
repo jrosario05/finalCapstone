@@ -40,8 +40,8 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border-radius: 10px;
   background-color: black;
   border: none;
@@ -70,8 +70,8 @@ body {
 }
 
 #brewery-image img {
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   object-fit: cover;
   border-radius: 10px;
   opacity: 0.65;
