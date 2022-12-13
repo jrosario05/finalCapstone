@@ -1,9 +1,9 @@
 <template>
   <div>
-    <b>Start:</b>
+    <!-- <b>Start:</b>
      <input type="text" v-model="start"/>
     <b>End:</b>
-     <input type="text" v-model="end"/>
+     <input type="text" v-model="end"/> -->
            <div v-on:click="origin(), destionation()" class="button">CLICK HERE</div>
 
 
@@ -25,7 +25,8 @@ export default {
   data(){
     return{
     start: '',
-    end: ''
+    end: '',
+    waypts:[]
       }
     },
 
@@ -34,7 +35,6 @@ export default {
       if(barCrawl.length>0){
         this.start=this.barCrawl[0].address;
         this.end=this.barCrawl[1].address;
-        
       }
     }
   },
@@ -52,17 +52,19 @@ export default {
     },
       },
 
+    
+
     methods:{
     origin() {
       console.log("hit origin")
-      this.start=this.barCrawl[0].breweryName;
+      this.start=this.barCrawl[0].address;
 
       if (!this.start) return null;
       return { query: this.start };
     },
     destionation() {
       console.log('hit destination')
-    this.end=this.barCrawl[1].breweryName;
+    this.end=this.barCrawl[1].address;
 
       if (!this.end) return null;
       return { query: this.end };
