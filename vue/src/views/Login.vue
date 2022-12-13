@@ -1,51 +1,57 @@
 <template>
-<div class="loginContainer"> 
-  <div id="login" class="text-center">
-    <form class="form-signin" >
-      <div id="signOnHeader">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
-      </div>
-      <p>Sign in to view and update your passport</p>
-      <div
-        class="alert alert-danger"
-        role="alert"
-        v-if="invalidCredentials"
-      >Invalid username and password!</div>
-      <div
-        class="alert alert-success"
-        role="alert"
-        v-if="this.$route.query.registration"
-      >Thank you for registering, please sign in.</div>
-      <div id="inputBoxes">
-      <label id="usernameLabel" for="username" class="sr-only">Username</label>
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Username"
-        v-model="user.username"
-        required
-        autofocus
-      />
-      <label id="passwordLabel" for="password" class="sr-only">Password</label>
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        placeholder="Password"
-        v-model="user.password"
-        required
-      />
-      </div>
-      <div id=button-full-div>
-      <div id="sign-in-button-div">
-      <p  v-on:click="login()"  >Sign in</p>
-      </div>
-      </div>
-      <router-link id="register-button" :to="{ name: 'register' }">CREATE A PASSPORT ACCOUNT</router-link>
-    </form>
+  <div id="loginContainer">
+    <div id="login" class="text-center">
+      <form class="form-signin">
+        <div id="signOnHeader">
+          <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+        </div>
+        <p>Sign in to view and update your passport</p>
+        <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
+          Invalid username and password!
+        </div>
+        <div
+          class="alert alert-success"
+          role="alert"
+          v-if="this.$route.query.registration"
+        >
+          Thank you for registering, please sign in.
+        </div>
+        <div id="inputBoxes">
+          <label id="usernameLabel" for="username" class="sr-only"
+            >Username</label
+          >
+          <input
+            type="text"
+            id="username"
+            class="form-control"
+            placeholder="Username"
+            v-model="user.username"
+            required
+            autofocus
+          />
+          <label id="passwordLabel" for="password" class="sr-only"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            placeholder="Password"
+            v-model="user.password"
+            required
+          />
+        </div>
+        <div id="button-full-div">
+          <div id="sign-in-button-div">
+            <p v-on:click="login()">Sign in</p>
+          </div>
+        </div>
+        <router-link id="register-button" :to="{ name: 'register' }"
+          >CREATE A PASSPORT ACCOUNT</router-link
+        >
+      </form>
+    </div>
   </div>
-   </div>
 </template>
 
 <script>
@@ -58,16 +64,16 @@ export default {
     return {
       user: {
         username: "",
-        password: ""
+        password: "",
       },
-      invalidCredentials: false
+      invalidCredentials: false,
     };
   },
   methods: {
     login() {
       authService
         .login(this.user)
-        .then(response => {
+        .then((response) => {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
@@ -75,7 +81,7 @@ export default {
             this.$router.push("/passport");
           }
         })
-        .catch(error => {
+        .catch((error) => {
           const response = error.response;
 
           if (response.status === 401) {
@@ -84,29 +90,31 @@ export default {
         });
     },
 
-    setUserInfo(){
-      let id=this.$store.state.user.id;
-      authService.get(id).then(response=>{
-        this.$store.commit('SET_USER_INFO', response.data)
-      })
-    }
-  }
+    setUserInfo() {
+      let id = this.$store.state.user.id;
+      authService.get(id).then((response) => {
+        this.$store.commit("SET_USER_INFO", response.data);
+      });
+    },
+  },
 };
 </script>
 
 <style scoped>
-.loginContainer {
-   background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg") no-repeat center center fixed; 
+#loginContainer {
+  background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg")
+    no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height:100%;
+  height: 100vh;
   background-color: black;
 }
-.form-signin{
-  margin-top:25px;
-  height:400px;
+
+.form-signin {
+  margin-top: 25px;
+  height: 400px;
   width: 400px;
   border-radius: 5px;
   border-width: 5px;
@@ -114,39 +122,35 @@ export default {
   border: black;
   background-color: white;
   display: grid;
-  grid-template-rows: .5fr .3fr 2fr 1fr 1fr;
+  grid-template-rows: 0.5fr 0.3fr 2fr 1fr 1fr;
   grid-template-areas: "header" "mini-text" "forms" "button" "register";
 }
-#inputBoxes{
+#inputBoxes {
   grid-area: forms;
   width: 100%;
   margin: 10px;
   display: grid;
-  grid-template-rows: .5fr 1fr .5fr 1fr;
+  grid-template-rows: 0.5fr 1fr 0.5fr 1fr;
   grid-template-areas: "userLabel" "userInput" "passwordLabel" "passwordInput";
-;
 }
-input{
-  width:90%
+input {
+  width: 90%;
 }
 
-#usernameLabel{
+#usernameLabel {
   grid-area: userLabel;
 }
-#username{
+#username {
   grid-area: userInput;
 }
-#passwordLabel{
+#passwordLabel {
   grid-area: passwordLabel;
 }
-#password{
+#password {
   grid-area: passwordInput;
 }
 
-
-
-
-#signOnHeader{
+#signOnHeader {
   grid-area: header;
   color: black;
   font-weight: bold;
@@ -154,21 +158,21 @@ input{
   display: flex;
   justify-content: center;
 }
-p{
+p {
   grid-area: mini-text;
 }
-#login{
+#login {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#register-button{
+#register-button {
   grid-area: register;
   color: black;
   font-size: x-large;
 }
-#button-full-div{
+#button-full-div {
   grid-area: button;
   display: flex;
   width: 100%;
@@ -176,7 +180,7 @@ p{
   align-items: center;
   justify-content: center;
 }
-#sign-in-button-div{
+#sign-in-button-div {
   grid-area: button;
   border-radius: 4px;
   border: black;
@@ -189,28 +193,20 @@ p{
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 
-#sign-in-button-div:hover{
+#sign-in-button-div:hover {
   background-color: rgb(190, 190, 190);
 }
 
-
-
-#sign-in-button-div p{
+#sign-in-button-div p {
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-
-
 }
 
-#register-button:hover{
+#register-button:hover {
   color: blue;
 }
-
-
-
 </style>

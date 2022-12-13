@@ -5,13 +5,26 @@ import store from './store/index'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.css'
 
+
+
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
+import * as VueGoogleMaps from 'vue2-google-maps'
+ 
+
+
 // Make BootstrapVue available throughout your project
-Vue.use(BootstrapVue)
+Vue.use(BootstrapVue),
 // Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
+Vue.use(IconsPlugin),
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyAfpmZoqcNF2wvl3Bv1NhiLDa0kRBTnuj4',
+    libraries: 'places'}
+});
+
+
 
 
 Vue.config.productionTip = false
@@ -23,3 +36,8 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+
+
+
+

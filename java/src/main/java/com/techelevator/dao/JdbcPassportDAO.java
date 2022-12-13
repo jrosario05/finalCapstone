@@ -79,7 +79,7 @@ public class JdbcPassportDAO implements PassportDao{
     @Override
     public List<PassportBeerInfo> getPassportBeerInfo(int userId, int breweryId) {
         List<PassportBeerInfo> beerInfo = new ArrayList<>();
-        String sql = "Select  passport_beer.beer_id, beer_name, abv, drank, style_name, brewery_id  from user_info " +
+        String sql = "Select  passport_beer.beer_id, beer_name, abv, drank, style_name, brewery_id, beer_rating  from user_info " +
                 "                join passport_beer on user_info.passport_id = passport_beer.passport_id " +
                 "join beer on passport_beer.beer_id = beer.beer_id " +
                 "join beer_style on  beer.style_id = beer_style.style_id " +
@@ -192,6 +192,23 @@ public class JdbcPassportDAO implements PassportDao{
          jdbcTemplate.update(sql, rating, beerId, userId );
 
     }
+
+
+//    @Override
+//    public UserInfo getUserAddess(int userId) {
+//        new UserInfo address = new UserInfo();
+//        String sql = "Select  address, city, state, zipCode from user_info where user_id=?"
+//
+//        SqlRowSet addressInfo = jdbcTemplate.queryForRowSet(sql,userId);
+//        if (addressInfo.next()){
+//            PassportBeerInfo beer =mapRowPassportBeerInfo(beerResults);
+//            beerInfo.add(beer);
+//        }
+//
+//
+//
+//        return beerInfo;
+//    }
 
 
 

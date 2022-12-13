@@ -69,14 +69,19 @@
           :key="brewery.id"
           :isRendered="checkBrewery(brewery)"
         >
-          <input
+          <!-- <input
             :checked="toggleCheckBox(brewery)"
             type="checkbox"
             id="addToBeerCrawl"
             name="beerCrawlToggle"
             v-on:change="addToBeerCrawl(brewery)"
-          />
-          <div id="breweryCard" v-on:click="cardOpen(brewery)">
+          /> -->
+          <div
+            id="breweryCard"
+            draggable
+            @dragstart="onDrag($event, brewery)"
+            v-on:click="cardOpen(brewery)"
+          >
             <div id="breweryName">{{ brewery.breweryName }}</div>
             <div class="open">
               <img
@@ -89,6 +94,7 @@
               />
             </div>
           </div>
+
           <div
             v-show="brewery.cardOpen"
             v-for="beer in brewery.passportBeers"
@@ -133,12 +139,32 @@
             v-for="brewery in beerCrawlBreweries"
             :key="brewery.id"
           >
-            <div class="brewery-name">
-              {{ beerCrawlBreweries.indexOf(brewery) + 1 }})
-              {{ brewery.breweryName }}
+            <div class="details">
+              <div class="brewery-name">
+                {{ beerCrawlBreweries.indexOf(brewery) + 1 }})
+                {{ brewery.breweryName }}
+              </div>
+              <div
+                :rendered="getBreweryAddress(brewery)"
+                class="brewery-address"
+              >
+                {{ brewery.address }}
+              </div>
             </div>
-            <div :rendered="getBreweryAddress(brewery)" class="brewery-address">
-              {{ address }}
+            <div class="reorder">
+              <img
+                id="reorderUp"
+                src="https://i.imgur.com/YjdeFuu.png"
+                @click="reorderUp(brewery)"
+              />
+              <img
+                id="reorderDown"
+                src="https://i.imgur.com/3OjzTy2.png"
+                @click="reorderDown(brewery)"
+              />
+            </div>
+            <div class="remove-crawl" @click="removeFromCrawl(brewery)">
+              <img src="https://i.imgur.com/vdqV5fW.png" />
             </div>
           </div>
         </div>
@@ -282,14 +308,72 @@ export default {
 </script>
 <style scoped>
 /* Sets size of the passport */
-.main-passport {
+/* .main-passport {
   margin: 0 auto;
   width: 60vw;
+} */
+
+/* .passport {
+  margin: 0 auto;
+  width: 100vw;
+}
+ */
+
+/* STYLING FOR THE LEGEND */
+.legend {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: center;
+  border-radius: 5px;
+  margin: 0px 20px 0px 20px;
+  height: 25px;
+  background-color: rgba(15, 15, 15, 0.801);
+  color: white;
+  font-size: 0.65em;
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
 
-.passport {
-  margin: 0 auto;
-  /* width: 100vw; */
+.legend p {
+  margin: 0px 30px;
+}
+
+.legend p {
+  /* text-align: center; */
+  font-size: 1em;
+  margin-top: 8px;
+  margin-bottom: 3px;
+}
+
+.legend-name {
+  margin-left: 30px;
+  width: 20%;
+  display: inline-block;
+}
+
+.legend-style {
+  width: 20%;
+  display: inline-block;
+}
+.legend-abv {
+  width: 20%;
+  display: inline-block;
+}
+.legend-review {
+  text-align: center;
+  width: 12%;
+}
+.remove-drank {
+  text-align: center;
+  width: 9%;
+}
+
+.legend-remove {
+  width: 9%;
+  margin-right: 30px;
+  text-align: center;
 }
 
 /* Styles individual brewery tiles */
@@ -298,14 +382,10 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
   height: 50px;
-
   border-radius: 5px;
   margin: 10px;
-
   background-color: white;
-
   -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
@@ -329,7 +409,7 @@ export default {
 #beerCard {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   border-radius: 5px;
   margin: 0px 20px 10px 20px;
@@ -361,7 +441,7 @@ export default {
   font-size: 1em;
 }
 .review {
-  width: 12%;
+  /* width: 12%; */
 }
 .drank {
   width: 9%;
@@ -373,7 +453,7 @@ export default {
   height: auto;
 }
 .remove {
-  width: 9%;
+  /* width: 9%; */
   margin-right: 30px;
 }
 .remove img {
@@ -389,13 +469,29 @@ export default {
   background-color: red;
 }
 
+.main {
+  width: 80vw;
+  background-color: rgba(228, 228, 228, 0.164);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-areas: "left-panel right-panel";
+}
+
+.leftPanel {
+  width: 100%;
+  grid-area: left-panel;
+}
+
+.rightPanel {
+  margin-right: 15px;
+  grid-area: right-panel;
+}
+
 /* STYLING FOR THE BAR CRAWL LIST */
 
 .barCrawlList {
-  /* width: 58vw; */
-
   margin: 36px 10px 10px 20px;
-
   height: auto;
   margin: 0 auto;
 
@@ -417,36 +513,42 @@ export default {
 }
 
 .brewery-info {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 0.7fr 0.15fr 0.15r;
+  grid-template-areas: "details reorder remove";
   background-color: white;
-  margin: 3px 0px;
+  margin: 8px 0px;
+  border-radius: 5px;
 
   -webkit-box-shadow: 0 8px 6px -6px black;
   -moz-box-shadow: 0 8px 6px -6px black;
   box-shadow: 0 8px 6px -6px black;
 }
 
+.details {
+  grid-area: details;
+}
+
 .brewery-name {
-  float: left;
-  margin-left: 50px;
+  /* float: left; */
+  margin-left: 25px;
   font-weight: bold;
+  font-size: 1.15em;
 }
 
 .brewery-address {
-  margin-right: 50px;
+  margin-left: 50px;
   font-style: italic;
+  font-size: 1em;
 }
 
 /* positions checkbox */
-#addToBeerCrawl {
+/* #addToBeerCrawl {
   position: absolute;
   width: 20px;
   height: 20px;
   transform: translate(25px, 15px);
-}
+} */
 
 #print-button {
   background-color: rgb(44, 72, 235);
