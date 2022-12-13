@@ -19,10 +19,22 @@ export default {
     DirectionsRenderer
   },
 
-  data: () => ({
-    start: "endeavor company",
-    end: "edison brewing company"
-  }),
+  data(){
+    return{
+    start: this.barCrawl[0].address,
+    end: this.barCrawl[0].address
+      }
+    },
+
+  watch:{
+    array(barCrawl){
+      if(barCrawl.length<=2){
+        this.start=barCrawl[0].address;
+        this.end=barCrawl[0].address;
+      }
+    }
+  },
+  
 
   computed: {
     origin() {
@@ -32,7 +44,8 @@ export default {
     destionation() {
       if (!this.end) return null;
       return { query: this.end };
-    }
+    },
+
   }
 };
 </script>
