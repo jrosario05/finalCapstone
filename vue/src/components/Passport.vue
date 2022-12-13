@@ -154,19 +154,28 @@
             v-for="brewery in beerCrawlBreweries"
             :key="brewery.id"
           >
-            <div class="brewery-name">
-              {{ beerCrawlBreweries.indexOf(brewery) + 1 }})
-              {{ brewery.breweryName }}
-            </div>
-            <div :rendered="getBreweryAddress(brewery)" class="brewery-address">
-              {{ brewery.address }}
+            <div class="details">
+              <div class="brewery-name">
+                {{ beerCrawlBreweries.indexOf(brewery) + 1 }})
+                {{ brewery.breweryName }}
+              </div>
+              <div
+                :rendered="getBreweryAddress(brewery)"
+                class="brewery-address"
+              >
+                {{ brewery.address }}
+              </div>
             </div>
             <div class="reorder">
               <img
-                src="https://i.imgur.com/3OjzTy2.png"
+                id="reorderUp"
+                src="https://i.imgur.com/YjdeFuu.png"
+                @click="reorderUp(brewery)"
               />
               <img
-                src="https://i.imgur.com/YjdeFuu.png"
+                id="reorderDown"
+                src="https://i.imgur.com/3OjzTy2.png"
+                @click="reorderDown(brewery)"
               />
             </div>
             <div class="remove-crawl" @click="removeFromCrawl(brewery)">
@@ -216,6 +225,43 @@ export default {
   },
 
   methods: {
+    reorderUp(brewery) {
+      let index = this.beerCrawlBreweries.indexOf(brewery);
+      if (index == 0) {
+        let temp = this.beerCrawlBreweries[index];
+        this.beerCrawlBreweries[0] = this.beerCrawlBreweries[this.beerCrawlBreweries.length - 1];
+        this.beerCrawlBreweries[this.beerCrawlBreweries.length-1] = temp;
+        this.$forceUpdate();
+      } else {
+        if (index != 0) {
+          let temp = this.beerCrawlBreweries[index];
+          this.beerCrawlBreweries[index] = this.beerCrawlBreweries[index - 1];
+
+          this.beerCrawlBreweries[index - 1] = temp;
+          this.$forceUpdate();
+        }
+      }
+    },
+
+    reorderDown(brewery) {
+      let index = this.beerCrawlBreweries.indexOf(brewery);
+      console.log(index);
+      if (index == this.beerCrawlBreweries.length - 1) {
+        let temp = this.beerCrawlBreweries[index];
+        this.beerCrawlBreweries[this.beerCrawlBreweries.length - 1] =
+          this.beerCrawlBreweries[0];
+        this.beerCrawlBreweries[0] = temp;
+        this.$forceUpdate();
+      } else {
+        if (index != this.beerCrawlBreweries.length) {
+          let temp = this.beerCrawlBreweries[index];
+          this.beerCrawlBreweries[index] = this.beerCrawlBreweries[index + 1];
+          this.beerCrawlBreweries[index + 1] = temp;
+          this.$forceUpdate();
+        }
+      }
+    },
+
     removeFromCrawl(brewery) {
       let index = this.beerCrawlBreweries.indexOf(brewery);
       this.beerCrawlBreweries.splice(index, 1);
@@ -351,61 +397,18 @@ export default {
 }
 
 /* Sets size of the passport */
-.main-passport {
+/* .main-passport {
   margin: 0 auto;
   width: 60vw;
-}
+} */
 
-.passport {
+/* .passport {
   margin: 0 auto;
-  /* width: 100vw; */
+  width: 100vw;
 }
+ */
 
-/* Styles individual brewery tiles */
-#breweryCard {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
-  border-radius: 5px;
-  margin: 10px;
-  background-color: white;
-  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
-}
-
-#breweryName {
-  margin-left: 50px;
-  font-weight: bold;
-}
-
-.open {
-  margin-right: 50px;
-}
-
-.open img {
-  /* display: inline-block; */
-  width: 25px;
-  height: auto;
-}
-
-#beerCard {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 5px;
-  margin: 0px 20px 10px 20px;
-  height: 50px;
-  background-color: rgba(56, 56, 56, 0.801);
-  color: white;
-  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
-}
-
+/* STYLING FOR THE LEGEND */
 .legend {
   display: flex;
   flex-direction: row;
@@ -462,6 +465,51 @@ export default {
   text-align: center;
 }
 
+/* Styles individual brewery tiles */
+#breweryCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  border-radius: 5px;
+  margin: 10px;
+  background-color: white;
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+}
+
+#breweryName {
+  margin-left: 50px;
+  font-weight: bold;
+}
+
+.open {
+  margin-right: 50px;
+}
+
+.open img {
+  /* display: inline-block; */
+  width: 25px;
+  height: auto;
+}
+
+#beerCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+  margin: 0px 20px 10px 20px;
+  height: 50px;
+  background-color: rgba(56, 56, 56, 0.801);
+  color: white;
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+}
+
 /*  Beer tile styling and positioning */
 
 .beer-name {
@@ -510,13 +558,29 @@ export default {
   background-color: red;
 }
 
+.main {
+  width: 80vw;
+  background-color: rgba(228, 228, 228, 0.164);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-areas: "left-panel right-panel";
+}
+
+.leftPanel {
+  width: 100%;
+  grid-area: left-panel;
+}
+
+.rightPanel {
+  margin-right: 15px;
+  grid-area: right-panel;
+}
+
 /* STYLING FOR THE BAR CRAWL LIST */
 
 .barCrawlList {
-  /* width: 58vw; */
-
   margin: 36px 10px 10px 20px;
-
   height: auto;
   margin: 0 auto;
 
@@ -538,10 +602,9 @@ export default {
 }
 
 .brewery-info {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center; */
+  display: grid;
+  grid-template-rows: 0.7fr 0.15fr 0.15r;
+  grid-template-areas: "details reorder remove";
   background-color: white;
   margin: 8px 0px;
   border-radius: 5px;
@@ -549,6 +612,10 @@ export default {
   -webkit-box-shadow: 0 8px 6px -6px black;
   -moz-box-shadow: 0 8px 6px -6px black;
   box-shadow: 0 8px 6px -6px black;
+}
+
+.details {
+  grid-area: details;
 }
 
 .brewery-name {
@@ -565,12 +632,12 @@ export default {
 }
 
 /* positions checkbox */
-#addToBeerCrawl {
+/* #addToBeerCrawl {
   position: absolute;
   width: 20px;
   height: 20px;
   transform: translate(25px, 15px);
-}
+} */
 
 #print-button {
   background-color: rgb(44, 72, 235);
@@ -598,28 +665,24 @@ export default {
   align-items: center;
 }
 
-.main {
-  width: 80vw;
-  background-color: rgba(228, 228, 228, 0.164);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  grid-template-areas: "left-panel right-panel";
-}
-
-.leftPanel {
-  width: 100%;
-  grid-area: left-panel;
-}
-
-.rightPanel {
-  margin-right: 15px;
-  grid-area: right-panel;
+.remove {
+  grid-area: remove;
 }
 
 .remove-crawl img {
   width: 30px;
-  float: right;
-  transform: translate(-10px, -40px);
+  transform: translate(10px, 10px);
+}
+
+.reorder {
+  grid-area: reorder;
+  display: flex;
+  flex-direction: column;
+  transform: translate(10px, 5px);
+}
+
+#reorderUp,
+#reorderDown {
+  width: 20px;
 }
 </style>
