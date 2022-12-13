@@ -1,9 +1,6 @@
 <template>
   <div>
-    <!-- <b>Start:</b>
-     <input type="text" v-model="start"/>
-    <b>End:</b>
-     <input type="text" v-model="end"/> -->
+
            <div v-on:click="origin(), destionation()" class="button">CLICK HERE</div>
 
 

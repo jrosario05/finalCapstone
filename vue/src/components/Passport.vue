@@ -4,64 +4,11 @@
       <user-profile :passport="fullObject" />
     </div>
 
-    <div
-      class="main-passport"
-      v-for="brewery in fullObject"
-      :key="brewery.id"
-      :isRendered="checkBrewery(brewery)"
-      v-show="beerCrawlBreweries.length == 0"
-    >
-      <input
-        :checked="toggleCheckBox(brewery)"
-        type="checkbox"
-        id="addToBeerCrawl"
-        name="beerCrawlToggle"
-        v-on:change="addToBeerCrawl(brewery)"
-      />
-      <div id="breweryCard" v-on:click="cardOpen(brewery)">
-        <div id="breweryName">{{ brewery.breweryName }}</div>
-        <div class="open">
-          <img
-            v-show="brewery.cardOpen"
-            src="https://i.imgur.com/3OjzTy2.png"
-          />
-          <img
-            v-show="!brewery.cardOpen"
-            src="https://i.imgur.com/YjdeFuu.png"
-          />
-        </div>
-      </div>
-      <div
-        v-show="brewery.cardOpen"
-        v-for="beer in brewery.passportBeers"
-        :key="beer.id"
-        id="beerCard"
-      >
-        <div class="beer-name">
-          {{ beer.beerName }}
-        </div>
-        <div class="beer-style">
-          {{ beer.styleName }}
-        </div>
-        <div class="beer-abv">{{ beer.abv }}% ABV</div>
-        <div class="review">
-          <review :beer="beer" />
-        </div>
-        <div class="drank" v-on:click="toggleDrank(beer)">
-          <img v-show="beer.drank" src="https://i.imgur.com/6XCzZEQ.png" />
-          <img v-show="!beer.drank" src="https://i.imgur.com/YnuPcOd.png" />
-        </div>
-        <div
-          id="remove"
-          class="remove"
-          v-on:click="removeFromPassport(beer.beerId, brewery)"
-        >
-          <img src="https://i.imgur.com/vdqV5fW.png" />
-        </div>
-      </div>
+    <div>
+      <directions/>
     </div>
 
-    <div class="main" v-show="beerCrawlBreweries.length > 0">
+ <div class="main">
       <div class="leftPanel">
         <div
           class="passport"
@@ -94,7 +41,6 @@
               />
             </div>
           </div>
-
           <div
             v-show="brewery.cardOpen"
             v-for="beer in brewery.passportBeers"
@@ -125,15 +71,18 @@
           </div>
         </div>
       </div>
-
       <!-- BAR CRAWL LIST STARTS HERE  -->
-      <div class="rightPanel">
-        <div class="barCrawlList" v-show="beerCrawlBreweries.length > 0">
+      <div
+        class="rightPanel"
+        @drop="onDrop($event)"
+        @dragover.prevent
+        @dragenter.prevent
+      >
+        <div class="barCrawlList">
           <h1>Beer Crawl Itinerary</h1>
           <div id="print-button" v-on:click="printItinerary">
             <p>Print</p>
           </div>
-
           <div
             class="brewery-info"
             v-for="brewery in beerCrawlBreweries"
@@ -179,11 +128,12 @@
 import PassportService from "../services/PassportService";
 import BreweryService from "../services/BreweryService.js";
 import AuthService from "../services/AuthService.js";
+import Directions from "../components/Directions.vue"
 
 import Review from "./Review.vue";
 import UserProfile from "./UserProfile.vue";
 export default {
-  components: { Review, UserProfile },
+  components: { Review, UserProfile, Directions },
   name: "my-passport",
   data() {
     return {
@@ -205,6 +155,68 @@ export default {
   },
 
   methods: {
+
+    reorderUp(brewery) {
+      let index = this.beerCrawlBreweries.indexOf(brewery);
+      if (index == 0) {
+        let temp = this.beerCrawlBreweries[index];
+        this.beerCrawlBreweries[0] = this.beerCrawlBreweries[this.beerCrawlBreweries.length - 1];
+        this.beerCrawlBreweries[this.beerCrawlBreweries.length-1] = temp;
+        this.$forceUpdate();
+      } else {
+        if (index != 0) {
+          let temp = this.beerCrawlBreweries[index];
+          this.beerCrawlBreweries[index] = this.beerCrawlBreweries[index - 1];
+          this.beerCrawlBreweries[index - 1] = temp;
+          this.$forceUpdate();
+        }
+      }
+    },
+    reorderDown(brewery) {
+      let index = this.beerCrawlBreweries.indexOf(brewery);
+      console.log(index);
+      if (index == this.beerCrawlBreweries.length - 1) {
+        let temp = this.beerCrawlBreweries[index];
+        this.beerCrawlBreweries[this.beerCrawlBreweries.length - 1] =
+          this.beerCrawlBreweries[0];
+        this.beerCrawlBreweries[0] = temp;
+        this.$forceUpdate();
+      } else {
+        if (index != this.beerCrawlBreweries.length) {
+          let temp = this.beerCrawlBreweries[index];
+          this.beerCrawlBreweries[index] = this.beerCrawlBreweries[index + 1];
+          this.beerCrawlBreweries[index + 1] = temp;
+          this.$forceUpdate();
+        }
+      }
+    },
+    removeFromCrawl(brewery) {
+      let index = this.beerCrawlBreweries.indexOf(brewery);
+      this.beerCrawlBreweries.splice(index, 1);
+    },
+    onDrag(evt, brewery) {
+      console.log(
+        "inside start drag " + brewery.breweryId + " " + brewery.breweryName
+      );
+      evt.dataTransfer.dropEffect = "move";
+      evt.dataTransfer.effectAllowed = "move";
+      evt.dataTransfer.setData("draggedBreweryId", brewery.breweryId);
+      evt.dataTransfer.setData("draggedBreweryName", brewery.breweryName);
+    },
+    onDrop(evt) {
+      console.log("on drop started");
+      const draggedBreweryId = evt.dataTransfer.getData("draggedBreweryId");
+      const draggedBreweryName = evt.dataTransfer.getData("draggedBreweryName");
+      console.log(draggedBreweryId + " " + draggedBreweryName);
+      const breweryToAdd = {
+        breweryId: draggedBreweryId,
+        breweryName: draggedBreweryName,
+      };
+      this.beerCrawlBreweries.push(breweryToAdd);
+    },
+
+
+
     printItinerary() {
       let contents = this.beerCrawlBreweries;
       let dialog = window.open("", "", "height=500, width=500");
@@ -307,18 +319,25 @@ export default {
 };
 </script>
 <style scoped>
+#welcome {
+  margin: 20px 0px;
+  color: white;
+  padding: 15px 0px;
+  text-align: center;
+  font-size: 3em;
+  background-color: rgba(99, 98, 98, 0.718);
+  text-shadow: 6px 6px 6px #272727;
+}
 /* Sets size of the passport */
 /* .main-passport {
   margin: 0 auto;
   width: 60vw;
 } */
-
 /* .passport {
   margin: 0 auto;
   width: 100vw;
 }
  */
-
 /* STYLING FOR THE LEGEND */
 .legend {
   display: flex;
@@ -335,24 +354,20 @@ export default {
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
-
 .legend p {
   margin: 0px 30px;
 }
-
 .legend p {
   /* text-align: center; */
   font-size: 1em;
   margin-top: 8px;
   margin-bottom: 3px;
 }
-
 .legend-name {
   margin-left: 30px;
   width: 20%;
   display: inline-block;
 }
-
 .legend-style {
   width: 20%;
   display: inline-block;
@@ -369,13 +384,11 @@ export default {
   text-align: center;
   width: 9%;
 }
-
 .legend-remove {
   width: 9%;
   margin-right: 30px;
   text-align: center;
 }
-
 /* Styles individual brewery tiles */
 #breweryCard {
   display: flex;
@@ -390,22 +403,18 @@ export default {
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
-
 #breweryName {
   margin-left: 50px;
   font-weight: bold;
 }
-
 .open {
   margin-right: 50px;
 }
-
 .open img {
   /* display: inline-block; */
   width: 25px;
   height: auto;
 }
-
 #beerCard {
   display: flex;
   flex-direction: row;
@@ -420,9 +429,7 @@ export default {
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
-
 /*  Beer tile styling and positioning */
-
 .beer-name {
   width: 20%;
   margin-left: 30px;
@@ -462,13 +469,11 @@ export default {
   margin: 0 auto;
   height: auto;
 }
-
 #button {
   width: 25px;
   height: 25px;
   background-color: red;
 }
-
 .main {
   width: 80vw;
   background-color: rgba(228, 228, 228, 0.164);
@@ -477,29 +482,23 @@ export default {
   grid-template-columns: 1.5fr 1fr;
   grid-template-areas: "left-panel right-panel";
 }
-
 .leftPanel {
   width: 100%;
   grid-area: left-panel;
 }
-
 .rightPanel {
   margin-right: 15px;
   grid-area: right-panel;
 }
-
 /* STYLING FOR THE BAR CRAWL LIST */
-
 .barCrawlList {
   margin: 36px 10px 10px 20px;
   height: auto;
   margin: 0 auto;
-
   -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0main, 0.75);
 }
-
 .barCrawlList h1 {
   font-size: 2em;
   background-color: rgba(99, 98, 98, 0.718);
@@ -511,7 +510,6 @@ export default {
   align-self: center;
   padding: 10px 0px;
 }
-
 .brewery-info {
   display: grid;
   grid-template-rows: 0.7fr 0.15fr 0.15r;
@@ -519,29 +517,24 @@ export default {
   background-color: white;
   margin: 8px 0px;
   border-radius: 5px;
-
   -webkit-box-shadow: 0 8px 6px -6px black;
   -moz-box-shadow: 0 8px 6px -6px black;
   box-shadow: 0 8px 6px -6px black;
 }
-
 .details {
   grid-area: details;
 }
-
 .brewery-name {
   /* float: left; */
   margin-left: 25px;
   font-weight: bold;
   font-size: 1.15em;
 }
-
 .brewery-address {
   margin-left: 50px;
   font-style: italic;
   font-size: 1em;
 }
-
 /* positions checkbox */
 /* #addToBeerCrawl {
   position: absolute;
@@ -549,21 +542,19 @@ export default {
   height: 20px;
   transform: translate(25px, 15px);
 } */
-
 #print-button {
   background-color: rgb(44, 72, 235);
   border-radius: 5px;
   width: 50px;
   height: 30px;
   position: absolute;
-  transform: translate(500px, -50px);
+  transform: translate(400px, -50px);
   -webkit-box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.75);
 }
-
 #print-button:hover {
-  background-color: #1d309e;
+  background-color: #1D309E;
   cursor: pointer;
 }
 #print-button p {
@@ -575,23 +566,21 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
-.main {
-  width: 75vw;
-  background-color: rgba(228, 228, 228, 0.164);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: "left-panel right-panel";
+.remove {
+  grid-area: remove;
 }
-
-.leftPanel {
-  width: 100%;
-  grid-area: left-panel;
+.remove-crawl img {
+  width: 30px;
+  transform: translate(10px, 10px);
 }
-
-.rightPanel {
-  margin-right: 15px;
-  grid-area: right-panel;
+.reorder {
+  grid-area: reorder;
+  display: flex;
+  flex-direction: column;
+  transform: translate(10px, 5px);
+}
+#reorderUp,
+#reorderDown {
+  width: 20px;
 }
 </style>
