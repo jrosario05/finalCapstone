@@ -18,7 +18,7 @@
       <h3>Number of Beers Tired: {{ allBeers }}</h3>
     </div>
     <div id="beer-passport">
-        <h3>Number of Beers in Passport: {{totalBeers}}</h3>
+        <!-- <h3>Number of Beers in Passport: {{totalBeers}}</h3> -->
     </div>
     </div>
     </div>
@@ -55,11 +55,8 @@ export default {
 
       totalBeers(){
           let numberOfBeersDrank = 0;
-      
-    
       this.passport.forEach((brewery) => {
-        this.$store.commit("PASSPORT_BEERS", brewery);
-      
+    
         brewery.passportBeers.forEach((beer) => {
             numberOfBeersDrank += 1;
           if (beer.drank) {
