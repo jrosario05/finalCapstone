@@ -1,7 +1,7 @@
 <template>
   <div>
 
-<div v-on:click.prevent="origin() + destionation(), addWayPoints()" class="button">CLICK HERE</div>
+<div v-on:click="origin() + destionation()+ addWayPoints()" class="button">CLICK HERE</div>
 
 
     <GmapMap :zoom="10" :center="{ lat: 39.9612, lng: -82.9988 }">

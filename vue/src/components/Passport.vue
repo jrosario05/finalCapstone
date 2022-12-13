@@ -1,14 +1,22 @@
 <template>
-  <div>
-    <div>
+  <div class="entirePassport">
+    <div class="placeholder">
       <user-profile :passport="fullObject" />
     </div>
 
-    <div>
-      <directions :barCrawl="beerCrawlBreweries"/>
+  
+    <div class="buttons" v-if="this.beerCrawlBreweries.length > 0">
+      <div id="print-button" v-on:click="printItinerary">
+        <p>Print Crawl</p>
+      </div>
+      <div id="view-map" v-on:click="toggleMap" v-if=!showMap>
+        <p>View Map</p>
+      </div>
+      <div id="view-list" v-on:click="toggleMap" v-if=showMap>
+        <p>View List</p>
+      </div>
     </div>
-
- <div class="main">
+    <div class="main">
       <div class="leftPanel">
         <div
           class="passport"
@@ -16,13 +24,6 @@
           :key="brewery.id"
           :isRendered="checkBrewery(brewery)"
         >
-          <!-- <input
-            :checked="toggleCheckBox(brewery)"
-            type="checkbox"
-            id="addToBeerCrawl"
-            name="beerCrawlToggle"
-            v-on:change="addToBeerCrawl(brewery)"
-          /> -->
           <div
             id="breweryCard"
             draggable
@@ -40,6 +41,14 @@
                 src="https://i.imgur.com/YjdeFuu.png"
               />
             </div>
+          </div>
+          <div class="legend" v-show="brewery.cardOpen">
+            <p class="legend-name">Name</p>
+            <p class="legend-style">Style</p>
+            <p class="legend-abv">ABV</p>
+            <p class="legend-review">RATING</p>
+            <p class="legend-drank">DRANK</p>
+            <p class="legend-remove">DELETE</p>
           </div>
           <div
             v-show="brewery.cardOpen"
@@ -72,53 +81,54 @@
         </div>
       </div>
       <!-- BAR CRAWL LIST STARTS HERE  -->
+
       <div
         class="rightPanel"
         @drop="onDrop($event)"
         @dragover.prevent
         @dragenter.prevent
       >
-        <div class="barCrawlList">
+        <div class="barCrawlList" v-if="!showMap">
           <h1>Beer Crawl Itinerary</h1>
-          <div id="print-button" v-on:click="printItinerary">
-            <p>Print</p>
-          </div>
-          <div
-            class="brewery-info"
-            v-for="brewery in beerCrawlBreweries"
-            :key="brewery.id"
-          >
-            <div class="details">
-              <div class="brewery-name">
-                {{ beerCrawlBreweries.indexOf(brewery) + 1 }})
-                {{ brewery.breweryName }}
+
+          <div v-for="brewery in beerCrawlBreweries" :key="brewery.id">
+            <div class="brewery-info">
+              <div class="reorder">
+                <img
+                  id="reorderUp"
+                  src="https://i.imgur.com/YjdeFuu.png"
+                  @click="reorderUp(brewery)"
+                />
+                <img
+                  id="reorderDown"
+                  src="https://i.imgur.com/3OjzTy2.png"
+                  @click="reorderDown(brewery)"
+                />
               </div>
-              <div
-                :rendered="getBreweryAddress(brewery)"
-                class="brewery-address"
-              >
-                {{ brewery.address }}
+              <div class="details">
+                <div class="brewery-name">
+                  {{ beerCrawlBreweries.indexOf(brewery) + 1 }})
+                  {{ brewery.breweryName }}
+                </div>
+                <div
+                  :rendered="getBreweryAddress(brewery)"
+                  class="brewery-address"
+                >
+                  {{ brewery.address }}
+                </div>
               </div>
-            </div>
-            <div class="reorder">
-              <img
-                id="reorderUp"
-                src="https://i.imgur.com/YjdeFuu.png"
-                @click="reorderUp(brewery)"
-              />
-              <img
-                id="reorderDown"
-                src="https://i.imgur.com/3OjzTy2.png"
-                @click="reorderDown(brewery)"
-              />
             </div>
             <div class="remove-crawl" @click="removeFromCrawl(brewery)">
               <img src="https://i.imgur.com/vdqV5fW.png" />
             </div>
           </div>
         </div>
+        <div id="directions" v-if="showMap">
+          <directions :barCrawl="beerCrawlBreweries" />
+        </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -128,7 +138,7 @@
 import PassportService from "../services/PassportService";
 import BreweryService from "../services/BreweryService.js";
 import AuthService from "../services/AuthService.js";
-import Directions from "../components/Directions.vue"
+import Directions from "../components/Directions.vue";
 
 import Review from "./Review.vue";
 import UserProfile from "./UserProfile.vue";
@@ -144,6 +154,7 @@ export default {
       beerCrawlBreweries: [],
       address: "",
       breweryToOpen: "",
+      showMap: false,
     };
   },
 
@@ -155,13 +166,18 @@ export default {
   },
 
   methods: {
+    toggleMap() {
+      console.log("toggle Damnit!!");
+      this.showMap = !this.showMap;
+    },
 
     reorderUp(brewery) {
       let index = this.beerCrawlBreweries.indexOf(brewery);
       if (index == 0) {
         let temp = this.beerCrawlBreweries[index];
-        this.beerCrawlBreweries[0] = this.beerCrawlBreweries[this.beerCrawlBreweries.length - 1];
-        this.beerCrawlBreweries[this.beerCrawlBreweries.length-1] = temp;
+        this.beerCrawlBreweries[0] =
+          this.beerCrawlBreweries[this.beerCrawlBreweries.length - 1];
+        this.beerCrawlBreweries[this.beerCrawlBreweries.length - 1] = temp;
         this.$forceUpdate();
       } else {
         if (index != 0) {
@@ -214,8 +230,6 @@ export default {
       };
       this.beerCrawlBreweries.push(breweryToAdd);
     },
-
-
 
     printItinerary() {
       let contents = this.beerCrawlBreweries;
@@ -318,6 +332,17 @@ export default {
 };
 </script>
 <style scoped>
+.entirePassport {
+  background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg")
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  background-color: black;
+}
+
 #welcome {
   margin: 20px 0px;
   color: white;
@@ -446,9 +471,7 @@ export default {
   font-style: italic;
   font-size: 1em;
 }
-.review {
-  /* width: 12%; */
-}
+
 .drank {
   width: 9%;
 }
@@ -489,6 +512,12 @@ export default {
   margin-right: 15px;
   grid-area: right-panel;
 }
+
+
+
+
+
+
 /* STYLING FOR THE BAR CRAWL LIST */
 .barCrawlList {
   margin: 36px 10px 10px 20px;
@@ -509,12 +538,15 @@ export default {
   align-self: center;
   padding: 10px 0px;
 }
+
 .brewery-info {
-  display: grid;
-  grid-template-rows: 0.7fr 0.15fr 0.15r;
-  grid-template-areas: "details reorder remove";
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
   background-color: white;
-  margin: 8px 0px;
+  margin: 0px 8px 10px;
   border-radius: 5px;
   -webkit-box-shadow: 0 8px 6px -6px black;
   -moz-box-shadow: 0 8px 6px -6px black;
@@ -522,64 +554,83 @@ export default {
 }
 .details {
   grid-area: details;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .brewery-name {
-  /* float: left; */
-  margin-left: 25px;
   font-weight: bold;
   font-size: 1.15em;
 }
+
 .brewery-address {
-  margin-left: 50px;
+  margin-left: 25px;
   font-style: italic;
   font-size: 1em;
 }
-/* positions checkbox */
-/* #addToBeerCrawl {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  transform: translate(25px, 15px);
-} */
-#print-button {
+
+.buttons {
+  margin-top: 25px;
+  margin-bottom: -15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#print-button,
+#view-map, #view-list {
   background-color: rgb(44, 72, 235);
   border-radius: 5px;
-  width: 50px;
-  height: 30px;
-  position: absolute;
-  transform: translate(400px, -50px);
+  width: 150px;
+  height: 45px;
+  margin: 25px;
+
   -webkit-box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.75);
 }
-#print-button:hover {
-  background-color: #1D309E;
+#print-button:hover,
+#view-map:hover, #view-list:hover {
+  background-color: #1d309e;
   cursor: pointer;
 }
-#print-button p {
+
+
+#print-button p,
+#view-map p, #view-list p {
   color: white;
-  text-align: center;
-  font-size: 1em;
+  font-size: 1.25em;
   display: flex;
+  margin-top: 5px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.remove {
-  grid-area: remove;
-}
+
 .remove-crawl img {
+    position: absolute;
+
   width: 30px;
-  transform: translate(10px, 10px);
+  transform: translate(425px, -50px);
 }
 .reorder {
   grid-area: reorder;
   display: flex;
   flex-direction: column;
-  transform: translate(10px, 5px);
+  margin: 0px 15px;
 }
 #reorderUp,
 #reorderDown {
   width: 20px;
 }
+
+/* STYLING FOR THE MAP */
+#directions {
+  width: 125%;
+  height: 125%;
+
+  /* margin: 0px auto; */
+}
+
+
 </style>
