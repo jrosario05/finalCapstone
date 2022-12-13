@@ -116,7 +116,7 @@ export default {
 <style scoped>
 .overlay {
   text-align: center;
-  width: 250px;
+  width: 251px;
   height: auto;
 
   /* padding: 15px 0px; */
@@ -126,7 +126,7 @@ export default {
 
   background-color: rgba(93, 216, 104, 0.85);
   color: white;
-  transform: translate(100px, 200px);
+  transform: translate(49.5px, 155px);
   position: absolute;
 }
 
@@ -364,6 +364,8 @@ export default {
 .fade-leave-active {
   animation: fade-out 0.5s;
 }
+
+
 @keyframes fade-out {
   0% {
     opacity: 1;
