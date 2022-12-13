@@ -4,6 +4,7 @@
       <user-profile :passport="fullObject" />
     </div>
 
+  
     <div class="buttons" v-if="this.beerCrawlBreweries.length > 0">
       <div id="print-button" v-on:click="printItinerary">
         <p>Print Crawl</p>
@@ -127,6 +128,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -261,8 +263,7 @@ export default {
     getBreweryAddress(brewery) {
       this.allBreweries.forEach((b) => {
         if (brewery.breweryId == b.breweryId) {
-          brewery.address =
-            b.streetAddress + " " + b.city + ", " + b.state + " " + b.zip;
+            brewery.address=(b.streetAddress + " " + b.city + ", " + b.state + " " + b.zip);
         }
       });
     },
@@ -541,7 +542,7 @@ export default {
 .brewery-info {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 
   background-color: white;
@@ -555,7 +556,7 @@ export default {
   grid-area: details;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .brewery-name {
   font-weight: bold;
