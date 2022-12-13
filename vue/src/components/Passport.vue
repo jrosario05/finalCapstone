@@ -4,7 +4,7 @@
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
     <div>
-      <directions />
+      <directions :barCrawl="beerCrawlBreweries" />
     </div>
     <!-- <div 
           class="main-passport"
