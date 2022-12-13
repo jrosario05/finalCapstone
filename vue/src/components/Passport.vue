@@ -40,13 +40,23 @@
                 src="https://i.imgur.com/YjdeFuu.png"
               />
             </div>
+
           </div>
+           <div class=legend v-show="brewery.cardOpen">
+            <p class="legend-name">Name</p>
+            <p class="legend-style">Style</p>
+            <p class="legend-abv">ABV</p>
+            <p class="legend-review">RATING</p>
+            <p class="legend-drank">DRANK</p>
+            <p class="legend-remove">DELETE</p>
+             </div>
           <div
             v-show="brewery.cardOpen"
             v-for="beer in brewery.passportBeers"
             :key="beer.id"
             id="beerCard"
           >
+          
             <div class="beer-name">
               {{ beer.beerName }}
             </div>
