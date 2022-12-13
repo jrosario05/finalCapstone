@@ -24,6 +24,9 @@ getBeerFilter(userId){
 
 updateRating(userId, beerId, rating){
     return axios.put(`rating/${userId}/${beerId}/${rating}`)
+},
+getPassportUserInfo(userId){
+    return axios.get(`userinfo/${userId}`)
 }
 
 

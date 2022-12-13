@@ -3,8 +3,10 @@
     <h1 id="welcome" v-show="$store.state.token != ''">
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
-
-        <div 
+      <div>
+        <directions/>
+        </div>
+        <!-- <div 
           class="main-passport"
           v-for="brewery in fullObject"
           :key="brewery.id"
@@ -25,12 +27,20 @@
                 v-show="brewery.cardOpen"
                 src="https://i.imgur.com/3OjzTy2.png"
               />
-              <img
+                            <img
                 v-show="!brewery.cardOpen"
                 src="https://i.imgur.com/YjdeFuu.png"
               />
             </div>
           </div>
+            <div class=legend v-show="brewery.cardOpen">
+            <p class="legend-name">Name</p>
+            <p class="legend-style">Style</p>
+            <p class="legend-abv">ABV</p>
+            <p class="legend-review">RATING</p>
+            <p class="legend-drank">DRANK</p>
+            <p class="legend-remove">DELETE</p>
+             </div>
           <div
             v-show="brewery.cardOpen"
             v-for="beer in brewery.passportBeers"
@@ -43,7 +53,7 @@
             <div class="beer-style">
               {{ beer.styleName }}
             </div>
-            <div class="beer-abv">{{ beer.abv }}% ABV</div>
+            <div class="beer-abv">{{ beer.abv }}%</div>
             <div class="review">
               <review :beer="beer" />
             </div>
@@ -59,10 +69,10 @@
               <img src="https://i.imgur.com/vdqV5fW.png" />
             </div>
           </div>
-          </div>
+          </div> -->
 
 
-    <div class="main" v-show="beerCrawlBreweries.length > 0"
+    <div class="main" 
 >
       <div class="leftPanel">
         <div
@@ -71,15 +81,15 @@
           :key="brewery.id"
           :isRendered="checkBrewery(brewery)"
         >
-          <input
+          <!-- <input
             :checked="toggleCheckBox(brewery)"
             type="checkbox"
             id="addToBeerCrawl"
             name="beerCrawlToggle"
             v-on:change="addToBeerCrawl(brewery)"
-          />
+          /> -->
           <div id="breweryCard" v-on:click="cardOpen(brewery)">
-            <div id="breweryName">{{ brewery.breweryName }}</div>
+            <div id="breweryName" draggable @dragstart="onDrag($event, brewery)">{{ brewery.breweryName }}</div>
             <div class="open">
               <img
                 v-show="brewery.cardOpen"
@@ -91,12 +101,17 @@
               />
             </div>
           </div>
+
           <div
             v-show="brewery.cardOpen"
             v-for="beer in brewery.passportBeers"
             :key="beer.id"
             id="beerCard"
           >
+          
+
+
+         
             <div class="beer-name">
               {{ beer.beerName }}
             </div>
@@ -123,8 +138,8 @@
       </div>
 
       <!-- BAR CRAWL LIST STARTS HERE  -->
-      <div class="rightPanel">
-        <div class="barCrawlList" v-show="beerCrawlBreweries.length > 0">
+      <div class="rightPanel" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent>
+        <div class="barCrawlList" >
             <h1>Beer Crawl Itinerary</h1>
       <div id="print-button" v-on:click="printItinerary">
         <p>Print</p>
@@ -140,7 +155,7 @@
               {{ brewery.breweryName }}
             </div>
             <div :rendered="getBreweryAddress(brewery)" class="brewery-address">
-              {{ address }}
+              {{ brewery.address }}
             </div>
           </div>
         </div>
@@ -157,9 +172,15 @@
 import PassportService from "../services/PassportService";
 import BreweryService from "../services/BreweryService.js";
 import Review from "./Review.vue";
+// import GoogleMap from './GoogleMap.vue';
+import Directions from './Directions.vue';
 export default {
-  components: { Review },
-  name: "my-passport",
+  components: {Review, 
+  //  GoogleMap,
+  Directions
+  },
+  name:
+    "my-passport",
   data() {
     return {
       allBreweries: [],
@@ -175,12 +196,32 @@ export default {
   computed: {
     fullObject() {
       let PassportObject = this.passport;
-      console.log("changing");
       return PassportObject;
     },
   },
 
   methods: {
+
+
+    onDrag(evt, brewery){
+      console.log("inside start drag " + brewery.breweryId + " " + brewery.breweryName);
+      evt.dataTransfer.dropEffect = "move";
+      evt.dataTransfer.effectAllowed = "move";
+      evt.dataTransfer.setData("draggedBreweryId", brewery.breweryId);
+      evt.dataTransfer.setData("draggedBreweryName", brewery.breweryName);
+    },
+
+  onDrop(evt) {
+      console.log('on drop started')
+      const draggedBreweryId = evt.dataTransfer.getData('draggedBreweryId');
+      const draggedBreweryName = evt.dataTransfer.getData('draggedBreweryName');
+      console.log(draggedBreweryId + " " + draggedBreweryName);
+      const breweryToAdd = {
+        breweryId: draggedBreweryId,
+        breweryName: draggedBreweryName
+      }
+      this.beerCrawlBreweries.push(breweryToAdd);
+    },
 
 
     printItinerary() {
@@ -192,7 +233,7 @@ export default {
 
             contents.forEach(pub => {
               this.getBreweryAddress(pub);
-              dialog.document.write(`<p><strong>${contents.indexOf(pub)+1}) ${pub.breweryName}</strong> <br> ${this.address}</p>`);
+              dialog.document.write(`<p><strong>${contents.indexOf(pub)+1}) ${pub.breweryName}</strong> <br> ${pub.address}</p>`);
             });
 
             dialog.document.write('</body></html>');
@@ -213,7 +254,7 @@ export default {
     getBreweryAddress(brewery) {
       this.allBreweries.forEach((b) => {
         if (brewery.breweryId == b.breweryId) {
-          return this.address =
+          brewery.address=
             b.streetAddress + " " + b.city + ", " + b.state + " " + b.zip;
         }
       });
@@ -343,6 +384,68 @@ export default {
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
+
+.legend {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: center;
+  border-radius: 5px;
+  margin: 0px 20px 0px 20px;
+  height: 25px;
+  background-color: rgba(15, 15, 15, 0.801);
+  color: white;
+  font-size: .65em;
+  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+}
+
+
+.legend p {
+  margin: 0px 30px;
+}
+
+
+.legend p {
+  /* text-align: center; */
+  font-size: 1em;
+  margin-top: 8px;
+  margin-bottom: 3px;
+}
+
+.legend-name {
+  margin-left: 30px;
+  width: 20%;
+    display: inline-block;
+
+}
+
+.legend-style {
+  width: 20%;
+    display: inline-block;
+
+}
+.legend-abv {
+  width: 20%;
+    display: inline-block;
+
+}
+.legend-review {
+  text-align: center;
+  width: 12%;
+}
+.remove-drank {
+  text-align: center;
+  width: 9%;
+}
+
+.legend-remove {
+  width: 9%;
+  margin-right: 30px;
+  text-align: center;
+}
+
 
 /*  Beer tile styling and positioning */
 

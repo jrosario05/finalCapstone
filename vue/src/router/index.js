@@ -7,7 +7,6 @@ import Register from '../views/Register.vue'
 import ShowListOfBreweries from '../views/ShowListOfBreweries.vue'
 import BreweryDetailsPage from '../views/BreweryDetailsPage.vue'
 import ShowListOfBeers from '../views/ShowListOfBeers.vue'
-import Test from '../views/Test.vue'
 
 import store from '../store/index'
 import Home from '../views/Home.vue'
@@ -80,14 +79,6 @@ const router = new Router({
     path:"/beers",  //THIS IS A LIST OF ALL BEERS
     name: "beers",
     component: ShowListOfBeers,
-    meta: {
-      requiresAuth: false
-    }
-  },
-  {
-    path:"/test",  //TESTING PAGE
-    name: "test",
-    component: Test,
     meta: {
       requiresAuth: false
     }
