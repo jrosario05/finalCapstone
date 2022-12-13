@@ -33,7 +33,7 @@ export default new Vuex.Store({
   },
   mutations: {
     PASSPORT_BEERS(state,data){
-      state.passportBeers=data;
+      state.passportBeers.push(data);
     },
     PASSPORT_BREWERIES(state,data){
       state.passportBreweries=data;
