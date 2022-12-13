@@ -3,10 +3,10 @@
     <h1 id="welcome" v-show="$store.state.token != ''">
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
-      <div>
-        <directions/>
-        </div>
-        <!-- <div 
+    <div>
+      <directions />
+    </div>
+    <!-- <div 
           class="main-passport"
           v-for="brewery in fullObject"
           :key="brewery.id"
@@ -71,9 +71,7 @@
           </div>
           </div> -->
 
-
-    <div class="main" 
->
+    <div class="main">
       <div class="leftPanel">
         <div
           class="passport"
@@ -88,8 +86,13 @@
             name="beerCrawlToggle"
             v-on:change="addToBeerCrawl(brewery)"
           /> -->
-          <div id="breweryCard" v-on:click="cardOpen(brewery)">
-            <div id="breweryName" draggable @dragstart="onDrag($event, brewery)">{{ brewery.breweryName }}</div>
+          <div
+            id="breweryCard"
+            draggable
+            @dragstart="onDrag($event, brewery)"
+            v-on:click="cardOpen(brewery)"
+          >
+            <div id="breweryName">{{ brewery.breweryName }}</div>
             <div class="open">
               <img
                 v-show="brewery.cardOpen"
@@ -108,10 +111,6 @@
             :key="beer.id"
             id="beerCard"
           >
-          
-
-
-         
             <div class="beer-name">
               {{ beer.beerName }}
             </div>
@@ -138,12 +137,17 @@
       </div>
 
       <!-- BAR CRAWL LIST STARTS HERE  -->
-      <div class="rightPanel" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent>
-        <div class="barCrawlList" >
-            <h1>Beer Crawl Itinerary</h1>
-      <div id="print-button" v-on:click="printItinerary">
-        <p>Print</p>
-        </div>
+      <div
+        class="rightPanel"
+        @drop="onDrop($event)"
+        @dragover.prevent
+        @dragenter.prevent
+      >
+        <div class="barCrawlList">
+          <h1>Beer Crawl Itinerary</h1>
+          <div id="print-button" v-on:click="printItinerary">
+            <p>Print</p>
+          </div>
 
           <div
             class="brewery-info"
@@ -156,6 +160,17 @@
             </div>
             <div :rendered="getBreweryAddress(brewery)" class="brewery-address">
               {{ brewery.address }}
+            </div>
+            <div class="reorder">
+              <img
+                src="https://i.imgur.com/3OjzTy2.png"
+              />
+              <img
+                src="https://i.imgur.com/YjdeFuu.png"
+              />
+            </div>
+            <div class="remove-crawl" @click="removeFromCrawl(brewery)">
+              <img src="https://i.imgur.com/vdqV5fW.png" />
             </div>
           </div>
         </div>
@@ -173,14 +188,14 @@ import PassportService from "../services/PassportService";
 import BreweryService from "../services/BreweryService.js";
 import Review from "./Review.vue";
 // import GoogleMap from './GoogleMap.vue';
-import Directions from './Directions.vue';
+import Directions from "./Directions.vue";
 export default {
-  components: {Review, 
-  //  GoogleMap,
-  Directions
+  components: {
+    Review,
+    //  GoogleMap,
+    Directions,
   },
-  name:
-    "my-passport",
+  name: "my-passport",
   data() {
     return {
       allBreweries: [],
@@ -201,46 +216,52 @@ export default {
   },
 
   methods: {
+    removeFromCrawl(brewery) {
+      let index = this.beerCrawlBreweries.indexOf(brewery);
+      this.beerCrawlBreweries.splice(index, 1);
+    },
 
-
-    onDrag(evt, brewery){
-      console.log("inside start drag " + brewery.breweryId + " " + brewery.breweryName);
+    onDrag(evt, brewery) {
+      console.log(
+        "inside start drag " + brewery.breweryId + " " + brewery.breweryName
+      );
       evt.dataTransfer.dropEffect = "move";
       evt.dataTransfer.effectAllowed = "move";
       evt.dataTransfer.setData("draggedBreweryId", brewery.breweryId);
       evt.dataTransfer.setData("draggedBreweryName", brewery.breweryName);
     },
 
-  onDrop(evt) {
-      console.log('on drop started')
-      const draggedBreweryId = evt.dataTransfer.getData('draggedBreweryId');
-      const draggedBreweryName = evt.dataTransfer.getData('draggedBreweryName');
+    onDrop(evt) {
+      console.log("on drop started");
+      const draggedBreweryId = evt.dataTransfer.getData("draggedBreweryId");
+      const draggedBreweryName = evt.dataTransfer.getData("draggedBreweryName");
       console.log(draggedBreweryId + " " + draggedBreweryName);
       const breweryToAdd = {
         breweryId: draggedBreweryId,
-        breweryName: draggedBreweryName
-      }
+        breweryName: draggedBreweryName,
+      };
       this.beerCrawlBreweries.push(breweryToAdd);
     },
 
-
     printItinerary() {
-      
-     let contents = this.beerCrawlBreweries;
-     let dialog = window.open('', '', 'height=500, width=500');
-            dialog.document.write('<html>');
-            dialog.document.write('<body > <h1>Bar Crawl Itinerary</h1>');
+      let contents = this.beerCrawlBreweries;
+      let dialog = window.open("", "", "height=500, width=500");
+      dialog.document.write("<html>");
+      dialog.document.write("<body > <h1>Bar Crawl Itinerary</h1>");
 
-            contents.forEach(pub => {
-              this.getBreweryAddress(pub);
-              dialog.document.write(`<p><strong>${contents.indexOf(pub)+1}) ${pub.breweryName}</strong> <br> ${pub.address}</p>`);
-            });
+      contents.forEach((pub) => {
+        this.getBreweryAddress(pub);
+        dialog.document.write(
+          `<p><strong>${contents.indexOf(pub) + 1}) ${
+            pub.breweryName
+          }</strong> <br> ${pub.address}</p>`
+        );
+      });
 
-            dialog.document.write('</body></html>');
-            dialog.document.close();
-            dialog.print();
+      dialog.document.write("</body></html>");
+      dialog.document.close();
+      dialog.print();
     },
-
 
     addToBeerCrawl(brewery) {
       let pub = this.beerCrawlBreweries;
@@ -254,7 +275,7 @@ export default {
     getBreweryAddress(brewery) {
       this.allBreweries.forEach((b) => {
         if (brewery.breweryId == b.breweryId) {
-          brewery.address=
+          brewery.address =
             b.streetAddress + " " + b.city + ", " + b.state + " " + b.zip;
         }
       });
@@ -395,17 +416,15 @@ export default {
   height: 25px;
   background-color: rgba(15, 15, 15, 0.801);
   color: white;
-  font-size: .65em;
+  font-size: 0.65em;
   -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
 
-
 .legend p {
   margin: 0px 30px;
 }
-
 
 .legend p {
   /* text-align: center; */
@@ -417,19 +436,16 @@ export default {
 .legend-name {
   margin-left: 30px;
   width: 20%;
-    display: inline-block;
-
+  display: inline-block;
 }
 
 .legend-style {
   width: 20%;
-    display: inline-block;
-
+  display: inline-block;
 }
 .legend-abv {
   width: 20%;
-    display: inline-block;
-
+  display: inline-block;
 }
 .legend-review {
   text-align: center;
@@ -445,7 +461,6 @@ export default {
   margin-right: 30px;
   text-align: center;
 }
-
 
 /*  Beer tile styling and positioning */
 
@@ -468,7 +483,6 @@ export default {
 }
 .review {
   /* width: 12%; */
-  
 }
 .drank {
   width: 9%;
@@ -524,12 +538,13 @@ export default {
 }
 
 .brewery-info {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
   background-color: white;
-  margin: 3px 0px;
+  margin: 8px 0px;
+  border-radius: 5px;
 
   -webkit-box-shadow: 0 8px 6px -6px black;
   -moz-box-shadow: 0 8px 6px -6px black;
@@ -537,14 +552,16 @@ export default {
 }
 
 .brewery-name {
-  float: left;
-  margin-left: 50px;
+  /* float: left; */
+  margin-left: 25px;
   font-weight: bold;
+  font-size: 1.15em;
 }
 
 .brewery-address {
-  margin-right: 50px;
+  margin-left: 50px;
   font-style: italic;
+  font-size: 1em;
 }
 
 /* positions checkbox */
@@ -561,8 +578,8 @@ export default {
   width: 50px;
   height: 30px;
   position: absolute;
-  transform: translate(500px,-50px);  
-    -webkit-box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.75);
+  transform: translate(400px, -50px);
+  -webkit-box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.75);
 }
@@ -579,34 +596,30 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
-
 .main {
-  width: 75vw;
+  width: 80vw;
   background-color: rgba(228, 228, 228, 0.164);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.0fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   grid-template-areas: "left-panel right-panel";
-
 }
 
 .leftPanel {
   width: 100%;
   grid-area: left-panel;
-  
 }
 
 .rightPanel {
   margin-right: 15px;
   grid-area: right-panel;
-
-
-
-
 }
 
-
+.remove-crawl img {
+  width: 30px;
+  float: right;
+  transform: translate(-10px, -40px);
+}
 </style>
