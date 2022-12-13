@@ -1200,9 +1200,15 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brew
 
 
 
+<<<<<<< HEAD
+INSERT INTO user_info (user_id, user_first, user_last, address, city, state, zip_code, img_url)
+VALUES ((SELECT user_id from users where username= 'user'), 'Michael', 'Doom', '1775 Kinner Rd', 'Columbus', 'OH', 43215, 'https://goodshepherdrangeley.org/wp-content/uploads/2020/10/no-image-icon-hi.png'),
+		((SELECT user_id from users where username = 'admin'), 'Andrew', 'Brantley', '123 Main St', 'Gahanna', 'OH', 43215, 'https://goodshepherdrangeley.org/wp-content/uploads/2020/10/no-image-icon-hi.png');
+=======
 INSERT INTO user_info (user_id, user_first, user_last, address, city, state, zip_code)
 VALUES ((SELECT user_id from users where username= 'user'), 'Michael', 'Doom', '1275 Kinnear Rd', 'Columbus', 'OH', 43215),
 		((SELECT user_id from users where username = 'admin'), 'Andrew', 'Brantley', '123 Main St', 'Columbus', 'OH', 43215);
+>>>>>>> 168619a19dc4c28f0d7526c0e9f98b1bd63c6c95
 		
 Insert into passport_beer (passport_id, beer_id, drank, beer_rating)
 		
