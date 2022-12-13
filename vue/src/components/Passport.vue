@@ -541,7 +541,7 @@ export default {
 .brewery-info {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 
   background-color: white;
@@ -555,7 +555,7 @@ export default {
   grid-area: details;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .brewery-name {
   font-weight: bold;
