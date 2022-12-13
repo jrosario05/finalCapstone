@@ -1,17 +1,45 @@
-// <template>
-//   <div>
-//      <div id="map" style="height:100vh"></div>
-//     <script src=" https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]"></script>
-//     <script src="app.js"></script>
-//   </div>
-// </template>
+<template>
+  <div>
+    <b>Start:</b>
+     <input type="text" v-model="start"/>
+    <b>End:</b>
+     <input type="text" v-model="end"/>
 
-// <script>
-// export default {
+    <GmapMap :zoom="7" :center="{ lat: 41.85, lng: -87.65 }">
+      <DirectionsRenderer travelMode="DRIVING" :origin="origin" :destination="destionation"/>
+    </GmapMap>
+  </div>
+</template>
 
-// }
-// </script>
+<script>
+import DirectionsRenderer from "@/components/DirectionsRenderer";
 
-// <style>
+export default {
+  components: {
+    DirectionsRenderer
+  },
 
-// </style>
+  data: () => ({
+    start: "endeavor company",
+    end: "edison brewing company"
+  }),
+
+  computed: {
+    origin() {
+      if (!this.start) return null;
+      return { query: this.start };
+    },
+    destionation() {
+      if (!this.end) return null;
+      return { query: this.end };
+    }
+  }
+};
+</script>
+
+<style>
+.vue-map-container {
+  height: 300px;
+  width: 80%
+}
+</style>

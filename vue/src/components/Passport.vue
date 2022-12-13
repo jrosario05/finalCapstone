@@ -4,7 +4,7 @@
       Welcome {{ $store.state.userInfo.userFirstName }}
     </h1>
       <div>
-        <google-map :barCrawl="beerCrawlBreweries"/>
+        <directions/>
         </div>
         <!-- <div 
           class="main-passport"
@@ -172,10 +172,12 @@
 import PassportService from "../services/PassportService";
 import BreweryService from "../services/BreweryService.js";
 import Review from "./Review.vue";
-import GoogleMap from './GoogleMap.vue';
+// import GoogleMap from './GoogleMap.vue';
+import Directions from './Directions.vue';
 export default {
   components: {Review, 
-   GoogleMap
+  //  GoogleMap,
+  Directions
   },
   name:
     "my-passport",
