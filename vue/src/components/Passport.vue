@@ -305,14 +305,10 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
   height: 50px;
-
   border-radius: 5px;
   margin: 10px;
-
   background-color: white;
-
   -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
@@ -336,7 +332,7 @@ export default {
 #beerCard {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   border-radius: 5px;
   margin: 0px 20px 10px 20px;
@@ -368,7 +364,8 @@ export default {
   font-size: 1em;
 }
 .review {
-  width: 12%;
+  /* width: 12%; */
+  
 }
 .drank {
   width: 9%;
@@ -380,7 +377,7 @@ export default {
   height: auto;
 }
 .remove {
-  width: 9%;
+  /* width: 9%; */
   margin-right: 30px;
 }
 .remove img {
