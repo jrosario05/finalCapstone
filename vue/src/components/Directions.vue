@@ -103,7 +103,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .vue-map-container {
   height: 300px;
   width: 80%

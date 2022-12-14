@@ -4,8 +4,20 @@
       Welcome {{ this.firstName }}
     </h1>
  <div class="sub-container">
+   <div class="avatar-score">
     <div id="user-avatar">
       <img src="https://ca.slack-edge.com/T0GNFLF6D-U03UY0PV0QP-91e4f0a326eb-512" @isRendered="updateScore" />
+       </div>
+       
+        <div id="score-container">
+      
+      <img
+        src="../resources/LowScore.png"
+        v-if="this.allBeers > 0 && this.allBeers < 4"
+      />
+      <img src="../resources/MidScore.png" v-if="this.allBeers > 1 && this.allBeers <8" />
+      <img src="../resources/HighScore.png" v-if="this.allBeers >= 8" />
+    </div>  
     </div>
     <div class="text-container">
     <div id="favorite-brewery">
@@ -18,19 +30,11 @@
       <h3>Number of Beers Tired: {{ allBeers }}</h3>
     </div>
     <div id="beer-passport">
-        <!-- <h3>Number of Beers in Passport: {{totalBeers}}</h3> -->
+        <h3>Number of Beers in Passport: {{totalBeers}}</h3>
     </div>
     </div>
     </div>
-    <div id="score-container">
-        
-      <img
-        src="../resources/LowScore.png"
-        v-if="this.allBeers > 0 && this.allBeers < 4"
-      />
-      <img src="../resources/MidScore.png" v-if="this.allBeers > 1 && this.allBeers <8" />
-      <img src="../resources/HighScore.png" v-if="this.allBeers >= 8" />
-    </div>
+  
   </div>
 </template>
 
@@ -60,8 +64,8 @@ export default {
         brewery.passportBeers.forEach((beer) => {
             numberOfBeersDrank += 1;
           if (beer.drank) {
-            this.drankBeers.push(beer.beerName);
            
+           return beer.drank;
             
           }
         });
@@ -132,20 +136,20 @@ export default {
 
    
 
-    Beers() {
+    // Beers() {
     
-      let allBreweries = this.passport;
-      allBreweries.forEach((brewery) => {
-        this.$store.commit("PASSPORT_BEERS", brewery);
+    //   let allBreweries = this.passport;
+    //   allBreweries.forEach((brewery) => {
+    //     this.$store.commit("PASSPORT_BEERS", brewery);
 
-        brewery.passportBeers.forEach((beer) => {
-          if (beer.drank) {
-            this.drankBeers.push(beer.beerName);
-            this.numberOfBeersDrank += 1;
-          }
-        });
-      });
-    },
+    //     brewery.passportBeers.forEach((beer) => {
+    //       if (beer.drank) {
+    //         this.drankBeers.push(beer.beerName);
+    //         this.numberOfBeersDrank += 1;
+    //       }
+    //     });
+    //   });
+    // },
     score() {
       console.log("firing score");
       let ratingNumber = this.numberOfBeersDrank / this.numberOfTotalBeers;
@@ -207,14 +211,21 @@ export default {
 
 .sub-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    
+}
+
+
+.text-container{
+  display: flex;
+  flex-direction: column;
 }
 
 #score-container img {
   width: 90px;
   margin: 0 auto;
   position: absolute;
-  transform: translate(18px, -260px);
+  transform: translate(18px, -150px);
 }
 
 
