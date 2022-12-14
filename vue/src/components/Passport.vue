@@ -1,7 +1,7 @@
 <template>
   <div class="entirePassport">
     <div class="placeholder">
-      <user-profile :passport="fullObject" />
+      <user-profile v-if="!isLoading" :passport="fullObject" />
     </div>
 
   
@@ -155,6 +155,7 @@ export default {
       address: "",
       breweryToOpen: "",
       showMap: false,
+      isLoading: true
     };
   },
 
@@ -280,6 +281,7 @@ export default {
       PassportService.breweryPassport(this.$store.state.user.id).then(
         (response) => {
           this.passport = response.data;
+          this.isLoading=false;
         }
       );
       BreweryService.listBreweries().then((response) => {

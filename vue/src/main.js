@@ -8,9 +8,6 @@ import axios from 'axios'
 // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import * as VueGoogleMaps from 'vue2-google-maps'
- 
-
-
 // Make BootstrapVue available throughout your project
 // Vue.use(BootstrapVue),
 // Optionally install the BootstrapVue icon components plugin
@@ -20,9 +17,6 @@ Vue.use(VueGoogleMaps, {
     key: 'AIzaSyAfpmZoqcNF2wvl3Bv1NhiLDa0kRBTnuj4',
     libraries: 'places'}
 });
-
-
-
 
 Vue.config.productionTip = false
 
