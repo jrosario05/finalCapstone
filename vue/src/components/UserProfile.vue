@@ -1,40 +1,50 @@
 <template>
-   <div class="main-container">
-    <h1 id="welcome" v-show="$store.state.token != ''">
-      Welcome {{ this.firstName }}
+<div class="whole-element">
+<div class="header">
+    <h1 id="welcome-name" v-show="$store.state.token != ''">
+       {{ this.firstName }}'s Passport
     </h1>
- <div class="sub-container">
-   <div class="avatar-score">
-    <div id="user-avatar">
-      <img src="https://ca.slack-edge.com/T0GNFLF6D-U03UY0PV0QP-91e4f0a326eb-512" @isRendered="updateScore" />
-       </div>
-       
-        <div id="score-container">
-      
+</div>
+  <div class="boxes">
+    <div class="left-container">
+      <div class="welcome">
+        <div id="user-avatar">
+          <img
+            src="https://ca.slack-edge.com/T0GNFLF6D-U03UY0PV0QP-91e4f0a326eb-512"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="middle-container">
+      <h1>Favorites</h1>
+      <div class="text-container">
+        <div id="favorite-brewery">
+          <h3>Favorite Brewery: {{ favoriteBrewery }}</h3>
+        </div>
+        <div id="favorite-beer">
+          <h3>Favorite Beer: Nikola</h3>
+        </div>
+        <div id="beers-drank">
+          <h3>Number of Beers Tired: {{ allBeers }}</h3>
+        </div>
+        <div id="beer-passport">
+          <h3>Number of Beers in Passport: {{ totalBeers }}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="right-container">
+      <h1>Hop Rank</h1>
       <img
         src="../resources/LowScore.png"
         v-if="this.allBeers > 0 && this.allBeers < 4"
       />
-      <img src="../resources/MidScore.png" v-if="this.allBeers > 1 && this.allBeers <8" />
+      <img
+        src="../resources/MidScore.png"
+        v-if="this.allBeers > 1 && this.allBeers < 8"
+      />
       <img src="../resources/HighScore.png" v-if="this.allBeers >= 8" />
-    </div>  
     </div>
-    <div class="text-container">
-    <div id="favorite-brewery">
-      <h3>Favorite Brewery: {{ favoriteBrewery}}</h3>
-    </div>
-    <div id="favorite-beer">
-      <h3>Favorite Beer: Nikola</h3>
-    </div>
-    <div id="beers-drank" @isRendered="allBeers()">
-      <h3>Number of Beers Tired: {{ allBeers }}</h3>
-    </div>
-    <div id="beer-passport">
-        <h3>Number of Beers in Passport: {{totalBeers}}</h3>
-    </div>
-    </div>
-    </div>
-  
+  </div>
   </div>
 </template>
 
@@ -47,56 +57,55 @@ export default {
   data() {
     return {
       drankBeers: [],
-      beersInPassport: [],
-      rating: 0,
+      // beersInPassport: [],
 
-      numberOfBeersDrank: 0,
-      numberOfTotalBeers: 0,
+      // numberOfBeersDrank: 0,
+      // numberOfTotalBeers: 0,
     };
   },
 
   computed: {
-
-      totalBeers(){
+    totalBeers() {
       let numberOfBeersDrank = 0;
-      this.passport.forEach((brewery) => {
+
+      let thisPassport = [];
+      thisPassport = this.passport;
+
+      Object.values(thisPassport).forEach((brewery) => {
         brewery.passportBeers.forEach((beer) => {
-            numberOfBeersDrank += 1;
+          numberOfBeersDrank += 1;
           if (beer.drank) {
             // this.drankBeers.push(beer.beerName);
           }
         });
       });
       return numberOfBeersDrank;
+    },
 
-      },
-
-      
     favoriteBrewery() {
-      
-      let allBreweries = this.passport;
       let favorite = 0;
-      let  favBrewery='';
-      allBreweries.forEach((brewery) => {
+      let favBrewery = "";
+
+      let thisPassport = [];
+      thisPassport = this.passport;
+
+      Object.values(thisPassport).forEach((brewery) => {
         let beerCounter = 0;
 
         brewery.passportBeers.forEach((beer) => {
-            if(beer.beerName != "")
-            {beerCounter++}
-          })
-            
-          if (beerCounter > favorite) {
-             favorite = beerCounter
-              favBrewery = brewery.breweryName
+          if (beer.beerName != "") {
+            beerCounter++;
           }
         });
-      
-           return favBrewery
-           
-      
+
+        if (beerCounter > favorite) {
+          favorite = beerCounter;
+          favBrewery = brewery.breweryName;
+        }
+      });
+
+      return favBrewery;
     },
-
-
 
     firstName() {
       return this.$store.state.userInfo.userFirstName;
@@ -108,59 +117,25 @@ export default {
     allBeers() {
       //   let allBreweries = this.passport;
       let numberOfBeersDrank = 0;
-      
-    
-      this.passport.forEach(brewery => {
+      let thisPassport = [];
+      thisPassport = this.passport;
+
+      Object.values(thisPassport).forEach((brewery) => {
         // this.$store.commit("PASSPORT_BEERS", brewery);
-      
+
         brewery.passportBeers.forEach((beer) => {
-            
           if (beer.drank) {
             this.drankBeers.push(beer.beerName);
-           
+
             numberOfBeersDrank += 1;
           }
         });
       });
       return numberOfBeersDrank;
     },
-    updateScore() {
-      return this.score();
-    },
   },
 
   methods: {
-
-   
-
-    // Beers() {
-    
-    //   let allBreweries = this.passport;
-    //   allBreweries.forEach((brewery) => {
-    //     this.$store.commit("PASSPORT_BEERS", brewery);
-
-    //     brewery.passportBeers.forEach((beer) => {
-    //       if (beer.drank) {
-    //         this.drankBeers.push(beer.beerName);
-    //         this.numberOfBeersDrank += 1;
-    //       }
-    //     });
-    //   });
-    // },
-    score() {
-      console.log("firing score");
-      let ratingNumber = this.numberOfBeersDrank / this.numberOfTotalBeers;
-      let ratingUpdate = "";
-      if (ratingNumber > 8) {
-        ratingUpdate = 1;
-      } else if (ratingNumber > 6) {
-        ratingUpdate = 2;
-      } else {
-        ratingUpdate = 3;
-      }
-      return (this.rating = ratingUpdate);
-    },
-
     getUserInfo() {
       AuthService.get(this.$store.state.user.id).then((response) => {
         this.$store.commit("SET_USER_INFO", response.data);
@@ -169,36 +144,54 @@ export default {
   },
 
   created() {
-    // this.Beers();
-    this.score();
-    this.getUserInfo();
-    
+    // this.score();
+    // this.getUserInfo();
   },
 };
 </script>
 
 <style scoped>
-#welcome {
+/* MAIN CONTAINER CSS */
+
+
+.whole-element{
   margin: 20px 0px;
   color: white;
   padding: 15px 0px;
   text-align: center;
-  font-size: 3em;
   width: 100vw;
-
   background-color: rgba(99, 98, 98, 0.718);
   text-shadow: 6px 6px 6px #272727;
 }
 
-.main-container {
+/* HEADER CSS */
+.header{
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 100px;
+  font-size: 2em;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.boxes {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "left center right";
+}
+
+/* LEFT BOX STUFF */
+.left-container {
+  grid-area: left;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: white;
-  
 }
-
 #user-avatar img {
   border-radius: 100%;
   width: 200px;
@@ -206,27 +199,46 @@ export default {
   border: 2px solid black;
 }
 
-.sub-container{
-    display: flex;
-    flex-direction: row;
-    
-}
+/* MIDDLE BOX CSS */
 
-
-.text-container{
+.middle-container {
+  grid-area: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.middle-container h1 {
+  margin-top: 10px;
 }
 
-#score-container img {
-  width: 90px;
-  margin: 0 auto;
-  position: absolute;
-  transform: translate(18px, -150px);
+/* RIGHT BOX CSS */
+
+.right-container {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.right-container h1 {
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
 
+.right-container img {
+  border-radius: 100%;
+  width: 230px;
+  margin: 20px;
+}
 
-h3{
-    color:black;
+.sub-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
 }
 </style>
