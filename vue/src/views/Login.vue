@@ -101,6 +101,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 #loginContainer {
   background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg")
     no-repeat center center fixed;
@@ -113,17 +115,22 @@ export default {
 }
 
 .form-signin {
-  margin-top: 25px;
-  height: 400px;
-  width: 400px;
-  border-radius: 5px;
-  border-width: 5px;
-  border-color: 2px;
-  border: black;
-  background-color: white;
-  display: grid;
-  grid-template-rows: 0.5fr 0.3fr 2fr 1fr 1fr;
-  grid-template-areas: "header" "mini-text" "forms" "button" "register";
+ margin-top: 4rem;
+
+  width: 20rem;
+	padding: 2.1rem 2rem;
+	border-radius: 0.7rem;
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	justify-items: center;
+	align-items: center;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.h3{
+  font-weight: 700;
+	font-size: 2rem;
+  color: #bfcf5f
 }
 #inputBoxes {
   grid-area: forms;
@@ -132,6 +139,11 @@ export default {
   display: grid;
   grid-template-rows: 0.5fr 1fr 0.5fr 1fr;
   grid-template-areas: "userLabel" "userInput" "passwordLabel" "passwordInput";
+  padding: 0.7rem 0.1rem;
+	margin-bottom: 0.9rem;
+	border: none;
+	width: 100%;
+ 
 }
 input {
   width: 90%;
@@ -139,15 +151,22 @@ input {
 
 #usernameLabel {
   grid-area: userLabel;
+  
 }
 #username {
   grid-area: userInput;
+   background: #eeeeee;
+	padding: 0.7rem 0.2rem;
+	text-transform: capitalize;
 }
 #passwordLabel {
   grid-area: passwordLabel;
 }
 #password {
   grid-area: passwordInput;
+   background: #eeeeee;
+	padding: 0.7rem 0.2rem;
+	text-transform: capitalize;
 }
 
 #signOnHeader {
@@ -158,9 +177,13 @@ input {
   display: flex;
   justify-content: center;
 }
-p {
-  grid-area: mini-text;
+login p {
+font-size: 1.2rem;
+text-decoration: none;
+
 }
+
+
 #login {
   width: 100%;
   display: flex;
@@ -169,8 +192,8 @@ p {
 }
 #register-button {
   grid-area: register;
-  color: black;
-  font-size: x-large;
+  color: #333233;
+  font-size: 18px;
 }
 #button-full-div {
   grid-area: button;
@@ -182,21 +205,29 @@ p {
 }
 #sign-in-button-div {
   grid-area: button;
-  border-radius: 4px;
-  border: black;
-  border-width: 5px;
+  
+ 
+  border-width: 10px;
   border: solid;
   background: none;
-  color: black;
-  width: 100px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+ 
+  margin-right: 10px;
+  padding: 16px 28px;
+  
+	border-radius: 5px;
+	font-weight: 700;
+	border: 1px solid #333232;
+	transition: all 200ms linear;
+	margin-bottom: 2rem;
+  background-color: #bfcf5f;
+  
+}
+#sign-in-button-div p{
+  color: white;
 }
 
 #sign-in-button-div:hover {
-  background-color: rgb(190, 190, 190);
+  background-color: #515A20;
 }
 
 #sign-in-button-div p {
@@ -204,9 +235,14 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 
+
+
 #register-button:hover {
-  color: blue;
+  color: #292e0e;
 }
+
+
 </style>
