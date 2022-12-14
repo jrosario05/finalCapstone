@@ -1,7 +1,7 @@
 <template>
   <div>
 
-<div v-on:="origin() + destionation()+ addWayPoints()" class="button">Load Map</div>
+<div v-on:click="origin() + destionation()+ addWayPoints()" class="button">Load Map</div>
 
 
     <GmapMap :zoom="10" :center="{ lat: 39.9612, lng: -82.9988 }">
@@ -33,6 +33,9 @@ export default {
     itemsLength (val, oldVal) {
       console.log('length changed')
       console.log(val, oldVal);
+      this.origin();
+      this.destionation();
+      this.addWayPoints();
     }
   },
 
@@ -41,9 +44,9 @@ export default {
   computed: {
 
     itemsLength() {
-      return this.barCrawl.length
-    }
-  },
+      return this.showMap
+    },
+ 
     origin2() {
       
       if (!this.start) return null;

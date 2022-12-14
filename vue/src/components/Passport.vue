@@ -124,7 +124,7 @@
           </div>
         </div>
         <div id="directions" v-if="showMap">
-          <directions :barCrawl="beerCrawlBreweries" />
+          <directions :barCrawl="beerCrawlBreweries" :showMap="showMap"/>
         </div>
       </div>
     </div>
