@@ -47,7 +47,7 @@
             <p class="legend-style">Style</p>
             <p class="legend-abv">ABV</p>
             <p class="legend-review">RATING</p>
-            <p class="legend-drank">DRANK</p>
+            <p class="legend-drank">DRANK?</p>
             <p class="legend-remove">DELETE</p>
           </div>
           <div
@@ -62,7 +62,7 @@
             <div class="beer-style">
               {{ beer.styleName }}
             </div>
-            <div class="beer-abv">{{ beer.abv }}% ABV</div>
+            <div class="beer-abv">{{ beer.abv }}%</div>
             <div class="review">
               <review :beer="beer" />
             </div>
@@ -97,12 +97,12 @@
                 <img
                   id="reorderUp"
                   src="https://i.imgur.com/YjdeFuu.png"
-                  @click="reorderUp(brewery)"
+                  @click="reorderUp(brewery)" 
                 />
                 <img
                   id="reorderDown"
                   src="https://i.imgur.com/3OjzTy2.png"
-                  @click="reorderDown(brewery)"
+                  @click="reorderDown(brewery)" 
                 />
               </div>
               <div class="details">
@@ -155,7 +155,11 @@ export default {
       address: "",
       breweryToOpen: "",
       showMap: false,
-      isLoading: true
+      isLoading: true,
+      // showUpArrow: true,
+      // showDownArrow: true,
+
+
     };
   },
 
@@ -164,6 +168,7 @@ export default {
       let PassportObject = this.passport;
       return PassportObject;
     },
+    
   },
 
   methods: {
@@ -174,6 +179,9 @@ export default {
 
     reorderUp(brewery) {
       let index = this.beerCrawlBreweries.indexOf(brewery);
+      // if(index == this.beerCrawlBreweries.length-1) {
+      //   this.showDownArrow = false;
+      // }
       if (index == 0) {
         let temp = this.beerCrawlBreweries[index];
         this.beerCrawlBreweries[0] =
@@ -191,7 +199,6 @@ export default {
     },
     reorderDown(brewery) {
       let index = this.beerCrawlBreweries.indexOf(brewery);
-      console.log(index);
       if (index == this.beerCrawlBreweries.length - 1) {
         let temp = this.beerCrawlBreweries[index];
         this.beerCrawlBreweries[this.beerCrawlBreweries.length - 1] =
@@ -370,7 +377,9 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-self: center;
+  align-items: center;
+  
+  
   border-radius: 5px;
   margin: 0px 20px 0px 20px;
   height: 25px;
@@ -380,41 +389,39 @@ export default {
   -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+
 }
-.legend p {
-  margin: 0px 30px;
-}
-.legend p {
-  /* text-align: center; */
-  font-size: 1em;
-  margin-top: 8px;
-  margin-bottom: 3px;
-}
+
 .legend-name {
+  font-size: 1em;
+
   margin-left: 30px;
-  width: 20%;
-  display: inline-block;
+    width: 26%;
+
 }
 .legend-style {
-  width: 20%;
-  display: inline-block;
+    font-size: 1em;
+    width: 19%;
+
 }
 .legend-abv {
-  width: 20%;
-  display: inline-block;
+    font-size: 1em;
+    width: 9%;
+
 }
 .legend-review {
-  text-align: center;
-  width: 12%;
+  transform: translate(45px,0px);
+  width: 20%;
+
 }
-.remove-drank {
-  text-align: center;
-  width: 9%;
+.legend-drank {
+  width: 10%;
+
 }
 .legend-remove {
-  width: 9%;
-  margin-right: 30px;
-  text-align: center;
+  width: 10%;
+  transform: translate(5px, 0px);
+
 }
 /* Styles individual brewery tiles */
 #breweryCard {
@@ -431,62 +438,75 @@ export default {
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
 #breweryName {
-  margin-left: 50px;
+  margin-left: 30px;
   font-weight: bold;
 }
 .open {
-  margin-right: 50px;
+  margin-right: 30px;
 }
 .open img {
   /* display: inline-block; */
   width: 25px;
   height: auto;
 }
+
+
+/* STYLE INDIVIDUAL BEER TILES */
+
 #beerCard {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+
   border-radius: 5px;
   margin: 0px 20px 10px 20px;
   height: 50px;
-  background-color: rgba(56, 56, 56, 0.801);
+  background-color:#33323283;
   color: white;
   -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
+
+
+
 /*  Beer tile styling and positioning */
 .beer-name {
-  width: 20%;
   margin-left: 30px;
   font-size: 1em;
   font-weight: bold;
+  width: 28%;
+  
 }
 .beer-style {
   width: 20%;
-  font-size: 1em;
+  font-size: .75em;
   font-style: italic;
 }
 .beer-abv {
-  width: 20%;
-  display: inline-block;
   font-style: italic;
-  font-size: 1em;
+  font-size: .75em;
+  width: 10%;
+}
+
+.review {
+  width: 20%;
 }
 
 .drank {
-  width: 9%;
+  width: 10%;
+
 }
 .drank img {
   display: flex;
   margin: 0 auto;
-  width: 40px;
+  width: 35px;
   height: auto;
 }
 .remove {
-  /* width: 9%; */
-  margin-right: 30px;
+  width: 10%;
+  margin-right: 20px;
 }
 .remove img {
   float: right;
@@ -494,11 +514,13 @@ export default {
   margin: 0 auto;
   height: auto;
 }
-#button {
-  width: 25px;
-  height: 25px;
-  background-color: red;
-}
+
+
+
+
+
+/* STYLING FOR THE ENTIRE PASSPORT */
+
 .main {
   width: 80vw;
   background-color: rgba(228, 228, 228, 0.164);
@@ -560,6 +582,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin: 10px 0px 10px 5px
 }
 .brewery-name {
   font-weight: bold;
@@ -571,6 +594,9 @@ export default {
   font-style: italic;
   font-size: 1em;
 }
+
+
+/* STYLING FOR BUTTONS */
 
 .buttons {
   margin-top: 25px;
@@ -614,18 +640,28 @@ export default {
     position: absolute;
 
   width: 30px;
-  transform: translate(425px, -50px);
+  transform: translate(425px, -55px);
 }
 .reorder {
   grid-area: reorder;
   display: flex;
   flex-direction: column;
-  margin: 0px 15px;
+  margin: 0px 25px 0px 15px;
 }
-#reorderUp,
+#reorderUp {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  transform: translate(0px,-20px);
+}
+
 #reorderDown {
   width: 20px;
+  height: 20px;
+  position: absolute;
+
 }
+
 
 /* STYLING FOR THE MAP */
 #directions {
