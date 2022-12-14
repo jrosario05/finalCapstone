@@ -72,7 +72,7 @@ export default {};
 
 <style scoped>
 #splash-screen {
-  background-color: black;
+  background-color: #000000;
   /* width: 100vw; */
   height: 500px;
   display: flex;
@@ -92,7 +92,7 @@ footer {
   height: 500px;
   object-fit: cover;
   object-position: center top;
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 .splash-text {

@@ -2,7 +2,7 @@
   <div id="header">
     <div id="logo">
       <router-link v-bind:to="{ name: 'home' }">
-        <img src="../resources/hop-logo-black.png"
+        <img src="../resources/hop-logo-white.png"
       /></router-link>
     </div>
 
@@ -46,9 +46,11 @@ export default {
 </script>
 
 <style scoped>
-#header {
-  background-color: rgba(255, 255, 255, 0.822);
 
+
+#header {
+  background-color: rgba(16, 15, 15, 0.836);
+  
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -63,15 +65,15 @@ export default {
   font-size: larger;
   font-weight: bolder;
   color: #bfcf5f;
+  filter: brightness(1);
 }
 
 .link:hover {
-  opacity: 0.85;
   color: #515a20;
 }
 
 .link:focus {
-  color: #292e0e;
+  color: #ecf0d7;
 }
 
 #navigation {
