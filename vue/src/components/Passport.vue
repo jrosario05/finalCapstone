@@ -242,7 +242,7 @@ export default {
         dialog.document.write(
           `<p><strong>${contents.indexOf(pub) + 1}) ${
             pub.breweryName
-          }</strong> <br> ${this.address}</p>`
+          }</strong> <br> ${pub.address}</p>`
         );
       });
 

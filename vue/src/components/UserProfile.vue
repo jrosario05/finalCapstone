@@ -58,15 +58,12 @@ export default {
   computed: {
 
       totalBeers(){
-          let numberOfBeersDrank = 0;
+      let numberOfBeersDrank = 0;
       this.passport.forEach((brewery) => {
-    
         brewery.passportBeers.forEach((beer) => {
             numberOfBeersDrank += 1;
           if (beer.drank) {
-           
-           return beer.drank;
-            
+            this.drankBeers.push(beer.beerName);
           }
         });
       });
