@@ -133,6 +133,7 @@ export default {
   color: #bfcf5f
 }
 #inputBoxes {
+  
   grid-area: forms;
   width: 100%;
   margin: 10px;
@@ -141,8 +142,9 @@ export default {
   grid-template-areas: "userLabel" "userInput" "passwordLabel" "passwordInput";
   padding: 0.7rem 0.1rem;
 	margin-bottom: 0.9rem;
+  
 	border: none;
-	width: 100%;
+
  
 }
 input {
@@ -158,6 +160,10 @@ input {
    background: #eeeeee;
 	padding: 0.7rem 0.2rem;
 	text-transform: capitalize;
+  border-radius: 5px;
+  
+  
+
 }
 #passwordLabel {
   grid-area: passwordLabel;
@@ -167,6 +173,7 @@ input {
    background: #eeeeee;
 	padding: 0.7rem 0.2rem;
 	text-transform: capitalize;
+  border-radius: 5px;
 }
 
 #signOnHeader {
@@ -177,11 +184,7 @@ input {
   display: flex;
   justify-content: center;
 }
-login p {
-font-size: 1.2rem;
-text-decoration: none;
 
-}
 
 
 #login {

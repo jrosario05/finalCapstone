@@ -88,9 +88,9 @@
         required
       />
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
-      <div class="btn btn-lg btn-primary btn-block" type="submit">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
-      </div>
+      </button>
     </form>
   </div>
   </div>
@@ -159,6 +159,14 @@ export default {
 
 <style scoped> 
 
+.h3{
+  color: #bfcf5f;
+}
+
+label{
+ color:  #333233;
+}
+
  .registerContainer{
    background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -169,21 +177,24 @@ export default {
   background-color: black;
   display: flex;
   justify-content: center;
+  padding-bottom: 10%;
+  
 
 
 }
 
 .text-center{
-  height:1000px;
-  width: 400px;
-  border-radius: 5px;
-  border-width: 5px;
-  border-color: 2px;
-  border: black;
-  background-color: white;
-  margin-top: 35px;
-  display: flex;
-  justify-content: center;
+ margin-top: 4rem;
+
+  width: 20rem;
+	padding: 2.1rem 2rem;
+	border-radius: 0.7rem;
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	justify-items: center;
+	align-items: center;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 #inputBoxes{
   grid-area: forms;
@@ -192,10 +203,17 @@ export default {
   display: grid;
   grid-template-rows: .5fr 1fr .5fr 1fr;
   grid-template-areas: "userLabel" "userInput" "passwordLabel" "passwordInput";
+
 ;
+  
+	border: none;
 }
 input{
-  width:90%
+  width:90%;
+   padding: 0.7rem 0.1rem;
+	margin-bottom: 0.9rem;
+  border-radius: 5px;
+  border-color: #333233;
 }
 
 #usernameLabel{
