@@ -1,7 +1,7 @@
 <template>
   <div>
 
-<div v-on:click="origin() + destionation()+ addWayPoints()" class="button">CLICK HERE</div>
+<div v-on:="origin() + destionation()+ addWayPoints()" class="button">Load Map</div>
 
 
     <GmapMap :zoom="10" :center="{ lat: 39.9612, lng: -82.9988 }">
@@ -18,7 +18,7 @@ export default {
   components: {
     DirectionsRenderer
   },
-  props:['barCrawl'],
+  props:['barCrawl','showMap'],
 
   data(){
     return{
@@ -29,7 +29,7 @@ export default {
       }
     },
 
-  
+
 
   computed: {
     origin2() {
@@ -115,6 +115,8 @@ export default {
         width: 10%;
         text-align: center;
         color: white;
+
+        
     }
 
     .button:hover {
