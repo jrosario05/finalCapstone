@@ -79,12 +79,6 @@ export default {};
   position: relative;
 }
 
-footer {
-  position: absolute;
-  background-color: #555;
-  color: white;
-  padding: 15px;
-}
 
 #img-container {
   /* width:1300px; */
@@ -97,6 +91,12 @@ footer {
 
   justify-content: space-between;
   background-color: #333232;
+}
+footer {
+  position: absolute;
+  background-color: #555;
+  color: white;
+  padding: 15px;
 }
 
 .footer-img {
@@ -116,7 +116,27 @@ footer {
 
   font-size: 3em;
 }
-
+#header-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -10%);
+  color: white;
+  font-weight: bold;
+  font-size: 2em;
+  bottom: 10px;
+}
+.header-button {
+  background-color: #809766;
+  color: white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 125%);
+  color: white;
+  /* font-weight: bold; */
+  /* transform: translate(10px, 10px); */
+}
 #border {
   display: flex;
   flex-direction: column;
@@ -132,16 +152,7 @@ footer {
   min-height: 400px;
 }
 
-#header-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -10%);
-  color: white;
-  font-weight: bold;
-  font-size: 2em;
-  bottom: 10px;
-}
+
 
 .button-bottom {
   background-color: #809766;
@@ -157,17 +168,6 @@ footer {
   color: white;
 }
 
-.header-button {
-  background-color: #809766;
-  color: white;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, 125%);
-  color: white;
-  /* font-weight: bold; */
-  /* transform: translate(10px, 10px); */
-}
 
 #footer-1 {
   display: flex;

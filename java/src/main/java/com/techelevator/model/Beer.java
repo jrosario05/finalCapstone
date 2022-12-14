@@ -11,6 +11,20 @@ public class Beer {
     private boolean inPassport;
 
 
+    public Beer(){
+
+    }
+
+    public Beer(int beerId, String beerName, double abv, String description, String style, String imgUrl, boolean inPassport) {
+        this.beerId = beerId;
+        this.beerName = beerName;
+        this.abv = abv;
+        this.description = description;
+        this.style = style;
+        this.imgUrl = imgUrl;
+        this.inPassport = inPassport;
+    }
+
     public boolean isInPassport() {
         return inPassport;
     }

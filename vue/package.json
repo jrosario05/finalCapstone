@@ -12,10 +12,8 @@
   "dependencies": {
     "@fawmi/vue-google-maps": "^0.9.79",
     "axios": "^0.21.4",
-    "bootstrap": "^5.2.3",
     "bootstrap-components": "^1.1.287",
     "bootstrap-icons": "^1.10.2",
-    "bootstrap-vue": "^2.23.1",
     "core-js": "^3.9.1",
     "vue": "^2.6.12",
     "vue-bs-modal": "^0.7.9",
