@@ -46,7 +46,7 @@ export default {
       this.waypts.forEach((brewery)=>{
       let object= {};
       object.location=brewery.address;
-      object.stopover=false;
+      object.stopover=true;
       otherArray.push(object)
       })
       return otherArray
@@ -106,7 +106,8 @@ export default {
 <style>
 .vue-map-container {
   height: 300px;
-  width: 80%
+  width: 80%;
+  height: 400px;
 }
 
     .button {
