@@ -39,7 +39,7 @@
 
       <!-- <div id="header-container"> -->
       <div id="border">
-        <img id="header-logo" src="../resources/city-background.png" alt="" />
+        <!-- <img id="header-logo" src="../resources/city-background.png" alt="" /> -->
 
         <h3 id="main-text">
           COME HOP AROUND<br />
@@ -142,14 +142,14 @@ footer {
 
 #img-container {
   /* width:1300px; */
-  padding-top: 50px;
+  /* padding-top: 50px;
   padding-bottom: 50px;
   padding-right: 100px;
-  padding-left: 100px;
-
+  padding-left: 100px; */
+padding: 2rem;
   display: flex;
 
-  flex-wrap: nowrap;
+ 
   justify-content: space-between;
   background-color: #333232;
 }
@@ -183,7 +183,17 @@ footer {
   align-items: center;
   box-pack: center;
   justify-content: center;
-}
+      background-image: url(https://i.imgur.com/Su0fBEM.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20% 0;
+    min-height: 400px;
+  }
+
+
+
+
+
 #header-text {
    position: absolute;
   left: 50%;
@@ -198,7 +208,8 @@ footer {
 .button-bottom{
    background-color: #809766;
   color: white;
-  
+  padding: .5rem 1rem;
+  margin: .5rem;
   left: 50%;
   top: 50%;
    color: white;
@@ -223,6 +234,9 @@ footer {
 #footer-1 {
   display: flex;
   flex-direction: column;
+  padding: .5rem 1rem;
+  margin: .5rem;
+
 }
 
 #footer-2 {
