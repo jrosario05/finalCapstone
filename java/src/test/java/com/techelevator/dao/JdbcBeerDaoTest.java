@@ -34,7 +34,7 @@ public class JdbcBeerDaoTest extends BaseDaoTests{
     @Test
     public void GET_BEER_TEST(){
         int beerId = 1;
-      Beer beer =  sut.getBeer(B);
+      Beer beer =  sut.getBeer();
 
         Assert.assertEquals(1,beer);
     }
