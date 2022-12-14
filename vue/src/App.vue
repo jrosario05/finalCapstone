@@ -16,8 +16,10 @@ export default {
 
 </script> 
 
-<style scoped>
-
+<style>
+#app{
+  font-family: "Helvetica";
+}
 </style>>
 
 

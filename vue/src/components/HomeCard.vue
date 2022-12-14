@@ -1,72 +1,69 @@
 <template>
-  <div class="container-fluid text-center">
-    <div class="row content">
-      <div id="border">
+  <div id="full-homepage">
+    <div id="splash-screen">
+      <img src="../resources/city-background.png" />
+      <div class="splash-text">
         <h3 id="main-text">
           COME HOP AROUND<br />
           COLUMBUS WITH YOUR PASSPORT!
         </h3>
-
         <p id="header-text">Discover new breweries throughout Columbus</p>
 
-        <button class="header-button">Get Your Passport</button>
+        <div id="splash-button">Get Your Passport</div>
       </div>
+    </div>
 
+    <div class="welcome">
       <h1>Welcome</h1>
       <p>
-        If you like beer as much as we do, you are in the right place.<br />
-        We partner with local breweries, so you can connect with them from.<br />
-
-        Explore local breweries, get stamps, enjoy beer. Cheers!
+        If you like beer as much as we do, you are in the right place. We
+        partner with local breweries, so you can connect with them from.
       </p>
-      <hr />
-      <div id="img-container">
-        <div class="footer-img" id="footer-1">
-          <img src="../resources/passport.png" class="img-footer" />
-          <h3 class="footer-text">Get Your Passport</h3>
-          <p class="footer-text">
+      <p />
+      <p>Explore local breweries, get stamps, enjoy beer.</p>
+      <p id="strong">Cheers!</p>
+    </div>
+
+    <div class="tri-fold">
+
+
+        <div class="tri-fold-element" id="first-image">
+          <img src="../resources/passport.png" />
+          <h3 class="title">Get Your Passport</h3>
+          <p class="description">
             Track all the breweries you want to visit <br />
             and add their beers to your passport
           </p>
-          <button class="button-bottom">Passport</button>
+          <button class="bottom-button">Passport</button>
         </div>
-        <div class="footer-img" id="footer-2">
-          <img src="../resources/huge-kegs.png" class="img-footer" />
-          <h3 class="footer-text">
-            Explore Our Partner <br />
-            Breweries
-          </h3>
-          <p class="footer-text">sldfkjs;lkdfjsfls</p>
-          <button class="button-bottom">sdfs</button>
-        </div>
-        <div class="footer-img" id="footer-3">
-          <img src="../resources/slave-pouring.png" class="img-footer" />
-          <h3 class="footer-text">Drink Beer</h3>
-          <p class="footer-text">sldfkjs;lkdfjsfls</p>
 
-          <button class="button-bottom">slfjsljf</button>
-        </div>
-      </div>
-      <!-- </div> -->
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
 
-      <!-- <div class="col-sm-2 sidenav">
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
-    </div> -->
+        <div class="tri-fold-element" id="second-image">
+          <img src="../resources/huge-kegs.png" />
+          <h3 class="title">Explore our Partner Breweries</h3>
+          <p class="description">
+            Track all the breweries you want to visit <br />
+            and add their beers to your passport
+          </p>
+          <button class="bottom-button">View Breweries</button>
+        </div>
+
+
+
+        <div class="tri-fold-element" id="third-image">
+          <img src="../resources/slave-pouring.png" />
+          <h3 class="title">Enjoy Responsibly</h3>
+          <p class="description">
+            Track all the breweries you want to visit <br />
+            and add their beers to your passport
+          </p>
+          <button class="bottom-button">View Beer List</button>
+        </div>
+
+
     </div>
+
   </div>
-
-  <!-- <footer class="container-fluid text-center">
-  <p>Footer Text</p>
-</footer> -->
-
-  <!-- </body> -->
 </template>
 
 <script>
@@ -74,133 +71,142 @@ export default {};
 </script>
 
 <style scoped>
-#header-logo {
-  max-width: 100%;
-  position: relative;
+#splash-screen {
+  background-color: black;
+  /* width: 100vw; */
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-footer {
+#splash-screen img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.85;
+}
+
+.splash-text {
   position: absolute;
-  background-color: #555;
-  color: white;
-  padding: 15px;
-}
-
-#img-container {
-  /* width:1300px; */
-  /* padding-top: 50px;
-  padding-bottom: 50px;
-  padding-right: 100px;
-  padding-left: 100px; */
-  padding: 2rem;
-  display: flex;
-
-  justify-content: space-between;
-  background-color: #333232;
-}
-
-.footer-img {
-  /* margin-left: 115px; */
-  display: flex;
-
-  height: 350px;
 }
 
 #main-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -140%);
+  font-family: serif;
   color: white;
-  font-weight: bold;
-
   font-size: 3em;
-}
-
-#border {
-  display: flex;
-  flex-direction: column;
-
-  box-align: center;
-  align-items: center;
-  box-pack: center;
-  justify-content: center;
-  background-image: url(https://i.imgur.com/Su0fBEM.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: 20% 0;
-  min-height: 400px;
+  margin: 0;
+  text-align: center;
+  text-shadow: 0.5px 0.5px 0.25px #8d8d8d;
 }
 
 #header-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -10%);
   color: white;
-  font-weight: bold;
   font-size: 2em;
-  bottom: 10px;
+  text-align: center;
+  padding: 0;
+  margin: 10px 0px 35px;
+  text-shadow: 0.5px 0.5px 0.25px #8d8d8d;
 }
 
-.button-bottom {
+#splash-button {
+  width: 300px;
+  height: 50px;
   background-color: #809766;
   color: white;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem;
-  left: 50%;
-  top: 50%;
-  color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  margin: 0 auto;
+  box-shadow: 12px 6px 10px 0px black;
 }
 
-.footer-text {
-  color: white;
-}
-
-.header-button {
-  background-color: #809766;
-  color: white;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, 125%);
-  color: white;
-  /* font-weight: bold; */
-  /* transform: translate(10px, 10px); */
-}
-
-#footer-1 {
+.welcome {
+  background-color: white;
+  color: #809766;
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem;
+  justify-content: center;
+  align-items: center;
 }
 
-#footer-2 {
+.welcome h1 {
+  font-size: 3em;
+  font-family: serif;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.welcome p {
+  width: 50%;
+  font-size: 1.5em;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+#strong {
+  margin-top: 20px;
+  font-weight: bolder;
+  font-size: 2em;
+}
+
+.tri-fold {
+background-color: #333232;
+display: flex;
+flex-direction: row;
+justify-content: space-evenly
+}
+
+.tri-fold-element {
+    margin-top: 35px;
+
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 }
-#footer-3 {
-  display: flex;
-  flex-direction: column;
+.tri-fold-element img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
 }
 
-.img-footer {
-  height: 250px;
+.title {
+  color: white;
+  text-align: center;
+  font-size: 1.25em;
+  margin-top: 10px;
+  margin-bottom: 6px;
 }
 
-.app {
-  margin-top: 1px;
-  margin-bottom: 1px;
-  margin-right: 12px;
-  margin-left: 12px;
+.description {
+  color: white;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  text-align: center;
+  
+  font-size: 1em;
+
 }
 
-img {
-  border: 0;
+.bottom-button {
+  width: 150px;
+  height: 35px;
+  margin-top: 15px;
+  margin-bottom: 35px;
+  color: white;
+  background-color:  #809766;
+  border: 1px solid white;
 }
 
-r {
-  padding-right: none;
-}
+
 </style>
+
+
