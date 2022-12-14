@@ -25,7 +25,7 @@
           <h3>Favorite Beer: Nikola</h3>
         </div>
         <div id="beers-drank">
-          <h3>Number of Beers Tired: {{ allBeers }}</h3>
+          <h3>Number of Beers Tried: {{ allBeers }}</h3>
         </div>
         <div id="beer-passport">
           <h3>Number of Beers in Passport: {{ totalBeers }}</h3>
@@ -40,9 +40,9 @@
       />
       <img
         src="../resources/MidScore.png"
-        v-if="this.allBeers > 1 && this.allBeers < 8"
+        v-if="this.allBeers >= 4 && this.allBeers < 8"
       />
-      <img src="../resources/HighScore.png" v-if="this.allBeers >= 8" />
+      <img src="../resources/HighScore.png" v-if="this.allBeers > 8" />
     </div>
   </div>
   </div>
