@@ -57,10 +57,7 @@ export default {
   data() {
     return {
       drankBeers: [],
-      // beersInPassport: [],
 
-      // numberOfBeersDrank: 0,
-      // numberOfTotalBeers: 0,
     };
   },
 
@@ -115,13 +112,11 @@ export default {
     },
 
     allBeers() {
-      //   let allBreweries = this.passport;
       let numberOfBeersDrank = 0;
       let thisPassport = [];
       thisPassport = this.passport;
 
       Object.values(thisPassport).forEach((brewery) => {
-        // this.$store.commit("PASSPORT_BEERS", brewery);
 
         brewery.passportBeers.forEach((beer) => {
           if (beer.drank) {
@@ -144,8 +139,7 @@ export default {
   },
 
   created() {
-    // this.score();
-    // this.getUserInfo();
+
   },
 };
 </script>
@@ -174,6 +168,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  letter-spacing: 2px;
 }
 
 
