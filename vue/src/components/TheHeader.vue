@@ -94,6 +94,10 @@ export default {
   height: 45px;
   border-radius: 5px;
   background-color:#bfcf5f; 
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 #login:hover {
   opacity: 0.85;
@@ -110,10 +114,7 @@ export default {
     text-decoration: none;
     margin-top: 2px;
     font-size: 1.5em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
 
 }
 

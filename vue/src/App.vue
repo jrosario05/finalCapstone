@@ -20,8 +20,5 @@ export default {
 #app{
   font-family: "Helvetica";
 }
-
-
 </style>>
-
 
