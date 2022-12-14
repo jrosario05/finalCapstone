@@ -6,9 +6,7 @@
       <div id="brewery-name">
         <h1>{{ brewery.breweryName }}</h1>
       </div>
-      <!-- <div id="description">
-      {{ brewery.description }}
-    </div> -->
+
     </div>
 </template>
 
@@ -52,15 +50,23 @@ body {
 }
 
 #brewery-name {
+  width: 250px;
   text-align: center;
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #brewery-name h1 {
-  padding: 0px 10px;
-  font-size: 2em;
+  transform: translate(0px,-150px);
+  margin: 0 auto;
+  font-size: 1.75em;
   color: white;
   text-shadow: 6px 6px 6px #272727;
+  width: 95%;
+  text-align: center;
 }
 
 

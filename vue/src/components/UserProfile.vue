@@ -57,10 +57,7 @@ export default {
   data() {
     return {
       drankBeers: [],
-      // beersInPassport: [],
 
-      // numberOfBeersDrank: 0,
-      // numberOfTotalBeers: 0,
     };
   },
 
@@ -115,13 +112,11 @@ export default {
     },
 
     allBeers() {
-      //   let allBreweries = this.passport;
       let numberOfBeersDrank = 0;
       let thisPassport = [];
       thisPassport = this.passport;
 
       Object.values(thisPassport).forEach((brewery) => {
-        // this.$store.commit("PASSPORT_BEERS", brewery);
 
         brewery.passportBeers.forEach((beer) => {
           if (beer.drank) {
@@ -144,8 +139,7 @@ export default {
   },
 
   created() {
-    // this.score();
-    // this.getUserInfo();
+
   },
 };
 </script>
@@ -154,12 +148,13 @@ export default {
 /* MAIN CONTAINER CSS */
 
 
-.whole-element{
-  margin: 20px 0px;
+.whole-element{  
+  margin-top: 0px;
+  margin-bottom: 20px;
   color: white;
   padding: 15px 0px;
   text-align: center;
-  width: 100vw;
+  width: 100%;
   background-color: rgba(99, 98, 98, 0.718);
   text-shadow: 6px 6px 6px #272727;
 }
@@ -174,6 +169,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  letter-spacing: 2px;
 }
 
 

@@ -295,7 +295,7 @@ export default {
   width: 250px;
   height: 250px;
   border-radius: 20px;
-  background-color: rgb(48, 31, 0);
+  background-color: #333232;
   border-radius: 10px;
   border: none;
   -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
