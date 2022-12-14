@@ -18,7 +18,7 @@
       <h3>Number of Beers Tired: {{ allBeers }}</h3>
     </div>
     <div id="beer-passport">
-        <h3>Number of Beers in Passport: {{totalBeers}}</h3>
+        <!-- <h3>Number of Beers in Passport: {{totalBeers}}</h3> -->
     </div>
     </div>
     </div>
