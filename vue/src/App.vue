@@ -20,11 +20,8 @@ export default {
 #app{
   font-family: "Helvetica";
 }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 591a2a48216c87c4b829c7044bc8afc79a15f43b
 </style>>
 
 
