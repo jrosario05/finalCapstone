@@ -6,8 +6,15 @@
       class="visible"
       v-show="$store.state.token != ''"
     >
-      <div @mouseenter="hover = true" @mouseleave="hover = false" class="card" id="addToPassport" v-show="!beer.inPassport" v-on:click="addBeerToPassport(beer)">
-        <p v-show="hover"  id="addText" >Add to Passport</p>
+      <div
+        @mouseenter="hover = true"
+        @mouseleave="hover = false"
+        class="card"
+        id="addToPassport"
+        v-show="!beer.inPassport"
+        v-on:click="addBeerToPassport(beer)"
+      >
+        <p v-show="hover" id="addText">Add to Passport</p>
         <img src="https://i.imgur.com/o3yJ5PP.png" />
       </div>
       <div class="card" id="currentlyInPassport" v-show="beer.inPassport">
@@ -64,7 +71,7 @@ export default {
       msg: "",
       hideMsg: false,
       check: "",
-      hover: false
+      hover: false,
     };
   },
 
@@ -116,9 +123,10 @@ export default {
 <style scoped>
 .overlay {
   text-align: center;
-  width: 251px;
+  width: 250px;
   height: auto;
-
+  position: absolute;
+  transform: translate(50px, 182px);
   /* padding: 15px 0px; */
   z-index: 10;
   margin: 0 auto;
@@ -126,20 +134,19 @@ export default {
 
   background-color: rgba(93, 216, 104, 0.85);
   color: white;
-  transform: translate(49.5px, 155px);
-  position: absolute;
+
 }
 
 .msg {
   margin: 0 auto;
-
   font-size: 1em;
+  width: 75%;
   display: inline-block;
 }
 
 #successMsg p {
-  margin: 0 auto;
-
+  margin: 5px 0px;
+  
   font-size: 0.5em;
 }
 
@@ -157,22 +164,23 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: absolute;
 
   background-color: rgb(240, 230, 174);
   border: 3px outset rgba(230, 230, 230), 0.75;
   width: 45px;
   height: 45px;
   border-radius: 100%;
-  z-index: 10;
-  transform: translate(225px, 40px);
+  transform: translate(225px, -20px);
 
   -webkit-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
 }
 
-
 #currentlyInPassport {
+  position: absolute;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -182,15 +190,14 @@ export default {
   width: 45px;
   height: 45px;
   border-radius: 100%;
-  z-index: 10;
-  transform: translate(225px, 40px);
+  transform: translate(225px, -20px);
 
   -webkit-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.75);
 }
 
-#addText  {
+#addText {
   text-align: center;
   font-size: 0.5em;
   position: absolute;
@@ -215,11 +222,10 @@ export default {
 #addToPassport img {
   width: 35px;
   height: auto;
-  filter:  brightness(100%) grayscale(100%) hue-rotate(46deg);
+  filter: brightness(100%) grayscale(100%) hue-rotate(46deg);
 }
 
 #addToPassport:hover img {
-
   opacity: 0.2;
 }
 
@@ -227,9 +233,14 @@ export default {
   width: 30px;
   height: auto;
   opacity: 1;
-  transform:translate(1px,-1px);
+  transform: translate(1px, -1px);
   filter: invert(100%) brightness(100%);
 }
+
+
+
+
+/* STYLING FOR THE BEER CARDS STARTS HERE */
 
 .card {
   z-index: 1;
@@ -241,7 +252,7 @@ export default {
   height: 250px;
   border-radius: 10px;
   border: none;
-  margin: 15px 50px;
+  margin: 25px 50px;
   background-color: transparent;
 
   animation: fadeinout 4s linear forwards;
@@ -280,9 +291,9 @@ export default {
   justify-content: center;
   align-items: center;
   position: absolute;
-  width: 100%;
-  height: 100%;
   color: white;
+  width: 250px;
+  height: 250px;
   border-radius: 20px;
   background-color: rgb(48, 31, 0);
   border-radius: 10px;
@@ -296,6 +307,8 @@ export default {
 .details h1 {
   text-align: center;
   font-size: 1.5em;
+  margin-top: 10px;
+  
 }
 
 .details h3 {
@@ -303,7 +316,9 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 1em;
+  font-size: .8em;
+  margin-top: 0 auto;
+
 }
 
 .description {
@@ -364,7 +379,6 @@ export default {
 .fade-leave-active {
   animation: fade-out 0.5s;
 }
-
 
 @keyframes fade-out {
   0% {
