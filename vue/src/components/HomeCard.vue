@@ -80,6 +80,12 @@ export default {};
   justify-content: center;
   align-items: center;
 }
+footer {
+  position: absolute;
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
 
 #splash-screen img {
   width: 100%;
