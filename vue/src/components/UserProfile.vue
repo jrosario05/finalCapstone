@@ -63,7 +63,7 @@ export default {
         brewery.passportBeers.forEach((beer) => {
             numberOfBeersDrank += 1;
           if (beer.drank) {
-            this.drankBeers.push(beer.beerName);
+            // this.drankBeers.push(beer.beerName);
           }
         });
       });
@@ -110,8 +110,8 @@ export default {
       let numberOfBeersDrank = 0;
       
     
-      this.passport.forEach((brewery) => {
-        this.$store.commit("PASSPORT_BEERS", brewery);
+      this.passport.forEach(brewery => {
+        // this.$store.commit("PASSPORT_BEERS", brewery);
       
         brewery.passportBeers.forEach((beer) => {
             
@@ -169,7 +169,7 @@ export default {
   },
 
   created() {
-    this.Beers();
+    // this.Beers();
     this.score();
     this.getUserInfo();
     
