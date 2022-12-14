@@ -148,12 +148,13 @@ export default {
 /* MAIN CONTAINER CSS */
 
 
-.whole-element{
-  margin: 20px 0px;
+.whole-element{  
+  margin-top: 0px;
+  margin-bottom: 20px;
   color: white;
   padding: 15px 0px;
   text-align: center;
-  width: 100vw;
+  width: 100%;
   background-color: rgba(99, 98, 98, 0.718);
   text-shadow: 6px 6px 6px #272727;
 }

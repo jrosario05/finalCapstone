@@ -17,8 +17,18 @@ export default {
 </script> 
 
 <style>
-#app{
+body {
+  margin: 0px auto;
   font-family: "Helvetica";
+  background-color: #333232;
+    background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg")
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  background-color: black;
 }
 </style>>
 
