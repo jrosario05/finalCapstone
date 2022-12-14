@@ -6,46 +6,67 @@
         <div id="color-box"></div>
       </div>
       <div id="title-info">
-        <h1 id="brewery_name" >{{ brewery.breweryName}}</h1>
+        <h1 id="brewery_name">{{ brewery.breweryName }}</h1>
         <p id="description">
-          {{ brewery.description}}
+          {{ brewery.description }}
         </p>
       </div>
     </div>
 
     <div class="information">
       <div class="address">
-        <p>{{brewery.streetAddress}}  {{brewery.city}},  {{brewery.state}}  {{brewery.zip}}</p>
+        <p>
+          {{ brewery.streetAddress }} {{ brewery.city }}, {{ brewery.state }}
+          {{ brewery.zip }}
+        </p>
       </div>
       <div class="hours">
-        <p>Monday - {{brewery.hours.monOpen}} - {{brewery.hours.monClose}}</p>
-        <p>Tuesday - {{brewery.hours.tuesOpen}} - {{brewery.hours.tuesClose}}</p>
-        <p>Wednesday - {{brewery.hours.wedOpen}} - {{brewery.hours.wedClose}}</p>
-        <p>Thursday - {{brewery.hours.thursOpen}} - {{brewery.hours.thursClose}}</p>
-        <p>Friday - {{brewery.hours.friOpen}} - {{brewery.hours.friClose}}</p>
-        <p>Saturday - {{brewery.hours.satOpen}} - {{brewery.hours.satClose}}</p>
-        <p>Sunday - {{brewery.hours.sunOpen}} - {{brewery.hours.sunClose}}</p>
+        <p>
+          Monday - {{ brewery.hours.monOpen }} - {{ brewery.hours.monClose }}
+        </p>
+        <p>
+          Tuesday - {{ brewery.hours.tuesOpen }} - {{ brewery.hours.tuesClose }}
+        </p>
+        <p>
+          Wednesday - {{ brewery.hours.wedOpen }} - {{ brewery.hours.wedClose }}
+        </p>
+        <p>
+          Thursday - {{ brewery.hours.thursOpen }} -
+          {{ brewery.hours.thursClose }}
+        </p>
+        <p>
+          Friday - {{ brewery.hours.friOpen }} - {{ brewery.hours.friClose }}
+        </p>
+        <p>
+          Saturday - {{ brewery.hours.satOpen }} - {{ brewery.hours.satClose }}
+        </p>
+        <p>
+          Sunday - {{ brewery.hours.sunOpen }} - {{ brewery.hours.sunClose }}
+        </p>
       </div>
 
       <div class="contact">
-        <div id="phone"><a v-bind:href="`tel:brewery.phoneNumber`">Call</a></div>
+        <div id="phone">
+          <a v-bind:href="`tel:brewery.phoneNumber`">Call</a>
+        </div>
         <div id="website">
           <a v-bind:href="brewery.website">Visit</a>
         </div>
       </div>
     </div>
 
-  <div class="beer-container">
-      <beer-card v-for="beer in beers" 
-      v-bind:key="beer.id"  
-      v-bind:beer="beer"
+    <div class="beer-container">
+      <beer-card
+        v-for="beer in beers"
+        v-bind:key="beer.id"
+        v-bind:beer="beer"
       />
-  </div>
+    </div>
   </div>
 </template>
 
 <script>
-import BeerService from '../services/BeerService';
+import BeerService from "../services/BeerService";
 import BreweryService from "../services/BreweryService";
 import BeerCard from "./BeerCard.vue";
 
@@ -59,39 +80,37 @@ export default {
       beers: [],
     };
   },
-  created(){
-      BreweryService.breweryById(this.$route.params.id).then((response)=>{
-        this.brewery=response.data;
-      });
-      BeerService.beerByBrewery(this.$route.params.id).then(response =>{
-            this.beers=response.data;
-        });
-
-    },
-
+  created() {
+    BreweryService.breweryById(this.$route.params.id).then((response) => {
+      this.brewery = response.data;
+    });
+    BeerService.beerByBrewery(this.$route.params.id).then((response) => {
+      this.beers = response.data;
+    });
+  },
 };
 </script>
 
 <style scoped>
 #background {
-   background: url("https://www.patriot-place.com/wp-content/uploads/2019/09/Wormtown-beer-garden-hero-bg.jpg") no-repeat center center fixed; 
+  background: url("../resources/background-image.jpg") no-repeat center center
+    fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   height: 100%;
   background-color: black;
-
 }
 
-
 .beer-container {
-    display:flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    width: 65vw;
-    margin: 0 auto;
-    background-color: transparent !important;}
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 65vw;
+  margin: 0 auto;
+  background-color: transparent !important;
+}
 
 .brewery_detail {
   display: grid;
