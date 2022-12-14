@@ -2,15 +2,15 @@
   <div>
       <h1 class="header">BREWERY LIST</h1>
     <div id="search">
-
-      <select name="citySearch" id="" v-model="cityFilter">
-        <option value="" selected>City</option>
-        <option v-for="city in cityFilterArray" :key="city.id">
+      <p>City Filter:</p>
+      <select name="citySearch" id="citySearch" v-model="cityFilter">
+        <option  value="" selected>City</option>
+        <option id="dropdown" v-for="city in cityFilterArray" :key="city.id">
           {{ city }}
         </option>
       </select>
-      <div id="filter">
-        <label for="breweryName">name filter:</label>
+      <div id="nameFilter">
+        <label for="breweryName" id='forms'>Name Filter:</label>
         <input type="text" name="breweryName" v-model="nameFilter" />
       </div>
     </div>
@@ -96,7 +96,14 @@ export default {
   flex-wrap: wrap;
   
 }
+#citySearch{
+  margin: 20px;
+    font-size: 1em;
 
+}
+#nameFilter{
+  margin: 10px;
+}
 
 .header {
   margin: 20px 0px;
@@ -111,11 +118,21 @@ export default {
 
 #search {
   background-color: rgba(0,0,0,.95);
+  color: white;
   height: 50px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-size: 1.2em;
+
+}
+#forms{
+  margin: 20px;
+}
+#dropdown {
+    border: 1px solid #fff;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 

@@ -29,9 +29,24 @@ export default {
       }
     },
 
+
+  computed: {
+
+  watch: {
+    itemsLength (val, oldVal) {
+      console.log('length changed')
+      console.log(val, oldVal);
+    }
+  },
+
   
 
   computed: {
+
+    itemsLength() {
+      return this.barCrawl.length
+    }
+  },
     origin2() {
       
       if (!this.start) return null;
