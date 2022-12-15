@@ -62,7 +62,7 @@
             <div class="beer-style">
               {{ beer.styleName }}
             </div>
-            <div class="beer-abv">{{ beer.abv }}% ABV</div>
+            <div class="beer-abv">{{ beer.abv }}%</div>
             <div class="review">
               <review :beer="beer" />
             </div>
@@ -381,40 +381,35 @@ export default {
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
-.legend p {
-  margin: 0px 30px;
-}
-.legend p {
-  /* text-align: center; */
-  font-size: 1em;
-  margin-top: 8px;
-  margin-bottom: 3px;
-}
+
 .legend-name {
   margin-left: 30px;
-  width: 20%;
-  display: inline-block;
+  width: 22%;
+  font-size: 1em;
 }
 .legend-style {
-  width: 20%;
-  display: inline-block;
+  width: 15%;
+ font-size: 1em;
 }
 .legend-abv {
-  width: 20%;
-  display: inline-block;
+  width: 9%;
+font-size: 1em;
 }
 .legend-review {
-  text-align: center;
-  width: 12%;
+  transform: translate(90px,0px);
+  width: 20%;
+
 }
-.remove-drank {
-  text-align: center;
-  width: 9%;
+.legend-drank {
+  transform: translate(25px,0px);
+
+    width: 10%;
+
 }
 .legend-remove {
-  width: 9%;
-  margin-right: 30px;
-  text-align: center;
+   width: 10%;
+  transform: translate(5px, 0px);
+
 }
 /* Styles individual brewery tiles */
 #breweryCard {
@@ -458,35 +453,41 @@ export default {
 }
 /*  Beer tile styling and positioning */
 .beer-name {
-  width: 20%;
+  width: 28%;
   margin-left: 30px;
   font-size: 1em;
   font-weight: bold;
 }
 .beer-style {
   width: 20%;
-  font-size: 1em;
+  font-size: .75em;
   font-style: italic;
 }
 .beer-abv {
+font-size: .75em;
+width: 20%;
+font-style: italic;
+}
+
+.review {
   width: 20%;
-  display: inline-block;
-  font-style: italic;
-  font-size: 1em;
 }
 
 .drank {
-  width: 9%;
+  width: 10%;
 }
+
 .drank img {
   display: flex;
   margin: 0 auto;
-  width: 40px;
+  width: 35px;
   height: auto;
+
 }
 .remove {
-  /* width: 9%; */
-  margin-right: 30px;
+  width: 10%;
+  margin-right: 20px;
+
 }
 .remove img {
   float: right;
@@ -634,6 +635,7 @@ export default {
 
   /* margin: 0px auto; */
 }
+
 
 
 </style>

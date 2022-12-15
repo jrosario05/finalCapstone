@@ -41,7 +41,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #footer {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;

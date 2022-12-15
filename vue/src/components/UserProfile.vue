@@ -40,7 +40,7 @@
           src="../resources/MidScore.png"
           v-if="this.allBeers >= 4 && this.allBeers < 8"
         />
-        <img src="../resources/HighScore.png" v-if="this.allBeers > 8" />
+        <img src="../resources/HighScore.png" v-if="this.allBeers >= 8" />
       </div>
     </div>
   </div>
