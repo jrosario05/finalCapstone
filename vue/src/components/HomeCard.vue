@@ -8,7 +8,9 @@
           COLUMBUS WITH YOUR PASSPORT!
         </h3>
         <p id="header-text">Discover new breweries throughout Columbus</p>
-        <div id="splash-button">Get Your Passport</div>
+        <router-link to="/login" custom v-slot="{navigate}">
+        <div id="splash-button" v-on:click="navigate" role="link">Get Your Passport</div>
+        </router-link>
       </div>
     </div>
     <div class="welcome">
@@ -27,27 +29,33 @@
           <h3 class="title">Get Your Passport</h3>
           <p class="description">
             Track all the breweries you want to visit <br />
-            and add their beers to your passport
+            and add their beers to your passport.
           </p>
-          <button class="bottom-button">Passport</button>
+          <router-link to="/register" custom v-slot="{navigate}">
+          <button class="bottom-button" v-on:click="navigate" role="link">Passport</button>
+        </router-link>
         </div>
         <div class="tri-fold-element" id="second-image">
           <img src="../resources/huge-kegs.png" />
           <h3 class="title">Explore our Partner Breweries</h3>
           <p class="description">
-            Track all the breweries you want to visit <br />
-            and add their beers to your passport
+            We partner with local breweries so they can show <br />
+           they show everything they have to offer.
           </p>
-          <button class="bottom-button">View Breweries</button>
+           <router-link to="/breweries" custom v-slot="{navigate}">
+          <button class="bottom-button" v-on:click="navigate" role="link" >View Breweries</button>
+          </router-link>
         </div>
         <div class="tri-fold-element" id="third-image">
           <img src="../resources/slave-pouring.png" />
-          <h3 class="title">Enjoy Responsibly</h3>
+          <h3 class="title">See All The Beers</h3>
           <p class="description">
-            Track all the breweries you want to visit <br />
-            and add their beers to your passport
+            Browser trough this mass collection <br />
+            of wonderful handcrafted beers.
           </p>
-          <button class="bottom-button">View Beer List</button>
+          <router-link to="/beers" custom v-slot="{navigate}">
+          <button class="bottom-button" v-on:click="navigate" role="link">View Beer List</button>
+          </router-link>
         </div>
     </div>
   </div>
