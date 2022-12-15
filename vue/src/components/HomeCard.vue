@@ -64,6 +64,16 @@
 export default {};
 </script>
 <style scoped>
+#splash-button:hover, .bottom-button:hover
+{
+background-color: #515a20;
+cursor: pointer;
+}
+#splash-button:focus, .bottom-button:focus
+{
+background-color: #292e0e;
+}
+
 #splash-screen {
   background-color: #000000;
   /* width: 100vw; */

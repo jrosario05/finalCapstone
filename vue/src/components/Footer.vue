@@ -123,6 +123,9 @@ export default {
   font-size: 25px;
   margin: 10px;
 }
+.bi:hover {
+color: gray;
+}
 
 .copyright {
   font-size: 0.75em;
