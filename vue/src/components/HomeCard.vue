@@ -8,11 +8,11 @@
           COLUMBUS WITH YOUR PASSPORT!
         </h3>
         <p id="header-text">Discover new breweries throughout Columbus</p>
-
-        <div id="splash-button">Get Your Passport</div>
+        <router-link to="/login" custom v-slot="{navigate}">
+        <div id="splash-button" v-on:click="navigate" role="link">Get Your Passport</div>
+        </router-link>
       </div>
     </div>
-
     <div class="welcome">
       <h1>Welcome</h1>
       <p>
@@ -23,53 +23,46 @@
       <p>Explore local breweries, get stamps, enjoy beer.</p>
       <p id="strong">Cheers!</p>
     </div>
-
     <div class="tri-fold">
-
-
         <div class="tri-fold-element" id="first-image">
           <img src="../resources/passport.png" />
           <h3 class="title">Get Your Passport</h3>
           <p class="description">
             Track all the breweries you want to visit <br />
-            and add their beers to your passport
+            and add their beers to your passport.
           </p>
-          <button class="bottom-button">Passport</button>
+          <router-link to="/register" custom v-slot="{navigate}">
+          <button class="bottom-button" v-on:click="navigate" role="link">Passport</button>
+        </router-link>
         </div>
-
-
         <div class="tri-fold-element" id="second-image">
           <img src="../resources/huge-kegs.png" />
           <h3 class="title">Explore our Partner Breweries</h3>
           <p class="description">
-            Track all the breweries you want to visit <br />
-            and add their beers to your passport
+            We partner with local breweries so they can show <br />
+           they show everything they have to offer.
           </p>
-          <button class="bottom-button">View Breweries</button>
+           <router-link to="/breweries" custom v-slot="{navigate}">
+          <button class="bottom-button" v-on:click="navigate" role="link" >View Breweries</button>
+          </router-link>
         </div>
-
-
-
         <div class="tri-fold-element" id="third-image">
           <img src="../resources/slave-pouring.png" />
-          <h3 class="title">Enjoy Responsibly</h3>
+          <h3 class="title">See All The Beers</h3>
           <p class="description">
-            Track all the breweries you want to visit <br />
-            and add their beers to your passport
+            Browser trough this mass collection <br />
+            of wonderful handcrafted beers.
           </p>
-          <button class="bottom-button">View Beer List</button>
+          <router-link to="/beers" custom v-slot="{navigate}">
+          <button class="bottom-button" v-on:click="navigate" role="link">View Beer List</button>
+          </router-link>
         </div>
-
-
     </div>
-
   </div>
 </template>
-
 <script>
 export default {};
 </script>
-
 <style scoped>
 #splash-screen {
   background-color: #000000;
@@ -86,7 +79,6 @@ footer {
   color: white;
   padding: 15px;
 }
-
 #splash-screen img {
   width: 100%;
   height: 500px;
@@ -94,29 +86,25 @@ footer {
   object-position: center top;
   opacity: 0.8;
 }
-
 .splash-text {
   position: absolute;
 }
-
 #main-text {
   font-family: serif;
   color: white;
   font-size: 3em;
   margin: 0;
   text-align: center;
-  text-shadow: 0.5px 0.5px 0.25px #8d8d8d;
+  text-shadow: 0.5px 0.5px 0.25px #8D8D8D;
 }
-
 #header-text {
   color: white;
   font-size: 2em;
   text-align: center;
   padding: 0;
   margin: 10px 0px 35px;
-  text-shadow: 0.5px 0.5px 0.25px #8d8d8d;
+  text-shadow: 0.5px 0.5px 0.25px #8D8D8D;
 }
-
 #splash-button {
   width: 300px;
   height: 50px;
@@ -131,7 +119,6 @@ footer {
   margin: 0 auto;
   box-shadow: 12px 6px 10px 0px black;
 }
-
 .welcome {
   background-color: white;
   color: #809766;
@@ -140,14 +127,12 @@ footer {
   justify-content: center;
   align-items: center;
 }
-
 .welcome h1 {
   font-size: 3em;
   font-family: serif;
   margin-top: 25px;
   margin-bottom: 15px;
 }
-
 .welcome p {
   width: 50%;
   font-size: 1.5em;
@@ -155,35 +140,29 @@ footer {
   margin-top: 0px;
   margin-bottom: 10px;
 }
-
 #strong {
   margin-top: 20px;
   font-weight: bolder;
   font-size: 2em;
 }
-
 .tri-fold {
 background-color: #333232;
 display: flex;
 flex-direction: row;
 justify-content: space-evenly
 }
-
 .tri-fold-element {
     margin-top: 35px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 .tri-fold-element img {
   width: 300px;
   height: 300px;
   object-fit: contain;
 }
-
 .title {
   color: white;
   text-align: center;
@@ -191,17 +170,13 @@ justify-content: space-evenly
   margin-top: 10px;
   margin-bottom: 6px;
 }
-
 .description {
   color: white;
   margin-top: 5px;
   margin-bottom: 0px;
   text-align: center;
-  
   font-size: 1em;
-
 }
-
 .bottom-button {
   width: 150px;
   height: 35px;
@@ -211,8 +186,5 @@ justify-content: space-evenly
   background-color:  #809766;
   border: 1px solid white;
 }
-
-
 </style>
-
 
