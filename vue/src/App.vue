@@ -3,14 +3,17 @@
     <!-- <div id="nav"> -->
     <the-header />
     <router-view />
+    <the-footer />
   </div>
   <!-- </div> -->
 </template>
 
 <script>
 import TheHeader from "./components/TheHeader.vue";
+import TheFooter from "./components/Footer.vue";
+
 export default {
-  components: { TheHeader },
+  components: { TheHeader, TheFooter },
 };
 </script> 
 
