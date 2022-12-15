@@ -52,9 +52,8 @@
             {{ brewery.city }}, {{ brewery.state }} {{ brewery.zip }}
           </p>
         </div>
-      </div>
 
-      <div class="contact">
+  <div class="contact">
         <div id="phone">
           <a v-bind:href="`tel:brewery.phoneNumber`">Call</a>
         </div>
@@ -62,6 +61,10 @@
           <a v-bind:href="brewery.website">Visit</a>
         </div>
       </div>
+
+      </div>
+
+    
     </div>
     </div>
 
@@ -127,6 +130,7 @@ export default {
 }
 
 .brewery_detail {
+  
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "photo title-info";
@@ -144,18 +148,20 @@ export default {
   background: rgba(0, 0, 0, 0.6);
   color: white;
 }
+
 #title-info{
   transform: translate(0px, -50px);
 }
 
 #title-info h1 {
-  font-size: 4em;
+  font-size: 2em;
   text-shadow: 6px 6px 6px #272727;
+  margin-top: px;
 }
 
 .brewery_photo {
-  grid-area: photo;
-  -webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
+
+-webkit-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 12px 0px 24px 0px rgba(0, 0, 0, 0.75);
 }
@@ -165,6 +171,8 @@ export default {
   margin: 0;
   padding: 0;
   width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 #brewery_name {
@@ -175,9 +183,12 @@ export default {
 #description {
   margin: 0;
   margin-top: 10px;
-  margin-bottom: 20px;
-  font-size: 1.5em;
+  font-size: 1em;
 }
+
+
+
+
 
 .spacer {
   text-shadow: 1px 1px 1px #000000;
@@ -196,7 +207,7 @@ export default {
 
 .address {
   grid-area: address;
-  font-size: 1.3em;
+  font-size: 1.25em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -208,8 +219,9 @@ export default {
 .information {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-areas: "hours address";
-  transform: translate(0px, 50px);
+  grid-template-areas: "hours address"
+  "contact contact";
+  transform: translate(0px, -30px);
 }
 
 .hours {
@@ -219,7 +231,7 @@ export default {
   align-items: center; */
   grid-area: hours;
   margin-top: 15px;
-  font-size: 0.9em;
+  font-size: 0.65em;
 }
 .hours p {
   margin: 0;
@@ -227,22 +239,28 @@ export default {
 }
 
 .contact {
+  grid-area: contact;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   width: 100%;
-  transform: translate(0px, 90px);
+  transform: translate(0px, 20px);
 }
 
 #phone {
+    width: 100px;
+
   display: flex;
   align-content: center;
   justify-content: center;
+  grid-area: phone;
 }
 #website {
+  width: 100px;
   display: flex;
   align-content: center;
   justify-content: center;
+  grid-area:website
 }
 
 #phone a {

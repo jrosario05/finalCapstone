@@ -74,6 +74,10 @@ VALUES ('Ohio Brewing Company', '421 E 2nd Ave', 'Columbus', 'OH', '43201',  '(6
 		true ,'https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/gkhlufvm/d8fbb293-6bf5-4d50-893f-02123e850797.jpg');
 
 
+INSERT INTO brewery  (brewery_name, street_address, city, state, zip_code, phone_number, website, description, has_food, img_url) 
+VALUES ('Java Green Brewing Company', '1275 Kinnear Rd', 'COlumbus', 'OH', '43212',  '(877) 606-3203', 'https://www.techelevator.com/', 
+		'We offer a superior selection of coded options to suit any pallet. One more thing, GO Green',
+		true ,'https://i.imgur.com/VtqdAXW.jpeg');
 
 
 /* Insertion of Brewery Hours */
@@ -192,6 +196,17 @@ Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Parsons North Brewi
 					'4:00pm', '12:00am', 
 					'12:00pm', '2:00am', 
 					'12:00pm', '7:00pm');
+
+INSERT INTO hours ( brewery_id, mon_open, mon_close, tues_open, tues_close, wed_open, wed_close, 
+					thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close )
+Values ((SELECT brewery_id FROM brewery WHERE brewery_name ='Java Green Brewing Company'),
+					'9:00am', '5:00pm', 
+					'9:00am', '5:00pm', 
+					'9:00am', '5:00pm', 
+					'9:00am', '5:00am', 
+					'9:00am', '5:00am', 
+					'Closed', 'Closed', 
+					'Closed', 'Closed');
 
 				
 
@@ -1195,9 +1210,39 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Parsons North Brew
 		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
 		'https://images.squarespace-cdn.com/content/v1/5370cbf5e4b039e44f882a13/1570745546267-M61OOQKK3XB6S2TN5S3O/Title+Slide.jpg');
 
+-- INSERTS BEER FOR JAVA GREEN
 
 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Java Green Brewing Company'), 
+		'Joel Rosario', 10.5, 'Aint Got Time to be Sober, hit em hard', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
+		'https://ca.slack-edge.com/T0GNFLF6D-U03SLQEHD9C-b2d25188183a-512');
 
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Java Green Brewing Company'), 
+		'Andrew Brantly', 6.5, 'A bit heady with a touch of sweetness, and a dash of humor', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
+		'https://ca.slack-edge.com/T0GNFLF6D-U03SQEFMCTX-eb27d2c08b33-512');
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Java Green Brewing Company'), 
+		'Michael Doom', 0.5, 'GOOOOOOOOAAAAAALLLLLLL', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
+		'https://ca.slack-edge.com/T0GNFLF6D-U03UY0PV0QP-91e4f0a326eb-512');
+
+
+INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Java Green Brewing Company'), 
+		'Scott Sedor', 7.5, 'A freaky taste that is suprisignly light on the palet', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
+		'https://ca.slack-edge.com/T0GNFLF6D-U03P155TN0K-9490dcc42dde-512');
+
+		INSERT INTO beer (brewery_id, beer_name, abv, description, style_id, img_url) 
+VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Java Green Brewing Company'), 
+		'Steve Carmicheal', 15.5, 'One More Thing.....                         One More Thing', 
+		(SELECT style_id FROM beer_style WHERE style_name = 'Lager'), 
+		'https://ca.slack-edge.com/T0GNFLF6D-U0198TC7QHJ-250f9f73eabe-512');
 
 
 INSERT INTO user_info (user_id, user_first, user_last, address, city, state, zip_code, img_url)

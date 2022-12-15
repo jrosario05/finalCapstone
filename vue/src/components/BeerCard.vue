@@ -263,7 +263,8 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  width: 250px;
+  height: 250px;
   border-radius: 10px;
   border: none;
   position: absolute;
@@ -276,8 +277,11 @@ export default {
 #beer-image img {
   filter: grayscale(75%);
   width: 250px;
-  height: 250px;
+  height: 255px;
   object-fit: cover;
+
+    background-color: white;
+
   border-radius: 10px;
 }
 

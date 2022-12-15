@@ -1,12 +1,13 @@
 <template>
   <div>
 
-<div v-on:click="origin() + destionation()+ addWayPoints()" class="button">Load Map</div>
+<div v-on:click="origin() + destionation()+ addWayPoints()" class="button">ROUTE MY CRAWL</div>
 
 
     <GmapMap :zoom="10" :center="{ lat: 39.9612, lng: -82.9988 }">
       <DirectionsRenderer travelMode="DRIVING" :origin="origin2" :destination="destionation2" :waypoints="waypoints1" />
     </GmapMap>
+
   </div>
 </template>
 
@@ -44,7 +45,7 @@ export default {
   computed: {
 
     itemsLength() {
-      return this.showMap
+      return this.barCrawl.length
     },
  
     origin2() {
@@ -80,9 +81,11 @@ export default {
     },
     destionation() {
     console.log('hit destination')
+    console.log(this.barCrawl)
     this.end=this.barCrawl[this.barCrawl.length-1].address;
       if (!this.end) return null;
       return { query: this.end };
+  
     },
     addWayPoints(){
       if (this.barCrawl.length>1){
@@ -114,7 +117,12 @@ export default {
 
 
     
+  },
+
+  created(){
   }
+
+
 };
 </script>
 
@@ -126,17 +134,23 @@ export default {
 }
 
     .button {
-        background-color: red;
-        width: 10%;
+        background-color: rgb(65, 65, 65);
+        width: 80%;
+        height: 40px;
         text-align: center;
         color: white;
-
+        border-radius: 5px;
+        font-size: 1.2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
         
     }
 
     .button:hover {
-        background-color: white;
-        color: red;
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         cursor: pointer;
     }
 </style>
