@@ -1247,7 +1247,7 @@ VALUES ((SELECT brewery_id FROM brewery WHERE brewery_name = 'Java Green Brewing
 
 INSERT INTO user_info (user_id, user_first, user_last, address, city, state, zip_code, img_url)
 VALUES ((SELECT user_id from users where username= 'user'), 'Michael', 'Doom', '1275 Kinnear Rd', 'Columbus', 'OH', 43215, 'https://ca.slack-edge.com/T0GNFLF6D-U03UY0PV0QP-91e4f0a326eb-512'),
-		((SELECT user_id from users where username = 'admin'), 'Andrew', 'Brantley', '123 Main St', 'Columbus', 'OH', 43215, 'https://ca.slack-edge.com/T0GNFLF6D-U03SQEFMCTX-eb27d2c08b33-512');
+		((SELECT user_id from users where username = 'admin'), 'Andrew', 'Brantley', '1275 Kinnear Rd', 'Columbus', 'OH', 43215, 'https://ca.slack-edge.com/T0GNFLF6D-U03SQEFMCTX-eb27d2c08b33-512');
 		
 Insert into passport_beer (passport_id, beer_id, drank, beer_rating)
 		
